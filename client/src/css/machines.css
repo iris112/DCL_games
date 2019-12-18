@@ -1,0 +1,225 @@
+/**************************************************************************/
+/* machine styles *********************************************************/
+input[type='text'] {
+  width: 65px !important;
+}
+::placeholder {
+  color: #333333 !important;
+  opacity: 1 !important;
+}
+:-ms-input-placeholder {
+  color: #333333 !important;
+}
+::-ms-input-placeholder {
+  color: #333333 !important;
+}
+.spinner {
+  position: absolute !important;
+  top: 25% !important;
+  left: 50% !important;
+  transform: translate(-50%) !important;
+  z-index: 999 !important;
+}
+:root {
+  --neon-border-orange: #ff4400 !important;
+  --neon-border-blue: #0088ff !important;
+  --neon-border-violet: #e53fe5 !important;
+}
+.status {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+}
+.bold {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+}
+.title {
+  font-size: 42px !important;
+  font-weight: 400 !important;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+    0 0 20px var(--neon-border-blue), 0 0 35px var(--neon-border-blue),
+    0 0 40px var(--neon-border-blue), 0 0 50px var(--neon-border-blue),
+    0 0 75px var(--neon-border-blue) !important;
+  line-height: 1.5em !important;
+}
+.jackpot {
+  font-size: 42px !important;
+  font-weight: 400 !important;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+    0 0 20px var(--neon-border-orange), 0 0 35px var(--neon-border-orange),
+    0 0 40px var(--neon-border-orange), 0 0 50px var(--neon-border-orange),
+    0 0 75px var(--neon-border-orange) !important;
+}
+.bannerViolet {
+  width: 750px !important;
+  background-color: #201d20 !important;
+  border: 1px solid #ffffff !important;
+  border-radius: 20px !important;
+  padding: 25px !important;
+  box-shadow: 0 0 3px #fff, inset 0 0 3px #fff,
+    0 0 15px var(--neon-border-violet), inset 0 0 15px var(--neon-border-violet),
+    0 0 15px var(--neon-border-violet), inset 0 0 15px var(--neon-border-violet) !important;
+}
+.bannerBlue {
+  width: 750px !important;
+  background-color: #201d20 !important;
+  border: 1px solid #ffffff !important;
+  border-radius: 20px !important;
+  padding: 25px !important;
+  box-shadow: 0 0 3px #fff, inset 0 0 3px #fff, 0 0 15px var(--neon-border-blue),
+    inset 0 0 15px var(--neon-border-blue), 0 0 15px var(--neon-border-blue),
+    inset 0 0 15px var(--neon-border-blue) !important;
+}
+.headerMachine {
+  margin-top: 30px !important;
+}
+.contentViolet {
+  width: 750px !important;
+  margin-top: 75px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  background-color: #201d20 !important;
+  border: 1px solid #ffffff !important;
+  border-radius: 20px !important;
+  padding: 25px !important;
+  box-shadow: 0 0 3px #fff, inset 0 0 3px #fff,
+    0 0 15px var(--neon-border-violet), inset 0 0 15px var(--neon-border-violet),
+    0 0 15px var(--neon-border-violet), inset 0 0 15px var(--neon-border-violet) !important;
+}
+.contentBlue {
+  width: 750px !important;
+  margin-top: 75px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  background-color: #000000 !important; /* 1d1f20 */
+  border: 1px solid #ffffff !important;
+  border-radius: 20px !important;
+  padding: 25px !important;
+  box-shadow: 0 0 3px #fff, inset 0 0 3px #fff, 0 0 15px var(--neon-border-blue),
+    inset 0 0 15px var(--neon-border-blue), 0 0 15px var(--neon-border-blue),
+    inset 0 0 15px var(--neon-border-blue) !important;
+}
+.row {
+  height: 23px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.chartLeft {
+  margin-left: 40px !important;
+  float: left !important;
+}
+.chartRight {
+  margin-right: 40px !important;
+  float: right !important;
+}
+.wheelContainer {
+  width: 321px !important;
+  height: 210px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.wheel {
+  float: left;
+  height: 215px !important;
+  width: 87px !important;
+  border: 1px solid #ffffff !important;
+  border-radius: 4px !important;
+  box-shadow: 0 0 3px #fff, inset 0 0 3px #fff, 0 0 20px var(--neon-border-blue),
+    inset 0 0 20px var(--neon-border-blue), 0 0 20px var(--neon-border-blue),
+    inset 0 0 20px var(--neon-border-blue) !important;
+}
+.statusLeft,
+.statusCenter,
+.statusRight {
+  width: 33% !important;
+  float: left !important;
+}
+.buttonContainer {
+  width: 135px !important;
+  height: 60px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.buttonCheckbox1 {
+  position: absolute !important;
+  top: 266px !important;
+  opacity: 0 !important;
+}
+.buttonCheckbox2 {
+  position: absolute !important;
+  top: 584px !important;
+  opacity: 0 !important;
+}
+.buttonLotto {
+  cursor: pointer !important;
+  width: 150px !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.buttonPickWinner {
+  cursor: pointer !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  width: 215px !important;
+  border-radius: 4px !important;
+  padding: 10px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.buttonSpin {
+  cursor: pointer !important;
+  width: 135px !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+}
+.buttonInput {
+  color: #ffffff !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.15em !important;
+  width: 150px !important;
+}
+.buttonViolet {
+  background-color: var(--neon-border-violet) !important;
+  box-shadow: 0 0 10px var(--neon-border-violet) !important;
+}
+.buttonGreen {
+  background-color: #00cc00 !important;
+  box-shadow: 0 0 10px #00cc00 !important;
+}
+.buttonBlue {
+  background-color: var(--neon-border-blue) !important;
+}
+.buttonGrey {
+  background-color: #777777 !important;
+}
+.messageBlack {
+  background-color: #171517 !important;
+  border: 1px solid #171517 !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+  box-shadow: inset 0 0 10px #171517, 0 0 10px #171517 !important;
+}
+.messageOrange {
+  background-color: #4f3728 !important;
+  border: 1px solid #ff6200 !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+  box-shadow: inset 0 0 10px #ff6200, 0 0 10px #ff6200 !important;
+}
+.messageGreen {
+  background-color: #284f28 !important;
+  border: 1px solid #00ff00 !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+  box-shadow: inset 0 0 10px #00ff00, 0 0 10px #00ff00 !important;
+}
+.messageError {
+  background-color: #4f2828 !important;
+  border: 1px solid #ff0000 !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+  box-shadow: inset 0 0 10px #ff0000, 0 0 10px #ff0000 !important;
+}

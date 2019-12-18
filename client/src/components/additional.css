@@ -1,0 +1,1204 @@
+@font-face {
+  font-family: 'avenir';
+  src: url(./fonts/avenir_next.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ----------------------------------------- */
+/*           General Spacing, Font           */
+/* ----------------------------------------- */
+
+.grid-margin {
+ 	margin-left: 1em !important;
+}
+
+@media only screen and (max-width: 767px) {
+	.grid-margin {
+		margin-left: 0em !important;
+		margin-right: 0em !important;
+	}
+  .blogdetail-page .container {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+  .blogdetail-page .post__content {
+    margin-left: -18px !important;
+  }
+}
+
+.ui.segment {
+	box-shadow: none;
+	padding-left: 0px;
+	padding-right: 0px;
+	border-radius: 0px !important;
+	border: none;
+}
+
+.main-segment {
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+	margin-bottom: 0px !important;
+	padding-bottom: 0px !important;
+}
+
+.account-p {
+  font-size: 17px !important;
+}
+
+#a-footer {
+	color: #2085F3;
+}
+
+p {
+  font-size: 18px !important;
+}
+
+h1 {
+  font-size: 48px !important;
+  line-height: 1.3 !important;
+}
+
+h2 {
+  font-size: 26px !important;
+  line-height: 1.3 !important;  
+}
+
+h1, h2, h3, h4, p, a, body {
+  font-family: 'Karla', sans-serif !important;
+}
+
+h3 {
+  font-size: 22px !important;
+  font-weight: 900 !important;
+  margin-bottom: 20px !important;
+  line-height: 1.3 !important;
+}
+
+.ui.divider {
+	margin-bottom: 13px !important;
+}
+
+.ui.container {
+  width: 95%;
+  max-width: 1300px !important;
+}
+
+@media (max-width: 768px) {
+  .ui.container {
+    margin-left: 18px !important;
+  }
+  #disclaimer-header {
+    text-align: left !important;
+  }
+}
+
+@media (min-width: 768px) {
+  #disclaimer-container {
+    padding-left: 21px !important;
+    padding-right: 30px !important;
+  }
+}
+
+.ui.selection.active.dropdown .menu {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+
+/* ----------------------------------------- */
+/*                    Navbar                 */
+/* ----------------------------------------- */
+
+.black-menu {
+  background-color: rgba(6, 10, 13, 1) !important;
+  border-radius: 0px !important;
+  border-bottom: 1px #1D1E24 solid !important;
+}
+
+.icon-lower {
+  padding-right: 0px !important;
+  margin-right: -18px !important;
+  margin-top: -17px !important;
+  font-size: 18px !important;
+  color: white;
+}
+
+.nav-text {
+  font-size: 16px !important;
+  color: white !important;
+  padding-left: 0px !important;
+}
+
+.nav-text2 {
+  font-size: 16px !important;
+  color: white !important;
+  margin-left: 3px !important;
+}
+
+.nav-text3 {
+  padding-top: 11px !important;
+  font-size: 16px !important;
+  color: white !important;
+  padding-right: 21px !important;
+}
+
+.nav-text:hover, .nav-text2:hover, .nav-text3:hover {
+  color: rgba(1, 133, 244, 1) !important;
+}
+
+#nav2-logo {
+  margin-left: -2px !important;
+  padding-left: 0px !important;
+  padding-top: 0px !important;
+  padding-bottom: 3px !important;
+}
+
+#nav3-logo {
+  padding-left: 0px !important;
+  padding-top: 0px !important;
+  padding-bottom: 3px !important;
+}
+
+.nav-buttons {
+  padding-right: 0px !important;
+  margin-right: -2px !important;
+}
+
+.ui.menu .active.item {
+  background: none !important;
+}
+
+.navbar {
+  width: 100%;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: top 0.3s;
+  transition-delay: 0.2s !important;
+  background-color: white;
+  z-index: 999 !important; 
+  padding: 0px !important;
+}
+
+.navbar2 {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: top 0.3s;
+  transition-delay: 0.2s !important;
+  background-color: white;
+  z-index: 999 !important; 
+  padding: 0px !important;
+}
+
+.navbarHidden {
+  top: -50px;
+}
+
+.navbarHidden2 {
+  top: -50px;
+  border: none !important;
+}
+
+.ui.menu .active.item {
+	background: none !important;
+}
+
+a.item.nav-text:hover {
+  background: none !important;
+  font: bold !important;
+}
+
+.nav-right {
+  margin-right: -19px !important;
+  margin-top: 14px !important;
+}
+
+#nav-icon {
+  padding-left: 0px !important;
+}
+
+#right-content:hover {
+  color: white;
+}
+
+
+@media (min-width: 768px) {
+  .nav-mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .nav-desktop {
+    display: none !important;
+  }
+}
+
+/* ----------------------------------------- */
+/*                  Modal                    */
+/* ----------------------------------------- */
+
+.ui.dimmer {
+  background-color: rgba(6, 10, 13, 0.9) !important;
+}
+
+.metamask {
+  border-radius: 4px;
+  border: 1px solid rgba(6, 10, 13, 0.25);
+  width: 210px;
+}
+
+.ui.modal {
+  border-radius: 4px;
+}
+
+.modal-close:hover {
+  color: rgba(1, 133, 244, 1);
+  cursor: pointer;
+}
+
+.not-modalmask {
+  text-align: left;
+  margin-bottom: 60px !important;
+  margin-left: 13px !important;
+}
+
+.ui.modal > .actions, .ui.modal > .ui.form > .actions {
+  width: 180px !important;
+  margin-left: 31px !important;
+}
+
+.modal-msg {
+  margin-left: 2px !important;
+  margin-right: 2px !important;
+  border-radius: 4px;
+  border: 1px solid white;
+  background-color: rgba(6, 10, 13, 1) !important;
+  margin-top: -30px !important;
+}
+
+.ui.message .header, .ui.message>.close.icon {
+  color: white !important;
+  font-weight: 100 !important;
+}
+
+.ui.message>.close.icon {
+  margin-top: -4px !important;
+}
+
+@media (max-width: 499px) {
+  .ui.message>.close.icon {
+    margin-top: -8px !important;
+    margin-right: -3px !important;
+  }
+}
+
+.modal-pop {
+  margin-left: -11px !important;
+  margin-top: -6px !important;
+}
+
+@media (max-width: 767px) {
+  .modal-pop2 {
+    margin-right: 9px !important;
+    margin-top: -6px !important;
+  }
+}
+
+
+/* ----------------------------------------- */
+/*                Hero Section               */
+/* ----------------------------------------- */
+
+.hero {
+	margin-bottom: -1em !important;
+  margin-top: 60px !important;
+  padding-top: 45px !important;
+  padding-bottom: 60px !important;
+  background-color: rgba(6, 10, 13, 1) !important;
+  overflow-x: hidden !important;
+}
+
+.hero-image {
+  border-radius: 2px;
+  padding-left: 3px !important;
+  padding-right: 3px !important;
+}
+
+@media (max-width: 767px) {
+  .hero-image {
+    transform: scale(1.25) !important;
+  }
+  .hero {
+    padding-top: 75px !important;
+    padding-bottom: 90px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-image {
+    transform: scale(1.5) !important;
+  }
+  .hero {
+    padding-top: 75px !important;
+    padding-bottom: 90px !important;
+  }
+}
+
+@media (max-width: 499px) {
+  .hero-image {
+    transform: scale(1z5) !important;
+    padding-top: ;
+  }
+  .hero {
+    padding-top: 60px !important;
+    padding-bottom: 75px !important;
+  }
+  .modal-msg {
+    margin-top: -45px !important;
+    margin-bottom: 45px !important;
+  }
+}
+
+.blue-link {
+  color: rgba(1, 133, 244, 1) !important;
+}
+
+/* ----------------------------------------- */
+/*                   Buttons                 */
+/* ----------------------------------------- */
+
+#button-6 {
+  color: white !important;
+  background-color: rgba(1, 133, 244, 1) !important;
+  box-shadow: 0 4px 14px 0 rgba(0,118,255,0.39) !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  padding-top: 15px !important;
+  letter-spacing: 0.12em !important;
+  font-size: 16px !important; 
+}
+
+#button-account {
+  font-size: 1.07em !important;
+  letter-spacing: 0.115em !important;
+}
+
+@-webkit-keyframes hvr-pop {
+  50% {
+    -webkit-transform: scale(1.025);
+    transform: scale(1.025);
+  }
+}
+@keyframes hvr-pop {
+  50% {
+    -webkit-transform: scale(1.025);
+    transform: scale(1.025);
+  }
+}
+
+.hvr-pop {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  color: white !important;
+  background-color: rgba(1, 133, 244, 1) !important;
+  padding-left: 36px !important;
+  padding-right: 36px !important;
+  letter-spacing: 0.12em !important;
+  font-size: 14px !important; 
+  height: 39px !important;
+  padding-top: 11px !important;
+  margin-top: 3px !important;
+}
+
+.hvr-pop:hover, .hvr-pop:focus, .hvr-pop:active {
+  -webkit-animation-name: hvr-pop;
+  animation-name: hvr-pop;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
+
+.button-nav {
+	color: white !important;
+  background-color: rgba(1, 133, 244, 1) !important;
+  box-shadow: 0 4px 14px 0 rgba(0,118,255,0.39) !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  letter-spacing: 0.12em !important;
+  font-size: 16px !important;	
+  margin-top: 9px !important;
+}
+
+#copy-button {
+	background-color: rgb(244, 246, 250) !important;
+	letter-spacing: 0.08em !important;
+}
+
+
+/* ----------------------------------------- */
+/*           Games/Casino Sections           */
+/* ----------------------------------------- */
+
+.games {
+  background-color: rgba(18, 22, 25, 1) !important;
+  padding-top: 45px !important;
+  padding-bottom: 45px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  border-top: 1px #1D1E24 solid !important;
+}
+
+.casino {
+  background-color: rgba(18, 22, 25, 1) !important;
+  padding-top: 30px !important;
+  padding-bottom: 45px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  border-bottom: 1px #1D1E24 solid !important;
+}
+
+.games-h1, .casino-h1 {
+  background: -webkit-linear-gradient(#045de9, #09c6f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 30px !important;
+  font-weight: 300 !important;
+  padding-bottom: 6px !important;
+  letter-spacing: 0.04em;
+}
+
+a.ui.card:hover {
+  transform: translateY(0px) !important;
+  border: white solid 3px !important;
+}
+
+.ui.card>.image, .ui.cards>.card>.image, .ui.card > .content, .ui.cards > .card > .content {
+  background: rgba(6, 10, 13, 1) !important;
+}
+
+.ui.card>:first-child, .ui.cards>.card>:first-child, .ui.card>:last-child, .ui.cards>.card>:last-child {
+  border-radius: 0px !important;
+}
+
+.card-image {
+  border-bottom: 1px solid rgba(100, 100, 100, 1) !important;
+}
+
+.games-card, .games-card2 {
+  border: rgba(18, 22, 25, 1) solid 3px !important;
+  border-radius: 2px !important;
+}
+
+@media (max-width: 767px) {
+  .games-card2 {
+    margin-top: 30px !important;
+  }
+}
+
+.card-header {
+  color: white !important;
+  letter-spacing: 0.12em !important;
+  font-size: 18px !important; 
+  text-align: center;
+  margin-bottom: -6px !important;
+  margin-top: -9px !important;
+}
+
+@media (max-width: 499px) {
+  .games-card {
+    width: 100% !important;
+  }
+}
+
+
+/* ----------------------------------------- */
+/*              Footer Section               */
+/* ----------------------------------------- */
+
+.footer-container {
+	margin-top: 45px;
+	margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+  .comp-footer {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .mob-footer {
+    display: none !important;
+  }
+}
+
+.footer-header {
+	font-size: 18px !important;
+	margin-top: 15px !important;
+}
+
+.nav-footer {
+  background-image: linear-gradient(to bottom, #121212 0%, #323232 100%) !important;
+}
+
+.footer-right, .footer-right2, .footer-right3 {
+  float: right !important;
+  margin-bottom: 0px !important;
+  margin-right: 12px !important;
+}
+
+.footer-right3 {
+  margin-left: 0px !important;
+  padding-left: 0px !important;
+}
+
+.footer-left {
+  margin-left: 12px !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .footer-right {
+    margin-left: 5px !important;
+    margin-bottom: 5px !important;
+    margin-right: 0px !important;
+  }
+  .footer-left {
+    margin-left: 5px !important;
+  }
+  #footer-display {
+    display: none !important;
+  }
+  #footer-mobile, #footer-mobile2 {
+    float: left !important;
+    padding-left: 0px !important;
+  }
+  #footer-mobile2 {
+    margin-top: -15px !important;
+  }
+  #footer-float2 {
+    float: left !important;
+  }
+}
+
+.footer-font {
+  color: white;
+  font-size: 16px !important;
+  text-align: center !important;
+}
+
+.footer-font2 {
+  font-size: 16px !important;
+}
+
+#footer-float1 {
+  float: left !important;
+}
+
+#footer-float2 {
+  float: right;
+  padding-right: 19px;
+}
+
+#footer-divider {
+  background-color: rgba(25, 25, 25, 1) !important;
+  border-bottom: none !important;
+}
+
+#footer-icon {
+  color: white;
+  margin-left: 4px;
+  margin-right: 4px;
+  font-size: 20px;
+}
+
+#footer-icon:hover {
+  color: rgba(1, 133, 244, 1) !important;
+}
+
+#footer-icon {
+  padding-top: 6px;
+}
+
+.svg1 {
+  width: 11em;
+  height: 11em;
+}
+
+.svg3 {
+  width: 13em;
+  height: 13em;
+}
+
+@media (min-width: 768px) {
+  .svg3, .svg4 {
+    float: right;
+  }
+}
+
+.svg2, .svg4 {
+  width: 12em;
+  height: 12em;
+}
+
+.svg1, .svg2, .svg3, .svg4 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  fill: #172023;
+}
+
+.svg1:hover, .svg2:hover, .svg3:hover, .svg4:hover {
+  fill: #2085F3;
+  transition: fill 3s ease-out !important;
+}
+
+@media (max-width: 991px) {
+  .col-hidden {
+    display: none !important;
+  }
+}
+
+/* ----------------------------------------- */
+/*             Withdraw Page CSS             */
+/* ----------------------------------------- */
+
+#withdraw {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#withdraw a {
+  color: gray;
+}
+
+.ui.withdrawContainer {
+  margin-left:0px;
+  margin-right:0px;
+  min-height: 100vh;
+}
+
+.ui.withdrawContainer * {
+  font-family: 'Lato', sans-serif, Dropdown!important;
+}
+
+/* ------------------------------- */
+/*         Deposit Page CSS        */
+/* ------------------------------- */
+
+#deposit {
+  display: flex;
+  min-height: 630px;
+  flex-direction: column;
+}
+
+#deposit a {
+  color: gray;
+}
+
+.ui.depositContainer {
+  margin-left:0px;
+  margin-right:0px;
+}
+
+.ui.depositContainer * {
+  font-family: 'Lato', sans-serif, Dropdown!important;
+}
+
+/* ------------------------------- */
+/*         Account Page CSS         */
+/* ------------------------------- */
+
+.ui.accountContainer {
+  /*max-width: 1050px !important;*/
+  /*height: 600px !important;*/
+  margin-left:0px;
+  margin-right:0px;
+  /*margin-top: 20px;*/
+  min-height: 100vh;
+}
+
+.ui.accountContainer * {
+  font-family: 'Lato', sans-serif!important;
+}
+
+.ui.accountContainer i {
+  font-family: Icons, brand-icons!important;
+}
+
+.ui.accountContainer .menuContainer {
+  position: fixed;
+  display: inline-block; 
+  width: 300px;
+  height: 100vh;
+  background-color: #f9fbfd;
+  border-right: 1px solid rgba(34,36,38,.15);
+  vertical-align: top;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 12px !important;
+}
+
+.ui.accountContainer .balanceBox {
+  padding: 30px;
+  text-align: center;
+  width: calc((100% - 40px) / 3);
+  background-color: #f9fbfd;
+  display: inline-block;
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: 8px;
+}
+
+#teleport-box {
+  background-color: #f9fbfd;
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: 8px;
+  margin-top: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 15px;
+}
+
+#nft-box {
+  background-color: #f9fbfd;
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: 8px;
+  margin-top: 42px !important;
+}
+
+#tx-box, #dep-box {
+  background-color: #f9fbfd;
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: 4px;
+  margin-top: 42px !important;
+}
+
+#balance-pad {
+  margin-top: 22px !important;
+}
+
+.ui.accountContainer a {
+  color: gray;
+}
+
+.dataTable {
+  overflow: auto;
+}
+.dataTable::-webkit-scrollbar { 
+  width: 10px !important ;
+}
+.dataTable::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+.dataTable::-webkit-scrollbar-track {
+  background: transparent
+}
+
+.scrollTable::-webkit-scrollbar-thumb {
+ background-color: gray;
+}
+
+.contentContainer { 
+  /*box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);*/
+  margin-left: 350px;
+  display: inline-block; 
+  width: calc(100% - 350px);
+  height: 550px;
+  border-radius: 5px;
+}
+
+.contentContainer2 { 
+  /*box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);*/
+  display: inline-block; 
+  width: calc(100%);
+  height: 550px;
+  border-radius: 5px;
+}
+
+
+
+.contentContainer .ui.dropdown > .text,
+.contentContainer .ui.dropdown > .dropdown.icon {
+  color: black;
+}
+
+.contentContainer table {
+  padding: 5px 0px;
+  background-color: transparent!important;
+  border: none!important;
+}
+
+.contentContainer table th {
+  border: none!important;
+  font-size: 0.9em;
+  font-weight: bold!important;
+  color: black!important;
+  padding: 5px 10px!important;
+}
+
+.contentContainer table th:last-child,
+.contentContainer table td:last-child {
+  text-align: center!important;
+}
+
+.contentContainer table td {
+  border: none!important;
+  font-size: 0.9em;
+  color: gray!important;
+  padding: 5px 10px!important;
+}
+
+.contentContainer table tr:nth-child(odd) {
+  /*background-color: #f0f0f0ff;*/
+}
+
+.contentContainer table#header,
+.contentContainer table#header tr,
+.contentContainer table#header tr th {
+  background-color: rgba(241, 243, 245, 1) !important;
+}
+
+.ui.accountContainer span.balanceAmount {
+  font-size: 1.5em;
+  /*font-weight: bold;*/
+  vertical-align: middle;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.ui.accountContainer button,
+#depositButton, #withdrawButton {
+  background-color: rgba(1, 133, 244, 1);
+  box-shadow: 0 4px 14px 0 rgba(0,118,255,0.39);
+  min-width: 96px;
+  padding: 7px 10px;
+  font-size: 0.9em;
+  vertical-align: middle;
+  height: 33px; 
+  color: white;
+  letter-spacing: 0.075em !important;
+  font-family: 'Lato', sans-serif!important;
+}
+
+.ui.accountContainer div.teleport {
+  width: calc(100% - 40px);
+}
+
+.ui.accountContainer div.teleport img:hover {
+  filter: brightness(0.5);
+}
+
+.ui.accountContainer p.titleName {
+  font-size: 30px !important;
+  padding-top: 20px;
+  margin-bottom: 0px;
+  font-weight: 1000;
+}
+
+.ui.accountContainer p.titleDescription {
+  font-size: 17px !important;
+  padding-top: 10px;
+}
+
+/* ------------------------------- */
+/*         Verify Page CSS         */
+/* ------------------------------- */
+
+#verify {
+  display: flex;
+  flex-direction: column;
+}
+
+.ui.fluid.dropdown {
+  width: 145px !important;
+}
+
+.ui.dropdown > .text, .ui.fluid.dropdown>.dropdown.icon {
+  color: black !important;
+}
+
+img.progressbar {
+  width: 18px;
+  vertical-align: middle;
+}
+
+img.progressbar.small {
+  width: 8px;
+  vertical-align: middle;
+}
+
+p.progressbar {
+  vertical-align: middle;
+  display: inline-block;
+  margin: 0;
+  margin-left: 5px;
+  margin-right: 10px;
+  font-size: 16px !important;
+}
+
+.ui.verifyContainer {
+  margin-left:0px;
+  margin-right:0px;
+}
+
+.ui.verifyContainer * {
+  font-family: 'Lato', sans-serif, Dropdown!important;
+}
+
+.contentContainer { 
+  display: inline-block; 
+  width: calc(100% - 350px);
+  height: 550px;
+  border-radius: 5px;
+}
+
+div.progressbar {
+  position: fixed;
+  display: inline-block; 
+  width: 300px;
+  height: 551px;
+  background-color: #f9fbfd;
+  border-right: 1px solid rgba(34,36,38,.15);
+  vertical-align: top;
+  padding-left: 30px;
+  font-size: 12px !important;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+div.progressbar2 {
+  position: fixed;
+  display: inline-block; 
+  width: 300px;
+  height: 630px;
+  background-color: #f9fbfd;
+  border-right: 1px solid rgba(34,36,38,.15);
+  vertical-align: top;
+  padding-left: 30px;
+  font-size: 12px !important;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+div.progressbar .row, div.progressbar2 .row {
+  text-align: left;
+}
+
+.progressTitle {
+  padding: 0em 0em 15px;
+  border-bottom: 1px solid lightgray;
+  margin-top: 60px !important;
+  text-align: left;
+  line-height: 1.6em; 
+  font-size: 2.7em; 
+  color: black;
+}
+
+.contentContainer .verifyTitle {
+  display: block;
+  font-size: 20px !important;
+  width: 100%;
+  text-align: left;
+}
+
+.ui.medium.image {
+  width: 245px;
+}
+
+.ui.verifyContainer .grid {
+  /*max-width: 570px !important;*/
+}
+
+/* ------------------------------- */
+/*         Admin Page CSS          */
+/* ------------------------------- */
+
+#admin {
+  display: flex;
+  min-height: 80vh;
+  flex-direction: column;
+}
+
+#admin .houseBalanceTitle {
+  font-size: 1.1em!important;
+}
+
+/* ------------------------------- */
+/*     Waiting Animation CSS       */
+/* ------------------------------- */
+
+.spinner {
+  position: fixed;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  background-color: rgba(255,255,255,0.8);
+}
+.sk-fading-circle {
+  margin: calc(50vh - 120px) 50%;
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.sk-fading-circle .sk-circle {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.sk-fading-circle .sk-circle:before {
+  content: '';
+  display: block;
+  margin: 0 auto;
+  width: 15%;
+  height: 15%;
+  background-color: #333;
+  border-radius: 100%;
+  -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
+          animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
+}
+.sk-fading-circle .sk-circle2 {
+  -webkit-transform: rotate(30deg);
+      -ms-transform: rotate(30deg);
+          transform: rotate(30deg);
+}
+.sk-fading-circle .sk-circle3 {
+  -webkit-transform: rotate(60deg);
+      -ms-transform: rotate(60deg);
+          transform: rotate(60deg);
+}
+.sk-fading-circle .sk-circle4 {
+  -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.sk-fading-circle .sk-circle5 {
+  -webkit-transform: rotate(120deg);
+      -ms-transform: rotate(120deg);
+          transform: rotate(120deg);
+}
+.sk-fading-circle .sk-circle6 {
+  -webkit-transform: rotate(150deg);
+      -ms-transform: rotate(150deg);
+          transform: rotate(150deg);
+}
+.sk-fading-circle .sk-circle7 {
+  -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.sk-fading-circle .sk-circle8 {
+  -webkit-transform: rotate(210deg);
+      -ms-transform: rotate(210deg);
+          transform: rotate(210deg);
+}
+.sk-fading-circle .sk-circle9 {
+  -webkit-transform: rotate(240deg);
+      -ms-transform: rotate(240deg);
+          transform: rotate(240deg);
+}
+.sk-fading-circle .sk-circle10 {
+  -webkit-transform: rotate(270deg);
+      -ms-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+.sk-fading-circle .sk-circle11 {
+  -webkit-transform: rotate(300deg);
+      -ms-transform: rotate(300deg);
+          transform: rotate(300deg); 
+}
+.sk-fading-circle .sk-circle12 {
+  -webkit-transform: rotate(330deg);
+      -ms-transform: rotate(330deg);
+          transform: rotate(330deg); 
+}
+.sk-fading-circle .sk-circle2:before {
+  -webkit-animation-delay: -1.1s;
+          animation-delay: -1.1s; 
+}
+.sk-fading-circle .sk-circle3:before {
+  -webkit-animation-delay: -1s;
+          animation-delay: -1s; 
+}
+.sk-fading-circle .sk-circle4:before {
+  -webkit-animation-delay: -0.9s;
+          animation-delay: -0.9s; 
+}
+.sk-fading-circle .sk-circle5:before {
+  -webkit-animation-delay: -0.8s;
+          animation-delay: -0.8s; 
+}
+.sk-fading-circle .sk-circle6:before {
+  -webkit-animation-delay: -0.7s;
+          animation-delay: -0.7s; 
+}
+.sk-fading-circle .sk-circle7:before {
+  -webkit-animation-delay: -0.6s;
+          animation-delay: -0.6s; 
+}
+.sk-fading-circle .sk-circle8:before {
+  -webkit-animation-delay: -0.5s;
+          animation-delay: -0.5s; 
+}
+.sk-fading-circle .sk-circle9:before {
+  -webkit-animation-delay: -0.4s;
+          animation-delay: -0.4s;
+}
+.sk-fading-circle .sk-circle10:before {
+  -webkit-animation-delay: -0.3s;
+          animation-delay: -0.3s;
+}
+.sk-fading-circle .sk-circle11:before {
+  -webkit-animation-delay: -0.2s;
+          animation-delay: -0.2s;
+}
+.sk-fading-circle .sk-circle12:before {
+  -webkit-animation-delay: -0.1s;
+          animation-delay: -0.1s;
+}
+
+@-webkit-keyframes sk-circleFadeDelay {
+  0%, 39%, 100% { opacity: 0; }
+  40% { opacity: 1; }
+}
+
+@keyframes sk-circleFadeDelay {
+  0%, 39%, 100% { opacity: 0; }
+  40% { opacity: 1; } 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

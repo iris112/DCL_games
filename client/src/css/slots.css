@@ -1,0 +1,62 @@
+.mycolumn {
+  border-radius: 4px !important;
+  height: 213px;
+  width: 84px;
+  background: #111111;
+  overflow: hidden;
+}
+.animate {
+  -webkit-animation: scroll 0.1s infinite;
+  -moz-animation: scroll 0.1s infinite;
+  -ms-animation: scroll 0.1s infinite;
+}
+.number {
+  color: #ffffff !important;
+  font-size: 48px !important;
+  margin-bottom: 27px !important;
+  position: relative !important;
+  top: 20px !important;
+  left: 10px !important;
+}
+@-webkit-keyframes scroll {
+  0% {
+    transform: translateY(0px);
+  }
+  33% {
+    transform: translateY(-100px);
+  }
+  66% {
+    transform: translateY(-200px);
+  }
+  100% {
+    transform: translateY(-300px);
+  }
+}
+@-moz-keyframes scroll {
+  0% {
+    transform: translateY(0px);
+  }
+  33% {
+    transform: translateY(-100px);
+  }
+  66% {
+    transform: translateY(-200px);
+  }
+  100% {
+    transform: translateY(-300px);
+  }
+}
+@-ms-keyframes scroll {
+  0% {
+    transform: translateY(0px);
+  }
+  33% {
+    transform: translateY(-100px);
+  }
+  66% {
+    transform: translateY(-200px);
+  }
+  100% {
+    transform: translateY(-300px);
+  }
+}

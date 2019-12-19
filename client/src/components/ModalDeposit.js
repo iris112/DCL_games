@@ -20,7 +20,7 @@ var USER_ADDRESS;
 
 const INITIAL_STATE = {
   isLoaded: 0,
-  isCustomAmount: 0, 
+  isCustomAmount: 0,
   amount: 1000,
   userStepValue: 0,
   networkID: 0,

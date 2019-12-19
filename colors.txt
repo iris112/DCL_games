@@ -1,0 +1,7 @@
+blue: 0086f4
+pink: ff69b4
+violet: e53fe5
+black: 171517
+orange: ff6200
+green: 00cc00
+red: ff0000

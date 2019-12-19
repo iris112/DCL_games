@@ -1,0 +1,30 @@
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+Ropsten Network addresses
+
+MANA contract: 0x2a8Fd99c19271F4F04B1B7b9c4f7cF264b626eDB
+SlotMachineLogic: 0x4cde4d1cef4ac925eea54b5e50673455f6aef9c1
+
+SlotMachineETH:
+SlotMachineMANA: 0xf4286ce6950ca64050e48b5698239492d3ad6891
+Server wallet address: 0x0C279F0f2090f8177c8C6F395BdAf52F77a3D910
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+Matic Network addresses
+MANA contract: 0xDd1B834a483fD754c8021FF0938f69C1d10dA81F
+
+SlotMachineLogic (a): 0x85697947b9bac8926bfa1e265a220436e8d0ee84
+SlotMachineLogic (b): 0x5d6b91270e33d1716be29b6be7b200226310c64b
+
+SlotMachineETH:
+
+SlotMachineMANA (a): 0x11f6757ab51a01686b1c54fa0f0c45960b1bd3bc
+SlotMachineMANA (b): 0x9ce85d696c0e69a755cb8d349ddac6c97bf09229
+
+Server wallet address: 0x1FcdE174C13691ef0C13fcEE042e0951452C0f8A
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+User accmount: 0xDf4eC4dAdCCAbBE4bC44C5D3597abBA54B18Df45
+Approve amount: 5000000000000000000000

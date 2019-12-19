@@ -2,16 +2,17 @@ import React, { Component } from 'react'
 import { Link, Redirect, withRouter } from 'react-router-dom';
 import { isMobile } from "react-device-detect";
 import '../additional.css';
-import box from './box.png';
-import check from './check.png';
-import verify from './verify.png';
-import verify1 from './verify1.png';
+import box from '../Images/box.png';
+import check from '../Images/check.png';
+import verify from '../Images/switch_matic.png';
+import verify1 from '../Images/switch_ropsten.png';
 import logo from '../Images/logo.png'
 import { Header, Button } from 'decentraland-ui'
-import { Container, Grid, Dropdown, Input} from 'semantic-ui-react'
+import { Container, Grid, Dropdown, Input, Breadcrumb} from 'semantic-ui-react'
 import Spinner from '../../Spinner'
 // ---------------------------------------------------------------------
 import Global from '../constant';
+
 
 var USER_ADDRESS = '';
 var UNIT = 1;
@@ -22,6 +23,7 @@ const INITIAL_STATE = {
   isCustomAmount: 0,
   amount: 1000,
   networkID: 0,
+  isExistWithdraw: 0,
   isValidStep1: 0,
   isConfirmStep1: 0,
   isValidStep2: 0,
@@ -58,9 +60,21 @@ class Withdraw extends React.Component {
           continue;
         }
 
-        let ret = await this.checkUserVerifyStep();
+        let ret = await this.checkExistWithdraw();
+        if (!ret) {
+          await Global.delay(2000);
+          continue;
+        }
+
+        ret = await this.checkWithdrawTransaction();
+        if (!ret) {
+          await Global.delay(2000);
+          continue;
+        } 
+
+        ret = await this.checkUserVerifyStep();
         if (ret) {
-          return;
+          return
         }
 
         await Global.delay(2000);
@@ -97,6 +111,66 @@ class Withdraw extends React.Component {
     return false;
   }
 
+  checkExistWithdraw = async () => {
+    try {
+      let txid = localStorage.getItem('withdrawTxID');
+      if (txid == null || txid == '') {
+        const response = await this.getWithdrawExist();
+        const json = await response.json();
+        if (json.status === 'ok') {
+          if (json.result === 'true') {
+            this.setState({isExistWithdraw: 1});
+          }
+        }
+      }
+
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
+
+    return false;
+  }
+
+  checkWithdrawTransaction = async () => {
+    try {
+      let txid = localStorage.getItem('withdrawTxID');
+      if (txid == null || txid == '') {
+        return true;
+      }
+
+      const response = await this.getWithdrawTransaction(txid);
+      const json = await response.json();
+      if (json.status === 'ok') {
+        if (json.result === 'false') {
+          return true;
+        }
+
+        let step = parseInt(json.result.step);
+        let amount = parseInt(json.result.amount);
+        if (step == 1)
+          this.setState({isValidStep1: 2, amount});
+        else if (step == 2)
+          this.setState({isConfirmStep1: 2, amount});
+        else if (step == 3)
+          this.setState({isValidStep2: 2, amount});
+        else if (step == 4)
+          this.setState({isConfirmStep2: 2, amount});
+        else if (step == 5)
+          this.setState({isConfirmStep3: 2, amount});
+        else
+          this.setState({amount});
+
+        
+        return true;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    return false;
+  }
+
   ifMobileRedirect = () => {
     if (isMobile) {
       return <Redirect to='/' />
@@ -122,6 +196,46 @@ class Withdraw extends React.Component {
     })
   }
 
+  getWithdrawExist = () => {
+    return fetch(`${Global.BASE_URL}/order/existWithdraw`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        address: USER_ADDRESS,
+      })
+    })
+  }
+
+  getWithdrawTransaction = (txid) => {
+    return fetch(`${Global.BASE_URL}/order/checkHistory`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        txHash: txid,
+      })
+    })
+  }
+
+  checkConfirm = (txid, step) => {
+    return fetch(`${Global.BASE_URL}/order/confirmHistory`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        txHash: txid,
+        step: step,
+      })
+    })
+  }
+
   onChangeAmount = (e, d) => {
     if (d.value == -2) {
       this.setState({amount: 0, isCustomAmount: 1 });
@@ -142,75 +256,172 @@ class Withdraw extends React.Component {
   withdrawManaFromMatic = async (e, d) => {
     try {
       this.setState({isRunningTransaction: true});
-      // let amount = this.state.amount;
-      // if (amount == -1)
-      //   amount = await this.getTokenBalance();
+      let amount = this.state.amount;
+      if (amount == -1)
+        amount = await this.getTokenBalance();
 
-      // var amount_wei = (amount / UNIT * 10 ** Global.TOKEN_DECIMALS).toString();
+      var amount_wei = (amount / UNIT * 10 ** Global.TOKEN_DECIMALS).toString();
 
-      // // init withdrawing
-      // let txHash = await Global.startWithdrawTokenFromMatic(Global.MATIC_TOKEN, amount_wei, USER_ADDRESS );
-      // if (txHash == false) {
-      //   this.setState({isValidStep1: 1, isRunningTransaction: false});
-      //   return;
-      // }
-      // let ret = await this.updateHistory(amount / UNIT, 'Withdraw', 'Ready', txHash);
-      // if (!ret) {
-      //   console.log('network error');
-      //   this.setState({isValidStep1: 1, isRunningTransaction: false});
-      //   return;
-      // }
+      // init withdrawing
+      let txHash = await Global.startWithdrawTokenFromMatic(Global.MATIC_TOKEN, amount_wei, USER_ADDRESS );
+      if (txHash == false) {
+        this.setState({isValidStep1: 1, isRunningTransaction: false});
+        return;
+      }
+      let ret = await this.updateHistory(amount / UNIT, 'Withdraw', 'In Progress', txHash, 1);
+      if (!ret) {
+        console.log('network error');
+        this.setState({isValidStep1: 1, isRunningTransaction: false});
+        return;
+      }
 
+      localStorage.setItem('withdrawTxID', txHash);
       this.setState({isValidStep1: 2, isRunningTransaction: false});
-
+      return;
     } catch (err) {
       console.log(err);
-      this.setState({isValidStep1: 1, isRunningTransaction: false});
     }
+
+    this.setState({isValidStep1: 1, isRunningTransaction: false});
   };
 
   confirmStep1 = async (e, d) => {
     try {
       this.setState({isRunningTransaction: true});
-      this.setState({isConfirmStep1: 2, isRunningTransaction: false});
+      let txid = localStorage.getItem('withdrawTxID');
+      if (txid == null || txid == '') {
+        this.setState({isConfirmStep1: 1, isRunningTransaction: false});
+        return;
+      }
+
+      const response = await this.checkConfirm(txid, 1);
+      const json = await response.json();
+      if (json.status === 'ok') {
+        if (json.result === 'false') {
+          this.setState({isRunningTransaction: false});
+          localStorage.setItem('withdrawTxID', '');
+          this.props.history.push('/account/');
+          return;
+        }
+
+        let ret = await this.updateHistory(this.state.amount / UNIT, 'Withdraw', 'Ready', txid, 2);
+        if (!ret) {
+          console.log('network error');
+          this.setState({isConfirmStep1: 1, isRunningTransaction: false});
+          return;
+        }
+        this.setState({isConfirmStep1: 2, isRunningTransaction: false});
+        return;
+      }
+
     } catch (err) {
       console.log(err);
-      this.setState({isConfirmStep1: 1, isRunningTransaction: false});
     }
+
+    this.setState({isConfirmStep1: 1, isRunningTransaction: false});
   }
 
   continueStep2 = async (e, d) => {
     try {
       this.setState({isRunningTransaction: true});
+      let txid = localStorage.getItem('withdrawTxID');
+      if (txid == null || txid == '') {
+        this.setState({isValidStep2: 1, isRunningTransaction: false});
+        return;
+      }
+
+      let ret = await Global.withdrawTokenFromMatic(txid, window.web3.currentProvider.selectedAddress);
+      if (ret == false) {
+        await this.updateHistory(this.state.amount / UNIT, 'Withdraw', 'Failed', txid, 2);
+        this.setState({isValidStep2: 1, isRunningTransaction: false});
+        return;
+      }
+
+      ret = await this.updateHistory(this.state.amount / UNIT, 'Withdraw', 'In Progress', txid, 3);
+      if (!ret) {
+        console.log('network error');
+        this.setState({isValidStep2: 1, isRunningTransaction: false});
+        return;
+      }
+
       this.setState({isValidStep2: 2, isRunningTransaction: false});
+      return;
     } catch (err) {
       console.log(err);
-      this.setState({isValidStep2: 1, isRunningTransaction: false});
     }
+
+    this.setState({isValidStep2: 1, isRunningTransaction: false});
   }
 
   confirmStep2 = async (e, d) => {
     try {
       this.setState({isRunningTransaction: true});
-      this.setState({isConfirmStep2: 2, isRunningTransaction: false});
+      let txid = localStorage.getItem('withdrawTxID');
+      if (txid == null || txid == '') {
+        this.setState({isConfirmStep2: 1, isRunningTransaction: false});
+        return;
+      }
+
+      const response = await this.checkConfirm(txid, 2);
+      const json = await response.json();
+      if (json.status === 'ok') {
+        if (json.result === 'false') {
+          this.setState({isRunningTransaction: false});
+          localStorage.setItem('withdrawTxID', '');
+          this.props.history.push('/account/');
+          return;
+        }
+
+        let ret = await this.updateHistory(this.state.amount / UNIT, 'Withdraw', 'Ready', txid, 4);
+        if (!ret) {
+          console.log('network error');
+          this.setState({isConfirmStep2: 1, isRunningTransaction: false});
+          return;
+        }
+        this.setState({isConfirmStep2: 2, isRunningTransaction: false});
+        return;
+      }
     } catch (err) {
       console.log(err);
-      this.setState({isConfirmStep2: 1, isRunningTransaction: false});
     }
+
+    this.setState({isConfirmStep2: 1, isRunningTransaction: false});
   }
 
   confirmStep3 = async (e, d) => {
     try {
       this.setState({isRunningTransaction: true});
+      let txid = localStorage.getItem('withdrawTxID');
+      if (txid == null || txid == '') {
+        this.setState({isConfirmStep3: 1, isRunningTransaction: false});
+        return;
+      }
+
+      // exit withdrawing
+      let ret = await Global.processExits(Global.ROPSTEN_TOKEN, window.web3.currentProvider.selectedAddress);
+      if (ret == false) {
+        await this.updateHistory(this.state.amount / UNIT, 'Withdraw', 'Failed', txid, 4);
+        this.setState({isConfirmStep3: 1, isRunningTransaction: false});
+        return;
+      }
+
+      ret = await this.updateHistory(this.state.amount / UNIT, 'Withdraw', 'Confirmed', txid, 5);
+      if (!ret) {
+        console.log('network error');
+        this.setState({isConfirmStep3: 1, isRunningTransaction: false});
+        return;
+      }
+      localStorage.setItem('withdrawTxID', '');
       this.setState({isConfirmStep3: 2, isRunningTransaction: false});
       this.props.history.push('/account/');
     } catch (err) {
       console.log(err);
-      this.setState({isConfirmStep3: 1, isRunningTransaction: false});
     }
+
+    this.setState({isConfirmStep3: 1, isRunningTransaction: false});
   }
 
-  postHistory = async (amount, type, state, txHash) => {
+  postHistory = async (amount, type, state, txHash, step) => {
     return fetch(`${Global.BASE_URL}/order/updateHistory`, {
       method: 'POST',
       headers: {
@@ -222,14 +433,15 @@ class Withdraw extends React.Component {
         amount,
         type,
         state,
-        txHash
+        txHash,
+        step
       })
     })
   }
 
-  updateHistory = async (amount, type, state, txHash = "") => {
+  updateHistory = async (amount, type, state, txHash, step) => {
     try {
-      const response = await this.postHistory(amount, type, state, txHash);
+      const response = await this.postHistory(amount, type, state, txHash, step);
       const json = await response.json();
       if (json.status === 'ok') {
         if (json.result === 'false') {
@@ -292,9 +504,12 @@ class Withdraw extends React.Component {
     if (!this.isBrowserMetamsk) {
       return (
         <div id="withdraw">
-          <Container style={{ marginTop: '25.5em', height: '35em' }}>
-            <Grid verticalAlign='middle' textAlign='center'>
-              <Header> Please use Chrome Browser with Metamask enabled to proceed. </Header>
+          <Container>
+            <a id='a-footer' style={{marginTop: '30px', display: 'inline-block'}} href='/'>
+              <Breadcrumb.Divider  style={{ fontSize: '18px' }} icon='left arrow' />
+            </a>
+            <Grid verticalAlign='middle' textAlign='center' style={{marginTop: '40vh'}}>
+              <Header> Please use a Chrome Browser with Metamask enabled to proceed. If you've haven't already, download Chrome <a class='redlink' href="https://www.google.com/chrome/">here</a> and Metamask <a class='redlink' href="https://metamask.io/">here</a> </Header>
             </Grid>
           </Container>
         </div>
@@ -303,6 +518,18 @@ class Withdraw extends React.Component {
 
     if (this.state.networkID == 0)
       this.verifyNetwork()
+
+    if (this.state.isExistWithdraw == 1) {
+      return (
+        <div id="withdraw">
+          <Container style={{ marginTop: '25.5em', height: '35em' }}>
+            <Grid verticalAlign='middle' textAlign='center'>
+              <Header> You have in-progress withdrawal now, Please finish already started withdrawal. </Header>
+            </Grid>
+          </Container>
+        </div>
+      )
+    }
 
     if (this.state.isConfirmStep2 == 2) {
       if (this.state.networkID == 3) {
@@ -355,28 +582,28 @@ class Withdraw extends React.Component {
 
                   <div class="contentContainer" style={{padding: '20px', marginTop: '10px', textAlign: 'left'}}>
                     <h3 style={{textAlign: 'left', marginLeft: '10px'}}> Withdraw MANA </h3>
-                      <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '50px'}}>7.</span>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '80px', marginTop: '45px' }}>
+                      <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '20px'}}>7.</span>
+                      <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '45px', marginTop: '47px' }}>
                         Confirm withdrawal on Ropsten.
                       </p>
-                      <Button id='button-6' color='blue' style={{marginLeft: '80px', display: 'block' }} 
+                      <Button id='button-6' color='blue' style={{marginTop: '15px', marginLeft: '45px', display: 'block' }} 
                         onClick={this.confirmStep3}>
                         Confirm
                       </Button>
 
                       { this.state.isConfirmStep3 == 1 ?
-                        <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
+                        <p style={{ textAlign: 'left', color: 'red', marginTop: '10px'}}>
                           Withdraw confirm failed.
                         </p> : <p/>
                       }
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '100px' }}>
+                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '100px' }}>
                         **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
                       </p>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
+                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
                         <span style={{fontWeight: 'bold'}}>NOTE: </span>
                         To ensure upmost security on the Matic sidechain, withdrawals currently take 1 week, and are broken down into 3 steps. You will need to sign 2 more thransactions to complete this withdrawal - one in 1-2 days, and one in 1 week.
                       </p>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
+                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
                         We will be offering instant mainchain liquidity services in the near future,
                       </p>
                   </div>
@@ -433,14 +660,14 @@ class Withdraw extends React.Component {
 
                 <div class="contentContainer" style={{padding: '20px', marginTop: '10px', textAlign: 'left'}}>
                   <h3 style={{textAlign: 'left', marginLeft: '10px'}}> Withdraw MANA </h3>
-                    <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '50px'}}>4.</span>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '80px', marginTop: '45px' }}>
+                    <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '20px'}}>4.</span>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '45px', marginTop: '47px' }}>
                       On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
                     </p>
-                    <img style={{width:'240px', marginLeft: '100px'}} src={verify1} class="image small inline" />
+                    <img style={{width:'240px', marginLeft: '65px'}} src={verify1} class="image small inline" />
 
                     { this.state.networkID != 3 ?
-                      <p style={{ textAlign: 'left', color: 'red', marginTop: '10px', marginLeft: '100px'}}>
+                      <p style={{ textAlign: 'left', color: 'red', marginTop: '10px', marginLeft: '85px'}}>
                         This is not Ropsten Network.
                       </p> : <p/>
                     }
@@ -501,11 +728,11 @@ class Withdraw extends React.Component {
 
                 <div class="contentContainer" style={{padding: '20px', marginTop: '10px', textAlign: 'left'}}>
                   <h3 style={{textAlign: 'left', marginLeft: '10px'}}> Withdraw MANA </h3>
-                    <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '50px'}}>6.</span>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '80px', marginTop: '45px' }}>
+                    <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '20px'}}>6.</span>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '45px', marginTop: '45px' }}>
                       Please check back in 15 minutes to continue withdrawal process from Matic Network.
                     </p>
-                    <Button id='button-6' color='blue' style={{marginLeft: '80px', display: 'block' }} 
+                    <Button id='button-6' color='blue' style={{marginTop: '15px', marginLeft: '45px', display: 'block' }} 
                       onClick={this.confirmStep2}>
                       Confirm
                     </Button>
@@ -515,14 +742,14 @@ class Withdraw extends React.Component {
                         Withdraw confirm failed.
                       </p> : <p/>
                     }
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '100px' }}>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '100px' }}>
                       **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
                     </p>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
                       <span style={{fontWeight: 'bold'}}>NOTE: </span>
                       To ensure upmost security on the Matic sidechain, withdrawals currently take 1 week, and are broken down into 3 steps. You will need to sign 2 more thransactions to complete this withdrawal - one in 1-2 days, and one in 1 week.
                     </p>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
                       We will be offering instant mainchain liquidity services in the near future,
                     </p>
                 </div>
@@ -582,11 +809,11 @@ class Withdraw extends React.Component {
 
                   <div class="contentContainer" style={{padding: '20px', marginTop: '10px', textAlign: 'left'}}>
                     <h3 style={{textAlign: 'left', marginLeft: '10px'}}> Withdraw MANA </h3>
-                      <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '50px'}}>5.</span>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '80px', marginTop: '45px' }}>
+                      <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '20px'}}>5.</span>
+                      <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '45px', marginTop: '47px' }}>
                         Continue withdrawal to Ropsten.
                       </p>
-                      <Button id='button-6' color='blue' style={{marginLeft: '80px', display: 'block' }} 
+                      <Button id='button-6' color='blue' style={{marginTop: '15px', marginLeft: '45px', display: 'block' }} 
                         onClick={this.continueStep2}>
                         Continue
                       </Button>
@@ -596,14 +823,14 @@ class Withdraw extends React.Component {
                           Withdraw continue failed.
                         </p> : <p/>
                       }
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '100px' }}>
+                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '100px' }}>
                         **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
                       </p>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
+                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
                         <span style={{fontWeight: 'bold'}}>NOTE: </span>
                         To ensure upmost security on the Matic sidechain, withdrawals currently take 1 week, and are broken down into 3 steps. You will need to sign 2 more thransactions to complete this withdrawal - one in 1-2 days, and one in 1 week.
                       </p>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
+                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
                         We will be offering instant mainchain liquidity services in the near future,
                       </p>
                   </div>
@@ -660,14 +887,14 @@ class Withdraw extends React.Component {
 
                 <div class="contentContainer" style={{padding: '20px', marginTop: '10px', textAlign: 'left'}}>
                   <h3 style={{textAlign: 'left', marginLeft: '10px'}}> Withdraw MANA </h3>
-                    <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '50px'}}>4.</span>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '80px', marginTop: '45px' }}>
+                    <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '20px'}}>4.</span>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '45px', marginTop: '47px' }}>
                       On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
                     </p>
-                    <img style={{width:'240px', marginLeft: '100px'}} src={verify1} class="image small inline" />
+                    <img style={{width:'240px', marginLeft: '65px'}} src={verify1} class="image small inline" />
 
                     { this.state.networkID != 3 ?
-                      <p style={{ textAlign: 'left', color: 'red', marginTop: '10px', marginLeft: '100px'}}>
+                      <p style={{ textAlign: 'left', color: 'red', marginTop: '10px', marginLeft: '85px'}}>
                         This is not Ropsten Network.
                       </p> : <p/>
                     }
@@ -725,11 +952,11 @@ class Withdraw extends React.Component {
 
                 <div class="contentContainer" style={{padding: '20px', marginTop: '10px', textAlign: 'left'}}>
                   <h3 style={{textAlign: 'left', marginLeft: '10px'}}> Withdraw MANA </h3>
-                    <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '50px'}}>3.</span>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '80px', marginTop: '45px' }}>
+                    <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '20px'}}>3.</span>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '45px', marginTop: '47px' }}>
                       Please check back in 1-2 days to continue withdrawal process from Matic Network.
                     </p>
-                    <Button id='button-6' color='blue' style={{marginLeft: '80px', display: 'block' }} 
+                    <Button id='button-6' color='blue' style={{marginTop: '15px', marginLeft: '45px', display: 'block' }} 
                       onClick={this.confirmStep1}>
                       Confirm
                     </Button>
@@ -739,14 +966,14 @@ class Withdraw extends React.Component {
                         Withdraw confirm failed.
                       </p> : <p/>
                     }
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '100px' }}>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '100px' }}>
                       **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
                     </p>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
                       <span style={{fontWeight: 'bold'}}>NOTE: </span>
                       To ensure upmost security on the Matic sidechain, withdrawals currently take 1 week, and are broken down into 3 steps. You will need to sign 2 more thransactions to complete this withdrawal - one in 1-2 days, and one in 1 week.
                     </p>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
                       We will be offering instant mainchain liquidity services in the near future,
                     </p>
                 </div>
@@ -757,7 +984,7 @@ class Withdraw extends React.Component {
       )
     }
 
-    if (this.state.networkID == 8995) {
+    if (this.state.networkID == parseInt(Global.MATIC_NETWORK_ID)) {
       return (
         <div id="withdraw">
           {this.ifMobileRedirect()}
@@ -802,16 +1029,17 @@ class Withdraw extends React.Component {
 
                 <div class="contentContainer" style={{padding: '20px', marginTop: '10px', textAlign: 'left'}}>
                   <h3 style={{textAlign: 'left', marginLeft: '10px'}}> Withdraw MANA </h3>
-                    <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '50px'}}>2.</span>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '80px', marginTop: '45px' }}>
+                    <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '20px'}}>2.</span>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '45px', marginTop: '47px' }}>
                       Select amount to initiate withdrawal of MANA from Matic.
                     </p>
                     { this.state.isCustomAmount == 0 ?
                       <Dropdown selection options={amount} value={this.state.amount} 
-                        style={{ width: '300px', marginLeft: '80px', marginTop: '10px'}} 
+                        style={{ width: '300px', marginLeft: '45px', marginTop: '10px'}} 
                         onChange={this.onChangeAmount} />
                     : <Input style={{ width: '300px', marginLeft: '80px', marginTop: '10px'}} value={this.state.amount} onChange={this.onChangeCustomAmount} /> }
-                    <Button id='button-6' color='blue' style={{marginLeft: '80px', display: 'block' }} 
+
+                    <Button id='button-6' color='blue' style={{ marginTop: '15px', marginLeft: '45px', display: 'block' }} 
                       onClick={this.withdrawManaFromMatic}>
                       Withdraw
                     </Button>
@@ -821,14 +1049,14 @@ class Withdraw extends React.Component {
                         Withdraw failed.
                       </p> : <p/>
                     }
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '100px' }}>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '100px' }}>
                       **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
                     </p>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
                       <span style={{fontWeight: 'bold'}}>NOTE: </span>
                       To ensure upmost security on the Matic sidechain, withdrawals currently take 1 week, and are broken down into 3 steps. You will need to sign 2 more thransactions to complete this withdrawal - one in 1-2 days, and one in 1 week.
                     </p>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '45px', width: '800px', fontStyle:'italic', marginTop: '20px' }}>
                       We will be offering instant mainchain liquidity services in the near future,
                     </p>
                 </div>
@@ -882,14 +1110,14 @@ class Withdraw extends React.Component {
 
               <div class="contentContainer" style={{padding: '20px', marginTop: '10px', textAlign: 'left'}}>
                 <h3 style={{textAlign: 'left', marginLeft: '10px'}}> Withdraw MANA </h3>
-                <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '50px'}}>1.</span>
-                <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '80px', marginTop: '45px' }}>
+                <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '20px'}}>1.</span>
+                <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '45px', marginTop: '47px' }}>
                   On your Metamask extension, open the Network dropdown menu and select 'Matic' Testnet.
                 </p>
-                <img style={{width:'240px', marginLeft: '100px'}} src={verify} class="image small inline" />
+                <img style={{width:'240px', marginLeft: '65px'}} src={verify} class="image small inline" />
 
-                { this.state.isMaticNetwork != 8995 ?
-                  <p style={{ textAlign: 'left', color: 'red', marginTop: '10px', marginLeft: '100px'}}>
+                { this.state.isMaticNetwork != parseInt(Global.MATIC_NETWORK_ID) ?
+                  <p style={{ textAlign: 'left', color: 'red', marginTop: '10px', marginLeft: '85px'}}>
                     This is not Matic Network.
                   </p> : <p/>
                 }

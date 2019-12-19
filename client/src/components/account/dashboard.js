@@ -1,16 +1,14 @@
 import React from 'react'
 import { Redirect, withRouter } from 'react-router-dom';
 import '../additional.css';
-import mana from './mana.png';
-import dai from './dai.png';
-import eth from './eth.png';
-import dg from './authorize_title.png';
+import mana from '../Images/mana.png';
+import dai from '../Images/dai.png';
+import eth from '../Images/eth.png';
+import dg from '../Images/authorize_title.png';
 import teleport1 from '../Images/chateau.png';
 import teleport2 from '../Images/serenity.png';
 import { Button } from 'decentraland-ui'
 import { Input, Image, Divider } from 'semantic-ui-react'
-import ModalDeposit from '../ModalDeposit'
-
 import Global from '../constant';
 
 var USER_ADDRESS;
@@ -41,6 +39,7 @@ class Dashboard extends React.Component {
     })
 
     await this.getUserData();
+
   }
 
   async getUserData() {
@@ -116,7 +115,7 @@ class Dashboard extends React.Component {
 
   verifyNetwork = () => {
     window.web3.version.getNetwork(async (err, network) => {
-      if (network === "8995") {
+      if (network === Global.MATIC_NETWORK_ID) {
         this.isMatic = true;
         await this.getTokenBalance(true);
       }
@@ -132,18 +131,20 @@ class Dashboard extends React.Component {
   }
 
   onWithdraw = () => {
+    localStorage.setItem('withdrawTxID', '');
     this.props.history.push('/withdraw/');
   }
   
   render() {
     return (
       <div class="contentContainer">
-        <div style={{width: 'calc(100% - 80px)', minWidth: '860px' }}>
+        <div style={{width: 'calc(100% - 50px)', minWidth: '860px' }}>
           <p  class="titleName">
-            Hi, {this.state.username}
+            Play Now
           </p>
           <p class="titleDescription">
-            Default gameplay is Free-to-Play. Deposit to play with cryptocurrency.
+            Default gameplay is Free-to-Play. Deposit to play with cryptocurrency. 
+            <i style={{marginLeft: '5px'}} class='lato'>Decentral Games is currently in beta, so all our crypto gameplay is with Ropsten coins on Matic Beta.</i>
           </p>
           <div style={{marginTop: '30px'}}>
             <div class='balanceBox'>
@@ -154,7 +155,11 @@ class Dashboard extends React.Component {
                 </span>
               </div>
       
-              <ModalDeposit onClick={this.onDeposit} />
+              <Button id="depositButton" color='blue' style={{marginRight:'0', marginLeft:'0px'}}
+              onClick={this.onDeposit}
+              >
+                Deposit
+              </Button>
               <Button id="depositButton" color='blue' style={{marginRight:'0', marginLeft:'10px'}}
               onClick={this.onWithdraw}
               >
@@ -206,7 +211,7 @@ class Dashboard extends React.Component {
               <a href="/chateau/">
                 <Image src={teleport1} inline style={{marginLeft:'20px', width: 'calc((100% - 60px) / 3'}}/>
               </a>
-              <a href="https://explorer.decentraland.org/?ENABLE_WEB3&position=-57%2C139">
+              <a href="/serenity/">
                 <Image src={teleport2} inline style={{marginLeft:'20px', width: 'calc((100% - 60px) / 3'}}/>
               </a>
             </div>

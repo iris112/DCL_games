@@ -25,7 +25,12 @@
     "semantic-ui-react": "^0.86.0",
     "solc": "^0.4.25",
     "web3": "1.0.0-beta.34",
-    "webpack": "4.28.3"
+    "webpack": "4.28.3",
+    "abi-decoder": "^2.2.2",
+    "base-64": "^0.1.0",
+    "ethereumjs-common": "^1.4.0",
+    "ethereumjs-tx": "^2.1.1",
+    "ethjs": "^0.4.0"
   },
   "browserslist": [
     ">0.2%",

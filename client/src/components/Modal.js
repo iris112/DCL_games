@@ -4,7 +4,6 @@ import { Icon, Image, Menu, Search, Container, Segment, Modal, Header, Grid, Inp
 import { isMobile } from "react-device-detect";
 import Global from './constant';
 import logo2 from './Images/logo.png'
-import Spinner from '../Spinner'
 import box from './Images/box.png'
 import check from './Images/check.png'
 import metamask from './Images/metamask.png'
@@ -26,14 +25,17 @@ const INITIAL_STATE = {
   isValidBirth: 0,
   isValidLocation: 0,
   isValidMetamask: 0,
-  isRunningTransaction: false,
   existAccount: 0,
 };
 
 class ModalVerify extends Component {
 
   state = { modalOpen: false}
-  handleOpen = () => this.setState({ modalOpen: true })
+  handleOpen = () => {
+    this.setState({ modalOpen: true }); 
+    if (this.state.isLoaded === 0)
+      this.props.showSpinner();
+  }
   handleClose = () => this.setState({ modalOpen: false })
 
   constructor(props) {
@@ -126,8 +128,8 @@ class ModalVerify extends Component {
       const json = await response.json();
       if (json.status === 'ok') {
         if (json.result === 'false') {
-          this.setState({isLoaded: 2});
-          this.setState({ existAccount: 0 });
+          this.setState({isLoaded: 2, existAccount: 0});
+          this.props.hideSpinner();
           return true;
         }
 
@@ -141,6 +143,7 @@ class ModalVerify extends Component {
         else
           this.setState({isLoaded: 2, userStepValue: stepValue, existAccount: 0});
 
+        this.props.hideSpinner();
         return true;
       } else {
         return false;
@@ -237,69 +240,74 @@ class ModalVerify extends Component {
   }
 
   verifyLocation = async (e, d) => {
-    this.setState({isValidLocation: 0});
-    fetch("https://extreme-ip-lookup.com/json")
-      .then(res => res.json())
-      .then(async ip => {
-        if (ip.country != 'poop') {
+    // this.setState({isValidLocation: 0 });
+    // fetch("https://extreme-ip-lookup.com/json")           // Get the IP data
+    //   .then(res => res.json())
+    //   .then(async ip => {
+    //     if (ip.country === 'United States') {
           await this.postUserVerify(4);
           this.setState({isValidLocation: 2 });
           this.props.history.push('/account/');
-        }
-        else
-          this.setState({isValidLocation: 1 });
-          console.log(ip.country);
-      });
+    //     }
+    //     else
+    //       this.setState({isValidLocation: 1 });
+    //   });
   };
 
   onMetamask = async (e, d) => {
     this.setState({isValidMetamask: 0});
+    this.props.showSpinner();
     if (window.ethereum) {
       if (window.web3.currentProvider.selectedAddress === '' || window.web3.currentProvider.selectedAddress === undefined) {
         window.web3 = new window.Web3(window.ethereum);
-        try {
-            // Request account access if needed
-            await window.ethereum.enable();
-            USER_ADDRESS = window.web3.currentProvider.selectedAddress;
-            
-            fetch(`${Global.BASE_URL}/order/addAddress`, {
-              method: 'POST',
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                address: USER_ADDRESS,
-                manaLock: 0,
-                ethLock: 0,
-              })
+        await window.ethereum.enable();
+      }
+      try {
+          // Request account access if needed
+          await window.ethereum.enable();
+          USER_ADDRESS = window.web3.currentProvider.selectedAddress;
+          
+          fetch(`${Global.BASE_URL}/order/addAddress`, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              address: USER_ADDRESS,
+              manaLock: 0,
+              ethLock: 0,
             })
-            .catch(e => {
-              console.log(e);
+          })
+          .catch(e => {
+            console.log(e);
+            this.setState({isValidMetamask: 1});
+            this.props.hideSpinner();
+          })
+          .then(res => {
+            this.props.hideSpinner();
+            if (res)
+              return res.json();
+            this.setState({isValidMetamask: 1});
+          })
+          .then(async data => {
+            if (!data)
               this.setState({isValidMetamask: 1});
-            })
-            .then(res => {
-              if (res)
-                return res.json();
-              this.setState({isValidMetamask: 1});
-            })
-            .then(async data => {
-              if (!data)
+            else {
+              if (data.status === 'ok' && data.result === 'true') {
+                // window.location.href = 'http://localhost:8000';
+                await this.postUserVerify(2);
+                this.setState({isValidMetamask: 2});
+              } else {
                 this.setState({isValidMetamask: 1});
-              else {
-                if (data.status === 'ok' && data.result === 'true') {
-                  // window.location.href = 'http://localhost:8000';
-                  await this.postUserVerify(2);
-                  this.setState({isValidMetamask: 2});
-                } else {
-                  this.setState({isValidMetamask: 1});
-                }
               }
-            });
-        } catch (error) {
-            // User denied account access...
-            console.log(error);
-        }
+            }
+            this.props.hideSpinner();
+          });
+      } catch (error) {
+          // User denied account access...
+          console.log(error);
+          this.props.hideSpinner();
       }
     }
   };
@@ -381,6 +389,22 @@ class ModalVerify extends Component {
       year[year.length] = { key: i, text: i, value: i};
     }
 
+    if (this.state.isLoaded === 0) {
+      return (
+        <Modal
+          trigger={<Button content='Play Now' className='hvr-pop' onClick={this.handleOpen} />}
+          open={this.state.modalOpen}
+          onClose={this.handleClose}
+          closeIcon
+        >
+        <div id="verify">
+          <Container style={{ height: '35em' }}>
+          </Container>
+        </div>
+        </Modal>
+      )
+    }
+
     if (this.state.existAccount == 1) {
       return (
         <Button content='Play Now' className='hvr-pop' as={NavLink} to='/account/' id='button-account' />
@@ -398,7 +422,6 @@ class ModalVerify extends Component {
          <div id="verify">
           {this.ifMobileRedirect()}
           
-          <Spinner show={this.state.isRunningTransaction}/>
           <div class="ui verifyContainer">
             <Grid verticalAlign='middle' textAlign='center'>
               <Grid.Column>
@@ -465,7 +488,6 @@ class ModalVerify extends Component {
           <div id="verify">
             {this.ifMobileRedirect()}
 
-            <Spinner show={this.state.isRunningTransaction}/>
             <div class="ui verifyContainer">
               <Grid verticalAlign='middle' textAlign='center'>
                 <Grid.Column>
@@ -551,7 +573,6 @@ class ModalVerify extends Component {
         <div id="verify">
           {this.ifMobileRedirect()}
           
-          <Spinner show={this.state.isRunningTransaction}/>
           <div class="ui verifyContainer">
             <Grid verticalAlign='middle' textAlign='center'>
               <Grid.Column>
@@ -607,4 +628,4 @@ class ModalVerify extends Component {
   }
 }
 
-export default ModalVerify
+export default withRouter(ModalVerify)

@@ -29,7 +29,7 @@ class SideMenu extends React.Component {
         <Menu.Item onClick={() => this.onMenuClick(index)} exact href='#' style={{color:'black'}}>
           <Icon.Group
             size='medium'
-            style={{ marginRight: '0.5em', width: '20px' }}
+            style={{ marginRight: '0.5em', width: '20px', textAlign: 'center' }}
           >
             <Icon name={icon}  />
           </Icon.Group>
@@ -40,15 +40,15 @@ class SideMenu extends React.Component {
 
     let url = '#';
     if (index == 5)
-      url = 'https://decentral.games/blog';
+      url = '/blog/';
     else if (index == 6)
-      url = 'https://decentral.games/discord';
+      url = 'https://decentral.games/discord/';
     else if (index == 7)
       url = 'mailto:hello@decentral.games';
     else if (index == 8)
       url = 'https://twitter.com/decentralgames';
     else if (index == 9)
-      url = 'https://decentral.games/disclaimer';
+      url = '/disclaimer/';
 
     return (
       <Menu.Item onClick={() => this.onMenuClick(index)} exact href={url}>

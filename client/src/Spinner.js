@@ -4,7 +4,7 @@ import Aux from './hoc/_Aux';
 const Spinner = props =>
   props.show == 1 ? (
     <Aux>
-      <div className="spinner">
+      <div className="spinner" style={props.style}>
         <div class="sk-fading-circle">
           <div class="sk-circle1 sk-circle"></div>
           <div class="sk-circle2 sk-circle"></div>

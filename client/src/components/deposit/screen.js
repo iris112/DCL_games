@@ -2,16 +2,16 @@ import React from 'react'
 import { Redirect, withRouter } from 'react-router-dom';
 import { isMobile } from "react-device-detect";
 import '../additional.css';
-import box from './box.png';
-import check from './check.png';
-import verify1 from './verify1.png';
+import box from '../Images/box.png';
+import check from '../Images/check.png';
+import verify1 from '../Images/switch_ropsten.png';
 import { Header, Button } from 'decentraland-ui'
-import { Container, Grid, Dropdown, Input} from 'semantic-ui-react'
+import { Container, Grid, Dropdown, Input, Breadcrumb} from 'semantic-ui-react'
 import Spinner from '../../Spinner'
 import logo from '../Images/logo.png'
-import verify5_1 from './verify5_1.png';
-import verify5_2 from './verify5_2.png';
-import verify6 from './verify6.png';
+import verify5_1 from '../Images/switch_matic_1.png';
+import verify5_2 from '../Images/switch_matic_2.png';
+import verify6 from '../Images/matic_gas.png';
 // ---------------------------------------------------------------------
 import Global from '../constant';
 
@@ -299,9 +299,12 @@ class Deposit extends React.Component {
     if (!this.isBrowserMetamsk) {
       return (
         <div id="deposit">
-          <Container style={{ marginTop: '25.5em', height: '35em' }}>
-            <Grid verticalAlign='middle' textAlign='center'>
-              <Header> Please use Chrome Browser with Metamask enabled to proceed. </Header>
+          <Container>
+            <a id='a-footer' style={{marginTop: '30px', display: 'inline-block'}} href='/'>
+              <Breadcrumb.Divider  style={{ fontSize: '18px' }} icon='left arrow' />
+            </a>
+            <Grid verticalAlign='middle' textAlign='center' style={{marginTop: '40vh'}}>
+              <Header> Please use a Chrome Browser with Metamask enabled to proceed. If you've haven't already, download Chrome <a class='redlink' href="https://www.google.com/chrome/">here</a> and Metamask <a class='redlink' href="https://metamask.io/">here</a> </Header>
             </Grid>
           </Container>
         </div>
@@ -333,29 +336,30 @@ class Deposit extends React.Component {
                   </div>
                   <div class="contentContainer" style={{padding: '20px', marginTop: '10px', textAlign: 'left'}}>
                     <h3 style={{textAlign: 'left', marginLeft: '10px'}}> Deposit MANA </h3>
-                    <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '50px'}}>2.</span>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '80px', marginTop: '45px' }}>
+                    <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '20px'}}>2.</span>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '45px', marginTop: '47px' }}>
                       Select amount to deposit MANA to Matic.
                     </p>
                     { this.state.isCustomAmount == 0 ?
                       <Dropdown selection options={amount} value={this.state.amount} 
-                        style={{ width: '300px', marginLeft: '80px', marginTop: '10px'}} 
+                        style={{ width: '300px', marginLeft: '20px', marginTop: '10px'}} 
                         onChange={this.onChangeAmount} />
-                    : <Input style={{ width: '300px', marginLeft: '80px', marginTop: '10px'}} value={this.state.amount} onChange={this.onChangeCustomAmount} /> }
-                    <Button id='button-6' color='blue' style={{marginLeft: '80px', display: 'block' }} 
+
+                    : <Input style={{ width: '300px', marginLeft: '20px', marginTop: '10px'}} value={this.state.amount} onChange={this.onChangeCustomAmount} /> }
+                    <Button id='button-6' color='blue' style={{marginTop: '15px', marginLeft: '20px', display: 'block' }} 
                       onClick={this.depositManaToMatic}>
                       Deposit
                     </Button>
 
                     { this.state.isValidDeposit == 1 ?
-                      <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
+                      <p style={{ textAlign: 'left', color: 'red', marginTop: '10px'}}>
                         Deposit failed.
                       </p> : <p/>
                     }
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', width: '800px', fontStyle:'italic', marginTop: '100px' }}>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '20px', width: '800px', fontStyle:'italic', marginTop: '100px' }}>
                       **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
                     </p>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '80px', fontStyle:'italic', marginTop: '20px' }}>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '20px', fontStyle:'italic', marginTop: '20px' }}>
                       <span style={{fontWeight: 'bold'}}>NOTE: </span>
                       Matic deposits are instantly usable in all our games.
                     </p>
@@ -390,8 +394,8 @@ class Deposit extends React.Component {
 
                 <div class="contentContainer" style={{padding: '20px', marginTop: '10px', textAlign: 'left'}}>
                   <h3 style={{textAlign: 'left', marginLeft: '10px'}}> Deposit MANA </h3>
-                  <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '50px'}}>1.</span>
-                  <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '80px', marginTop: '45px' }}>
+                  <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '10px'}}>1.</span>
+                  <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '45px', marginTop: '47px' }}>
                     On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
                   </p>
                   <img style={{width:'240px', marginLeft: '100px'}} src={verify1} class="image small inline" />
@@ -410,7 +414,7 @@ class Deposit extends React.Component {
     }
     else {
       if (this.state.isValidDeposit == 2) {
-        if (this.state.networkID == 8995) {
+        if (this.state.networkID == parseInt(Global.MATIC_NETWORK_ID)) {
           return (
             <div id="deposit">
               {this.ifMobileRedirect()}
@@ -457,7 +461,7 @@ class Deposit extends React.Component {
                         <img style={{width:'800px', marginTop: '20px', display: 'block'}} src={verify6} class="image small inline" />
 
                         { this.state.isValidAuthorize == 1 ?
-                          <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
+                          <p style={{ textAlign: 'left', color: 'red', marginTop: '10px'}}>
                             Authorization failed.
                           </p> : <p/>
                         }
@@ -508,12 +512,12 @@ class Deposit extends React.Component {
                     </p>
 
                     <div style={{marginLeft: '80px'}}>
-                      <span style={{ verticalAlign: 'top', textAlign: 'left', fontSize: '1.33em'}}>1.</span>
+                      <span style={{ verticalAlign: 'top', textAlign: 'left', fontSize: '1.33em', marginLeft: '50px'}}>1.</span>
                       <img style={{width:'240px'}} src={verify5_1} class="image small inline" />
                       <span style={{ verticalAlign: 'top', textAlign: 'left', fontSize: '1.33em', marginLeft: '20px'}}>2.</span>
                       <img style={{width:'240px', verticalAlign:'top'}} src={verify5_2} class="image small inline" />
 
-                      { this.state.networkID != 8995 ?
+                      { this.state.networkID != parseInt(Global.MATIC_NETWORK_ID) ?
                         <p style={{ textAlign: 'left', color: 'red', marginTop: '10px'}}>
                           This is not Matic Network.
                         </p> : <p/>
@@ -559,8 +563,8 @@ class Deposit extends React.Component {
                   </div>
                   <div class="contentContainer" style={{padding: '20px', marginTop: '10px', textAlign: 'left'}}>
                     <h3 style={{textAlign: 'left', marginLeft: '10px'}}> Deposit MANA </h3>
-                    <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '50px'}}>2.</span>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '80px', marginTop: '45px' }}>
+                    <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '20px'}}>2.</span>
+                    <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '45px', marginTop: '46px' }}>
                       Select amount to deposit MANA to Matic.
                     </p>
                     { this.state.isCustomAmount == 0 ?
@@ -568,13 +572,14 @@ class Deposit extends React.Component {
                         style={{ width: '300px', marginLeft: '80px', marginTop: '10px'}} 
                         onChange={this.onChangeAmount} />
                     : <Input style={{ width: '300px', marginLeft: '80px', marginTop: '10px'}} value={this.state.amount} onChange={this.onChangeCustomAmount} /> }
-                    <Button id='button-6' color='blue' style={{marginLeft: '80px', display: 'block' }} 
+
+                    <Button id='button-6' color='blue' style={{ marginTop: '15px', marginLeft: '80px', display: 'block' }} 
                       onClick={this.depositManaToMatic}>
                       Deposit
                     </Button>
 
                     { this.state.isValidDeposit == 1 ?
-                      <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
+                      <p style={{ textAlign: 'left', color: 'red', marginTop: '10px'}}>
                         Deposit failed.
                       </p> : <p/>
                     }
@@ -624,8 +629,8 @@ class Deposit extends React.Component {
 
                 <div class="contentContainer" style={{padding: '20px', marginTop: '10px', textAlign: 'left'}}>
                   <h3 style={{textAlign: 'left', marginLeft: '10px'}}> Deposit MANA </h3>
-                  <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '50px'}}>1.</span>
-                  <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '80px', marginTop: '45px' }}>
+                  <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '10px'}}>1.</span>
+                  <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '50px', marginTop: '45px' }}>
                     On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
                   </p>
                   <img style={{width:'240px', marginLeft: '100px'}} src={verify1} class="image small inline" />

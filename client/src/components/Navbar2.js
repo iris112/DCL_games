@@ -42,6 +42,8 @@ class Navbar2 extends Component {
   state = { modalOpen: false}
   handleOpen = () => this.setState({ modalOpen: true })
   handleClose = () => this.setState({ modalOpen: false })
+  showSpinner = () => this.setState({isRunningTransaction: true})
+  hideSpinner = () => this.setState({isRunningTransaction: false})
 
   constructor(props) {
     super(props);
@@ -127,6 +129,7 @@ class Navbar2 extends Component {
       <Segment className='nav-desktop' style={{ marginTop: '0em', paddingTop: '0em', marginBottom: '0em', paddingBottom: '0em' }}>
 
         <div className='navbar2'>
+          <Spinner show={this.state.isRunningTransaction}/>
           <Menu
             className='black-menu'
             borderless
@@ -153,7 +156,7 @@ class Navbar2 extends Component {
 
               <Menu.Menu className='nav-buttons' position='right' style={{ paddingRight: '6px', paddingTop: '6px' }}>
                 <Menu.Item className='nav-text3' as={NavLink} to='/discord'>JOIN OUR DISCORD</Menu.Item> 
-                <ModalVerify />
+                <ModalVerify showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
 
               </Menu.Menu>
             </Container>

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Redirect, withRouter } from 'react-router-dom';
 import '../additional.css';
-import mana from './mana.png';
-import eth from './eth.png';
-import dg from './authorize_title.png';
+import mana from '../Images/mana.png';
+import eth from '../Images/eth.png';
+import dg from '../Images/authorize_title.png';
 import teleport1 from '../Images/chateau.png';
 import teleport2 from '../Images/serenity.png';
 import { Button } from 'decentraland-ui'
@@ -105,7 +105,7 @@ class Coin extends React.Component {
 
   verifyNetwork = () => {
     window.web3.version.getNetwork(async (err, network) => {
-      if (network === "8995") {
+      if (network === Global.MATIC_NETWORK_ID) {
         this.isMatic = true;
         await this.getTokenBalance(true);
       }
@@ -119,9 +119,9 @@ class Coin extends React.Component {
   render() {
     return (
       <div class="contentContainer">
-        <div style={{width: 'calc(100% - 80px)', minWidth: '860px', marginTop: '20px'}}>
+        <div style={{width: 'calc(100% - 50px)', minWidth: '860px', marginTop: '20px'}}>
           <h3 style={{paddingTop: '20px'}}> NFTs </h3>
-          <div id='nft-box' style={{ height: '675px', marginTop: '20px', padding: '10px'}}>
+          <div id='nft-box' style={{ height: 'calc(100vh - 200px)', marginTop: '20px', padding: '10px'}}>
             <div style={{marginTop:'40px', padding: '10px'}}>
               <p style={{textAlign: 'center'}}>
                 My NFTs

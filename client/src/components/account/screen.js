@@ -34,31 +34,44 @@ class Account extends React.Component {
   }
 
   async componentDidMount() {
+    let object = this;
+    window.ethereum.on('accountsChanged', async function (accounts) {
+      await object.getUserState();
+    })
+
     try {
       if (window.web3.currentProvider.selectedAddress === '' || window.web3.currentProvider.selectedAddress === undefined) {
         window.web3 = new window.Web3(window.ethereum);
         await window.ethereum.enable();
       }
 
-      for (var i = 0; i < 3; i++) {
-        if (window.web3.currentProvider.selectedAddress === '' || window.web3.currentProvider.selectedAddress === undefined) {
-          await Global.delay(2000);
-          continue;
-        }
-
-        let ret = await this.checkUserVerifyStep();
-        if (ret) {
-          return;
-        }
-
-        await Global.delay(2000);
-      }
+      let ret = await this.getUserState();
+      if (ret)
+        return;
 
     } catch(e) {
       console.log(e);
     }
     
     this.setState({isValid : 0});
+  }
+
+  async getUserState() {
+    for (var i = 0; i < 3; i++) {
+      if (window.web3.currentProvider.selectedAddress === '' || window.web3.currentProvider.selectedAddress === undefined) {
+        await Global.delay(2000);
+        continue;
+      }
+
+      let ret = await this.checkUserVerifyStep();
+      if (ret) {
+        return true;
+      }
+
+      await Global.delay(2000);
+    }
+
+    return false;
   }
 
   getUserVerify = () => {
@@ -157,7 +170,7 @@ class Account extends React.Component {
         <div id="account" class="ui accountContainer">
           <Container style={{ marginTop: '25.5em', height: '35em' }}>
             <Grid verticalAlign='middle' textAlign='center'>
-              <Header> Please finish <a id='a-footer' href="/verify/">verification</a> to view My Account. </Header>
+              <Header> Please finish <a href="/verify/">verification</a> to view My Account. </Header>
             </Grid>
           </Container>
         </div>

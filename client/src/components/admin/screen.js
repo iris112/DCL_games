@@ -4,19 +4,18 @@ import { isMobile } from "react-device-detect";
 import '../additional.css';
 import { Header } from 'decentraland-ui'
 import { Container, Grid, Image } from 'semantic-ui-react'
-import metamask from '../Images/metamask.png';
-import ledger from '../Images/ledger.png';
 import Menu from './menu'
 import Machine from './machine'
 import History from './history'
 import Deposit from './deposit'
+import Dashboard from './dashboard'
 import Spinner from '../../Spinner'
+import AdminCheck from './adminCheck'
 
 import Global from '../constant';
 
 const INITIAL_STATE = {
   selectedMenu: 0,
-  isAdmin: 0,
   isRunningTransaction: false,
 };
 
@@ -33,19 +32,6 @@ class Admin extends React.Component {
   }
 
   async componentDidMount() {
-    try {
-      if (window.web3.currentProvider.selectedAddress === '' || window.web3.currentProvider.selectedAddress === undefined) {
-        this.setState({isAdmin : 0});
-      } else if (window.web3.currentProvider.selectedAddress.toLowerCase() === Global.ADMIN_ADDR1 || 
-        window.web3.currentProvider.selectedAddress.toLowerCase() === Global.ADMIN_ADDR2) {
-        this.setState({isAdmin : 2});
-      } else {
-        this.setState({isAdmin : 1});
-      }
-    } catch(e) {
-      console.log(e);
-      this.setState({isAdmin : 0});
-    }
   }
 
   getAdminData = () => {
@@ -66,12 +52,14 @@ class Admin extends React.Component {
   }
 
   getContent = () => {
-    if (this.state.selectedMenu == 0)
-      return (<Machine />);
     if (this.state.selectedMenu == 1)
-      return (<History />);
+      return (<Machine />);
     if (this.state.selectedMenu == 2)
+      return (<History />);
+    if (this.state.selectedMenu == 3)
       return (<Deposit />);
+    if (this.state.selectedMenu == 0)
+      return (<Dashboard />);
   }
 
   ifMobileRedirect = () => {
@@ -80,29 +68,10 @@ class Admin extends React.Component {
     }
   }
 
-  onMetamask = async (e, d) => {
-    if (window.ethereum) {
-      window.web3 = new window.Web3(window.ethereum);
-      try {
-          // Request account access if needed
-          await window.ethereum.enable();
-          if (window.web3.currentProvider.selectedAddress.toLowerCase() === Global.ADMIN_ADDR1 || 
-            window.web3.currentProvider.selectedAddress.toLowerCase() === Global.ADMIN_ADDR2) {
-            this.setState({isAdmin : 2});
-          } else {
-            this.setState({isAdmin : 1});
-          }
-      } catch (error) {
-          // User denied account access...
-          console.log(error);
-      }
-    }
-  };
-
   render() {
     if (!this.isBrowserMetamsk) {
       return (
-        <div id="admin">
+        <div id="admin" class="ui accountContainer">
           <Container style={{ marginTop: '25.5em', height: '35em' }}>
             <Grid verticalAlign='middle' textAlign='center'>
               <Header> This page is only available when you have installed metamask on browser. </Header>
@@ -112,56 +81,11 @@ class Admin extends React.Component {
       )
     }
 
-    if (this.state.isAdmin == 0) {
-      return (
-        <div id="admin" class="ui accountContainer">
-          <Header as='h3' style={{ padding: '0em 0em 0em', marginTop: '5.5em', textAlign: 'center', lineHeight: '1.6em', fontSize: '2.7em', color: 'black' }}>
-            Login
-          </Header>
-          <Spinner show={this.state.isRunningTransaction}/>
-          <div class="ui verifyContainer">
-            <p style={{ textAlign: 'center', fontSize: '1.33em', marginLeft: '40px', marginRight: '50px' }}>
-              Login with your Metamask or Ledger wallet.
-            </p>
-            <Grid verticalAlign='middle' textAlign='center'>
-              <Grid.Column>
-                <Link to='#' onClick={this.onMetamask}>
-                  <Image src={metamask} size='small' inline rounded bordered />
-                </Link>
-                <Link to='#' >
-                  <Image src={ledger} size='small' inline rounded bordered style={{marginLeft: '10px'}} />
-                </Link>
-
-                { this.state.isValidMetamask == 1 ?
-                  <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
-                    Add address failed.
-                  </p> : <p/>
-                }
-              </Grid.Column>
-            </Grid>
-          </div>
-        </div>
-      )
-    } else if (this.state.isAdmin == 1) {
-      return (
-        <div id="admin">
-          <Container style={{ marginTop: '25.5em', height: '35em' }}>
-            <Grid verticalAlign='middle' textAlign='center'>
-              <Header> This page is only available to the administrator. </Header>
-            </Grid>
-          </Container>
-        </div>
-      )
-    }
-
     return (
-      <div id="admin" style={{ marginBottom: '5em' }}>
+      <div id="admin">
         {this.ifMobileRedirect()}
-        <Header as='h3' style={{ padding: '0em 0em 0em', marginTop: '14px', textAlign: 'center', lineHeight: '1.6em', color: 'black' }}>
-          Admin Portal
-        </Header>
         <Spinner show={this.state.isRunningTransaction}/>
-        <div class="ui accountContainer" style={{ marginTop: '3em' }}>
+        <div class="ui accountContainer">
           <Grid verticalAlign='middle'>
             <Grid.Column>
               <Menu onMenuSelected={this.selectedMenu}/>
@@ -174,4 +98,4 @@ class Admin extends React.Component {
   }
 }
 
-export default withRouter(Admin);
+export default withRouter(AdminCheck(Admin));

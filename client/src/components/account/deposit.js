@@ -33,16 +33,23 @@ class Deposit extends React.Component {
     if (json.result !== 'false') {
       this.setState({data: json.result});
 
-      if (json.result.length > 0) {
-        var el = document.querySelector('.dataTable');
-        el.addEventListener('scroll', function(e) {
-        (function(el){
-          el.classList.add('scrollTable');
-          setTimeout(function() {
-            el.classList.remove('scrollTable');
-          }, 1000);    
-        })(el);
-        })
+      for (var i = 0; i < 3; i++) {
+        if (json.result.length > 0) {
+          var el = document.querySelector('.dataTable');
+          if (!el) {
+            await Global.delay(1000);
+            continue;
+          }
+          
+          el.addEventListener('scroll', function(e) {
+          (function(el){
+            el.classList.add('scrollTable');
+            setTimeout(function() {
+              el.classList.remove('scrollTable');
+            }, 1000);    
+          })(el);
+          })
+        }
       }
     } else {
       this.setState({data: []});
@@ -73,7 +80,7 @@ class Deposit extends React.Component {
     return (
       <div class="contentContainer">
         <Spinner show={this.state.isRunningTransaction}/>
-        <div style={{width: 'calc(100% - 80px)', minWidth: '860px', marginTop: '20px'}}>
+        <div style={{width: 'calc(100% - 50px)', minWidth: '860px', marginTop: '20px'}}>
           <h3 style={{paddingTop: '20px'}}> Deposits/Withdrawals </h3>
           <div id='dep-box' style={{ marginTop: '20px'}}>
             <Table id='header' singleLine fixed style={{marginBottom: 0}}>
@@ -88,7 +95,7 @@ class Deposit extends React.Component {
               </Table.Header>
             </Table>
             { data.length != 0 ?
-              <div class='dataTable scrollTable' style={{height: '600px'}}>
+              <div class='dataTable scrollTable' style={{height: 'calc(100vh - 200px)'}}>
                 <Table singleLine fixed>
                   <Table.Header></Table.Header>
                   <Table.Body>
@@ -150,7 +157,7 @@ class Deposit extends React.Component {
                   </Table.Body>
                 </Table>
               </div>
-            : <p style={{lineHeight:'600px', textAlign:'center', color: 'gray', fontStyle: 'italic'}}> There is no deposit/withdraw for this account </p> }
+            : <p style={{lineHeight:'calc(100vh - 200px)', textAlign:'center', color: 'gray', fontStyle: 'italic'}}> There are no deposits/withdrawals for this account </p> }
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom';
 import '../additional.css';
 import { Button } from 'decentraland-ui'
-import mana from './mana.png';
+import mana from '../Images/mana.png';
 import Global from '../constant';
 
 var USER_ADDRESS;
@@ -60,7 +60,7 @@ class Authorize extends React.Component {
   render() {
     return (
       <div class="contentContainer">
-        <div style={{width: 'calc(100% - 80px)', minWidth: '860px', marginTop: '20px'}}>
+        <div style={{width: 'calc(100% - 50px)', minWidth: '860px', marginTop: '20px'}}>
           <h3 style={{paddingTop: '20px'}}> Authorizations </h3>
           <div style={{ marginTop: '20px', height: '675px'}}>
             <div class='balanceBox' id='balance-pad'>

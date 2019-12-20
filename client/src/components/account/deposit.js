@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import '../additional.css';
 import { Table, Button } from 'semantic-ui-react'
 import Spinner from '../../Spinner'
-
+import ModalWithdraw from '../ModalWithdraw'
 import Global from '../constant';
 
 const INITIAL_STATE = {
@@ -12,6 +12,9 @@ const INITIAL_STATE = {
 };
 
 class Deposit extends React.Component {
+  showSpinner = () => this.setState({isRunningTransaction: true})
+  hideSpinner = () => this.setState({isRunningTransaction: false})
+
   constructor(props) {
     super(props);
 
@@ -54,11 +57,6 @@ class Deposit extends React.Component {
     } else {
       this.setState({data: []});
     }
-  }
-
-  startWithdraw = async (item) => {
-    localStorage.setItem('withdrawTxID', item.txid);
-    this.props.history.push('/withdraw/');
   }
 
   getData = () => {
@@ -111,9 +109,7 @@ class Deposit extends React.Component {
                             <Table.Cell style={{color:'white'}}>{row.status}</Table.Cell>
                             <Table.Cell style={{color:'white'}}>{timestamp}</Table.Cell>
                             <Table.Cell>
-                              <a style={{color: 'white' }} href="#" onClick={() => {this.startWithdraw(row)}}>
-                                RETRY
-                              </a>
+                              <ModalWithdraw isLink={1} tx={row.txid} showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
                             </Table.Cell>
                           </Table.Row>
                         );
@@ -126,9 +122,7 @@ class Deposit extends React.Component {
                             <Table.Cell style={{color:'white'}}>{row.status}</Table.Cell>
                             <Table.Cell style={{color:'white'}}>{timestamp}</Table.Cell>
                             <Table.Cell>
-                              <a style={{color: 'white' }} href="#" onClick={() => {this.startWithdraw(row)}}>
-                                START
-                              </a>
+                              <ModalWithdraw isLink={1} tx={row.txid} showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
                             </Table.Cell>
                           </Table.Row>
                         );

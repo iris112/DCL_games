@@ -681,7 +681,7 @@ a.ui.card:hover {
 
 #withdraw {
   display: flex;
-  min-height: 100vh;
+  min-height: 630px;
   flex-direction: column;
 }
 
@@ -692,7 +692,6 @@ a.ui.card:hover {
 .ui.withdrawContainer {
   margin-left:0px;
   margin-right:0px;
-  min-height: 100vh;
 }
 
 .ui.withdrawContainer * {

@@ -11,6 +11,7 @@ import { Button } from 'decentraland-ui'
 import { Input, Image, Divider } from 'semantic-ui-react'
 import Global from '../constant';
 import ModalDeposit from '../ModalDeposit'
+import ModalWithdraw from '../ModalWithdraw'
 import Spinner from '../../Spinner'
 
 var USER_ADDRESS;
@@ -131,11 +132,6 @@ class Dashboard extends React.Component {
       }
     });
   }
-
-  onWithdraw = () => {
-    localStorage.setItem('withdrawTxID', '');
-    this.props.history.push('/withdraw/');
-  }
   
   render() {
     return (
@@ -158,11 +154,7 @@ class Dashboard extends React.Component {
                 </span>
               </div>
               <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
-              <Button id="depositButton" color='blue' style={{marginRight:'0', marginLeft:'10px'}}
-              onClick={this.onWithdraw}
-              >
-                Withdraw
-              </Button>
+              <ModalWithdraw isLink={0} showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
             </div>
             <div class='balanceBox' style={{marginLeft: '20px'}}>
               <div style={{marginBottom: '20px', opacity: '0.5'}}>

@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Demo from "./components/Demo";
 import Demo2 from "./components/Demo2";
 import Account from "./components/account/account";
-import Withdraw from "./components/withdraw/withdraw";
 import Layout from "./hoc/Layout";
 
 
@@ -20,7 +19,6 @@ const Routes = () => {
         <Route path="/chateau/" exact component={Demo} />
         <Route path="/serenity/" exact component={Demo2} />
         <Route path="/account" exact component={Account} />
-        <Route path="/withdraw" exact component={Withdraw} />
         <Route component={Layout} />
       </Switch>
     </BrowserRouter>

@@ -120,6 +120,7 @@ class ModalVerify extends Component {
     }
 
     this.setState({isLoaded : 0});
+    this.props.hideSpinner();
   }
 
   checkUserVerifyStep = async () => {
@@ -145,13 +146,13 @@ class ModalVerify extends Component {
 
         this.props.hideSpinner();
         return true;
-      } else {
-        return false;
       }
     } catch (error) {
       console.log(error);
-      return false;
     }
+
+    this.props.hideSpinner();
+    return false;
   }
 
   ifMobileRedirect = () => {
@@ -399,6 +400,25 @@ class ModalVerify extends Component {
         >
         <div id="verify">
           <Container style={{ height: '35em' }}>
+          </Container>
+        </div>
+        </Modal>
+      )
+    }
+
+    if (!this.isBrowserMetamsk) {
+      return (
+        <Modal
+          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} />}
+          open={this.state.modalOpen}
+          onClose={this.handleClose}
+          closeIcon
+        >
+        <div id="deposit">
+          <Container style={{ height: '35em' }}>
+            <Grid style={{marginTop: '17em'}} verticalAlign='middle' textAlign='center'>
+              <Header> Please use Chrome Browser with Metamask enabled to proceed. </Header>
+            </Grid>
           </Container>
         </div>
         </Modal>

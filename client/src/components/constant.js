@@ -29,18 +29,18 @@ const MATIC_TOKEN = '0xdd1b834a483fd754c8021ff0938f69c1d10da81f';    // Matic ma
 const SLOTS_CONTRACT_ADDRESS = '0x11f6757ab51a01686b1c54fa0f0c45960b1bd3bc'.toLowerCase();    // Matic address
 const TOKEN_DECIMALS = 18;
 
-// const ROOTCHAIN_ADDRESS = '0x60e2b19b9a87a3f37827f2c8c8306be718a5f9b4';    //test
-const ROOTCHAIN_ADDRESS = '0xA4edab1eF6358c40D487a9D466D977e98F7AC218'.toLowerCase();  //main
-// const DEPOSITMANAGER_ADDRESS = '0x4072fab2a132bf98207cbfcd2c341adb904a67e9';  //test
-const DEPOSITMANAGER_ADDRESS = '0xe60eb6A559eec79f65f2207366D32A68fD171944'.toLowerCase();  //main
-// const WITHDRAWMANAGER_ADDRESS = '0x4ef2b60cdd4611fa0bc815792acc14de4c158d22'  //test
-const WITHDRAWMANAGER_ADDRESS = '0x4D67F2e7Be1807D76D5E55e21Af6300ad35c19e9'.toLowerCase();  //main
+const ROOTCHAIN_ADDRESS = '0x60e2b19b9a87a3f37827f2c8c8306be718a5f9b4';    //test
+// const ROOTCHAIN_ADDRESS = '0xA4edab1eF6358c40D487a9D466D977e98F7AC218'.toLowerCase();  //main
+const DEPOSITMANAGER_ADDRESS = '0x4072fab2a132bf98207cbfcd2c341adb904a67e9';  //test
+// const DEPOSITMANAGER_ADDRESS = '0xe60eb6A559eec79f65f2207366D32A68fD171944'.toLowerCase();  //main
+const WITHDRAWMANAGER_ADDRESS = '0x4ef2b60cdd4611fa0bc815792acc14de4c158d22'  //test
+// const WITHDRAWMANAGER_ADDRESS = '0x4D67F2e7Be1807D76D5E55e21Af6300ad35c19e9'.toLowerCase();  //main
 const SYNCER_URL = 'https://matic-syncer2.api.matic.network/api/v1';
 const WATCHER_URL = 'https://ropsten-watcher2.api.matic.network/api/v1';
 const MAX_AMOUNT = "115792089237316195423570985008687907853269984665640564039457584007913129639935";
 const GAS_LIMIT = '500000';
-// const MATIC_NETWORK_ID = '8995'  //test
-const MATIC_NETWORK_ID = '15001'  //main
+const MATIC_NETWORK_ID = '8995'  //test
+// const MATIC_NETWORK_ID = '15001'  //main
 
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms));

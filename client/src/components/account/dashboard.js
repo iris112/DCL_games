@@ -10,6 +10,8 @@ import teleport2 from '../Images/serenity.png';
 import { Button } from 'decentraland-ui'
 import { Input, Image, Divider } from 'semantic-ui-react'
 import Global from '../constant';
+import ModalDeposit from '../ModalDeposit'
+import Spinner from '../../Spinner'
 
 var USER_ADDRESS;
 
@@ -17,9 +19,13 @@ const INITIAL_STATE = {
   tokenBalance: 0,
   ethBalance: 0,
   username: '',
+  isRunningTransaction: false,
 };
 
 class Dashboard extends React.Component {
+  showSpinner = () => this.setState({isRunningTransaction: true})
+  hideSpinner = () => this.setState({isRunningTransaction: false})
+
   constructor(props) {
     super(props);
 
@@ -126,10 +132,6 @@ class Dashboard extends React.Component {
     });
   }
 
-  onDeposit = () => {
-    this.props.history.push('/deposit/');
-  }
-
   onWithdraw = () => {
     localStorage.setItem('withdrawTxID', '');
     this.props.history.push('/withdraw/');
@@ -138,6 +140,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div class="contentContainer">
+        <Spinner show={this.state.isRunningTransaction}/>
         <div style={{width: 'calc(100% - 50px)', minWidth: '860px' }}>
           <p  class="titleName">
             Play Now
@@ -154,12 +157,7 @@ class Dashboard extends React.Component {
                   {this.state.tokenBalance} MANA
                 </span>
               </div>
-      
-              <Button id="depositButton" color='blue' style={{marginRight:'0', marginLeft:'0px'}}
-              onClick={this.onDeposit}
-              >
-                Deposit
-              </Button>
+              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
               <Button id="depositButton" color='blue' style={{marginRight:'0', marginLeft:'10px'}}
               onClick={this.onWithdraw}
               >

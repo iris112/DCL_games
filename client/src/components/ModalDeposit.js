@@ -4,14 +4,13 @@ import { isMobile } from "react-device-detect";
 import './additional.css';
 import box from './Images/box.png';
 import check from './Images/check.png';
-import verify1 from './deposit/verify1.png';
+import verify1 from './Images/switch_ropsten.png';
 import { Header, Button } from 'decentraland-ui'
 import { Container, Grid, Dropdown, Input, Modal, Divider } from 'semantic-ui-react'
-import Spinner from '../Spinner'
 import logo from './Images/logo.png'
-import verify5_1 from './deposit/verify5_1.png';
-import verify5_2 from './deposit/verify5_2.png';
-import verify6 from './deposit/verify6.png';
+import verify5_1 from './Images/switch_matic_1.png';
+import verify5_2 from './Images/switch_matic_2.png';
+import verify6 from './Images/matic_gas.png';
 import Global from './constant';
 
 var UNIT = 1;
@@ -26,13 +25,17 @@ const INITIAL_STATE = {
   networkID: 0,
   isValidDeposit: 0,
   isValidAuthorize: 0,
-  isRunningTransaction: false,
 };
 
 class Deposit extends React.Component {
 
   state = { modalOpen: false }
-  handleOpen = () => this.setState({ modalOpen: true })
+  handleOpen = () => {
+    this.setState({ modalOpen: true }); 
+    if (this.state.isLoaded === 0)
+      this.props.showSpinner();
+  }
+
   handleClose = () => this.setState({ modalOpen: false })
 
   constructor(props) {
@@ -76,6 +79,7 @@ class Deposit extends React.Component {
     }
     
     this.setState({isLoaded : 0});
+    this.props.hideSpinner();
   }
 
   checkUserVerifyStep = async () => {
@@ -85,6 +89,7 @@ class Deposit extends React.Component {
       if (json.status === 'ok') {
         if (json.result === 'false') {
           this.setState({isLoaded: 1});
+          this.props.hideSpinner();
           return true;
         }
 
@@ -99,11 +104,13 @@ class Deposit extends React.Component {
         else
           this.setState({isLoaded: 1, userStepValue: stepValue});
 
+        this.props.hideSpinner();
         return true;
       }
     } catch (error) {
       console.log(error);
     }
+    this.props.hideSpinner();
     return false;
   }
 
@@ -151,7 +158,7 @@ class Deposit extends React.Component {
 
   depositManaToMatic = async (e, d) => {
     try {
-      this.setState({isRunningTransaction: true});
+      this.props.showSpinner();
       var amount_wei = (this.state.amount / UNIT * 10 ** Global.TOKEN_DECIMALS).toString();
       var allowed_amount = await Global.getAllowedToken(Global.ROPSTEN_TOKEN, Global.ROOTCHAIN_ADDRESS, USER_ADDRESS);
       allowed_amount = allowed_amount / (10 ** Global.TOKEN_DECIMALS);
@@ -167,7 +174,8 @@ class Deposit extends React.Component {
         var ret = await this.updateHistory(this.state.amount / UNIT, 'Deposit', 'In Progress', txHash);
         if (!ret) {
           console.log('network error');
-          this.setState({isValidDeposit: 1, isRunningTransaction: false});
+          this.setState({isValidDeposit: 1});
+          this.props.hideSpinner();
           return;
         }
         
@@ -179,27 +187,30 @@ class Deposit extends React.Component {
 
         if (!ret) {
           console.log('network error');
-          this.setState({isValidDeposit: 1, isRunningTransaction: false});
+          this.setState({isValidDeposit: 1});
+          this.props.hideSpinner();
           return;
         }
 
         if (this.state.userStepValue < 6)
           await this.postUserVerify(5);
 
-        this.setState({isValidDeposit: 2, isRunningTransaction: false});
+        this.setState({isValidDeposit: 2});
+        this.props.hideSpinner();
         if (this.state.userStepValue == 6)
-          this.props.history.push('/account/');
+          this.handleClose();
         return;
       }
     } catch (err) {
       console.log(err);
     }
-    this.setState({isValidDeposit: 1, isRunningTransaction: false});
+    this.setState({isValidDeposit: 1});
+    this.props.hideSpinner();
   };
 
   authorizeMana = async (e, d) => {
     try {
-      this.setState({isRunningTransaction: true});
+      this.props.showSpinner();
       var amount_wei = (this.state.amount / UNIT * 10 ** Global.TOKEN_DECIMALS).toString();
       var allowed_amount = await Global.getAllowedToken(Global.MATIC_TOKEN, Global.SLOTS_CONTRACT_ADDRESS, USER_ADDRESS);
       allowed_amount = allowed_amount / (10 ** Global.TOKEN_DECIMALS);
@@ -210,10 +221,12 @@ class Deposit extends React.Component {
         await Global.approveToken(Global.MATIC_TOKEN, Global.MAX_AMOUNT, Global.SLOTS_CONTRACT_ADDRESS, USER_ADDRESS);
       }
       await this.postUserVerify(6);
-      this.setState({isValidAuthorize: 2, isRunningTransaction: false});
-      this.props.history.push('/account/');
+      this.setState({isValidAuthorize: 2});
+      this.props.hideSpinner();
+      this.handleClose()
     } catch (err) {
-      this.setState({isValidAuthorize: 1, isRunningTransaction: false});
+      this.setState({isValidAuthorize: 1});
+      this.props.hideSpinner();
     }
   };
 
@@ -278,37 +291,57 @@ class Deposit extends React.Component {
     if (this.state.networkID == 0)
       this.verifyNetwork()
 
-    if (this.state.isLoaded == 0) {
+    if (this.state.isLoaded === 0) {
       return (
+        <Modal
+          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} />}
+          open={this.state.modalOpen}
+          onClose={this.handleClose}
+          closeIcon
+        >
         <div id="deposit">
-          <Container style={{ marginTop: '25.5em', height: '35em' }}>
-            <Spinner show={1}/>
+          <Container style={{ height: '35em' }}>
           </Container>
         </div>
+        </Modal>
       )
     }
 
     if (this.state.isLoaded === 1) {
       return (
+        <Modal
+          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} />}
+          open={this.state.modalOpen}
+          onClose={this.handleClose}
+          closeIcon
+        >
         <div id="deposit">
-          <Container style={{ marginTop: '25.5em', height: '35em' }}>
-            <Grid verticalAlign='middle' textAlign='center'>
-              <Header> Please finish <a href="/verify">verification</a> to Deposit. </Header>
+          <Container style={{ height: '35em' }}>
+            <Grid style={{marginTop: '17em'}} verticalAlign='middle' textAlign='center'>
+              <Header> Please finish <a href="/">verification</a> to Deposit. </Header>
             </Grid>
           </Container>
         </div>
+        </Modal>
       )
     }
 
     if (!this.isBrowserMetamsk) {
       return (
+        <Modal
+          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} />}
+          open={this.state.modalOpen}
+          onClose={this.handleClose}
+          closeIcon
+        >
         <div id="deposit">
-          <Container style={{ marginTop: '25.5em', height: '35em' }}>
-            <Grid verticalAlign='middle' textAlign='center'>
+          <Container style={{ height: '35em' }}>
+            <Grid style={{marginTop: '17em'}} verticalAlign='middle' textAlign='center'>
               <Header> Please use Chrome Browser with Metamask enabled to proceed. </Header>
             </Grid>
           </Container>
         </div>
+        </Modal>
       )
     }
 
@@ -327,7 +360,6 @@ class Deposit extends React.Component {
           >
             <div id="deposit">
               {this.ifMobileRedirect()}
-              <Spinner show={this.state.isRunningTransaction}/>
               <div class="ui depositContainer">
             <Grid verticalAlign='middle' textAlign='center'>
               <Grid.Column>
@@ -403,7 +435,6 @@ class Deposit extends React.Component {
         >
         <div id="deposit">
           {this.ifMobileRedirect()}
-          <Spinner show={this.state.isRunningTransaction}/>
           <div class="ui depositContainer">
             <Grid verticalAlign='middle' textAlign='center'>
               <Grid.Column>
@@ -451,7 +482,7 @@ class Deposit extends React.Component {
 
     else {
       if (this.state.isValidDeposit == 2) {
-        if (this.state.networkID == 8995) {
+        if (this.state.networkID == parseInt(Global.MATIC_NETWORK_ID)) {
           return (
           <Modal
             trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} />}
@@ -461,7 +492,6 @@ class Deposit extends React.Component {
           >
           <div id="deposit">
             {this.ifMobileRedirect()}
-            <Spinner show={this.state.isRunningTransaction}/>
             <div class="ui depositContainer">
               <Grid verticalAlign='middle' textAlign='center'>
                 <Grid.Column>
@@ -504,7 +534,7 @@ class Deposit extends React.Component {
                             onClick={this.authorizeMana}>
                             Authorize
                           </Button>
-                          <img style={{width:'800px', marginTop: '20px', display: 'block'}} src={verify6} class="image small inline" />
+                          <img style={{width:'700px', marginTop: '20px', display: 'block'}} src={verify6} class="image small inline" />
 
                           { this.state.isValidAuthorize == 1 ?
                             <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
@@ -531,7 +561,6 @@ class Deposit extends React.Component {
           >
           <div id="deposit">
           {this.ifMobileRedirect()}
-          <Spinner show={this.state.isRunningTransaction}/>
           <div class="ui depositContainer">
             <Grid verticalAlign='middle' textAlign='center'>
               <Grid.Column>
@@ -575,7 +604,7 @@ class Deposit extends React.Component {
                         <p style={{ verticalAlign: 'top', textAlign: 'left', fontSize: '20px', marginLeft: '20px'}}>2.</p>
                         <img style={{width:'210px', verticalAlign:'top'}} src={verify5_2} class="image small inline" />
 
-                        { this.state.networkID != 8995 ?
+                        { this.state.networkID != parseInt(Global.MATIC_NETWORK_ID) ?
                           <p style={{ textAlign: 'left', color: 'red', marginTop: '30px'}}>
                             This is not Matic Network.
                           </p> : <p/>
@@ -601,7 +630,6 @@ class Deposit extends React.Component {
           >
           <div id="deposit">
             {this.ifMobileRedirect()}
-            <Spinner show={this.state.isRunningTransaction}/>
             <div class="ui depositContainer">
               <Grid verticalAlign='middle' textAlign='center'>
                 <Grid.Column>
@@ -681,7 +709,6 @@ class Deposit extends React.Component {
           >
         <div id="deposit">
           {this.ifMobileRedirect()}
-          <Spinner show={this.state.isRunningTransaction}/>
           <div class="ui depositContainer">
             <Grid verticalAlign='middle' textAlign='center'>
               <Grid.Column>

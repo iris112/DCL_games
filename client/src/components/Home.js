@@ -140,7 +140,9 @@ class Home extends Component {
               <Header className='msg-text'>Please use a desktop Chrome browser to play our free games. To play games with cryptocurrency, you must enable Metamask. You can download Chrome <a className='blue-link' href="https://www.google.com/chrome/">here</a> and Metamask <a className='blue-link' href="https://metamask.io/">here</a>.</Header>
             </Message>
 
-            <video className='hero-image' width="100%" src={vid} type="video/mp4" autoplay='true' muted loop/>
+            <a href='/account'>
+              <video className='hero-image' width="100%" src={vid} type="video/mp4" autoplay='true' muted loop/>
+            </a>
 
           </Container>
         </Segment>
@@ -161,7 +163,7 @@ class Home extends Component {
 
               <Grid.Row>
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/' className='games-card'>
+                  <Card fluid href='/account' className='games-card'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={slots} />
@@ -177,7 +179,7 @@ class Home extends Component {
                 </Grid.Column>
 
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/' className='games-card'>
+                  <Card fluid href='/account' className='games-card'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={roulette} />
@@ -193,7 +195,7 @@ class Home extends Component {
                 </Grid.Column>
 
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/' className='games-card2'>
+                  <Card fluid href='/account' className='games-card2'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={blackjack} />
@@ -209,7 +211,7 @@ class Home extends Component {
                 </Grid.Column>
 
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/' className='games-card2'>
+                  <Card fluid href='/account' className='games-card2'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={roulette} />
@@ -304,7 +306,9 @@ class Home extends Component {
         <Segment className='hero'>
           <Container className='hero-container'>
   
-            <video className='hero-image' width="100%" src={vid} type="video/mp4" autoplay='true' muted loop/>
+            <a href='/account'>
+              <video className='hero-image' width="100%" src={vid} type="video/mp4" autoplay='true' muted loop/>
+            </a>
 
           </Container>
         </Segment>
@@ -325,7 +329,7 @@ class Home extends Component {
 
               <Grid.Row>
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/' className='games-card'>
+                  <Card fluid href='/account' className='games-card'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={slots} />
@@ -341,7 +345,7 @@ class Home extends Component {
                 </Grid.Column>
 
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/' className='games-card'>
+                  <Card fluid href='/account' className='games-card'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={roulette} />
@@ -357,7 +361,7 @@ class Home extends Component {
                 </Grid.Column>
 
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/' className='games-card2'>
+                  <Card fluid href='/account' className='games-card2'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={blackjack} />
@@ -373,7 +377,7 @@ class Home extends Component {
                 </Grid.Column>
 
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/' className='games-card2'>
+                  <Card fluid href='/account' className='games-card2'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={roulette} />

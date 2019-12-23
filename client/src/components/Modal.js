@@ -626,9 +626,6 @@ class ModalVerify extends Component {
                         <Link to='#' onClick={this.onMetamask}>
                           <Image src={metamask} inline rounded bordered style={{width: '110px'}}/>
                         </Link>
-                        <Link to='#' >
-                          <Image src={ledger} inline rounded bordered style={{marginLeft: '10px', width: '110px'}} />
-                        </Link>
 
                         { this.state.isValidMetamask == 1 ?
                           <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>

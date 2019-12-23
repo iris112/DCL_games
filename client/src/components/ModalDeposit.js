@@ -31,12 +31,16 @@ class Deposit extends React.Component {
 
   state = { modalOpen: false }
   handleOpen = () => {
+    localStorage.setItem('modalDeposit', 1);
     this.setState({ modalOpen: true }); 
     if (this.state.isLoaded === 0)
       this.props.showSpinner();
   }
 
-  handleClose = () => this.setState({ modalOpen: false })
+  handleClose = () => {
+    this.setState({ modalOpen: false })
+    localStorage.setItem('modalDeposit', 0);
+  }
 
   constructor(props) {
     super(props);
@@ -68,6 +72,8 @@ class Deposit extends React.Component {
 
         let ret = await this.checkUserVerifyStep();
         if (ret) {
+          if (parseInt(localStorage.getItem('modalDeposit')) == 1)
+            this.setState({ modalOpen: true }); 
           return;
         }
 
@@ -526,7 +532,7 @@ class Deposit extends React.Component {
                         </Grid.Row>
                         <Grid.Row>
                           <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>
-                            4. Authorize MANA transfers on Matic. When the Metamask popup appears, select ‘edit’, select ‘advanced’, set the gas price to 0, and click ‘save’ before confirming the transaction.
+                            4. Authorize MANA transfers on Matic.
                           </p>
                         </Grid.Row>
                         <Grid.Row>
@@ -534,7 +540,6 @@ class Deposit extends React.Component {
                             onClick={this.authorizeMana}>
                             Authorize
                           </Button>
-                          <img style={{width:'700px', marginTop: '20px', display: 'block'}} src={verify6} class="image small inline" />
 
                           { this.state.isValidAuthorize == 1 ?
                             <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
@@ -661,7 +666,7 @@ class Deposit extends React.Component {
                           <h3 style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
                         </Grid.Row>
                         <Grid.Row>
-                          <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>2. Select amount to deposit MANA to Matic.
+                          <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>2. Authorize MANA transfers and deposit to Matic.
                           </p>
                         </Grid.Row>
                         <Grid.Row>

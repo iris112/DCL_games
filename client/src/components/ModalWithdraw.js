@@ -77,11 +77,15 @@ class Withdraw extends React.Component {
       }
     }
 
+    localStorage.setItem('modalWithdraw', 1);
     this.setState({ modalOpen: true }); 
     this.props.hideSpinner();
   }
 
-  handleClose = () => this.setState({ modalOpen: false })
+  handleClose = () => {
+    localStorage.setItem('modalWithdraw', 0);
+    this.setState({ modalOpen: false });
+  }
 
   constructor(props) {
     super(props);
@@ -124,6 +128,8 @@ class Withdraw extends React.Component {
 
         ret = await this.checkUserVerifyStep();
         if (ret) {
+          if (parseInt(localStorage.getItem('modalWithdraw')) == 1)
+            this.setState({ modalOpen: true }); 
           return
         }
 

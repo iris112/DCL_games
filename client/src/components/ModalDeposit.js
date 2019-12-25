@@ -203,8 +203,10 @@ class Deposit extends React.Component {
 
         this.setState({isValidDeposit: 2});
         this.props.hideSpinner();
-        if (this.state.userStepValue == 6)
+        if (this.state.userStepValue == 6) {
           this.handleClose();
+          setTimeout(this.props.update, 5000); 
+        }
         return;
       }
     } catch (err) {

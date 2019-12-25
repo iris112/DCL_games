@@ -13,6 +13,8 @@ import Global from '../constant';
 import ModalDeposit from '../ModalDeposit'
 import ModalWithdraw from '../ModalWithdraw'
 import Spinner from '../../Spinner'
+import LogoSpinner from '../../LogoSpinner'
+
 
 var USER_ADDRESS;
 
@@ -20,12 +22,12 @@ const INITIAL_STATE = {
   tokenBalance: 0,
   ethBalance: 0,
   username: '',
-  isRunningTransaction: false,
+  isLogoRunning: false,
 };
 
 class Dashboard extends React.Component {
-  showSpinner = () => this.setState({isRunningTransaction: true})
-  hideSpinner = () => this.setState({isRunningTransaction: false})
+  showSpinner = () => this.setState({isLogoRunning: true})
+  hideSpinner = () => this.setState({isLogoRunning: false})
 
   constructor(props) {
     super(props);
@@ -51,8 +53,11 @@ class Dashboard extends React.Component {
 
   async getUserData() {
     this.verifyNetwork();
-    this.getEthBalance();
     await this.getUserName();
+  }
+
+  update = () => {
+    this.getTokenBalance();
   }
 
   getUserInfo = () => {
@@ -112,7 +117,6 @@ class Dashboard extends React.Component {
       this.maticWeb3.eth.getBalance(USER_ADDRESS, function(err, amount) {
         if (err)
           return;
-        
         Obj.setState({ethBalance: window.web3.fromWei(amount, 'ether').toFixed(8)});
       });
     } catch (err) {
@@ -136,7 +140,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div class="contentContainer">
-        <Spinner show={this.state.isRunningTransaction}/>
+        <LogoSpinner show={this.state.isLogoRunning}/>
         <div style={{width: 'calc(100% - 50px)', minWidth: '860px' }}>
           <p  class="titleName">
             Play Now
@@ -153,7 +157,7 @@ class Dashboard extends React.Component {
                   {this.state.tokenBalance} MANA
                 </span>
               </div>
-              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
+              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner} update={this.update}/>
               <ModalWithdraw isLink={0} showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
             </div>
             <div class='balanceBox' style={{marginLeft: '20px'}}>

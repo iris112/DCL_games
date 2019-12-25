@@ -567,9 +567,25 @@ a.ui.card:hover {
 .footer-left {
   margin-left: 12px !important;
 }
+
+@media only screen and (min-width: 768px) {
+  .logospin {
+    margin-right: calc((100vw - 88%) / 2)
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .logospin {
+    margin-right: calc((100vw - 850px) / 2)
+  }
+}
+
 @media only screen and (min-width: 1200px) {
   .ui.modal {
     width: 1100px;
+  }
+  .logospin {
+    margin-right: calc((100vw - 1100px) / 2)
   }
 }
 
@@ -1051,6 +1067,11 @@ div.progressbar .row, div.progressbar2 .row {
   left: 0;
   z-index: 1000;
   /*background-color: rgba(255,255,255,0.8);*/
+}
+.logospin {
+  float: right;
+  width: 100px;
+  margin-top: calc((100vh - 630px) / 2);
 }
 .sk-fading-circle {
   margin: calc(50vh - 120px) 50%;

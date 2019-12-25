@@ -43,7 +43,7 @@ class Withdraw extends React.Component {
     }
     else {
       if (txid !== '')
-        isUpdate = false;
+        isUpdate = true;
       localStorage.setItem('withdrawTxID', '');
     }
 
@@ -366,7 +366,6 @@ class Withdraw extends React.Component {
       if (json.status === 'ok') {
         if (json.result === 'false') {
           this.props.hideSpinner();
-          localStorage.setItem('withdrawTxID', '');
           this.handleClose();
           return;
         }
@@ -443,7 +442,6 @@ class Withdraw extends React.Component {
       if (json.status === 'ok') {
         if (json.result === 'false') {
           this.props.hideSpinner();
-          localStorage.setItem('withdrawTxID', '');
           this.handleClose();
           return;
         }
@@ -493,7 +491,6 @@ class Withdraw extends React.Component {
         this.props.hideSpinner();
         return;
       }
-      localStorage.setItem('withdrawTxID', '');
       this.setState({isConfirmStep3: 2});
       this.props.hideSpinner();
       this.handleClose();

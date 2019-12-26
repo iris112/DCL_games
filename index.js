@@ -127,8 +127,8 @@ httpserver.listen(PORT, () => console.log(`Listening on ${PORT}`));
 /////////////////////////////////////////////////////////////////////////////////////////
 // WebSocket message handlers and smart contract transaction call
 // 'https://testnet2.matic.network','https://ropsten.infura.io/v3/78b439fd7ce943889dbd895c93b408e4';
-// const testnet = 'https://testnet2.matic.network';
-const testnet = 'https://beta.matic.network';
+const testnet = 'https://testnet2.matic.network';
+// const testnet = 'https://beta.matic.network';
 web3 = new Web3(new Web3.providers.HttpProvider(testnet));
 const privateKey = Buffer.from(keys.WALLET_PRIVATE_KEY, 'hex');
 let contractSlotsMANA = '';

@@ -141,7 +141,7 @@ class Home extends Component {
             </Message>
 
             <a href='/account'>
-              <video className='hero-image' width="100%" src={vid} type="video/mp4" autoplay='true' muted loop/>
+              <video className='hero-image' width="100%" src={vid} type="video/mp4" autoplay='true' playsinline muted loop/>
             </a>
 
           </Container>
@@ -307,7 +307,7 @@ class Home extends Component {
           <Container className='hero-container'>
   
             <a href='/account'>
-              <video className='hero-image' width="100%" src={vid} type="video/mp4" autoplay='true' muted loop/>
+              <video className='hero-image' width="100%" src={vid} type="video/mp4" autoplay='true' playsinline muted loop/>
             </a>
 
           </Container>

@@ -302,7 +302,7 @@ class Deposit extends React.Component {
     if (this.state.isLoaded === 0) {
       return (
         <Modal
-          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} />}
+          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           closeIcon
@@ -318,7 +318,7 @@ class Deposit extends React.Component {
     if (this.state.isLoaded === 1) {
       return (
         <Modal
-          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} />}
+          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           closeIcon
@@ -337,7 +337,7 @@ class Deposit extends React.Component {
     if (!this.isBrowserMetamsk) {
       return (
         <Modal
-          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} />}
+          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           closeIcon
@@ -361,7 +361,7 @@ class Deposit extends React.Component {
       if (this.state.networkID == 3) {
         return (
           <Modal
-            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} />}
+            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
             open={this.state.modalOpen}
             onClose={this.handleClose}
             closeIcon
@@ -436,7 +436,7 @@ class Deposit extends React.Component {
 
       return (
         <Modal
-          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} />}
+          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           closeIcon
@@ -493,7 +493,7 @@ class Deposit extends React.Component {
         if (this.state.networkID == parseInt(Global.MATIC_NETWORK_ID)) {
           return (
           <Modal
-            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} />}
+            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
             open={this.state.modalOpen}
             onClose={this.handleClose}
             closeIcon
@@ -561,7 +561,7 @@ class Deposit extends React.Component {
 
         return (
           <Modal
-            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} />}
+            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
             open={this.state.modalOpen}
             onClose={this.handleClose}
             closeIcon
@@ -630,7 +630,7 @@ class Deposit extends React.Component {
       if (this.state.networkID == 3) {
         return (
           <Modal
-            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} />}
+            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
             open={this.state.modalOpen}
             onClose={this.handleClose}
             closeIcon
@@ -709,7 +709,7 @@ class Deposit extends React.Component {
 
       return (
                 <Modal
-            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} />}
+            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
             open={this.state.modalOpen}
             onClose={this.handleClose}
             closeIcon

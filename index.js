@@ -108,9 +108,15 @@ if (process.env.NODE_ENV === 'production') {
   wss = new SocketServer({ server: httpserver }); // create WebSocket connection and establish handshake
   setDagger(); // set Matic WebSocket provider
 } else {
-  server.use(express.static('client/public')); // set the pet images root folder
+  // server.use(force('https://decentral.games')); // redirect all requests to https://decentral.games
+  server.use(sslRedirect());
 
-  wss = new SocketServer({ port: 8080 }); // create WebSocket connection and establish handshake
+  // express will serve production assets
+  server.use(express.static('client/build'), (req, res) => {
+    res.sendFile(__dirname + '/client/build/index.html');
+  });
+
+  wss = new SocketServer({ server: httpserver }); // create WebSocket connection and establish handshake
   setDagger(); // set Matic WebSocket provider
 }
 

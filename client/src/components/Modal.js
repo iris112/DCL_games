@@ -213,7 +213,7 @@ class ModalVerify extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        // address: window.web3.currentProvider.selectedAddress,
+        address: window.web3.currentProvider.selectedAddress,
         email: this.state.email,
         name: this.state.name,
       })

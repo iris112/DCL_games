@@ -566,7 +566,7 @@ class Withdraw extends React.Component {
     if (this.state.isLoaded === 0) {
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} />
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>RETRY</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -584,7 +584,7 @@ class Withdraw extends React.Component {
     if (this.state.isLoaded === 1) {
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} />
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>RETRY</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -605,7 +605,7 @@ class Withdraw extends React.Component {
     if (!this.isBrowserMetamsk) {
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} />
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>RETRY</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -629,7 +629,7 @@ class Withdraw extends React.Component {
     if (this.state.isExistWithdraw == 1) {
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} />
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>RETRY</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -651,7 +651,7 @@ class Withdraw extends React.Component {
       if (this.state.networkID == 3) {
         return (
           <Modal
-            trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} />
+            trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>RETRY</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
             open={this.state.modalOpen}
@@ -745,7 +745,7 @@ class Withdraw extends React.Component {
 
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} />
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>RETRY</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -824,7 +824,7 @@ class Withdraw extends React.Component {
     if (this.state.isValidStep2 == 2) {
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} />
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>RETRY</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -919,7 +919,7 @@ class Withdraw extends React.Component {
       if (this.state.networkID == 3) {
         return (
           <Modal
-            trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} />
+            trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>RETRY</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
             open={this.state.modalOpen}
@@ -1011,7 +1011,7 @@ class Withdraw extends React.Component {
 
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} />
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>RETRY</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -1090,7 +1090,7 @@ class Withdraw extends React.Component {
     if (this.state.isValidStep1 == 2) {
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} />
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>RETRY</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -1181,7 +1181,7 @@ class Withdraw extends React.Component {
     if (this.state.networkID == parseInt(Global.MATIC_NETWORK_ID)) {
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} />
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>RETRY</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -1277,7 +1277,7 @@ class Withdraw extends React.Component {
 
     return (
       <Modal
-        trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} />
+        trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>RETRY</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
         open={this.state.modalOpen}

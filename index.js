@@ -108,9 +108,15 @@ if (process.env.NODE_ENV === 'production') {
   wss = new SocketServer({ server: httpserver }); // create WebSocket connection and establish handshake
   setDagger(); // set Matic WebSocket provider
 } else {
-  server.use(express.static('client/public')); // set the pet images root folder
+  // server.use(force('https://decentral.games')); // redirect all requests to https://decentral.games
+  server.use(sslRedirect());
 
-  wss = new SocketServer({ port: 8080 }); // create WebSocket connection and establish handshake
+  // express will serve production assets
+  server.use(express.static('client/build'), (req, res) => {
+    res.sendFile(__dirname + '/client/build/index.html');
+  });
+
+  wss = new SocketServer({ server: httpserver }); // create WebSocket connection and establish handshake
   setDagger(); // set Matic WebSocket provider
 }
 
@@ -127,8 +133,8 @@ httpserver.listen(PORT, () => console.log(`Listening on ${PORT}`));
 /////////////////////////////////////////////////////////////////////////////////////////
 // WebSocket message handlers and smart contract transaction call
 // 'https://testnet2.matic.network','https://ropsten.infura.io/v3/78b439fd7ce943889dbd895c93b408e4';
-// const testnet = 'https://testnet2.matic.network';
-const testnet = 'https://beta.matic.network';
+const testnet = 'https://testnet2.matic.network';
+// const testnet = 'https://beta.matic.network';
 web3 = new Web3(new Web3.providers.HttpProvider(testnet));
 const privateKey = Buffer.from(keys.WALLET_PRIVATE_KEY, 'hex');
 let contractSlotsMANA = '';

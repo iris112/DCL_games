@@ -1,0 +1,11 @@
+const Web3 = require('web3');
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+// set the Matic provider - 'https://testnet2.matic.network'
+module.exports.getWeb3 = function() {
+  const testnet = 'https://testnet2.matic.network';
+  const web3 = new Web3(new Web3.providers.HttpProvider(testnet));
+
+  return web3;
+};

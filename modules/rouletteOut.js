@@ -1,0 +1,49 @@
+const dbMongo = require('../db/dbMongo');
+
+dbMongo.initDb();
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+// web3 removes leading zeros, let's put them back
+function padding(number, size) {
+  let numberString = number.toString();
+
+  while (numberString.length < size) numberString = '0' + numberString;
+
+  return numberString;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+module.exports.returnData = async result => {
+  console.log(result);
+
+  const numbers = parseInt(result[0].topics[1], 16);
+  const machineID = parseInt(result[0].topics[2], 16);
+  const machineIDPadded = padding(machineID, 9);
+  const amount = parseInt(result[0].topics[3], 16);
+
+  console.log(
+    'wheel numbers: ' + numbers,
+    'machine id: ' + machineIDPadded,
+    'win amount: ' + amount
+  );
+
+  const spinObj = {
+    _numbers: numbers,
+    _machineID: machineIDPadded,
+    _amountWin: amount
+  };
+  const json = JSON.stringify({ type: 'message', data: spinObj });
+
+  /////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////
+  // notify each client of new spin result
+  wss.clients.forEach(client => {
+    client.send(json);
+  });
+
+  /////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////
+  // write event data to mongoDB database
+};

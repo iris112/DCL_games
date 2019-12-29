@@ -1,6 +1,6 @@
 const ABIDecentralotto = require('../contracts/decentralotto/ABIDecentralotto.json');
 
-export function setInfura() {
+module.exports.setInfura = () => {
   // refreshes provider instance and attaches event handlers to it
   function refreshProvider(web3Obj, providerUrl) {
     let retries = 0;

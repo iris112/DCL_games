@@ -20,7 +20,6 @@ import serenity from './Images/serenity.png'
 import chateau2 from './Images/chateau.gif'
 import serenity2 from './Images/serenity.gif'
 import vid_pc from './Images/home_pc.mp4'
-import vid_tab from './Images/home_tab.mp4'
 import vid_mob from './Images/home_mob.mp4'
 
 ReactGA.initialize("UA-146057069-1");
@@ -143,7 +142,7 @@ class Home extends Component {
             </Message>
 
             <a href='/account'>
-              <video className='hero-image' width="100%" src={window.innerWidth >= 1080 ? vid_pc : window.innerWidth >= 720 ? vid_tab : vid_mob} type="video/mp4" autoplay='true' playsinline muted loop/>
+              <video className='hero-image' width="100%" src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" autoplay='true' playsinline muted loop/>
             </a>
 
           </Container>
@@ -309,7 +308,7 @@ class Home extends Component {
           <Container className='hero-container'>
   
             <a href='/account'>
-              <video className='hero-image' width="100%" src={window.innerWidth >= 1080 ? vid_pc : window.innerWidth >= 720 ? vid_tab : vid_mob} type="video/mp4" autoplay='true' playsinline muted loop/>
+              <video className='hero-image' width="100%" src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" autoplay='true' playsinline muted loop/>
             </a>
 
           </Container>

@@ -1,4 +1,6 @@
-export function setDagger() {
+const Dagger = require('eth-dagger');
+
+module.exports.setDagger = () => {
   // connect to Dagger ETH matic network over web socket
   const dagger = new Dagger('wss://matic.dagger2.matic.network');
   // our contract address on matic network

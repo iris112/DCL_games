@@ -4,13 +4,19 @@ import '../additional.css';
 import { Button } from 'decentraland-ui'
 import mana from '../Images/mana.png';
 import Global from '../constant';
+import LogoSpinner from '../../LogoSpinner'
+import ModalDeposit from '../ModalDeposit';
 
 var USER_ADDRESS;
 
 const INITIAL_STATE = {
+  isRunningTransaction: false,
 };
 
 class Authorize extends React.Component {
+  showSpinner = () => this.setState({isRunningTransaction: true})
+  hideSpinner = () => this.setState({isRunningTransaction: false})
+
   constructor(props) {
     super(props);
 
@@ -23,43 +29,10 @@ class Authorize extends React.Component {
   async componentDidMount() {
   }
 
-  onAuthorize = async () => {
-    await this.postUserVerify(6);
-    await this.postUserAuthState(1);
-    this.props.history.push('/verify/');
-  }
-
-  postUserVerify = (step) => {
-    return fetch(`${Global.BASE_URL}/order/updateUserVerify`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        address: window.web3.currentProvider.selectedAddress,
-        verifyStep: step,
-      })
-    })
-  }
-
-  postUserAuthState = (value) => {
-    return fetch(`${Global.BASE_URL}/order/updateUserAuthState`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        address: window.web3.currentProvider.selectedAddress,
-        authorized: value,
-      })
-    })
-  }
-  
   render() {
     return (
       <div class="contentContainer">
+        <LogoSpinner show={this.state.isRunningTransaction}/>
         <div style={{width: 'calc(100% - 50px)', minWidth: '860px', marginTop: '20px'}}>
           <h3 style={{paddingTop: '20px'}}> Authorizations </h3>
           <div style={{ marginTop: '20px', height: '675px'}}>
@@ -70,16 +43,8 @@ class Authorize extends React.Component {
                   MANA Slots
                 </span>
               </div>
-              { this.props.authorized == 0 ?
-                <Button id="depositButton" color='blue' style={{marginTop:'5px'}}
-                onClick={this.onAuthorize}
-                >
-                  Authorize
-                </Button>
-              : <Button disabled id="depositButton" style={{marginTop:'5px', color: 'white'}}
-                >
-                  Authorized
-                </Button> }
+              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}
+              type={1} authorized={this.props.authorized & 4} authvalue={4} />
             </div>
             <div id='balance-pad' class='balanceBox' style={{marginLeft: '20px'}}>
               <div style={{marginBottom: '20px'}}>
@@ -88,16 +53,8 @@ class Authorize extends React.Component {
                   MANA Roulette
                 </span>
               </div>
-              { this.props.authorized == 0 ?
-                <Button id="depositButton" color='blue' style={{marginTop:'5px'}}
-                onClick={this.onAuthorize}
-                >
-                  Coming Soon
-                </Button>
-              : <Button disabled id="depositButton" style={{marginTop:'5px', color: 'white'}}
-                >
-                  Coming Soon
-                </Button> }
+              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}
+              type={1} authorized={this.props.authorized & 2} authvalue={2} />
             </div>
             <div id='balance-pad' class='balanceBox' style={{marginLeft: '20px'}}>
               <div style={{marginBottom: '20px'}}>
@@ -106,16 +63,8 @@ class Authorize extends React.Component {
                   MANA Blackjack
                 </span>
               </div>
-              { this.props.authorized == 0 ?
-                <Button id="depositButton" color='blue' style={{marginTop:'5px'}}
-                onClick={this.onAuthorize}
-                >
-                  Coming Soon
-                </Button>
-              : <Button disabled id="depositButton" style={{marginTop:'5px', color: 'white'}}
-                >
-                  Coming Soon
-                </Button> }
+              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}
+              type={1} authorized={this.props.authorized & 1} commingsoon={1} authvalue={1} />
             </div>
           </div>
         </div>

@@ -1,18 +1,16 @@
 import React from 'react'
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import '../additional.css';
 import mana from '../Images/mana.png';
 import dai from '../Images/dai.png';
-import eth from '../Images/eth.png';
 import dg from '../Images/authorize_title.png';
 import teleport1 from '../Images/chateau.png';
 import teleport2 from '../Images/serenity.png';
 import { Button } from 'decentraland-ui'
-import { Input, Image, Divider } from 'semantic-ui-react'
+import { Image} from 'semantic-ui-react'
 import Global from '../constant';
 import ModalDeposit from '../ModalDeposit'
 import ModalWithdraw from '../ModalWithdraw'
-import Spinner from '../../Spinner'
 import LogoSpinner from '../../LogoSpinner'
 
 
@@ -22,12 +20,12 @@ const INITIAL_STATE = {
   tokenBalance: 0,
   ethBalance: 0,
   username: '',
-  isLogoRunning: false,
+  isRunningTransaction: false,
 };
 
 class Dashboard extends React.Component {
-  showSpinner = () => this.setState({isLogoRunning: true})
-  hideSpinner = () => this.setState({isLogoRunning: false})
+  showSpinner = () => this.setState({isRunningTransaction: true})
+  hideSpinner = () => this.setState({isRunningTransaction: false})
 
   constructor(props) {
     super(props);
@@ -140,7 +138,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div class="contentContainer">
-        <LogoSpinner show={this.state.isLogoRunning}/>
+        <LogoSpinner show={this.state.isRunningTransaction}/>
         <div style={{width: 'calc(100% - 50px)', minWidth: '860px' }}>
           <p  class="titleName">
             Play Now
@@ -157,7 +155,7 @@ class Dashboard extends React.Component {
                   {this.state.tokenBalance} MANA
                 </span>
               </div>
-              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner} update={this.update}/>
+              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner} update={this.update} authvalue={4}/>
               <ModalWithdraw isLink={0} showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
             </div>
             <div class='balanceBox' style={{marginLeft: '20px'}}>

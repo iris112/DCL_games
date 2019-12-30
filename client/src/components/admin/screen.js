@@ -34,19 +34,6 @@ class Admin extends React.Component {
   async componentDidMount() {
   }
 
-  getAdminData = () => {
-    return fetch(`${Global.BASE_URL}/order/authState`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        data: '',
-      })
-    })
-  }
-
   selectedMenu = async (index) => {
     this.setState({selectedMenu: index});
   }

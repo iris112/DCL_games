@@ -10,7 +10,6 @@ import { Container, Grid, Dropdown, Input, Modal, Divider } from 'semantic-ui-re
 import logo from './Images/logo.png'
 import verify5_1 from './Images/switch_matic_1.png';
 import verify5_2 from './Images/switch_matic_2.png';
-import verify6 from './Images/matic_gas.png';
 import Global from './constant';
 
 var UNIT = 1;
@@ -31,7 +30,7 @@ class Deposit extends React.Component {
 
   state = { modalOpen: false }
   handleOpen = () => {
-    localStorage.setItem('modalDeposit', 1);
+    localStorage.setItem('modalDeposit', (parseInt(localStorage.getItem('selectedMenu')) || 0) + 1);
     this.setState({ modalOpen: true }); 
     if (this.state.isLoaded === 0)
       this.props.showSpinner();
@@ -40,6 +39,7 @@ class Deposit extends React.Component {
   handleClose = () => {
     this.setState({ modalOpen: false })
     localStorage.setItem('modalDeposit', 0);
+    localStorage.setItem('authvalue', 0);
   }
 
   constructor(props) {
@@ -72,8 +72,12 @@ class Deposit extends React.Component {
 
         let ret = await this.checkUserVerifyStep();
         if (ret) {
-          if (parseInt(localStorage.getItem('modalDeposit')) == 1)
-            this.setState({ modalOpen: true }); 
+          if (parseInt(localStorage.getItem('modalDeposit')) == (parseInt(localStorage.getItem('selectedMenu')) || 0) + 1) {
+            if (parseInt(localStorage.getItem('modalDeposit')) == 1)
+              this.setState({ modalOpen: true }); 
+            else if (parseInt(localStorage.getItem('authvalue')) == this.props.authvalue)
+              this.setState({ modalOpen: true, isValidDeposit: 2, userStepValue: 5 }); 
+          }
           return;
         }
 
@@ -220,15 +224,20 @@ class Deposit extends React.Component {
     try {
       this.props.showSpinner();
       var amount_wei = (this.state.amount / UNIT * 10 ** Global.TOKEN_DECIMALS).toString();
-      var allowed_amount = await Global.getAllowedToken(Global.MATIC_TOKEN, Global.SLOTS_CONTRACT_ADDRESS, USER_ADDRESS);
+      var contract_address = Global.SLOTS_CONTRACT_ADDRESS;
+      if (this.props.authvalue === 2)
+        contract_address = Global.ROULETTE_CONTRACT_ADDRESS;
+
+      var allowed_amount = await Global.getAllowedToken(Global.MATIC_TOKEN, contract_address, USER_ADDRESS);
       allowed_amount = allowed_amount / (10 ** Global.TOKEN_DECIMALS);
       if (allowed_amount == 0)
-        await Global.approveToken(Global.MATIC_TOKEN, Global.MAX_AMOUNT, Global.SLOTS_CONTRACT_ADDRESS, USER_ADDRESS);
+        await Global.approveToken(Global.MATIC_TOKEN, Global.MAX_AMOUNT, contract_address, USER_ADDRESS);
       else if (allowed_amount < this.state.amount / UNIT || this.state.amount == 0) {
-        await Global.approveToken(Global.MATIC_TOKEN, 0, Global.SLOTS_CONTRACT_ADDRESS, USER_ADDRESS);
-        await Global.approveToken(Global.MATIC_TOKEN, Global.MAX_AMOUNT, Global.SLOTS_CONTRACT_ADDRESS, USER_ADDRESS);
+        await Global.approveToken(Global.MATIC_TOKEN, 0, contract_address, USER_ADDRESS);
+        await Global.approveToken(Global.MATIC_TOKEN, Global.MAX_AMOUNT, contract_address, USER_ADDRESS);
       }
       await this.postUserVerify(6);
+      await this.postUserAuthState(this.props.authvalue);
       this.setState({isValidAuthorize: 2});
       this.props.hideSpinner();
       this.handleClose()
@@ -248,6 +257,20 @@ class Deposit extends React.Component {
       body: JSON.stringify({
         address: window.web3.currentProvider.selectedAddress,
         verifyStep: step,
+      })
+    })
+  }
+
+  postUserAuthState = (value) => {
+    return fetch(`${Global.BASE_URL}/order/updateUserAuthState`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        address: window.web3.currentProvider.selectedAddress,
+        authorized: value,
       })
     })
   }
@@ -286,6 +309,25 @@ class Deposit extends React.Component {
     return false;
   }
 
+  onAuthorize = async () => {
+    localStorage.setItem('authvalue', this.props.authvalue || 0);
+    this.setState({isValidDeposit: 2, userStepValue: 5});
+    this.handleOpen();
+  }
+
+  getTrigger = () => {
+    if (this.props.type != 1) {
+      return <Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>;
+    }
+    else if (this.props.commingsoon == 1) {
+      return <Button content='Coming Soon' disabled id='depositButton' color='blue' style={{marginTop:'5px'}} />
+    } else if (this.props.authorized == 0) {
+      return <Button content='Authorize' id='depositButton' color='blue' style={{marginTop:'5px'}} onClick={this.onAuthorize}/>
+    } else {
+      return <Button disabled content='Authorized' id='depositButton' style={{marginTop:'5px', color: 'white'}}/>
+    }
+  }
+
   render() {
     const amount = [
       { key: 1, text: '1000 MANA', value: 1000 },
@@ -302,7 +344,7 @@ class Deposit extends React.Component {
     if (this.state.isLoaded === 0) {
       return (
         <Modal
-          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
+          trigger={this.getTrigger()}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           closeIcon
@@ -361,7 +403,7 @@ class Deposit extends React.Component {
       if (this.state.networkID == 3) {
         return (
           <Modal
-            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
+            trigger={this.getTrigger()}
             open={this.state.modalOpen}
             onClose={this.handleClose}
             closeIcon
@@ -436,7 +478,7 @@ class Deposit extends React.Component {
 
       return (
         <Modal
-          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
+          trigger={this.getTrigger()}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           closeIcon
@@ -493,7 +535,7 @@ class Deposit extends React.Component {
         if (this.state.networkID == parseInt(Global.MATIC_NETWORK_ID)) {
           return (
           <Modal
-            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
+            trigger={this.getTrigger()}
             open={this.state.modalOpen}
             onClose={this.handleClose}
             closeIcon
@@ -561,7 +603,7 @@ class Deposit extends React.Component {
 
         return (
           <Modal
-            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
+            trigger={this.getTrigger()}
             open={this.state.modalOpen}
             onClose={this.handleClose}
             closeIcon
@@ -612,7 +654,7 @@ class Deposit extends React.Component {
                         <img style={{width:'210px', verticalAlign:'top'}} src={verify5_2} class="image small inline" />
 
                         { this.state.networkID != parseInt(Global.MATIC_NETWORK_ID) ?
-                          <p style={{ textAlign: 'left', color: 'red', marginTop: '30px'}}>
+                          <p style={{ textAlign: 'left', color: 'red', marginTop: '30px', width: '400px'}}>
                             This is not Matic Network.
                           </p> : <p/>
                         }
@@ -630,7 +672,7 @@ class Deposit extends React.Component {
       if (this.state.networkID == 3) {
         return (
           <Modal
-            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
+            trigger={this.getTrigger()}
             open={this.state.modalOpen}
             onClose={this.handleClose}
             closeIcon
@@ -708,8 +750,8 @@ class Deposit extends React.Component {
       }
 
       return (
-                <Modal
-            trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
+          <Modal
+            trigger={this.getTrigger()}
             open={this.state.modalOpen}
             onClose={this.handleClose}
             closeIcon

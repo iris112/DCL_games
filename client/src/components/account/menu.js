@@ -16,9 +16,16 @@ class SideMenu extends React.Component {
     this.state = { ...INITIAL_STATE };
   }
 
+  async componentDidMount() {
+    var index = parseInt(localStorage.getItem('selectedMenu') || 0)
+    this.setState({ selectedMenu: index });
+    this.props.onMenuSelected(index);
+  }
+
   onMenuClick = (index) => {
     if (index >= 5 && index <= 9)
       return;
+    localStorage.setItem('selectedMenu', index);
     this.setState({selectedMenu: index});
     this.props.onMenuSelected(index);
   }

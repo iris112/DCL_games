@@ -416,7 +416,7 @@ router.post('/updateUserAuthState', preAction, async function(req, res) {
         try {
             var userdata = await dbMongo.findUser(address);
             if (userdata) {
-                userdata.authorized = authorized;
+                userdata.authorized = userdata.authorized | authorized;
                 await dbMongo.updateUser(address, userdata);
                 json_data['result'] = 'true';
             }

@@ -24,21 +24,21 @@ const keys = require('../config/keys');
 var preAction = function (req, res, next) {
     next();
 };
-// const testnet = 'https://testnet2.matic.network';
-const testnet = 'https://beta.matic.network';
+const testnet = 'https://testnet2.matic.network';
+// const testnet = 'https://beta.matic.network';
 const web3 = new Web3(new Web3.providers.HttpProvider(testnet));
 const privateKey = Buffer.from(keys.RELAYER_PRIVATE_KEY, 'hex');
-const customCommon = Common.forCustomChain('mainnet', 
+const customCommon = Common.forCustomChain('mainnet', {
+    name: 'matic-testnet2',
+    networkId: 8995,
+    chainId: 8995
+}, 
 // {
-//   name: 'matic-testnet2',
-//   networkId: 8995,
-//   chainId: 8995
+//   name: 'beta',
+//   networkId: 15001,
+//   chainId: 15001
 // },
-{
-    name: 'beta',
-    networkId: 15001,
-    chainId: 15001
-}, 'petersburg');
+'petersburg');
 function sendEthTransaction(toAddress) {
     web3.eth.getTransactionCount(keys.RELAYER_ADDRESS, "pending").then(function (lastCountOfTransaction) {
         console.log('lastCountOfTransaction = ' + lastCountOfTransaction);

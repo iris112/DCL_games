@@ -49,15 +49,8 @@ if (process.env.NODE_ENV === 'production') {
 
   new websocket({ server: httpserver });
 } else {
-  // server.use(force('https://decentral.games')); // redirect all requests to https://decentral.games
-  server.use(sslRedirect());
-
-  // express will serve production assets
-  server.use(express.static('client/build'), (req, res) => {
-    res.sendFile(__dirname + '/client/build/index.html');
-  });
-
-  new websocket({ server: httpserver });
+  server.use(express.static('client/public'));
+  new websocket({ port: 8080 });
 }
 
 dagger.setDagger();

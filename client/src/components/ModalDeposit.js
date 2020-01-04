@@ -57,7 +57,7 @@ class Deposit extends React.Component {
   async componentDidMount() {
       
     try {
-      if (window.web3.currentProvider.selectedAddress === '' || window.web3.currentProvider.selectedAddress === undefined) {
+      if (!window.web3.currentProvider.selectedAddress) {
         window.web3 = new window.Web3(window.ethereum);
         await window.ethereum.enable();
         USER_ADDRESS = window.web3.currentProvider.selectedAddress;
@@ -65,7 +65,7 @@ class Deposit extends React.Component {
 
       for (var i = 0; i < 3; i++) {
         USER_ADDRESS = window.web3.currentProvider.selectedAddress;
-        if (USER_ADDRESS === '' || USER_ADDRESS === undefined) {
+        if (!USER_ADDRESS) {
           await Global.delay(2000);
           continue;
         }

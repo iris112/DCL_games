@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import { Input, Checkbox } from 'semantic-ui-react';
 import { instance2 } from '../ethereum/instance';
-import web3 from '../ethereum/web3';
 import MetaMask from '../ethereum/MetaMask';
 import Reel from '../components/Reel';
 import Aux from '../hoc/_Aux';
+
+const promisify = (inner) =>
+  new Promise((resolve, reject) =>
+      inner((err, res) => {
+          if (err) {
+              reject(err);
+          } else {
+              resolve(res);
+          }
+      })
+  );
 
 class Slots extends Component {
   constructor(props) {
@@ -38,8 +48,8 @@ class Slots extends Component {
   async componentDidMount() {
     await this.getNetwork();
 
-    const accounts = await web3.eth.getAccounts();
-    const credits = await web3.eth.getBalance(accounts[0]);
+    const accounts = await promisify(cb => window.web3.eth.getAccounts(cb));
+    const credits = await promisify(cb => window.web3.eth.getBalance(accounts[0], cb));
     const amountBet = await instance2.methods.amountBet().call();
     const amountWin = await instance2.methods.amountWin().call();
     const jackpot1 = await instance2.methods.jackpot1().call();
@@ -158,7 +168,7 @@ class Slots extends Component {
       const randomNumber = Math.floor(Math.random() * 1000);
       const hash = ('00' + randomNumber).slice(-3);
 
-      const accounts = await web3.eth.getAccounts();
+      const accounts = await promisify(cb => window.web3.eth.getAccounts(cb));
       await instance2.methods.play(hash).send({
         from: accounts[0],
         value: this.state.amountBet
@@ -192,7 +202,7 @@ class Slots extends Component {
       const amountAdd =
         this.inputAdd.inputRef.value !== ''
           ? this.inputAdd.inputRef.value
-          : web3.utils.fromWei(this.state.amountAdd, 'ether');
+          : window.web3.fromWei(this.state.amountAdd, 'ether');
       if (isNaN(amountAdd)) {
         this.setState({
           loaded: true,
@@ -201,9 +211,9 @@ class Slots extends Component {
 
         return false; // if not return false web3 will also check for valid input
       }
-      const priceWei = web3.utils.toWei(amountAdd, 'ether');
+      const priceWei = window.web3.toWei(amountAdd, 'ether');
 
-      const accounts = await web3.eth.getAccounts();
+      const accounts = await promisify(cb => window.web3.eth.getAccounts(cb));
       await instance2.methods.addFunds().send({
         from: accounts[0],
         gas: '300000',
@@ -227,7 +237,7 @@ class Slots extends Component {
       const amountBet =
         this.inputBet.inputRef.value !== ''
           ? this.inputBet.inputRef.value
-          : web3.utils.fromWei(this.state.amountBet, 'ether');
+          : window.web3.fromWei(this.state.amountBet, 'ether');
       if (isNaN(amountBet)) {
         this.setState({
           loaded: true,
@@ -236,9 +246,9 @@ class Slots extends Component {
 
         return false; // if not return false web3 will also check for valid input
       }
-      const priceWei = web3.utils.toWei(amountBet, 'ether');
+      const priceWei = window.web3.toWei(amountBet, 'ether');
 
-      const accounts = await web3.eth.getAccounts();
+      const accounts = await promisify(cb => window.web3.eth.getAccounts(cb));
       await instance2.methods.setAmounts(priceWei).send({
         from: accounts[0],
         gas: '300000'
@@ -265,7 +275,7 @@ class Slots extends Component {
       const amountWithdraw =
         this.inputAmount.inputRef.value !== ''
           ? this.inputAmount.inputRef.value
-          : web3.utils.fromWei(this.state.funds, 'ether');
+          : window.web3.fromWei(this.state.funds, 'ether');
       if (isNaN(amountWithdraw)) {
         this.setState({
           loaded: true,
@@ -274,9 +284,9 @@ class Slots extends Component {
 
         return false; // if not return false web3 will also check for valid input
       }
-      const priceWei = web3.utils.toWei(amountWithdraw, 'ether');
+      const priceWei = window.web3.toWei(amountWithdraw, 'ether');
 
-      const accounts = await web3.eth.getAccounts();
+      const accounts = await promisify(cb => window.web3.eth.getAccounts(cb));
       await instance2.methods.withdrawFunds(priceWei).send({
         from: accounts[0]
       });
@@ -305,32 +315,32 @@ class Slots extends Component {
   };
 
   machine = () => {
-    const jackpot1 = web3.utils.fromWei(
+    const jackpot1 = window.web3.fromWei(
       this.state.jackpot1.toString(),
       'ether'
     );
-    const jackpot2 = web3.utils.fromWei(
+    const jackpot2 = window.web3.fromWei(
       this.state.jackpot2.toString(),
       'ether'
     );
-    const jackpot3 = web3.utils.fromWei(
+    const jackpot3 = window.web3.fromWei(
       this.state.jackpot3.toString(),
       'ether'
     );
-    const jackpot4 = web3.utils.fromWei(
+    const jackpot4 = window.web3.fromWei(
       this.state.jackpot4.toString(),
       'ether'
     );
-    const credits = web3.utils.fromWei(this.state.credits.toString(), 'ether');
-    const amountBet = web3.utils.fromWei(
+    const credits = window.web3.fromWei(this.state.credits.toString(), 'ether');
+    const amountBet = window.web3.fromWei(
       this.state.amountBet.toString(),
       'ether'
     );
-    const amountWin = web3.utils.fromWei(
+    const amountWin = window.web3.fromWei(
       this.state.amountWin.toString(),
       'ether'
     );
-    const funds = web3.utils.fromWei(this.state.funds.toString(), 'ether');
+    const funds = window.web3.fromWei(this.state.funds.toString(), 'ether');
 
     return (
       <div

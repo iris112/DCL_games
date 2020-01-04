@@ -33,8 +33,10 @@ class ModalVerify extends Component {
   state = { modalOpen: false}
   handleOpen = () => {
     this.setState({ modalOpen: true }); 
-    if (this.state.isLoaded === 0)
+    if (this.state.isLoaded === 0) {
       this.props.showSpinner();
+      this.prepareVerify();
+    }
   }
   handleClose = () => this.setState({ modalOpen: false })
 
@@ -51,8 +53,12 @@ class ModalVerify extends Component {
   }
 
   async componentDidMount() {
+    
+  }
+
+  async prepareVerify() {
     try {
-      if (window.web3.currentProvider.selectedAddress === '' || window.web3.currentProvider.selectedAddress === undefined) {
+      if (!window.web3.currentProvider.selectedAddress) {
         window.web3 = new window.Web3(window.ethereum);
         await window.ethereum.enable();
         USER_ADDRESS = window.web3.currentProvider.selectedAddress;
@@ -60,58 +66,14 @@ class ModalVerify extends Component {
 
       for (var i = 0; i < 3; i++) {
         USER_ADDRESS = window.web3.currentProvider.selectedAddress;
-        if (USER_ADDRESS === '' || USER_ADDRESS === undefined) {
+        if (!USER_ADDRESS) {
           await Global.delay(2000);
           continue;
         }
 
         let ret = await this.checkUserVerifyStep();
-        if (ret) {
-          if (this.state.userStepValue < 2 ) {
-            try {
-              // Request account access if needed
-              fetch(`${Global.BASE_URL}/order/addAddress`, {
-                method: 'POST',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  address: USER_ADDRESS,
-                  manaLock: 0,
-                  ethLock: 0,
-                })
-              })
-              .catch(e => {
-                console.log(e);
-                this.setState({isValidMetamask: 1});
-              })
-              .then(res => {
-                if (res)
-                  return res.json();
-                this.setState({isValidMetamask: 1});
-              })
-              .then(async data => {
-                if (!data)
-                  this.setState({isValidMetamask: 1});
-                else {
-                  if (data.status === 'ok' && data.result === 'true') {
-                    // window.location.href = 'http://localhost:8000';
-                    await this.postUserVerify(2);
-                    this.setState({isValidMetamask: 2});
-                  } else {
-                    this.setState({isValidMetamask: 1});
-                  }
-                }
-              });
-            } catch (error) {
-                // User denied account access...
-                console.log(error);
-            }
-          }
-
+        if (ret)
           return;
-        }
 
         await Global.delay(2000);
       }
@@ -119,7 +81,7 @@ class ModalVerify extends Component {
       console.log(err)
     }
 
-    this.setState({isLoaded : 0});
+    this.setState({isLoaded : 1});
     this.props.hideSpinner();
   }
 
@@ -134,9 +96,10 @@ class ModalVerify extends Component {
           return true;
         }
 
+        localStorage.setItem('selectedMenu', 0);
         let stepValue = parseInt(json.result);
         if (stepValue > 3)
-          this.setState({isValidLocation: 2, isLoaded: 2, userStepValue: 4, existAccount: 1});
+          this.props.history.push('/account/');
         else if (stepValue == 3)
           this.setState({isValidBirth: 2, isLoaded: 2, userStepValue: 3, existAccount: 0});
         else if (stepValue == 2)
@@ -151,7 +114,6 @@ class ModalVerify extends Component {
       console.log(error);
     }
 
-    this.props.hideSpinner();
     return false;
   }
 
@@ -259,12 +221,9 @@ class ModalVerify extends Component {
     this.setState({isValidMetamask: 0});
     this.props.showSpinner();
     if (window.ethereum) {
-      if (window.web3.currentProvider.selectedAddress === '' || window.web3.currentProvider.selectedAddress === undefined) {
-        window.web3 = new window.Web3(window.ethereum);
-        await window.ethereum.enable();
-      }
       try {
           // Request account access if needed
+          window.web3 = new window.Web3(window.ethereum);
           await window.ethereum.enable();
           USER_ADDRESS = window.web3.currentProvider.selectedAddress;
           

@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
 import { Input, Checkbox } from 'semantic-ui-react';
 import { instance } from '../ethereum/instance';
-import web3 from '../ethereum/web3';
 import MetaMask from '../ethereum/MetaMask';
 import Aux from '../hoc/_Aux';
 import Spinner from '../Spinner';
 
+const promisify = (inner) =>
+  new Promise((resolve, reject) =>
+      inner((err, res) => {
+          if (err) {
+              reject(err);
+          } else {
+              resolve(res);
+          }
+      })
+  );
+  
 class Decentralotto extends Component {
   constructor(props) {
     super(props);
@@ -34,11 +44,11 @@ class Decentralotto extends Component {
   async componentDidMount() {
     await this.getNetwork();
 
-    const account = await web3.eth.getAccounts();
+    const account = await promisify(cb => window.web3.eth.getAccounts(cb));
     const manager = await instance.methods.ceoAddress().call();
     const developer = await instance.methods.devAddress().call();
     const players = await instance.methods.getPlayers().call();
-    const balance = await web3.eth.getBalance(instance.options.address);
+    const balance = await promisify(cb => window.web3.eth.getBalance(instance.options.address, cb));
     const jackpot = await instance.methods.getJackpot().call();
     const ticketPrice = await instance.methods.getTicketPrice().call();
     const onSale = await instance.methods.ticketSale().call();
@@ -54,7 +64,7 @@ class Decentralotto extends Component {
       onSale: onSale
     });
 
-    const accounts = await web3.eth.getAccounts();
+    const accounts = await promisify(cb => window.web3.eth.getAccounts(cb));
     if (typeof accounts[0] !== 'undefined') {
       // handle PlayerAdded() event from smart contract
       instance.events.PlayerAdded(
@@ -158,7 +168,7 @@ class Decentralotto extends Component {
         winner: null
       });
 
-      const accounts = await web3.eth.getAccounts();
+      const accounts = await promisify(cb => window.web3.eth.getAccounts(cb));
       await instance.methods.play().send({
         from: accounts[0],
         value: this.state.ticketPrice
@@ -182,7 +192,7 @@ class Decentralotto extends Component {
     try {
       this.setState({ loaded: false });
 
-      const accounts = await web3.eth.getAccounts();
+      const accounts = await promisify(cb => window.web3.eth.getAccounts(cb));
       await instance.methods.ticketsOnSale(!this.state.onSale).send({
         from: accounts[0],
         gas: '300000'
@@ -213,7 +223,7 @@ class Decentralotto extends Component {
       const newPrice =
         this.inputtext.inputRef.value !== ''
           ? this.inputtext.inputRef.value
-          : web3.utils.fromWei(this.state.ticketPrice, 'ether');
+          : window.web3.fromWei(this.state.ticketPrice, 'ether');
       if (isNaN(newPrice)) {
         this.setState({
           loaded: true,
@@ -222,9 +232,9 @@ class Decentralotto extends Component {
 
         return false; // if not return false web3 will also check for valid input
       }
-      const priceWei = web3.utils.toWei(newPrice, 'ether');
+      const priceWei = window.web3.toWei(newPrice, 'ether');
 
-      const accounts = await web3.eth.getAccounts();
+      const accounts = await promisify(cb => window.web3.eth.getAccounts(cb));
       await instance.methods.setTicketPrice(priceWei).send({
         from: accounts[0],
         gas: '300000'
@@ -259,7 +269,7 @@ class Decentralotto extends Component {
 
       const timeStamp = Date.now();
 
-      const accounts = await web3.eth.getAccounts();
+      const accounts = await promisify(cb => window.web3.eth.getAccounts(cb));
       await instance.methods.pickWinner(timeStamp).send({
         from: accounts[0]
       });
@@ -290,7 +300,7 @@ class Decentralotto extends Component {
   };
 
   machine = () => {
-    const ticketPrice = web3.utils.fromWei(
+    const ticketPrice = window.web3.fromWei(
       this.state.ticketPrice.toString(),
       'ether'
     );
@@ -300,7 +310,7 @@ class Decentralotto extends Component {
         {this.playerMessage()}
 
         <div className="messageBlack status">
-          CURRENT JACKPOT: {web3.utils.fromWei(this.state.jackpot, 'ether')} ETH
+          CURRENT JACKPOT: {window.web3.fromWei(this.state.jackpot, 'ether')} ETH
         </div>
         <div className="messageBlack status marginTop10">
           NUMBER OF PLAYERS: {this.state.players.length}

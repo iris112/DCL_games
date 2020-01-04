@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { instance } from '../ethereum/instance';
-import web3 from '../ethereum/web3';
 
 class BannerLotto extends Component {
   constructor(props) {
@@ -22,7 +21,7 @@ class BannerLotto extends Component {
   render() {
     return (
       <div className="ui container bannerViolet copy jackpot">
-        JACKPOT {web3.utils.fromWei(this.state.jackpot, 'ether')} ETH
+        JACKPOT {window.web3.fromWei(this.state.jackpot, 'ether')} ETH
       </div>
     );
   }

@@ -23,7 +23,7 @@ const withAdmin = Component => {
 		// return;
 
 		try {
-		  if (window.web3.currentProvider.selectedAddress === '' || window.web3.currentProvider.selectedAddress === undefined) {
+		  if (!window.web3.currentProvider.selectedAddress) {
 		    this.setState({isAdmin : 0});
 		  } else if (Global.ADMIN_ADDR.includes(window.web3.currentProvider.selectedAddress.toLowerCase())) {
 		    this.setState({isAdmin : 2});

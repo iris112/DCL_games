@@ -25,12 +25,9 @@ import vid_mob from './Images/home_mob.mp4'
 ReactGA.initialize("UA-146057069-1");
 ReactGA.pageview(window.location.pathname);
 
-
-var USER_ADDRESS;
-
 const INITIAL_STATE = {
+  player: null,
   visible: true,
-  existAccount: 0,
 
 };
 
@@ -47,75 +44,21 @@ class Home extends Component {
     this.isBrowserMetamsk = 0;
 
     if (window.web3) {
-      USER_ADDRESS = window.web3.currentProvider.selectedAddress;
       this.isBrowserMetamsk = 1;
     }
   }
 
   async componentDidMount() {
-    try {
-      // if (window.web3.currentProvider.selectedAddress === '') {
-      //   window.web3 = new window.Web3(window.ethereum);
-      //   await window.ethereum.enable();
-      // }
-
-      for (var i = 0; i < 3; i++) {
-        if (window.web3.currentProvider.selectedAddress === '' || window.web3.currentProvider.selectedAddress === undefined) {
-          await Global.delay(2000);
-          continue;
-        }
-
-        let ret = await this.checkUserVerifyStep();
-        if (ret) {
-          return;
-        }
-
-        await Global.delay(2000);
-      }
-
-    } catch (e) {
-      console.log(e);
-    }
-
-    this.setState({ existAccount: 0 });
+    this.tryPlayVideo();
   }
 
-  checkUserVerifyStep = async () => {
-    try {
-      const response = await this.getUserVerify();
-      const json = await response.json();
-      if (json.status === 'ok') {
-        if (json.result === 'false') {
-          this.setState({ existAccount: 0 });
-          return true;
-        }
-
-        let stepValue = parseInt(json.result);
-        if (stepValue > 3)
-          this.setState({ existAccount: 1 });
-        else
-          this.setState({ existAccount: 0 });
-
-        return true;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-
-    return false;
-  }
-
-  getUserVerify = () => {
-    return fetch(`${Global.BASE_URL}/order/verifyAddress`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        address: window.web3.currentProvider.selectedAddress,
-      })
-    })
+  tryPlayVideo() {
+    setTimeout(() => {
+      if (this.player)
+        this.player.play()
+      else
+        this.tryPlayVideo();
+    }, 5000);
   }
 
   render() {
@@ -142,7 +85,7 @@ class Home extends Component {
             </Message>
 
             <a href='/account'>
-              <video className='hero-image' width="100%" src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" autoplay='true' playsinline muted loop/>
+              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'auto'} src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" playsinline muted loop/>
             </a>
 
           </Container>
@@ -308,7 +251,7 @@ class Home extends Component {
           <Container className='hero-container'>
   
             <a href='/account'>
-              <video className='hero-image' width="100%" src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" autoplay='true' playsinline muted loop/>
+              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'auto'} src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" playsinline muted loop/>
             </a>
 
           </Container>

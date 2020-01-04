@@ -40,7 +40,7 @@ class Account extends React.Component {
     })
 
     try {
-      if (window.web3.currentProvider.selectedAddress === '' || window.web3.currentProvider.selectedAddress === undefined) {
+      if (!window.web3.currentProvider.selectedAddress) {
         window.web3 = new window.Web3(window.ethereum);
         await window.ethereum.enable();
       }
@@ -58,7 +58,7 @@ class Account extends React.Component {
 
   async getUserState() {
     for (var i = 0; i < 3; i++) {
-      if (window.web3.currentProvider.selectedAddress === '' || window.web3.currentProvider.selectedAddress === undefined) {
+      if (!window.web3.currentProvider.selectedAddress) {
         await Global.delay(2000);
         continue;
       }

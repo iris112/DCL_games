@@ -9,9 +9,14 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "abi-decoder": "^2.2.2",
+    "base-64": "^0.1.0",
     "buttercms": "1.1.5",
     "decentraland-ui": "^2.3.2",
     "eslint-loader": "^2.1.2",
+    "ethereumjs-common": "^1.4.0",
+    "ethereumjs-tx": "^2.1.1",
+    "ethjs": "^0.4.0",
     "html-to-react": "^1.4.1",
     "imgurify": "^2.0.1",
     "react": "^16.8.1",
@@ -25,12 +30,7 @@
     "semantic-ui-react": "^0.86.0",
     "solc": "^0.4.25",
     "web3": "1.0.0-beta.34",
-    "webpack": "4.28.3",
-    "abi-decoder": "^2.2.2",
-    "base-64": "^0.1.0",
-    "ethereumjs-common": "^1.4.0",
-    "ethereumjs-tx": "^2.1.1",
-    "ethjs": "^0.4.0"
+    "webpack": "4.28.3"
   },
   "browserslist": [
     ">0.2%",

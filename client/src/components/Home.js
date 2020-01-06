@@ -85,7 +85,7 @@ class Home extends Component {
             </Message>
 
             <a href='/account'>
-              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'auto'} src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" playsinline muted loop/>
+              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'none'} src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" playsinline muted loop/>
             </a>
 
           </Container>
@@ -251,7 +251,7 @@ class Home extends Component {
           <Container className='hero-container'>
   
             <a href='/account'>
-              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'auto'} src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" playsinline muted loop/>
+              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'none'} src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" playsinline muted loop/>
             </a>
 
           </Container>

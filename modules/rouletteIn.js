@@ -15,106 +15,101 @@ let web3;
 let contractRouletteMANA;
 
 async function setProviderAndInstance() {
-  web3 = getWeb3();
-  web3.eth.defaultAccount = keys.WALLET_ADDRESS;
+	web3 = getWeb3();
+	web3.eth.defaultAccount = keys.WALLET_ADDRESS;
 
-  contractRouletteMANA = await getContractInstance(
-    ABIRouletteMANA,
-    keys.ROULETTE_MANA_ADDRESS
-  );
+	contractRouletteMANA = await getContractInstance(ABIRouletteMANA, keys.ROULETTE_MANA_ADDRESS);
 }
 
 setProviderAndInstance();
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
-module.exports.prepareTransaction = async messageJSON => {
-  const machineID = '001002015'; // messageJSON.machineID;
-  const walletAddress = '0x1FcdE174C13691ef0C13fcEE042e0951452C0f8A'; // messageJSON.walletAddress;
+module.exports.prepareTransaction = async (messageJSON) => {
+	const machineID = '001002015'; // messageJSON.machineID;
+	const walletAddress = messageJSON.walletAddress;
 
-  const betIDs = [3302]; // messageJSON.gameData.betIDs;
-  const betValues = [0]; // messageJSON.gameData.betValues;
-  const betAmount = [1000000000000000]; // messageJSON.gameData.betAmount;
+	console.log('machine ID: ' + machineID);
+	console.log('wallet address: ' + walletAddress);
 
-  // get the land ID and game type from the machine ID
-  const landID = machineID.slice(0, 3);
-  const gameType = machineID.slice(3, 6);
+	console.log('bet IDs: ' + messageJSON.gameData.betIDs);
+	console.log('bet values: ' + messageJSON.gameData.betValues);
+	console.log('bet amount: ' + messageJSON.gameData.betAmounts);
 
-  console.log('wallet address: ' + walletAddress);
-  console.log('land ID: ' + landID);
-  console.log('machine ID: ' + machineID);
+	const betIDs = messageJSON.gameData.betIDs; // [3304]; //
+	const betValues = messageJSON.gameData.betValues; // [0]; //
+	const betAmounts = messageJSON.gameData.betAmounts; // [25000000000000000000]; //
 
-  console.log('bet IDs: ' + betIDs);
-  console.log('bet values: ' + betValues);
-  console.log('bet amount: ' + betAmount);
+	// get the land ID and game type from the machine ID
+	const landID = machineID.slice(0, 3);
+	const gameType = machineID.slice(3, 6);
 
-  console.log('game type: ' + gameType);
+	console.log('land ID: ' + landID);
+	console.log('game type: ' + gameType);
 
-  const randomNumber = Math.ceil(Math.random() * 10000);
+	const randomNumber = Math.ceil(Math.random() * 10000);
 
-  console.log('random number: ' + randomNumber);
+	console.log('random number: ' + randomNumber);
 
-  const contractFunction = contractRouletteMANA.methods.play(
-    walletAddress,
-    landID,
-    machineID,
-    betIDs,
-    betValues,
-    betAmount,
-    randomNumber
-  );
-  const functionABI = contractFunction.encodeABI();
+	const contractFunction = contractRouletteMANA.methods.play(
+		walletAddress,
+		landID,
+		machineID,
+		betIDs,
+		betValues,
+		betAmounts,
+		randomNumber
+	);
+	const functionABI = contractFunction.encodeABI();
 
-  contractFunction
-    .estimateGas({ from: keys.WALLET_ADDRESS })
-    .then(gasAmount => {
-      web3.eth.getTransactionCount(keys.WALLET_ADDRESS).then(_nonce => {
-        console.log('nonce: ' + _nonce);
-        const gasMultiple = Math.floor(gasAmount * 1.5);
-        console.log('gas amount * 1.5: ' + gasMultiple);
+	contractFunction.estimateGas({ from: keys.WALLET_ADDRESS }).then((gasAmount) => {
+		web3.eth.getTransactionCount(keys.WALLET_ADDRESS).then((_nonce) => {
+			console.log('nonce: ' + _nonce);
+			const gasMultiple = Math.floor(gasAmount * 1.5);
+			console.log('gas amount * 1.5: ' + gasMultiple);
 
-        const customCommon = Common.forCustomChain(
-          'mainnet',
-          {
-            name: 'matic-testnet2',
-            networkId: 8995,
-            chainId: 8995
-          },
-          'petersburg'
-        );
-        const tx = new Tx(
-          {
-            gasPrice: web3.utils.toHex(20000000000),
-            gasLimit: web3.utils.toHex(gasMultiple),
-            to: contractRouletteMANA.options.address,
-            data: functionABI,
-            from: keys.WALLET_ADDRESS,
-            nonce: web3.utils.toHex(_nonce)
-          },
-          { common: customCommon }
-        );
+			const customCommon = Common.forCustomChain(
+				'mainnet',
+				{
+					name: 'matic-testnet2',
+					networkId: 8995,
+					chainId: 8995
+				},
+				'petersburg'
+			);
+			const tx = new Tx(
+				{
+					gasPrice: web3.utils.toHex(20000000000),
+					gasLimit: web3.utils.toHex(gasMultiple),
+					to: contractRouletteMANA.options.address,
+					data: functionABI,
+					from: keys.WALLET_ADDRESS,
+					nonce: web3.utils.toHex(_nonce)
+				},
+				{ common: customCommon }
+			);
 
-        const privateKey = Buffer.from(keys.WALLET_PRIVATE_KEY, 'hex');
-        tx.sign(privateKey);
-        const serializedTx = tx.serialize();
+			const privateKey = Buffer.from(keys.WALLET_PRIVATE_KEY, 'hex');
+			tx.sign(privateKey);
+			const serializedTx = tx.serialize();
 
-        const sendTransaction = async () => {
-          var txHash;
-          result = await web3.eth
-            .sendSignedTransaction('0x' + serializedTx.toString('hex'))
-            .once('transactionHash', hash => {
-              console.log('TxHash: ', hash);
-              txHash = hash;
-            })
-            .on('receipt', console.log);
+			const sendTransaction = async () => {
+				var txHash;
+				result = await web3.eth
+					.sendSignedTransaction('0x' + serializedTx.toString('hex'))
+					.once('transactionHash', (hash) => {
+						console.log('TxHash: ', hash);
+						txHash = hash;
+					})
+					.on('receipt', console.log);
 
-          console.log('transaction complete');
-          web3.eth.getTransactionReceipt(txHash).then(async data => {
-            // write transaction data to mongoDB database
-          });
-        };
+				console.log('transaction complete');
+				web3.eth.getTransactionReceipt(txHash).then(async (data) => {
+					// write transaction data to mongoDB database
+				});
+			};
 
-        sendTransaction();
-      });
-    });
+			sendTransaction();
+		});
+	});
 };

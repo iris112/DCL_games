@@ -19,18 +19,15 @@ require('./routes/nft-router')(server);
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 server.use(
-  bodyParser.urlencoded({
-    extended: true
-  })
+	bodyParser.urlencoded({
+		extended: true
+	})
 );
 server.use(bodyParser.json());
-server.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  next();
+server.use(function(req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+	next();
 });
 server.use('/order', orderRouter);
 server.use('/admin', adminRouter);
@@ -39,20 +36,20 @@ server.use('/admin', adminRouter);
 /////////////////////////////////////////////////////////////////////////////////////////
 // set WebSocket instance and Matic Dagger provider
 if (process.env.NODE_ENV === 'production') {
-  // server.use(force('https://decentral.games')); // redirect all requests to https://decentral.games
-  server.use(sslRedirect());
+	// server.use(force('https://decentral.games')); // redirect all requests to https://decentral.games
+	server.use(sslRedirect());
 
-  // express will serve production assets
-  server.use(express.static('client/build'), (req, res) => {
-    res.sendFile(__dirname + '/client/build/index.html');
-  });
+	// express will serve production assets
+	server.use(express.static('client/build'), (req, res) => {
+		res.sendFile(__dirname + '/client/build/index.html');
+	});
 
-  new websocket({ server: httpserver });
+	new websocket({ server: httpserver });
 } else {
-  server.use(express.static('client/public'));
-  new websocket({ port: 8080 });
-}
+	server.use(express.static('client/public')); // set the static assets root folder
 
+	new websocket({ port: 8080 });
+}
 dagger.setDagger();
 
 /////////////////////////////////////////////////////////////////////////////////////////

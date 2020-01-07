@@ -577,7 +577,7 @@ class ModalVerify extends Component {
                       <h3 style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>
                     </Grid.Row>
                     <Grid.Row>
-                      <p style={{ textAlign: 'left', float: 'left', fontSize: '20px'}}>1. Connect your Metamask or Ledger wallet.
+                      <p style={{ textAlign: 'left', float: 'left', fontSize: '20px'}}>1. Connect your Metamask wallet.
                       </p>
                     </Grid.Row>
                     <Grid.Row>

@@ -21,13 +21,12 @@ import chateau2 from './Images/chateau.gif'
 import serenity2 from './Images/serenity.gif'
 import vid_pc from './Images/home_pc.mp4'
 import vid_mob from './Images/home_mob.mp4'
-import spinning from './Images/spinning.gif'
 
 ReactGA.initialize("UA-146057069-1");
 ReactGA.pageview(window.location.pathname);
 
 const INITIAL_STATE = {
-  player: null,
+  vid_blob: null,
   visible: true,
 
 };
@@ -57,8 +56,11 @@ class Home extends Component {
   tryPlayVideo() {
     setTimeout(() => {
       if (this.player) {
-        this.player.classList.remove('hero-image-spin');
-        this.player.play()
+        fetch(window.innerWidth >= 720 ? vid_pc : vid_mob).then(res => res.blob()).then(data => {
+          this.setState({vid_blob: URL.createObjectURL(data)});
+          this.player.classList.remove('hero-image-spin');
+          this.player.play()
+        });
       }
       else
         this.tryPlayVideo();
@@ -91,7 +93,7 @@ class Home extends Component {
             </Message>
 
             <a href='/account'>
-              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'none'} src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" playsinline autoplay muted loop/>
+              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'none'} src={this.state.vid_blob} type="video/mp4" playsinline autoplay muted loop/>
             </a>
 
           </Container>
@@ -257,7 +259,7 @@ class Home extends Component {
           <Container className='hero-container'>
   
             <a href='/account'>
-              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'none'} src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" playsinline autoplay muted loop/>
+              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'none'} src={this.state.vid_blob} type="video/mp4" playsinline autoplay muted loop/>
             </a>
 
           </Container>

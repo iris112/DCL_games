@@ -9,8 +9,8 @@ import EthJS from 'ethjs';
 import CommonDefault from 'ethereumjs-common';
 // import MyWeb3 from 'web3';
 
-const BASE_URL = 'https://decentral.games';
-// const BASE_URL = 'https://testdecentralgames.herokuapp.com';
+// const BASE_URL = 'https://decentral.games';
+const BASE_URL = 'https://testdecentralgames.herokuapp.com';
 // const BASE_URL = 'http://localhost:5000';
 const Buffer = window.ethereumjs.Buffer.Buffer;
 const Util = window.ethereumjs.Util;
@@ -484,7 +484,6 @@ export default {
 	TOKEN_DECIMALS,
 	ROOTCHAIN_ADDRESS,
 	DEPOSITMANAGER_ADDRESS,
-	// SLOTS_CONTRACT_ADDRESS,
   MATIC_NETWORK_ID,
 	SYNCER_URL,
 	WATCHER_URL,

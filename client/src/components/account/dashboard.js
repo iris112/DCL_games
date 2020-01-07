@@ -152,7 +152,7 @@ class Dashboard extends React.Component {
               <div style={{marginBottom: '20px'}}>
                 <img style={{verticalAlign:'middle'}} class="image inline" width="20px" height="20px" src={mana} />
                 <span class="balanceAmount" style={{textAlign: 'left'}}>
-                  {this.state.tokenBalance} MANA
+                  {this.state.tokenBalance == 0 ? '__' : this.state.tokenBalance} MANA
                 </span>
               </div>
               <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner} update={this.update} authvalue={4}/>

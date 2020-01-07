@@ -35,7 +35,7 @@ server.use('/admin', adminRouter);
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 // set WebSocket instance and Matic Dagger provider
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'dev') {
 	// server.use(force('https://decentral.games')); // redirect all requests to https://decentral.games
 	server.use(sslRedirect());
 

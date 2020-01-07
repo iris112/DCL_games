@@ -74,6 +74,10 @@ class Account extends React.Component {
     return false;
   }
 
+  update = () => {
+    this.checkUserVerifyStep();
+  }
+
   getUserVerify = () => {
     return fetch(`${Global.BASE_URL}/order/verifyAddress`, {
       method: 'POST',
@@ -141,7 +145,7 @@ class Account extends React.Component {
     if (this.state.selectedMenu == 2)
       return (<Deposit />);
     if (this.state.selectedMenu == 3)
-      return (<Authorize authorized={this.state.isAuthorized}/>);
+      return (<Authorize authorized={this.state.isAuthorized} update={this.update} />);
     if (this.state.selectedMenu == 4)
       return (<Coin />);        
 
@@ -170,7 +174,7 @@ class Account extends React.Component {
         <div id="account" class="ui accountContainer">
           <Container style={{ marginTop: '25.5em', height: '35em' }}>
             <Grid verticalAlign='middle' textAlign='center'>
-              <Header> Please finish <a href="/verify/">verification</a> to view My Account. </Header>
+              <Header> Please finish verification to view My Account. </Header>
             </Grid>
           </Container>
         </div>

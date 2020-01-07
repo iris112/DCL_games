@@ -241,6 +241,7 @@ class Deposit extends React.Component {
       this.setState({isValidAuthorize: 2});
       this.props.hideSpinner();
       this.handleClose()
+      setTimeout(this.props.update, 5000); 
     } catch (err) {
       this.setState({isValidAuthorize: 1});
       this.props.hideSpinner();
@@ -368,7 +369,7 @@ class Deposit extends React.Component {
         <div id="deposit">
           <Container style={{ height: '35em' }}>
             <Grid style={{marginTop: '17em'}} verticalAlign='middle' textAlign='center'>
-              <Header> Please finish <a href="/">verification</a> to Deposit. </Header>
+              <Header> Please finish verification to Deposit. </Header>
             </Grid>
           </Container>
         </div>
@@ -761,11 +762,10 @@ class Deposit extends React.Component {
           <div class="ui depositContainer">
             <Grid verticalAlign='middle' textAlign='center'>
               <Grid.Column>
-                <div class="progressbar">
-                  <a href="https://decentral.games">
-                    <img class="image inline" src={logo} style={{width: '230px', paddingTop: '25px', paddingBottom: '25px'}}/>
-                  </a>
-                  <Grid.Row style={{paddingTop: '25px', borderTop: '1px solid lightgray'}}>
+                <div class="progressbar2">
+                  <img class="image inline" src={logo} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
+                  <Grid.Row >
+                    <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
                     <img class="progressbar image inline" src={box} />
                     <p class="progressbar"> Switch to Ropsten RPC </p>
                   </Grid.Row>  
@@ -783,25 +783,31 @@ class Deposit extends React.Component {
                   </Grid.Row>
                 </div>
 
-                <div class="contentContainer" style={{padding: '20px', marginTop: '10px', textAlign: 'left'}}>
-                  <h3 style={{textAlign: 'left', marginLeft: '10px'}}> Deposit MANA </h3>
-                  <span style={{ display: 'block', float: 'left', textAlign: 'left', fontSize: '1.33em', marginTop : '30px', marginLeft: '50px'}}>1.</span>
-                  <p style={{ textAlign: 'left', fontSize: '1.33em', paddingLeft: '80px', marginTop: '45px' }}>
-                    On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
-                  </p>
-                  <img style={{width:'240px', marginLeft: '100px'}} src={verify1} class="image small inline" />
+                <div class="contentContainer" >
+                  <Grid>
+                    <Grid.Row>
+                      <h3 style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>1. On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
+                      </p>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <img style={{width:'240px' }} src={verify1} class="image small inline" />
+                    </Grid.Row>
+                  </Grid>
 
                   { this.state.networkID != 3 ?
-                    <p style={{ textAlign: 'left', color: 'red', marginTop: '10px', marginLeft: '100px'}}>
+                    <p style={{ textAlign: 'left', color: 'red', marginTop: '21px', marginLeft: '-13px'}}>
                       This is not Ropsten Network.
                     </p> : <p/>
                   }
-                </div>
-              </Grid.Column>
-            </Grid>
+                  </div>
+                </Grid.Column>
+              </Grid>
+            </div>
           </div>
-        </div>
-      </Modal>
+        </Modal>
       )
     }
   }

@@ -594,7 +594,7 @@ class Withdraw extends React.Component {
         <div id="deposit">
           <Container style={{ height: '35em' }}>
             <Grid style={{marginTop: '17em'}} verticalAlign='middle' textAlign='center'>
-              <Header> Please finish <a href="/">verification</a> to Withdraw. </Header>
+              <Header> Please finish verification to Withdraw. </Header>
             </Grid>
           </Container>
         </div>

@@ -17,7 +17,7 @@ import LogoSpinner from '../../LogoSpinner'
 var USER_ADDRESS;
 
 const INITIAL_STATE = {
-  tokenBalance: 0,
+  tokenBalance: -1,
   ethBalance: 0,
   username: '',
   isRunningTransaction: false,
@@ -152,7 +152,7 @@ class Dashboard extends React.Component {
               <div style={{marginBottom: '20px'}}>
                 <img style={{verticalAlign:'middle'}} class="image inline" width="20px" height="20px" src={mana} />
                 <span class="balanceAmount" style={{textAlign: 'left'}}>
-                  {this.state.tokenBalance == 0 ? '__' : this.state.tokenBalance} MANA
+                  {this.state.tokenBalance == -1 ? '—' : this.state.tokenBalance} MANA
                 </span>
               </div>
               <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner} update={this.update} authvalue={4}/>

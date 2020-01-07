@@ -17,6 +17,7 @@ const INITIAL_STATE = {
   manaSlotBalance: 0,
   manaSlotPayout: 0,
   manaSlotVolume: 0,
+  manaRouletteBalance: 0,
   ethMaticGasBalance: 0,
   ethRopstenGasBalance: 0,
   username: '',
@@ -87,14 +88,16 @@ class Dashboard extends React.Component {
 
   getTokenBalance = async (isMatic) => {
     try {
-      var amount;
+      var amountSlot, amountRoulette;
       
       // if (isMatic)
       //   amount = await Global.balanceOfToken(Global.MATIC_TOKEN);
       // else
       //   amount = await Global.balanceOfToken(Global.ROPSTEN_TOKEN);
-      amount = await Global.balanceOfToken(Global.MATIC_TOKEN, this.maticWeb3, Global.SLOTS_CONTRACT_ADDRESS);
-      this.setState({manaSlotBalance: window.web3.fromWei(amount, 'ether').toFixed(0)});
+      amountSlot = await Global.balanceOfToken(Global.MATIC_TOKEN, this.maticWeb3, Global.SLOTS_CONTRACT_ADDRESS);
+      amountRoulette = await Global.balanceOfToken(Global.MATIC_TOKEN, this.maticWeb3, Global.ROULETTE_CONTRACT_ADDRESS);
+      this.setState({manaSlotBalance: window.web3.fromWei(amountSlot, 'ether').toFixed(0),
+                    manaRouletteBalance: window.web3.fromWei(amountRoulette, 'ether').toFixed(0)});
     } catch (err) {
       console.log(err);
     }
@@ -164,7 +167,7 @@ class Dashboard extends React.Component {
         name: 'MANA Roulette',
         image: mana,
         unit: 'MANA',
-        balance: 0,
+        balance: this.state.manaRouletteBalance,
         volume: 0,
         payout: 0,
         enabled: 1

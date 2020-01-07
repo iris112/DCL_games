@@ -43,7 +43,7 @@ class Authorize extends React.Component {
                   MANA Slots
                 </span>
               </div>
-              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}
+              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner} update={this.props.update}
               type={1} authorized={this.props.authorized & 4} authvalue={4} />
             </div>
             <div id='balance-pad' class='balanceBox' style={{marginLeft: '20px'}}>
@@ -53,7 +53,7 @@ class Authorize extends React.Component {
                   MANA Roulette
                 </span>
               </div>
-              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}
+              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner} update={this.props.update}
               type={1} authorized={this.props.authorized & 2} authvalue={2} />
             </div>
             <div id='balance-pad' class='balanceBox' style={{marginLeft: '20px'}}>
@@ -63,7 +63,7 @@ class Authorize extends React.Component {
                   MANA Blackjack
                 </span>
               </div>
-              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}
+              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner} update={this.props.update}
               type={1} authorized={this.props.authorized & 1} commingsoon={1} authvalue={1} />
             </div>
           </div>

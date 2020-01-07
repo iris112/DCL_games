@@ -21,6 +21,7 @@ import chateau2 from './Images/chateau.gif'
 import serenity2 from './Images/serenity.gif'
 import vid_pc from './Images/home_pc.mp4'
 import vid_mob from './Images/home_mob.mp4'
+import spinning from './Images/spinning.gif'
 
 ReactGA.initialize("UA-146057069-1");
 ReactGA.pageview(window.location.pathname);
@@ -49,16 +50,21 @@ class Home extends Component {
   }
 
   async componentDidMount() {
+    this.player.classList.add('hero-image-spin');
     this.tryPlayVideo();
   }
 
   tryPlayVideo() {
     setTimeout(() => {
-      if (this.player)
+      if (this.player) {
+        this.player.classList.remove('hero-image-spin');
         this.player.play()
+      }
       else
         this.tryPlayVideo();
     }, 5000);
+
+    
   }
 
   render() {
@@ -85,7 +91,7 @@ class Home extends Component {
             </Message>
 
             <a href='/account'>
-              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'none'} src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" playsinline muted loop/>
+              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'none'} src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" playsinline autoplay muted loop/>
             </a>
 
           </Container>
@@ -251,7 +257,7 @@ class Home extends Component {
           <Container className='hero-container'>
   
             <a href='/account'>
-              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'none'} src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" playsinline muted loop/>
+              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'none'} src={window.innerWidth >= 720 ? vid_pc : vid_mob} type="video/mp4" playsinline autoplay muted loop/>
             </a>
 
           </Container>

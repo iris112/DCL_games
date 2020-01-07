@@ -330,6 +330,10 @@ a.item.nav-text:hover {
   padding-right: 3px !important;
 }
 
+.hero-image-spin {
+  background: black url(./Images/spinning.gif) center center no-repeat;
+}
+
 @media (max-width: 767px) {
   .hero-image {
     transform: scale(1.25) !important;

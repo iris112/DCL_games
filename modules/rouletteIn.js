@@ -26,19 +26,19 @@ setProviderAndInstance();
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 module.exports.prepareTransaction = async (messageJSON) => {
-	const machineID = '001002015'; // messageJSON.machineID;
+	const machineID = messageJSON.machineID; // '001002015'; //
 	const walletAddress = messageJSON.walletAddress;
 
 	console.log('machine ID: ' + machineID);
 	console.log('wallet address: ' + walletAddress);
 
-	console.log('bet IDs: ' + messageJSON.gameData.betIDs);
-	console.log('bet values: ' + messageJSON.gameData.betValues);
-	console.log('bet amount: ' + messageJSON.gameData.betAmounts);
-
 	const betIDs = messageJSON.gameData.betIDs; // [3304]; //
 	const betValues = messageJSON.gameData.betValues; // [0]; //
 	const betAmounts = messageJSON.gameData.betAmounts; // [25000000000000000000]; //
+
+	console.log('bet IDs: ' + betIDs);
+	console.log('bet values: ' + betValues);
+	console.log('bet amount: ' + betAmounts);
 
 	// get the land ID and game type from the machine ID
 	const landID = machineID.slice(0, 3);

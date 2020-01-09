@@ -17,6 +17,7 @@
     "ethereumjs-common": "^1.4.0",
     "ethereumjs-tx": "^2.1.1",
     "ethjs": "^0.4.0",
+    "hls.js": "^0.13.1",
     "html-to-react": "^1.4.1",
     "imgurify": "^2.0.1",
     "react": "^16.8.1",

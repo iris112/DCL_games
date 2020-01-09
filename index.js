@@ -6,8 +6,9 @@ const bodyParser = require('body-parser');
 const websocket = require('./modules/websocket.js');
 const orderRouter = require('./routes/order-router');
 const adminRouter = require('./routes/admin-router');
-const streamRouter = require('./routes/stream-router');
 const dagger = require('./modules/dagger.js');
+const hls = require('./hls.js');
+const cors = require('cors');
 
 const PORT = process.env.PORT || 5000;
 let server = express();
@@ -17,6 +18,11 @@ let server = express();
 // NFT meta-data route
 require('./routes/nft-router')(server);
 
+var corsOptionsDelegate = function (req, callback) {
+  var corsOptions;
+  corsOptions = { origin: true, credentials: true } // disable CORS for this request
+  callback(null, corsOptions) // callback expects two parameters: error and options
+}
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 server.use(
@@ -26,13 +32,13 @@ server.use(
 );
 server.use(bodyParser.json());
 server.use(function(req, res, next) {
-	res.header('Access-Control-Allow-Origin', '*');
+	// res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 	next();
 });
 server.use('/order', orderRouter);
 server.use('/admin', adminRouter);
-server.use('/stream', streamRouter);
+server.get('/streams/*', cors(corsOptionsDelegate), hls.serveHLSVideo);
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////

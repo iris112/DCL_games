@@ -20,12 +20,14 @@ import chateau2 from './Images/chateau.gif'
 import serenity2 from './Images/serenity.gif'
 // import vid_pc from './Images/home_pc.mp4'
 // import vid_mob from './Images/home_mob.mp4'
+import Hls from "hls.js";
 
 ReactGA.initialize("UA-146057069-1");
 ReactGA.pageview(window.location.pathname);
 
 const INITIAL_STATE = {
-  vid_blob: Global.BASE_URL + '/stream/video',
+  vid_pc: Global.BASE_URL + "/streams/home_pc.m3u8",
+  vid_mob: Global.BASE_URL + "/streams/home_mob.m3u8",
   visible: true,
 
 };
@@ -34,6 +36,7 @@ class Home extends Component {
 
   handleDismiss = () => {
     this.setState({ visible: false })
+    this.player.classList.add('hero-image-spin');
   }
 
   constructor(props) {
@@ -49,7 +52,26 @@ class Home extends Component {
 
   async componentDidMount() {
     this.player.classList.add('hero-image-spin');
-    this.tryPlayVideo();
+    var hls = new Hls({
+          // This configuration is required to insure that only the
+          // viewer can access the content by sending a session cookie
+          // to api.video service
+          xhrSetup: function(xhr, url) {
+            xhr.withCredentials = true;
+          }
+        });
+    if (window.innerWidth >= 720)
+      hls.loadSource(this.state.vid_pc);
+    else
+      hls.loadSource(this.state.vid_mob);
+
+    hls.attachMedia(this.player);
+    // hls.on(Hls.Events.MANIFEST_PARSED, function() {
+    //   this.player.play();
+    // });
+  }
+
+  componentWillUnmount() {
   }
 
   tryPlayVideo() {
@@ -61,6 +83,7 @@ class Home extends Component {
         //   this.player.play()
         // });
         this.player.play();
+        this.player.classList.remove('hero-image-spin');
       }
       else
         this.tryPlayVideo();
@@ -91,7 +114,7 @@ class Home extends Component {
             </Message>
 
             <a href='/account'>
-              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'none'} src={this.state.vid_blob} type="video/mp4" playsinline autoplay muted loop/>
+              <video className="hero-image" width="100%" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
             </a>
 
           </Container>
@@ -256,9 +279,9 @@ class Home extends Component {
         <Segment className='hero'>
           <Container className='hero-container'>
   
-            <a href='/account'>
-              <video className='hero-image' width="100%" ref={ref => this.player = ref} preload={'none'} src={this.state.vid_blob} type="video/mp4" playsinline autoplay muted loop/>
-            </a>
+          <a href='/account'>
+            <video className="hero-image" width="100%" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
+          </a>
 
           </Container>
         </Segment>

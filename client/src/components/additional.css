@@ -331,7 +331,8 @@ a.item.nav-text:hover {
 }
 
 .hero-image-spin {
-  background: black url(./Images/spinning.gif) center center no-repeat;
+  background: black url(./Images/spin.gif) center center no-repeat;
+  background-size: 100px;
 }
 
 @media (max-width: 767px) {

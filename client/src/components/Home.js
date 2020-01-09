@@ -14,19 +14,18 @@ import roulette from './Images/roulette-1.png'
 import roulette2 from './Images/roulette.gif'
 import blackjack from './Images/blackjack.png'
 import soon from './Images/soon_hover.png'
-import image from './Images/image.png'
 import chateau from './Images/chateau.png'
 import serenity from './Images/serenity.png'
 import chateau2 from './Images/chateau.gif'
 import serenity2 from './Images/serenity.gif'
-import vid_pc from './Images/home_pc.mp4'
-import vid_mob from './Images/home_mob.mp4'
+// import vid_pc from './Images/home_pc.mp4'
+// import vid_mob from './Images/home_mob.mp4'
 
 ReactGA.initialize("UA-146057069-1");
 ReactGA.pageview(window.location.pathname);
 
 const INITIAL_STATE = {
-  vid_blob: null,
+  vid_blob: Global.BASE_URL + '/stream/video',
   visible: true,
 
 };
@@ -56,17 +55,16 @@ class Home extends Component {
   tryPlayVideo() {
     setTimeout(() => {
       if (this.player) {
-        fetch(window.innerWidth >= 720 ? vid_pc : vid_mob).then(res => res.blob()).then(data => {
-          this.setState({vid_blob: URL.createObjectURL(data)});
-          this.player.classList.remove('hero-image-spin');
-          this.player.play()
-        });
+        // fetch(window.innerWidth >= 720 ? vid_pc : vid_mob).then(res => res.blob()).then(data => {
+        //   this.setState({vid_blob: URL.createObjectURL(data)});
+        //   this.player.classList.remove('hero-image-spin');
+        //   this.player.play()
+        // });
+        this.player.play();
       }
       else
         this.tryPlayVideo();
     }, 5000);
-
-    
   }
 
   render() {

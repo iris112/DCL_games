@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const websocket = require('./modules/websocket.js');
 const orderRouter = require('./routes/order-router');
 const adminRouter = require('./routes/admin-router');
+const streamRouter = require('./routes/stream-router');
 const dagger = require('./modules/dagger.js');
 
 const PORT = process.env.PORT || 5000;
@@ -31,6 +32,7 @@ server.use(function(req, res, next) {
 });
 server.use('/order', orderRouter);
 server.use('/admin', adminRouter);
+server.use('/stream', streamRouter);
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////

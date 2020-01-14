@@ -93,7 +93,7 @@ class SideMenu extends React.Component {
             {this.getContent('Authorizations', 3, 'check')}
           </p>
         </div>
-        <div style={{paddingTop: '25px', paddingBottom: '25px', borderBottom: '1px solid lightgray'}}>
+        <div style={{paddingTop: '25px', paddingBottom: '25px'}}>
           <p className='account-p' > 
             {this.getContent('Blog', 5, 'book')}
           </p>

@@ -411,12 +411,12 @@ class ModalVerify extends Component {
                       <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
                     <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                     <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> Connect Wallet </p>
+                    <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Connect Wallet </p>
                   </Grid.Row>  
                   <Grid.Row style={{marginTop: '15px'}}>
                     <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                     <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> User Info, Verify Age </p>
+                    <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> User Info, Verify Age </p>
                   </Grid.Row>
                   <Grid.Row style={{marginTop: '15px'}}>
                     <img class="progressbar image inline" src={box} />
@@ -476,7 +476,7 @@ class ModalVerify extends Component {
                       <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Connect Wallet </p>
+                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Connect Wallet </p>
                     </Grid.Row>  
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img class="progressbar image inline" src={box} />

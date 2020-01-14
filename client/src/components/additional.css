@@ -335,9 +335,9 @@ a.item.nav-text:hover {
   background-image: url(./Images/spin.gif), url(./Images/preview.png);
   background-position: center center, center center;
   background-repeat: no-repeat, no-repeat;
-  background-color: black;
+  background-color: transparent;
   background-size: 100px, 99%;
-  height: 400px;
+  height: 500px;
 }
 
 @media (max-width: 767px) {

@@ -57,7 +57,7 @@ class SideMenu extends React.Component {
         <a href="https://decentral.games">
           <img class="image inline" src={logo} style={{width: '230px', paddingTop: '42px', paddingBottom: '35px'}}/>
         </a>
-        <div style={{borderBottom: '1px solid lightgray', paddingBottom: '25px', paddingTop: '25px', borderTop: '1px solid lightgray'}}>
+        <div style={{paddingBottom: '25px', paddingTop: '25px', borderTop: '1px solid lightgray'}}>
           <p className='account-p'>
             {this.getContent('Admin Portal', 0, 'user secret')}
           </p>

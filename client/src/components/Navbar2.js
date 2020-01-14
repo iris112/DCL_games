@@ -12,7 +12,7 @@ import { Navbar, Center, Button } from "decentraland-ui";
 import metamask from './Images/metamask.png'
 import ledger from './Images/ledger.png'
 import Global from './constant';
-import Spinner from '../Spinner'
+import LogoSpinner from '../LogoSpinner'
 import box from './Images/box.png'
 import check from './Images/check.png'
 
@@ -129,7 +129,7 @@ class Navbar2 extends Component {
       <Segment className='nav-desktop' style={{ marginTop: '0em', paddingTop: '0em', marginBottom: '0em', paddingBottom: '0em' }}>
 
         <div className='navbar2'>
-          <Spinner show={this.state.isRunningTransaction}/>
+          <LogoSpinner show={this.state.isRunningTransaction}/>
           <Menu
             className='black-menu'
             borderless

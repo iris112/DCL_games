@@ -160,7 +160,7 @@ class Deposit extends React.Component {
                   <Grid.Row style={{paddingTop: '25px', borderTop: '1px solid lightgray'}}>
                     <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                     <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> Switch to Matic RPC </p>
+                    <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
                   </Grid.Row>  
                   <Grid.Row style={{marginTop: '15px'}}>
                     <img class="progressbar image inline" src={box} />

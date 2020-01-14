@@ -337,7 +337,8 @@ a.item.nav-text:hover {
   background-repeat: no-repeat, no-repeat;
   background-color: transparent;
   background-size: 100px, 99%;
-  height: 500px;
+  max-height: 430px;
+  width: 100%;
 }
 
 @media (max-width: 767px) {
@@ -363,7 +364,6 @@ a.item.nav-text:hover {
 @media (max-width: 499px) {
   .hero-image {
     transform: scale(1z5) !important;
-    padding-top: ;
   }
   .hero {
     padding-top: 60px !important;

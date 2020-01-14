@@ -36,8 +36,8 @@ server.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 	next();
 });
-server.use('/order', orderRouter);
-server.use('/admin', adminRouter);
+server.use('/order', cors(corsOptionsDelegate), orderRouter);
+server.use('/admin', cors(corsOptionsDelegate), adminRouter);
 server.get('/streams/*', cors(corsOptionsDelegate), hls.serveHLSVideo);
 
 /////////////////////////////////////////////////////////////////////////////////////////

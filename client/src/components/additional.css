@@ -113,7 +113,8 @@ h3 {
 .black-menu {
   background-color: rgba(6, 10, 13, 1) !important;
   border-radius: 0px !important;
-  border-bottom: 1px #1D1E24 solid !important;
+  /*border-bottom: 1px #1D1E24 solid !important;*/
+  border-bottom: 1px #000000 solid !important;
 }
 
 .icon-lower {
@@ -331,8 +332,12 @@ a.item.nav-text:hover {
 }
 
 .hero-image-spin {
-  background: black url(./Images/spin.gif) center center no-repeat;
-  background-size: 100px;
+  background-image: url(./Images/spin.gif), url(./Images/preview.png);
+  background-position: center center, center center;
+  background-repeat: no-repeat, no-repeat;
+  background-color: black;
+  background-size: 100px, 99%;
+  height: 400px;
 }
 
 @media (max-width: 767px) {
@@ -1080,7 +1085,7 @@ div.progressbar .row, div.progressbar2 .row {
 }
 .logospin {
   display: block;
-  width: 200px;
+  width: 100px;
   margin-left: calc((100vw - 200px) / 2);
   margin-top: calc((100vh - 200px) / 2);
 }

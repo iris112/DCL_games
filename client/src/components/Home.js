@@ -20,6 +20,7 @@ import chateau2 from './Images/chateau.gif'
 import serenity2 from './Images/serenity.gif'
 // import vid_pc from './Images/home_pc.mp4'
 // import vid_mob from './Images/home_mob.mp4'
+import preview from './Images/preview.png'
 import Hls from "hls.js";
 
 ReactGA.initialize("UA-146057069-1");

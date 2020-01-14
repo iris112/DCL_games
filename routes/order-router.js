@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -247,7 +248,7 @@ router.post('/confirmHistory', preAction, function (req, res) {
             try {
                 var txdata = yield dbMongo.findTransaction(txid);
                 if (txdata) {
-                    let date = new Date(txdata.updatedAt);
+                    let date = new Date(txdata.createdAt);
                     let currentDate = new Date();
                     if (step == 1) {
                         if (currentDate.getTime() - date.getTime() < 2 * 24 * 60 * 60 * 1000)
@@ -292,14 +293,14 @@ router.post('/getHistory', preAction, function (req, res) {
                         if (txdatas[i].type != 'Withdraw')
                             continue;
                         if (parseInt(txdatas[i].step) == 1 && txdatas[i].status == 'In Progress') {
-                            let date = new Date(txdatas[i].updatedAt);
+                            let date = new Date(txdatas[i].createdAt);
                             if (currentDate.getTime() - date.getTime() > 2 * 24 * 60 * 60 * 1000) {
                                 txdatas[i].status = 'Ready';
                                 yield dbMongo.updateTransaction(txdatas[i].txid, txdatas[i]);
                             }
                         }
                         else if (parseInt(txdatas[i].step) == 3 && txdatas[i].status == 'In Progress') {
-                            let date = new Date(txdatas[i].updatedAt);
+                            let date = new Date(txdatas[i].createdAt);
                             if (currentDate.getTime() - date.getTime() > 15 * 60 * 1000) {
                                 txdatas[i].status = 'Ready';
                                 yield dbMongo.updateTransaction(txdatas[i].txid, txdatas[i]);

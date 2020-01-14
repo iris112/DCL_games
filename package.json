@@ -9,7 +9,7 @@
   "scripts": {
     "test": "gulp",
     "mocha": "mocha",
-    "start": "node index.js",
+    "start": "NODE_ENV=dev node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",

@@ -239,7 +239,7 @@ router.post('/confirmHistory', preAction, async function(req, res) {
         try {
             var txdata = await dbMongo.findTransaction(txid);
             if (txdata) {
-                let date = new Date(txdata.updatedAt);
+                let date = new Date(txdata.createdAt);
                 let currentDate = new Date();
                 if (step == 1) {
                     if (currentDate.getTime() - date.getTime() < 2 * 24 * 60 * 60 * 1000)
@@ -284,13 +284,13 @@ router.post('/getHistory', preAction, async function(req, res) {
                         continue;
 
                     if (parseInt(txdatas[i].step) == 1 && txdatas[i].status == 'In Progress') {
-                        let date = new Date(txdatas[i].updatedAt);
+                        let date = new Date(txdatas[i].createdAt);
                         if (currentDate.getTime() - date.getTime() > 2 * 24 * 60 * 60 * 1000) {
                             txdatas[i].status = 'Ready';
                             await dbMongo.updateTransaction(txdatas[i].txid, txdatas[i]);
                         }
                     } else if (parseInt(txdatas[i].step) == 3 && txdatas[i].status == 'In Progress') {
-                        let date = new Date(txdatas[i].updatedAt);
+                        let date = new Date(txdatas[i].createdAt);
                         if (currentDate.getTime() - date.getTime() > 15 * 60 * 1000) {
                             txdatas[i].status = 'Ready';
                             await dbMongo.updateTransaction(txdatas[i].txid, txdatas[i]);

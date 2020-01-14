@@ -52,7 +52,8 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-    this.player.classList.add('hero-image-spin');
+    let player = this.player;
+    player.classList.add('hero-image-spin');
     var hls = new Hls({
           // This configuration is required to insure that only the
           // viewer can access the content by sending a session cookie
@@ -66,9 +67,9 @@ class Home extends Component {
     else
       hls.loadSource(this.state.vid_mob);
 
-    hls.attachMedia(this.player);
-    // hls.on(Hls.Events.MANIFEST_PARSED, function() {
-    //   this.player.play();
+    hls.attachMedia(player);
+    // hls.on(Hls.Events.FRAG_LOADED, function() {
+    //   player.classList.remove('hero-image-spin');
     // });
   }
 

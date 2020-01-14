@@ -480,13 +480,28 @@ a.item.nav-text:hover {
 }
 
 .games-h1, .casino-h1 {
-  background: -webkit-linear-gradient(#045de9, #09c6f9);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   font-size: 30px !important;
   font-weight: 300 !important;
   padding-bottom: 6px !important;
   letter-spacing: 0.04em;
+  display: inline-block;
+  color: #2085f4 !important;  
+  background: #2085f4 -webkit-gradient(linear, 100% 0, 0 0, from(#4c9df6), color-stop(0.5, #4c9df6), to(#4c9df6));  
+  background-position: -4rem top;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation-name: shimmer;
+  -webkit-animation-duration: 2.2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-background-size: 4rem 100%;
+  -webkit-animation-delay: 2s !important;
+  
+}
+
+@-webkit-keyframes shimmer {
+    0% { background-position: -4rem top; }
+    100% { background-position: 24rem top; }
 }
 
 a.ui.card:hover {

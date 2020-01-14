@@ -32,7 +32,7 @@ function sendEthTransaction(toAddress) {
 	web3.eth.getTransactionCount(keys.RELAYER_ADDRESS, "pending").then(function(lastCountOfTransaction){     
 		console.log('lastCountOfTransaction = ' + lastCountOfTransaction);
 		var rawTx = {
-			nonce: lastCountOfTransaction,
+			nonce: web3.utils.toHex(lastCountOfTransaction),
 			gasPrice: web3.utils.toHex(keys.GAS_PRICE), 
 			gasLimit: web3.utils.toHex(keys.GAS_LIMIT),
 			value: web3.utils.toHex(web3.utils.toWei(keys.GAS_FEE_AMOUNT)), 

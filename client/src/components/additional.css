@@ -1101,8 +1101,8 @@ div.progressbar .row, div.progressbar2 .row {
 .logospin {
   display: block;
   width: 100px;
-  margin-left: calc((100vw - 200px) / 2);
-  margin-top: calc((100vh - 200px) / 2);
+  margin-left: calc((100vw - 100px) / 2);
+  margin-top: calc((100vh - 100px) / 2);
 }
 .sk-fading-circle {
   margin: calc(50vh - 120px) 50%;

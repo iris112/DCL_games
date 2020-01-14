@@ -53,24 +53,35 @@ class Home extends Component {
 
   async componentDidMount() {
     let player = this.player;
-    player.classList.add('hero-image-spin');
-    var hls = new Hls({
-          // This configuration is required to insure that only the
-          // viewer can access the content by sending a session cookie
-          // to api.video service
-          xhrSetup: function(xhr, url) {
-            xhr.withCredentials = true;
-          }
-        });
+    let videoUrl = '';
+    
     if (window.innerWidth >= 720)
-      hls.loadSource(this.state.vid_pc);
+      videoUrl = this.state.vid_pc;
     else
-      hls.loadSource(this.state.vid_mob);
+      videoUrl = this.state.vid_mob;
 
-    hls.attachMedia(player);
-    // hls.on(Hls.Events.FRAG_LOADED, function() {
-    //   player.classList.remove('hero-image-spin');
-    // });
+    player.classList.add('hero-image-spin');
+
+    if(Hls.isSupported()) {
+      var hls = new Hls({
+        // This configuration is required to insure that only the
+        // viewer can access the content by sending a session cookie
+        // to api.video service
+        xhrSetup: function(xhr, url) {
+          xhr.withCredentials = true;
+        }
+      });
+      hls.loadSource(videoUrl);
+      hls.attachMedia(player);
+      // hls.on(Hls.Events.FRAG_LOADED, function() {
+      //   player.classList.remove('hero-image-spin');
+      // });
+    } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
+      player.src = videoUrl;
+      player.addEventListener('loadedmetadata',function() {
+        player.play();
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -116,7 +127,7 @@ class Home extends Component {
             </Message>
 
             <a href='/account'>
-              <video className="hero-image" width="100%" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
+              <video className="hero-image" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
             </a>
 
           </Container>
@@ -282,7 +293,7 @@ class Home extends Component {
           <Container className='hero-container'>
   
           <a href='/account'>
-            <video className="hero-image" width="100%" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
+            <video className="hero-image" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
           </a>
 
           </Container>

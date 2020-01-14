@@ -337,6 +337,8 @@ a.item.nav-text:hover {
   background-repeat: no-repeat, no-repeat;
   background-color: transparent;
   background-size: 100px, 99%;
+  max-height: 430px;
+  width: 100%;
 }
 
 @media (max-width: 767px) {

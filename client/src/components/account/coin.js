@@ -122,21 +122,9 @@ class Coin extends React.Component {
         <div style={{width: 'calc(100% - 50px)', minWidth: '860px', marginTop: '20px'}}>
           <h3 style={{paddingTop: '20px'}}> NFTs </h3>
           <div id='nft-box' style={{ height: 'calc(100vh - 200px)', marginTop: '20px', padding: '10px'}}>
-            <div style={{marginTop:'40px', padding: '10px'}}>
-              <p style={{textAlign: 'center'}}>
-                My NFTs
-              </p>
+            <div style={{marginTop:'calc(50vh - 150px)', padding: '10px'}}>
               <p style={{textAlign: 'center', marginTop: '20px', color: 'gray'}}>
                 You don't have any Decentral Games NFTs.
-              </p>
-            </div>
-
-            <div style={{marginTop:'100px', padding: '10px'}}>
-              <p style={{textAlign: 'center'}}>
-                For Sale
-              </p>
-              <p style={{textAlign: 'center', marginTop: '20px', color: 'gray'}}>
-                There are no Decentral Games NFTs for sale currently.
               </p>
             </div>
           </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom';
 import '../additional.css';
 import { Table, Button } from 'semantic-ui-react'
-import Spinner from '../../Spinner'
+import LogoSpinner from '../../LogoSpinner'
 import ModalWithdraw from '../ModalWithdraw'
 import Global from '../constant';
 
@@ -77,7 +77,7 @@ class Deposit extends React.Component {
     
     return (
       <div class="contentContainer">
-        <Spinner show={this.state.isRunningTransaction}/>
+        <LogoSpinner show={this.state.isRunningTransaction}/>
         <div style={{width: 'calc(100% - 50px)', minWidth: '860px', marginTop: '20px'}}>
           <h3 style={{paddingTop: '20px'}}> Deposits/Withdrawals </h3>
           <div id='dep-box' style={{ marginTop: '20px'}}>

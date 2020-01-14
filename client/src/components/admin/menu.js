@@ -71,9 +71,6 @@ class SideMenu extends React.Component {
             {this.getContent('Deposits/Withdrawals', 3, 'dollar')}
           </p>
         </div>
-        <p className='account-p' style={{paddingTop: '25px', paddingBottom: '25px'}}>
-          {this.getContent('Sign out', 4, 'sign out')}
-        </p>
       </div>
     )
   }

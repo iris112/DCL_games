@@ -110,10 +110,6 @@ class SideMenu extends React.Component {
             {this.getContent('Disclaimer', 9, 'exclamation circle')}
           </p>
         </div>
-
-        <p style={{paddingTop: '25px', paddingBottom: '25px'}}>
-          {this.getContent('Sign out', 10, 'sign out')}
-        </p>
       </div>
     )
   }

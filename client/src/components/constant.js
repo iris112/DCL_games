@@ -9,9 +9,10 @@ import EthJS from 'ethjs';
 import CommonDefault from 'ethereumjs-common';
 // import MyWeb3 from 'web3';
 
+
 const BASE_URL = "https://decentral.games";
 // const BASE_URL = "https://testdecentralgames.herokuapp.com";
-// const BASE_URL = "http://10.70.1.76:5000";
+// const BASE_URL = "http://localhost:5000";
 const Buffer = window.ethereumjs.Buffer.Buffer;
 const Util = window.ethereumjs.Util;
 const RLP = window.ethereumjs.RLP;

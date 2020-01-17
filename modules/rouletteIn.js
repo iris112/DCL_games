@@ -118,7 +118,7 @@ module.exports.prepareTransaction = async (messageJSON) => {
 		                //store session DB
 		                var playData = await dbMongo.insertPlayInfo({
 		                  address: walletAddress,
-		                  coinName: 'MANA,
+		                  coinName: 'MANA',
 		                  machineID: machineID,
 		                  landID: landID,
 		                  betAmount: allAmount,

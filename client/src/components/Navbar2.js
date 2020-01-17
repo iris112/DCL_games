@@ -12,6 +12,7 @@ import { Navbar, Center, Button } from "decentraland-ui";
 import metamask from './Images/metamask.png'
 import ledger from './Images/ledger.png'
 import Global from './constant';
+import Spinner from '../Spinner'
 import LogoSpinner from '../LogoSpinner'
 import box from './Images/box.png'
 import check from './Images/check.png'
@@ -34,6 +35,7 @@ const INITIAL_STATE = {
   isValidLocation: 0,
   isValidMetamask: 0,
   isRunningTransaction: false,
+  isFistLoading: false,
   existAccount: 0,
 };
 
@@ -44,6 +46,8 @@ class Navbar2 extends Component {
   handleClose = () => this.setState({ modalOpen: false })
   showSpinner = () => this.setState({isRunningTransaction: true})
   hideSpinner = () => this.setState({isRunningTransaction: false})
+  showLoading = () => this.setState({isFistLoading: true})
+  hideLoading = () => this.setState({isFistLoading: false})
 
   constructor(props) {
     super(props);
@@ -129,6 +133,7 @@ class Navbar2 extends Component {
       <Segment className='nav-desktop' style={{ marginTop: '0em', paddingTop: '0em', marginBottom: '0em', paddingBottom: '0em' }}>
 
         <div className='navbar2'>
+          <Spinner show={this.state.isFistLoading}/>
           <LogoSpinner show={this.state.isRunningTransaction}/>
           <Menu
             className='black-menu'
@@ -156,7 +161,8 @@ class Navbar2 extends Component {
 
               <Menu.Menu className='nav-buttons' position='right' style={{ paddingRight: '6px', paddingTop: '6px' }}>
                 <Menu.Item className='nav-text3' as={NavLink} to='/discord'>JOIN OUR DISCORD</Menu.Item> 
-                <ModalVerify showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
+                <ModalVerify showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}
+                  showLoading={this.showLoading} hideLoading={this.hideLoading}/>
 
               </Menu.Menu>
             </Container>

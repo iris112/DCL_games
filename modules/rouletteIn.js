@@ -105,7 +105,116 @@ module.exports.prepareTransaction = async (messageJSON) => {
 
 				console.log('transaction complete');
 				web3.eth.getTransactionReceipt(txHash).then(async (data) => {
-					// write transaction data to mongoDB database
+					if (data.status) {
+		              /////////////////////////////////////////////////////////////////////////////////////////
+		              /////////////////////////////////////////////////////////////////////////////////////////
+		              // write transaction data to mongoDB database
+
+		              var allAmount = 0;
+		              for (var i = 0; i < betAmounts.length; i++)
+		              	allAmount += Number(betAmounts[i]);
+
+		              try {
+		                //store session DB
+		                var playData = await dbMongo.insertPlayInfo({
+		                  address: walletAddress,
+		                  coinName: 'MANA,
+		                  machineID: machineID,
+		                  landID: landID,
+		                  betAmount: allAmount,
+		                  txid: txHash,
+		                  type: 'Roulette'
+		                });
+
+		                if (playData) console.log('roulette playinfo storing success');
+		                else console.log('roulette playinfo storing failed');
+
+		                // store player DB
+		                var playerData = await dbMongo.findPlayerInfo({
+		                  address: walletAddress, type: 'Roulette'
+		                });
+		                var incFreePlay = allAmount > 0 ? 0 : 1;
+		                var incPayoutPlay = allAmount > 0 ? 1 : 0;
+
+		                if (playerData) {
+		                  playerData = await dbMongo.updatePlayerInfo(
+		                    { address: playerData.address, type: 'Roulette' },
+		                    {
+		                      totalBetAmount:
+		                        Number(playerData.totalBetAmount) + Number(allAmount),
+		                      latestSessionDate: playData.createdAt,
+		                      numberOfFreePlays:
+		                        Number(playerData.numberOfFreePlays) + incFreePlay,
+		                      numberOfPayoutPlays:
+		                        Number(playerData.numberOfPayoutPlays) + incPayoutPlay
+		                    }
+		                  );
+		                } else {
+		                  playerData = await dbMongo.insertPlayerInfo({
+		                    address: walletAddress,
+		                    totalBetAmount: allAmount,
+		                    latestSessionDate: playData.createdAt,
+		                    numberOfFreePlays: incFreePlay,
+		                    numberOfPayoutPlays: incPayoutPlay,
+		                    type: 'Roulette'
+		                  });
+		                }
+
+		                if (playerData) console.log('roulette playerinfo storing success');
+		                else console.log('roulette playerinfo storing failed');
+
+		                // store machineDB
+		                var machineData = await dbMongo.findMachineInfo({
+		                  machineID: machineID,
+		                  landID: landID,
+		                  playerAddresse: walletAddress,
+		                  type: 'Roulette'
+		                });
+
+		                if (!machineData) {
+		                  machineData = await dbMongo.insertMachineInfo({
+		                    machineID: machineID,
+		                    landID: landID,
+		                    playerAddresse: walletAddress,
+		                    type: 'Roulette'
+		                  });
+		                }
+
+		                if (machineData) console.log('roulette machineinfo storing success');
+		                else console.log('roulette machineinfo storing failed');
+
+		                // store machineTotalDB
+		                var machineTotalData = await dbMongo.findMachineTotalInfo({
+		                  machineID: machineID, type: 'Roulette'
+		                });
+
+		                if (!machineTotalData) {
+		                  machineTotalData = await dbMongo.insertMachineTotalInfo({
+		                    machineID: machineID,
+		                    landID: landID,
+		                    totalBetAmount: allAmount,
+		                    latestSessionDate: playData.createdAt,
+		                    type: 'Roulette'
+		                  });
+		                } else {
+		                  machineTotalData = await dbMongo.updateMachineTotalInfo(
+		                    { machineID: machineID, type: 'Roulette' },
+		                    {
+		                      totalBetAmount:
+		                        Number(machineTotalData.totalBetAmount) +
+		                        Number(allAmount),
+		                      latestSessionDate: playData.createdAt
+		                    }
+		                  );
+
+		                  if (machineTotalData)
+			                console.log('roulette machinetotalinfo storing success');
+			              else console.log('roulette machinetotalinfo storing failed');
+		                }
+		              } catch (e) {
+		                console.log(e);
+		              }
+		            }
 				});
 			};
 

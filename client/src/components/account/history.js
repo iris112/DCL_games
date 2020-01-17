@@ -99,10 +99,16 @@ class History extends React.Component {
                       var amount = Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
                       var payout = Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
                       timestamp = timestamp.replace(timestamp.substr(-2), '').trim();
+                      var game;
+
+                      if (row.type === 'Roulette')
+                        game = "MANA Roulette";
+                      else
+                        game = "MANA Slots";
 
                       return (
                         <Table.Row>
-                          <Table.Cell style={{paddingLeft: '20px'}}>Slots</Table.Cell>
+                          <Table.Cell style={{paddingLeft: '20px'}}>{game}</Table.Cell>
                           <Table.Cell>{amount} MANA</Table.Cell>
                           <Table.Cell>{payout} MANA</Table.Cell>
                           <Table.Cell>{timestamp}</Table.Cell>

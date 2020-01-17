@@ -18,6 +18,8 @@ const INITIAL_STATE = {
   manaSlotPayout: 0,
   manaSlotVolume: 0,
   manaRouletteBalance: 0,
+  manaRoulettePayout: 0,
+  manaRouletteVolume: 0,
   ethMaticGasBalance: 0,
   ethRopstenGasBalance: 0,
   username: '',
@@ -54,14 +56,21 @@ class Dashboard extends React.Component {
 
     // Get Mana Slot Contract Data
     let page = 1;
-    let volume = 0;
-    let payout = 0;
+    let slotVolume = 0;
+    let slotPayout = 0;
+    let rouletteVolume = 0;
+    let roulettePayout = 0;
     let response = await this.getData(page, period);
     let json = await response.json();
     while (json.result !== 'false') {
       json.result.map((row) => {
-        volume = volume + Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
-        payout = payout + Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
+        if (row.type !== 'Roulette') {
+          slotVolume = slotVolume + Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
+          slotPayout = slotPayout + Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
+        } else {
+          rouletteVolume = rouletteVolume + Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
+          roulettePayout = roulettePayout + Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
+        }
       });
 
       page = page + 1;
@@ -69,7 +78,10 @@ class Dashboard extends React.Component {
       json = await response.json();
     }
 
-    this.setState({manaSlotVolume: volume, manaSlotPayout: payout, isRunningTransaction: false});
+    this.setState({
+      manaSlotVolume: slotVolume, manaSlotPayout: slotPayout, 
+      manaRouletteVolume: rouletteVolume, manaRoulettePayout: roulettePayout, 
+      isRunningTransaction: false});
   }
 
   getData = (page, period) => {
@@ -168,8 +180,8 @@ class Dashboard extends React.Component {
         image: mana,
         unit: 'MANA',
         balance: this.state.manaRouletteBalance,
-        volume: 0,
-        payout: 0,
+        volume: this.state.manaRouletteVolume,
+        payout: this.state.manaRoulettePayout,
         enabled: 1
       },
       {

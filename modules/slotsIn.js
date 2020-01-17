@@ -200,10 +200,10 @@ module.exports.prepareTransaction = async messageJSON => {
                       latestSessionDate: playData.createdAt,
                       type: 'Slots'
                     }
-                    if (machineTotalData)
-                      console.log('slots machinetotalinfo storing success');
-                    else console.log('slots machinetotalinfo storing failed');
                   );
+                  if (machineTotalData)
+                    console.log('slots machinetotalinfo storing success');
+                  else console.log('slots machinetotalinfo storing failed');
                 }
               } catch (e) {
                 console.log(e);

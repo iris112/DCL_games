@@ -34,7 +34,7 @@ class ModalVerify extends Component {
   handleOpen = () => {
     this.setState({ modalOpen: true }); 
     if (this.state.isLoaded === 0) {
-      this.props.showSpinner();
+      this.props.showLoading();
       this.prepareVerify();
     }
   }
@@ -83,6 +83,7 @@ class ModalVerify extends Component {
 
     this.setState({isLoaded : 1});
     this.props.hideSpinner();
+    this.props.hideLoading();
   }
 
   checkUserVerifyStep = async () => {
@@ -93,6 +94,7 @@ class ModalVerify extends Component {
         if (json.result === 'false') {
           this.setState({isLoaded: 2, existAccount: 0});
           this.props.hideSpinner();
+          this.props.hideLoading();
           return true;
         }
 
@@ -108,6 +110,7 @@ class ModalVerify extends Component {
           this.setState({isLoaded: 2, userStepValue: stepValue, existAccount: 0});
 
         this.props.hideSpinner();
+        this.props.hideLoading();
         return true;
       }
     } catch (error) {

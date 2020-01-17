@@ -114,6 +114,7 @@ const userPlayInfos = new Schema({
   number: {type: Int32, default: 0},
   amountWin: {type: Schema.Types.Decimal128, default: 0},
   txid: {type: String, default: ''},
+  type: {type: String, default: ''},
 },
 {
   timestamps: {
@@ -125,6 +126,14 @@ const userPlayInfos = new Schema({
 
 userPlayInfos.set('toJSON', {
   transform: (doc, ret) => {
+    // if (ret.betAmount) {
+    //   let betAmount = ret.betAmount.map(function(item) { return Number(item); });
+    //   ret.betAmount = betAmount;
+    // }
+    // if (ret.amountWin) {
+    //   let amountWin = ret.amountWin.map(function(item) { return Number(item); });
+    //   ret.amountWin = amountWin;
+    // }
     if (ret.betAmount)
       ret.betAmount = Number(ret.betAmount.toString());
     if (ret.amountWin)
@@ -135,6 +144,7 @@ userPlayInfos.set('toJSON', {
 
 const userPlayerInfos = new Schema({
   address: {type: String, default: '', unique: true, index: true},
+  type: {type: String, default: ''},
   totalBetAmount: {type: Schema.Types.Decimal128, default: 0},
   totalAmountWin: {type: Schema.Types.Decimal128, default: 0},
   latestSessionDate: {type: Date, default: null},
@@ -162,7 +172,8 @@ userPlayerInfos.set('toJSON', {
 const machineInfos = new Schema({
   playerAddresse: {type: String, default: ''},
   machineID: {type: String, default: ''},
-  landID: {type: String, default: ''}
+  landID: {type: String, default: ''},
+  type: {type: String, default: ''},
 },
 {
   timestamps: {
@@ -175,6 +186,7 @@ const machineInfos = new Schema({
 const machineTotalInfos = new Schema({
   machineID: {type: String, default: ''},
   landID: {type: String, default: ''},
+  type: {type: String, default: ''},
   totalBetAmount: {type: Schema.Types.Decimal128, default: 0},
   totalAmountWin: {type: Schema.Types.Decimal128, default: 0},
   latestSessionDate: {type: Date, default: null}
@@ -368,6 +380,7 @@ async function insertPlayInfo(data) {
   PlayInfoModel.number = data.number || 0;
   PlayInfoModel.amountWin = data.amountWin || 0;
   PlayInfoModel.txid = data.txid || '';
+  PlayInfoModel.type = data.type || '';
 
   PlayInfoModel = await PlayInfoModel.save();
   return PlayInfoModel.toJSON();
@@ -414,6 +427,7 @@ async function insertPlayerInfo(data) {
   let PlayerInfoModel = new userPlayerInfosModel();
 
   PlayerInfoModel.address = data.address || '';
+  PlayerInfoModel.type = data.type || '';
   PlayerInfoModel.totalBetAmount = data.totalBetAmount || 0;
   PlayerInfoModel.totalAmountWin = data.totalAmountWin || 0;
   PlayerInfoModel.latestSessionDate = data.latestSessionDate || null;
@@ -446,6 +460,7 @@ async function insertMachineInfo(data) {
   let MachineInfoModel = new machineInfosModel();
 
   MachineInfoModel.playerAddresse = data.playerAddresse || '';
+  MachineInfoModel.type = data.type || '';
   MachineInfoModel.machineID = data.machineID || '';
   MachineInfoModel.landID = data.landID || '';
   
@@ -492,6 +507,7 @@ async function insertMachineTotalInfo(data) {
 
   machineTotalInfoModel.machineID = data.machineID || '';
   machineTotalInfoModel.landID = data.landID || '';
+  machineTotalInfoModel.type = data.type || '';
   machineTotalInfoModel.totalBetAmount = data.totalBetAmount || 0;
   machineTotalInfoModel.totalAmountWin = data.totalAmountWin || 0;
   machineTotalInfoModel.latestSessionDate = data.latestSessionDate || null;

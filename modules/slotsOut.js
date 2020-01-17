@@ -48,54 +48,54 @@ module.exports.returnData = async result => {
   // write event data to mongoDB database
   try {
     // update session DB
-    const playData = await dbMongo.findPlayInfo({ machineIDPadded });
+    const playData = await dbMongo.findPlayInfo({ machineID:machineIDPadded, type: 'Slots' });
     if (!playData) {
-      console.log("can't find play info : machinID = " + machinID);
+      console.log("can't find slots play info : machinID = " + machineIDPadded);
       return;
     } else {
       playData = await dbMongo.updatePlayInfo(playData, {
         number: numbers,
         amountWin: amount
       });
-      if (playData) console.log('playinfo updating success');
-      else console.log('playinfo updating failed');
+      if (playData) console.log('slots playinfo updating success');
+      else console.log('slots playinfo updating failed');
     }
 
     // update player DB
     const playerData = await dbMongo.findPlayerInfo({
-      address: playData.address
+      address: playData.address, type: 'Slots'
     });
 
     if (playerData) {
       playerData = await dbMongo.updatePlayerInfo(
-        { address: playerData.address },
+        { address: playerData.address, type: 'Slots' },
         {
           totalAmountWin: Number(playerData.totalAmountWin) + amount
         }
       );
-      if (playerData) console.log('playerinfo updating success');
-      else console.log('playerinfo updating failed');
+      if (playerData) console.log('slots playerinfo updating success');
+      else console.log('slots playerinfo updating failed');
     } else {
-      console.log("can't find player info : address = " + playData.address);
+      console.log("can't find slots player info : address = " + playData.address);
     }
 
     // update machine Total DB
     const machineTotalData = await dbMongo.findMachineTotalInfo({
-      machineIDPadded
+      machineID:machineIDPadded, type: 'Slots'
     });
 
     if (machineTotalData) {
       machineTotalData = await dbMongo.updateMachineTotalInfo(
-        { machineIDPadded },
+        { machineID:machineIDPadded, type: 'Slots' },
         {
           totalAmountWin: Number(machineTotalData.totalAmountWin) + amount
         }
       );
-      if (machineTotalData) console.log('machinetotalinfo updating success');
-      else console.log('machinetotalinfo updating failed');
+      if (machineTotalData) console.log('slots machinetotalinfo updating success');
+      else console.log('slots machinetotalinfo updating failed');
     } else {
       console.log(
-        "can't find machine total info : machineID = " + machineIDPadded
+        "can't find slots machine total info : machineID = " + machineIDPadded
       );
     }
   } catch (e) {

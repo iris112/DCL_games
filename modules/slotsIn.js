@@ -116,15 +116,16 @@ module.exports.prepareTransaction = async messageJSON => {
                   machineID: machineID,
                   landID: landID,
                   betAmount: betAmount,
-                  txid: txHash
+                  txid: txHash,
+                  type: 'Slots'
                 });
 
-                if (playData) console.log('playinfo storing success');
-                else console.log('playinfo storing failed');
+                if (playData) console.log('slots playinfo storing success');
+                else console.log('slots playinfo storing failed');
 
                 // store player DB
                 var playerData = await dbMongo.findPlayerInfo({
-                  address: walletAddress
+                  address: walletAddress, type: 'Slots'
                 });
                 var incFreePlay = betAmount > 0 ? 0 : 1;
                 var incPayoutPlay = betAmount > 0 ? 1 : 0;
@@ -148,34 +149,37 @@ module.exports.prepareTransaction = async messageJSON => {
                     totalBetAmount: betAmount,
                     latestSessionDate: playData.createdAt,
                     numberOfFreePlays: incFreePlay,
-                    numberOfPayoutPlays: incPayoutPlay
+                    numberOfPayoutPlays: incPayoutPlay,
+                    type: 'Slots'
                   });
                 }
 
-                if (playerData) console.log('playerinfo storing success');
-                else console.log('playerinfo storing failed');
+                if (playerData) console.log('slots playerinfo storing success');
+                else console.log('slots playerinfo storing failed');
 
                 // store machineDB
                 var machineData = await dbMongo.findMachineInfo({
                   machineID: machineID,
                   landID: landID,
-                  playerAddresse: walletAddress
+                  playerAddresse: walletAddress,
+                  type: 'Slots'
                 });
 
                 if (!machineData) {
                   machineData = await dbMongo.insertMachineInfo({
                     machineID: machineID,
                     landID: landID,
-                    playerAddresse: walletAddress
+                    playerAddresse: walletAddress,
+                    type: 'Slots'
                   });
                 }
 
-                if (machineData) console.log('machineinfo storing success');
-                else console.log('machineinfo storing failed');
+                if (machineData) console.log('slots machineinfo storing success');
+                else console.log('slots machineinfo storing failed');
 
                 // store machineTotalDB
                 var machineTotalData = await dbMongo.findMachineTotalInfo({
-                  machineID: machineID
+                  machineID: machineID, type: 'Slots'
                 });
 
                 if (!machineTotalData) {
@@ -183,23 +187,24 @@ module.exports.prepareTransaction = async messageJSON => {
                     machineID: machineID,
                     landID: landID,
                     totalBetAmount: betAmount,
-                    latestSessionDate: playData.createdAt
+                    latestSessionDate: playData.createdAt,
+                    type: 'Slots'
                   });
                 } else {
-                  await dbMongo.updateMachineTotalInfo(
-                    { machineID: machineID },
+                  machineTotalData = await dbMongo.updateMachineTotalInfo(
+                    { machineID: machineID, type: 'Slots' },
                     {
                       totalBetAmount:
                         Number(machineTotalData.totalBetAmount) +
                         Number(betAmount),
-                      latestSessionDate: playData.createdAt
+                      latestSessionDate: playData.createdAt,
+                      type: 'Slots'
                     }
+                    if (machineTotalData)
+                      console.log('slots machinetotalinfo storing success');
+                    else console.log('slots machinetotalinfo storing failed');
                   );
                 }
-
-                if (machineTotalData)
-                  console.log('machinetotalinfo storing success');
-                else console.log('machinetotalinfo storing failed');
               } catch (e) {
                 console.log(e);
               }

@@ -142,13 +142,19 @@ class Deposit extends React.Component {
                       var date = new Date(row.latestSessionDate);
                       var timestamp = date.toLocaleString();
                       timestamp = timestamp.replace(timestamp.substr(-2), '').trim();
+                      var game;
+
+                      if (row.type === 'Roulette')
+                        game = "MANA Roulette";
+                      else
+                        game = "MANA Slots";
 
                       return (
                         <Table.Row>
                           <Table.Cell style={{paddingLeft:'20px'}}>
                             <img style={{verticalAlign:'middle'}} class="image inline" width="20px" height="20px" src={mana} />
                             <span style={{textAlign: 'left', marginLeft: '10px'}}>
-                              MANA Slots
+                              {game}
                             </span>
                           </Table.Cell>
                           <Table.Cell>{row.machineID}</Table.Cell>

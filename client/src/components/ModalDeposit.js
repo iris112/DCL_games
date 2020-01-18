@@ -400,7 +400,7 @@ class Deposit extends React.Component {
     { /*                 ON ROPSTEN, CONFIGURED MATIC                */ }
     { /* ----------------------------------------------------------- */ }
 
-    if (this.state.userStepValue != 6) {
+    if (this.state.userStepValue == 6) {
       if (this.state.networkID == 3) {
         return (
           <Modal

@@ -5,21 +5,22 @@ import { Segment, Container, Center, Button, Image, Card } from "decentraland-ui
 import Global from './constant';
 import Navbar2 from "./Navbar2";
 import Navbar3 from "./nav-mobile";
+import { isMobile } from "react-device-detect";
 import Footer from "./Footer";
 import ReactGA from "react-ga";
-import logo from './Images/logo.png'
 import slots from './Images/slots-1.png'
 import slots2 from './Images/slots.gif'
+import overlaySlots from './Images/slots_overlay.png'
 import roulette from './Images/roulette-1.png'
 import roulette2 from './Images/roulette.gif'
+import overlayRoulette from './Images/roulette_overlay.png'
 import blackjack from './Images/blackjack.png'
+import dice from './Images/dice.png'
 import soon from './Images/soon_hover.png'
 import chateau from './Images/chateau.png'
 import serenity from './Images/serenity.png'
 import chateau2 from './Images/chateau.gif'
 import serenity2 from './Images/serenity.gif'
-// import vid_pc from './Images/home_pc.mp4'
-// import vid_mob from './Images/home_mob.mp4'
 import preview from './Images/preview.png'
 import Hls from "hls.js";
 
@@ -125,10 +126,11 @@ class Home extends Component {
             <Message className='modal-msg' onDismiss={this.handleDismiss}>
               <Header className='msg-text'>Please use a desktop Chrome browser to play our free games. To play games with cryptocurrency, you must enable Metamask. You can download Chrome <a className='blue-link' href="https://www.google.com/chrome/">here</a> and Metamask <a className='blue-link' href="https://metamask.io/">here</a>.</Header>
             </Message>
-
-            <a href='/account'>
-              <video className="hero-image" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
-            </a>
+            {isMobile ? <video className="hero-image" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
+            : <a href='/account'>
+                <video className="hero-image" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
+              </a> }
+            
 
           </Container>
         </Segment>
@@ -156,6 +158,7 @@ class Home extends Component {
                       </Reveal.Content>
                       <Reveal.Content hidden>
                         <Image className='card-image' src={slots2} />
+                        <Image className='card-image overlay-image' src={overlaySlots} />
                       </Reveal.Content>
                     </Reveal>
                     <Card.Content className='card-border'>
@@ -172,6 +175,7 @@ class Home extends Component {
                       </Reveal.Content>
                       <Reveal.Content hidden>
                         <Image className='card-image' src={roulette2} />
+                        <Image className='card-image overlay-image' src={overlayRoulette} />
                       </Reveal.Content>
                     </Reveal>
                     <Card.Content className='card-border'>
@@ -200,7 +204,7 @@ class Home extends Component {
                   <Card fluid href='/account' className='games-card2'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
-                        <Image className='card-image' src={roulette} />
+                        <Image className='card-image' src={dice} />
                       </Reveal.Content>
                       <Reveal.Content hidden>
                         <Image className='card-image' src={soon} />
@@ -292,9 +296,10 @@ class Home extends Component {
         <Segment className='hero'>
           <Container className='hero-container'>
   
-          <a href='/account'>
-            <video className="hero-image" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
-          </a>
+          {isMobile ? <video className="hero-image" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
+            : <a href='/account'>
+                <video className="hero-image" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
+              </a> }
 
           </Container>
         </Segment>
@@ -322,6 +327,7 @@ class Home extends Component {
                       </Reveal.Content>
                       <Reveal.Content hidden>
                         <Image className='card-image' src={slots2} />
+                        <Image className='card-image overlay-image' src={overlaySlots} />
                       </Reveal.Content>
                     </Reveal>
                     <Card.Content className='card-border'>
@@ -338,6 +344,7 @@ class Home extends Component {
                       </Reveal.Content>
                       <Reveal.Content hidden>
                         <Image className='card-image' src={roulette2} />
+                        <Image className='card-image overlay-image' src={overlayRoulette} />
                       </Reveal.Content>
                     </Reveal>
                     <Card.Content className='card-border'>
@@ -366,7 +373,7 @@ class Home extends Component {
                   <Card fluid href='/account' className='games-card2'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
-                        <Image className='card-image' src={roulette} />
+                        <Image className='card-image' src={dice} />
                       </Reveal.Content>
                       <Reveal.Content hidden>
                         <Image className='card-image' src={soon} />

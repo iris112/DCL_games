@@ -70,7 +70,7 @@ const Footer = () => (
 
           <Grid.Row style={{ paddingTop: '2em' }}>
             <Grid.Column centered computer={16}>
-              <p className='footer-font'>Copyright © 2019 Decentral Games </p>
+              <p className='footer-font'>Copyright © 2020 Decentral Games </p>
             </Grid.Column>
           </Grid.Row>
         </Grid>

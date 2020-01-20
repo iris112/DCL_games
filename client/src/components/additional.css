@@ -521,6 +521,12 @@ a.ui.card:hover {
   border-bottom: 1px solid rgba(100, 100, 100, 1) !important;
 }
 
+.overlay-image {
+  position: absolute!important;
+  top: 0;
+  left: 0;
+}
+
 .games-card, .games-card2 {
   border: rgba(18, 22, 25, 1) solid 3px !important;
   border-radius: 2px !important;
@@ -1096,7 +1102,7 @@ div.progressbar .row, div.progressbar2 .row {
 .modallogospin {
   float: right;
   width: 100px;
-  margin-top: calc((100vh - 630px) / 2);
+  margin-top: calc((100vh - 600px) / 2);
 }
 .logospin {
   display: block;

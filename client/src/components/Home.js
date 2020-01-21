@@ -31,14 +31,12 @@ const INITIAL_STATE = {
   vid_pc: Global.BASE_URL + "/streams/home_pc.m3u8",
   vid_mob: Global.BASE_URL + "/streams/home_mob.m3u8",
   visible: true,
-
 };
 
 class Home extends Component {
 
   handleDismiss = () => {
     this.setState({ visible: false })
-    this.player.classList.add('hero-image-spin');
   }
 
   constructor(props) {
@@ -46,6 +44,7 @@ class Home extends Component {
 
     this.state = { ...INITIAL_STATE };
     this.isBrowserMetamsk = 0;
+    this.hls = null;
 
     if (window.web3) {
       this.isBrowserMetamsk = 1;
@@ -53,18 +52,25 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-    let player = this.player;
+  }
+
+  componentWillUnmount() {
+  }
+
+  refVideo(ref) {
+    if (!ref || !ref.classList)
+      return;
+
     let videoUrl = '';
-    
     if (window.innerWidth >= 720)
       videoUrl = this.state.vid_pc;
     else
       videoUrl = this.state.vid_mob;
 
-    player.classList.add('hero-image-spin');
+    ref.classList.add('hero-image-spin');
 
     if(Hls.isSupported()) {
-      var hls = new Hls({
+      this.hls = new Hls({
         // This configuration is required to insure that only the
         // viewer can access the content by sending a session cookie
         // to api.video service
@@ -72,36 +78,18 @@ class Home extends Component {
           xhr.withCredentials = true;
         }
       });
-      hls.loadSource(videoUrl);
-      hls.attachMedia(player);
+
+      this.hls.loadSource(videoUrl);
+      this.hls.attachMedia(ref);
       // hls.on(Hls.Events.FRAG_LOADED, function() {
       //   player.classList.remove('hero-image-spin');
       // });
-    } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
-      player.src = videoUrl;
-      player.addEventListener('loadedmetadata',function() {
-        player.play();
+    } else if (ref.canPlayType('application/vnd.apple.mpegurl')) {
+      ref.src = videoUrl;
+      ref.addEventListener('loadedmetadata',function() {
+        ref.play();
       });
     }
-  }
-
-  componentWillUnmount() {
-  }
-
-  tryPlayVideo() {
-    setTimeout(() => {
-      if (this.player) {
-        // fetch(window.innerWidth >= 720 ? vid_pc : vid_mob).then(res => res.blob()).then(data => {
-        //   this.setState({vid_blob: URL.createObjectURL(data)});
-        //   this.player.classList.remove('hero-image-spin');
-        //   this.player.play()
-        // });
-        this.player.play();
-        this.player.classList.remove('hero-image-spin');
-      }
-      else
-        this.tryPlayVideo();
-    }, 5000);
   }
 
   render() {
@@ -126,9 +114,9 @@ class Home extends Component {
             <Message className='modal-msg' onDismiss={this.handleDismiss}>
               <Header className='msg-text'>Please use a desktop Chrome browser to play our free games. To play games with cryptocurrency, you must enable Metamask. You can download Chrome <a className='blue-link' href="https://www.google.com/chrome/">here</a> and Metamask <a className='blue-link' href="https://metamask.io/">here</a>.</Header>
             </Message>
-            {isMobile ? <video className="hero-image" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
+            {isMobile ? <video className="hero-image" ref={ref => this.refVideo(ref)} preload="auto" playsInline autoPlay muted loop/>
             : <a href='/account'>
-                <video className="hero-image" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
+                <video className="hero-image" ref={ref => this.refVideo(ref)} preload="auto" playsInline autoPlay muted loop/>
               </a> }
             
 
@@ -296,9 +284,9 @@ class Home extends Component {
         <Segment className='hero'>
           <Container className='hero-container'>
   
-          {isMobile ? <video className="hero-image" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
+          {isMobile ? <video className="hero-image" ref={ref => this.refVideo(ref)} preload="auto" playsInline autoPlay muted loop/>
             : <a href='/account'>
-                <video className="hero-image" ref={ref => this.player = ref} preload="auto" playsInline autoPlay muted loop/>
+                <video className="hero-image" ref={ref => this.refVideo(ref)} preload="auto" playsInline autoPlay muted loop/>
               </a> }
 
           </Container>

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Menu, Icon} from 'semantic-ui-react';
 import '../additional.css';
-import logo from '../Images/logo.png'
+import logo from '../Images/authorize_title.png'
 
 const INITIAL_STATE = {
   selectedMenu: 0,
@@ -33,13 +33,8 @@ class SideMenu extends React.Component {
   getContent = (title, index, icon) => {
     if (this.state.selectedMenu == index) {
       return (
-        <Menu.Item onClick={() => this.onMenuClick(index)} exact href='#' style={{color:'black'}}>
-          <Icon.Group
-            size='medium'
-            style={{ marginRight: '0.5em', width: '20px', textAlign: 'center' }}
-          >
-            <Icon name={icon}  />
-          </Icon.Group>
+        <Menu.Item onClick={() => this.onMenuClick(index)} exact href='#' className='account-p' style={{color:'white'}}>
+          <Icon name={icon} />
           {title}
         </Menu.Item>
       )
@@ -58,13 +53,8 @@ class SideMenu extends React.Component {
       url = '/disclaimer/';
 
     return (
-      <Menu.Item onClick={() => this.onMenuClick(index)} exact href={url}>
-        <Icon.Group
-          size='medium'
-          style={{ marginRight: '0.5em', width: '20px', textAlign: 'center' }}
-        >
-          <Icon name={icon} />
-        </Icon.Group>
+      <Menu.Item onClick={() => this.onMenuClick(index)} exact href='#' className='account-p' style={{color:'gray'}}>
+        <Icon name={icon} />
         {title}
       </Menu.Item>
     )
@@ -72,45 +62,15 @@ class SideMenu extends React.Component {
 
   render() {
     return (
-      <div class="menuContainer">
+      <Menu className="menuContainer" icon='labeled' vertical>
         <a href="https://decentral.games">
-          <img class="image inline" src={logo} style={{width: '230px', paddingTop: '42px', paddingBottom: '35px'}}/>
+          <img class="image inline" src={logo} style={{width: '50px', paddingTop: '30px', paddingBottom: '35px'}}/>
         </a>
-        <div style={{borderBottom: '1px solid lightgray', paddingBottom: '25px', paddingTop: '25px', borderTop: '1px solid lightgray'}}>
-          <p className='account-p'>
-            {this.getContent('Play Now', 0, 'play')}
-          </p>
-          <p className='account-p'>
-            {this.getContent('NFTs', 4, 'gamepad')}
-          </p>
-          <p className='account-p'>
-            {this.getContent('Transaction History', 1, 'history')}
-          </p>
-          <p className='account-p'>
-            {this.getContent('Deposits/Withdrawals', 2, 'dollar')}
-          </p>
-          <p className='account-p' >
-            {this.getContent('Authorizations', 3, 'check')}
-          </p>
-        </div>
-        <div style={{paddingTop: '25px', paddingBottom: '25px'}}>
-          <p className='account-p' > 
-            {this.getContent('Blog', 5, 'book')}
-          </p>
-          <p className='account-p' >
-            {this.getContent('Discord', 6, 'discord')}
-          </p>
-          <p className='account-p' >
-            {this.getContent('Twitter', 8, 'twitter')}
-          </p>
-          <p className='account-p' >
-            {this.getContent('Contact', 7, 'mail')}
-          </p>
-          <p className='account-p' >
-            {this.getContent('Disclaimer', 9, 'exclamation circle')}
-          </p>
-        </div>
-      </div>
+       {this.getContent('Play Now', 0, 'play')}
+       {this.getContent('NFTs', 4, 'gamepad')}
+       {this.getContent('Tx History', 1, 'dollar')}
+       {this.getContent('Authorizations', 3, 'check')}
+      </Menu>
     )
   }
 }

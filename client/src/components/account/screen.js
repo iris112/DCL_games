@@ -198,8 +198,8 @@ class Account extends React.Component {
         {this.ifMobileRedirect()}
         <Spinner show={this.state.isRunningTransaction}/>
         <div class="ui accountContainer" style={{}}>
-          <Grid verticalAlign='middle'>
-            <Grid.Column>
+          <Grid verticalAlign='middle' style={{margin: '0px'}}>
+            <Grid.Column style={{padding: '0px'}}>
               <Menu onMenuSelected={this.selectedMenu}/>
               {this.getContent()}
             </Grid.Column>

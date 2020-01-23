@@ -427,7 +427,7 @@ class ModalVerify extends Component {
                   </Grid.Row>
                 </div>
 
-                <div class="contentContainer">
+                <div class="contentContainer2">
                   <Grid>
                     <Grid.Row>
                       <h3 style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>
@@ -490,7 +490,7 @@ class ModalVerify extends Component {
                       <p style={{opacity: '0.5'}} class="progressbar"> Verify Location </p>
                     </Grid.Row>
                   </div>
-                  <div class="contentContainer">
+                  <div class="contentContainer2">
                     <Grid>
                       <Grid.Row>
                         <h3 style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>
@@ -574,7 +574,7 @@ class ModalVerify extends Component {
                     <p style={{opacity: '0.5'}} class="progressbar"> Verify Location </p>
                   </Grid.Row>
                 </div>
-                <div class="contentContainer">
+                <div class="contentContainer2">
                   <Grid>
                     <Grid.Row>
                       <h3 style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>

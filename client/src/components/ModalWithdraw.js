@@ -566,7 +566,7 @@ class Withdraw extends React.Component {
     if (this.state.isLoaded === 0) {
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>CONTINUE</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -584,7 +584,7 @@ class Withdraw extends React.Component {
     if (this.state.isLoaded === 1) {
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>CONTINUE</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -605,7 +605,7 @@ class Withdraw extends React.Component {
     if (!this.isBrowserMetamsk) {
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>CONTINUE</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -629,7 +629,7 @@ class Withdraw extends React.Component {
     if (this.state.isExistWithdraw == 1) {
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>CONTINUE</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -651,7 +651,7 @@ class Withdraw extends React.Component {
       if (this.state.networkID == 3) {
         return (
           <Modal
-            trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
+            trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>CONTINUE</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
             open={this.state.modalOpen}
@@ -702,7 +702,7 @@ class Withdraw extends React.Component {
                       </Grid.Row>
                     </div>
 
-                    <div class="contentContainer" >
+                    <div class="contentContainer2" >
                       <Grid>
                         <Grid.Row>
                           <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
@@ -745,7 +745,7 @@ class Withdraw extends React.Component {
 
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>CONTINUE</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -793,7 +793,7 @@ class Withdraw extends React.Component {
                     </Grid.Row>
                   </div>
 
-                  <div class="contentContainer" >
+                  <div class="contentContainer2" >
                     <Grid>
                       <Grid.Row>
                         <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
@@ -824,7 +824,7 @@ class Withdraw extends React.Component {
     if (this.state.isValidStep2 == 2) {
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>CONTINUE</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -874,7 +874,7 @@ class Withdraw extends React.Component {
                     </Grid.Row>
                   </div>
 
-                  <div class="contentContainer" >
+                  <div class="contentContainer2" >
                     <Grid>
                       <Grid.Row>
                         <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
@@ -919,7 +919,7 @@ class Withdraw extends React.Component {
       if (this.state.networkID == 3) {
         return (
           <Modal
-            trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
+            trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>CONTINUE</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
             open={this.state.modalOpen}
@@ -968,7 +968,7 @@ class Withdraw extends React.Component {
                       </Grid.Row>
                     </div>
 
-                    <div class="contentContainer" >
+                    <div class="contentContainer2" >
                       <Grid>
                         <Grid.Row>
                           <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
@@ -1011,7 +1011,7 @@ class Withdraw extends React.Component {
 
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>CONTINUE</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -1059,7 +1059,7 @@ class Withdraw extends React.Component {
                     </Grid.Row>
                   </div>
 
-                  <div class="contentContainer" >
+                  <div class="contentContainer2" >
                     <Grid>
                       <Grid.Row>
                         <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
@@ -1090,7 +1090,7 @@ class Withdraw extends React.Component {
     if (this.state.isValidStep1 == 2) {
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>CONTINUE</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -1137,7 +1137,7 @@ class Withdraw extends React.Component {
                     </Grid.Row>
                   </div>
 
-                  <div class="contentContainer" >
+                  <div class="contentContainer2" >
                     <Grid>
                       <Grid.Row>
                         <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
@@ -1181,7 +1181,7 @@ class Withdraw extends React.Component {
     if (this.state.networkID == parseInt(Global.MATIC_NETWORK_ID)) {
       return (
         <Modal
-          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
+          trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>CONTINUE</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
           open={this.state.modalOpen}
@@ -1227,7 +1227,7 @@ class Withdraw extends React.Component {
                     </Grid.Row>
                   </div>
 
-                  <div class="contentContainer" >
+                  <div class="contentContainer2" >
                     <Grid>
                       <Grid.Row>
                         <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
@@ -1277,7 +1277,7 @@ class Withdraw extends React.Component {
 
     return (
       <Modal
-        trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{marginLeft: '10px'}}/>
+        trigger={this.props.isLink == 0 ? <Button content='Withdraw' id='depositButton' onClick={this.handleOpen} style={{}}/>
                   : this.props.isLink == 1 ? <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>CONTINUE</a>
                   : <a style={{color: 'white' }} href="#" onClick={this.handleOpen}>START</a> }
         open={this.state.modalOpen}
@@ -1322,7 +1322,7 @@ class Withdraw extends React.Component {
                   </Grid.Row>
                 </div>
 
-                <div class="contentContainer" >
+                <div class="contentContainer2" >
                   <Grid>
                     <Grid.Row>
                       <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>

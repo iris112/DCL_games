@@ -1,25 +1,15 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom';
 import '../additional.css';
-import mana from '../Images/mana.png';
-import dai from '../Images/dai.png';
-import dg from '../Images/authorize_title.png';
 import teleport1 from '../Images/chateau.png';
 import teleport2 from '../Images/serenity.png';
 import { Button } from 'decentraland-ui'
 import { Image} from 'semantic-ui-react'
 import Global from '../constant';
-import ModalDeposit from '../ModalDeposit'
-import ModalWithdraw from '../ModalWithdraw'
 import LogoSpinner from '../../LogoSpinner'
-
-
-var USER_ADDRESS;
+import WalletInfo from './walletInfo'
 
 const INITIAL_STATE = {
-  tokenBalance: -1,
-  ethBalance: 0,
-  username: '',
   isRunningTransaction: false,
 };
 
@@ -31,193 +21,38 @@ class Dashboard extends React.Component {
     super(props);
 
     this.state = { ...INITIAL_STATE };
-
-    if (window.web3) {
-      USER_ADDRESS = window.web3.currentProvider.selectedAddress;
-    }
-
-    this.maticWeb3 = new window.Web3(new window.Web3.providers.HttpProvider("https://testnet2.matic.network"));
   }
 
   async componentDidMount() {
-    let object = this;
-    window.ethereum.on('accountsChanged', async function (accounts) {
-      await object.getUserData();
-    })
-
-    await this.getUserData();
-
-  }
-
-  async getUserData() {
-    this.verifyNetwork();
-    await this.getUserName();
-  }
-
-  update = () => {
-    this.getTokenBalance();
-  }
-
-  getUserInfo = () => {
-    return fetch(`${Global.BASE_URL}/order/getUser`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        address: window.web3.currentProvider.selectedAddress,
-      })
-    })
-  }
-
-  getUserName = async () => {
-    try {
-      let response = await this.getUserInfo();
-      let json = await response.json();
-      if (json.status === 'ok') {
-        if (json.result === 'false') {
-          return;
-        }
-
-        this.setState({username: json.name});
-        return;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  getTokenBalance = async (isMatic) => {
-    try {
-      var amount;
-      
-      // if (isMatic)
-      //   amount = await Global.balanceOfToken(Global.MATIC_TOKEN);
-      // else
-      //   amount = await Global.balanceOfToken(Global.ROPSTEN_TOKEN);
-      amount = await Global.balanceOfToken(Global.MATIC_TOKEN, this.maticWeb3);
-      this.setState({tokenBalance: window.web3.fromWei(amount, 'ether').toFixed(0)});
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  getEthBalance = () => {
-    try {
-      var Obj = this;
-      // window.web3.eth.getBalance(USER_ADDRESS, function(err, amount) {
-      //   if (err)
-      //     return;
-        
-      //   Obj.setState({ethBalance: window.web3.fromWei(amount, 'ether').toFixed(8)});
-      // });
-      this.maticWeb3.eth.getBalance(USER_ADDRESS, function(err, amount) {
-        if (err)
-          return;
-        Obj.setState({ethBalance: window.web3.fromWei(amount, 'ether').toFixed(8)});
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  verifyNetwork = () => {
-    window.web3.version.getNetwork(async (err, network) => {
-      if (network === Global.MATIC_NETWORK_ID) {
-        this.isMatic = true;
-        await this.getTokenBalance(true);
-      }
-      else {
-        this.isMatic = false;
-        await this.getTokenBalance(false);
-      }
-    });
   }
   
   render() {
     return (
-      <div class="contentContainer">
+      <div id="playboard" class="contentContainer">
         <LogoSpinner show={this.state.isRunningTransaction}/>
-        <div style={{width: 'calc(100% - 50px)', minWidth: '860px' }}>
-          <p  class="titleName">
-            Play Now
-          </p>
-          <p class="titleDescription">
-            Default gameplay is Free-to-Play. Deposit to play with cryptocurrency. 
-            <i style={{marginLeft: '5px'}} class='lato'>Decentral Games is currently in beta, so all our crypto gameplay is with Ropsten coins on Matic Beta.</i>
-          </p>
-          <div style={{marginTop: '30px'}}>
-            <div class='balanceBox'>
-              <div style={{marginBottom: '20px'}}>
-                <img style={{verticalAlign:'middle'}} class="image inline" width="20px" height="20px" src={mana} />
-                <span class="balanceAmount" style={{textAlign: 'left'}}>
-                  {this.state.tokenBalance == -1 ? '—' : this.state.tokenBalance} MANA
-                </span>
-              </div>
-              <ModalDeposit showSpinner={this.showSpinner} hideSpinner={this.hideSpinner} update={this.update} authvalue={4}/>
-              <ModalWithdraw isLink={0} showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
-            </div>
-            <div class='balanceBox' style={{marginLeft: '20px'}}>
-              <div style={{marginBottom: '20px', opacity: '0.5'}}>
-                <img style={{verticalAlign:'middle'}} class="image inline" width="20px" height="20px" src={dg} />
-                <span class="balanceAmount" style={{textAlign: 'left'}}>
-                  0 DG
-                </span>
-              </div>
-              <Button id="depositButton" disabled color='blue' style={{marginRight:'0', marginLeft:'0px'}}
-              onClick={this.onDeposit}
-              >
-                Deposit
-              </Button>
-              <Button id="depositButton" disabled color='blue' style={{marginRight:'0', marginLeft:'10px'}}
-              onClick={this.onWithdraw}
-              >
-                Withdraw
-              </Button>
-            </div>
-            <div class='balanceBox' style={{marginLeft: '20px'}}>
-              <div style={{marginBottom: '20px', opacity: '0.5'}}>
-                <img style={{verticalAlign:'middle'}} class="image inline" width="20px" height="20px" src={dai} />
-                <span class="balanceAmount" style={{textAlign: 'left'}}>
-                  0 DAI
-                </span>
-              </div>
-              <Button id="depositButton" disabled color='blue' style={{marginRight:'0', marginLeft:'0px'}}
-              onClick={this.onDeposit}
-              >
-                Deposit
-              </Button>
-              <Button id="depositButton" disabled color='blue' style={{marginRight:'0', marginLeft:'10px'}}
-              onClick={this.onWithdraw}
-              >
-                Withdraw
-              </Button>
-            </div>
+        <div style={{marginLeft:'50px', marginRight:'20px'}}>
+          <div class="description">
+            <p>FEATURED CASINO</p>
+            <h3>Serenity Island</h3>
+            <p>Serenity Island is Decentral Games' first casino, located at -55,143 in the Decentraland Metaverse. The structure sports a Monty Carlo vibe, situated on a topical island surrounded by water.</p>
+            <p><b>Games:</b> MANA Slots, MANA Roulette</p>
           </div>
-          <div id='teleport-box'>
-            <div class="teleport">
-              <p style={{fontSize:'15px', textAlign: 'center'}}>
-                Decentral Games Zeit
-              </p>
-              <a href="/chateau/">
-                <Image src={teleport1} inline style={{marginLeft:'20px', width: 'calc((100% - 60px) / 3'}}/>
-              </a>
-              <a href="/serenity/">
-                <Image src={teleport2} inline style={{marginLeft:'20px', width: 'calc((100% - 60px) / 3'}}/>
-              </a>
-            </div>
-
-            <div style={{marginTop: '30px'}} class="teleport">
-              <p style={{fontSize:'15px', textAlign: 'center'}}>
-                Decentraland
-              </p>
-              <a href="https://explorer.decentraland.org/?ENABLE_WEB3&position=-57%2C139">
-                <Image src={teleport2} inline style={{marginLeft:'20px', width: 'calc((100% - 60px) / 3'}}/>
-              </a>
-            </div>
+          <Button id="playButton" color='blue'
+          onClick={this.onPlay}
+          >
+            Play Now
+          </Button>
+          <div class="teleport" style={{marginTop: '50px'}}>
+            <p>ALL CASINOS</p>
+            <a href="/chateau/">
+              <Image src={teleport1} inline style={{marginLeft:'-5px'}}/>
+            </a>
+            <a href="/serenity/">
+              <Image src={teleport2} inline style={{marginLeft:'20px'}}/>
+            </a>
           </div>
         </div>
+        <WalletInfo showSpinner={this.showSpinner} hideSpinner={this.hideSpinner} />
       </div>
     )
   }

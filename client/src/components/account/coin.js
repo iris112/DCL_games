@@ -119,7 +119,7 @@ class Coin extends React.Component {
   render() {
     return (
       <div class="contentContainer">
-        <div style={{width: 'calc(100% - 50px)', minWidth: '860px', marginTop: '20px'}}>
+        <div style={{width: 'calc(100% - 50px)', minWidth: '860px', marginTop: '20px', marginLeft: '30px'}}>
           <h3 style={{paddingTop: '20px'}}> NFTs </h3>
           <div id='nft-box' style={{ height: 'calc(100vh - 200px)', marginTop: '20px', padding: '10px'}}>
             <div style={{marginTop:'calc(50vh - 150px)', padding: '10px'}}>

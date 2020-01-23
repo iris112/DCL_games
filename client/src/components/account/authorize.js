@@ -33,7 +33,7 @@ class Authorize extends React.Component {
     return (
       <div class="contentContainer">
         <LogoSpinner show={this.state.isRunningTransaction}/>
-        <div style={{width: 'calc(100% - 50px)', minWidth: '860px', marginTop: '20px'}}>
+        <div style={{width: 'calc(100% - 50px)', minWidth: '860px', marginTop: '20px', marginLeft: '30px'}}>
           <h3 style={{paddingTop: '20px'}}> Authorizations </h3>
           <div style={{ marginTop: '20px', height: '675px'}}>
             <div class='balanceBox' id='balance-pad'>

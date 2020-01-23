@@ -791,8 +791,33 @@ a.ui.card:hover {
   font-family: Icons, brand-icons!important;
 }
 
+.ui.accountContainer #playboard {
+  background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2),rgba(0,0,0,0.9)), url(./Images/background.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  height: 100vh;
+  background-size: cover;
+}
+
+#playboard div.description {
+  margin-top: 350px;
+  width: 565px;
+}
+
+#playboard div.description p, 
+#playboard div.description h3, 
+#playboard div.teleport p {
+  color: white;
+  text-shadow: 3px 3px 8px #000000;
+}
+
+#playboard div.description h3 {
+  font-size: 35px!important;
+}
+
 .ui.accountContainer .menuContainer {
-  position: fixed;
+  position: absolute;
   display: inline-block; 
   width: 100px!important;
   height: 100vh;
@@ -802,6 +827,7 @@ a.ui.card:hover {
   padding-left: 10px;
   padding-right: 10px;
   font-size: 12px !important;
+  margin: 0;
 }
 
 .ui.accountContainer .balanceBox {
@@ -812,6 +838,13 @@ a.ui.card:hover {
   display: inline-block;
   border: 1px solid rgba(34,36,38,.15);
   border-radius: 8px;
+}
+
+.ui.accountContainer span.address {
+  display: inline-block;
+  width: 120px;
+  float: right;
+  text-align: right;
 }
 
 #teleport-box {
@@ -865,21 +898,21 @@ a.ui.card:hover {
 
 .contentContainer { 
   /*box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);*/
-  margin-left: 150px;
+  margin-left: 100px;
   display: inline-block; 
-  width: calc(100% - 150px);
+  width: calc(100% - 100px);
   height: 550px;
   border-radius: 5px;
 }
 
 .contentContainer2 { 
   /*box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);*/
+  margin-left: 350px;
   display: inline-block; 
-  width: calc(100%);
+  width: calc(100% - 350px);
   height: 550px;
   border-radius: 5px;
 }
-
 
 
 .contentContainer .ui.dropdown > .text,
@@ -945,12 +978,89 @@ a.ui.card:hover {
   font-family: 'Lato', sans-serif!important;
 }
 
+#playButton {
+  background-color: rgba(1, 133, 244, 1);
+  box-shadow: 0 4px 14px 0 rgba(0,118,255,0.39);
+  color: white;
+  font-family: 'Lato', sans-serif!important;
+  width: 180px;
+  font-size: 16px;
+  font-weight: 900;
+  margin-top: 20px;
+  padding: 20px;
+  height: 50px;
+  text-shadow: 3px 3px 8px #000000;
+}
+
 .ui.accountContainer div.teleport {
-  width: calc(100% - 40px);
+  width: 100%;
+}
+
+.ui.accountContainer div.wallet_board {
+  width: 450px;
+  height: 500px;
+  background-color: rgba(255,255,255, 0.8);
+  display: block;
+  border-radius: 10px;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 18px;
+}
+
+.ui.accountContainer div.wallet_board div#balance-box {
+  color: black;
+}
+
+.ui.accountContainer div.wallet_board table#header tbody tr:nth-child(odd) {
+  background-color: #00000022 !important;
+}
+
+.ui.accountContainer div.wallet_board table#header tr th:nth-child(odd),
+.ui.accountContainer div.wallet_board table#header tr td:nth-child(odd) {
+  padding-left: 20px !important
+}
+
+.ui.accountContainer div.wallet_board table#header tr th:nth-child(even),
+.ui.accountContainer div.wallet_board table#header tr td:nth-child(even) {
+  padding-left: 20px !important
+}
+
+.ui.accountContainer div.wallet_board table#header,
+.ui.accountContainer div.wallet_board table#header tr,
+.ui.accountContainer div.wallet_board table#header tr th,
+.ui.accountContainer div.wallet_board table#header tr td {
+  background-color: transparent !important;
+  color: black !important;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.ui.accountContainer div.wallet_board table button#depositButton {
+  background-color: transparent!important;
+  box-shadow: none!important;
+  color: rgba(1, 133, 244, 1);
+  text-transform: capitalize;
+  font-size: 16px;
+  margin-left: 0;
+}
+
+.ui.accountContainer div.wallet_board div.account {
+  line-height: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom-style: solid; 
+  border-bottom-width: 2px; 
+  border-bottom-color: gray;
 }
 
 .ui.accountContainer div.teleport img:hover {
   filter: brightness(0.5);
+}
+
+.ui.accountContainer div.teleport img {
+  /*border-radius: 5px;*/
+  width: calc((100% - 60px) / 4);
 }
 
 .ui.accountContainer p.titleName {

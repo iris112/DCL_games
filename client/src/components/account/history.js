@@ -74,7 +74,7 @@ class History extends React.Component {
 
     return (
       <div class="contentContainer">
-        <div style={{width: 'calc(100% - 50px)', minWidth: '860px', marginTop: '20px'}}>
+        <div style={{width: 'calc(100% - 50px)', minWidth: '860px', marginTop: '20px', marginLeft: '30px'}}>
           <h3 style={{paddingTop: '20px'}}> Transaction History </h3>
           <div id='tx-box' style={{ marginTop: '20px'}}>
             <Table id='header' singleLine fixed style={{marginBottom: 0}}>

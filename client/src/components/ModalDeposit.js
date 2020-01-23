@@ -428,7 +428,7 @@ class Deposit extends React.Component {
                       </Grid.Row>
                     </div>
 
-                    <div class="contentContainer" >
+                    <div class="contentContainer2" >
                       <Grid>
                         <Grid.Row>
                           <h3 style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
@@ -502,7 +502,7 @@ class Deposit extends React.Component {
                   </Grid.Row>
                 </div>
 
-                <div class="contentContainer" >
+                <div class="contentContainer2" >
                   <Grid>
                     <Grid.Row>
                       <h3 style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
@@ -570,7 +570,7 @@ class Deposit extends React.Component {
                       </Grid.Row>
                     </div>
 
-                    <div class="contentContainer">
+                    <div class="contentContainer2">
                       <Grid>
                         <Grid.Row>
                           <h3 style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
@@ -637,7 +637,7 @@ class Deposit extends React.Component {
                     </Grid.Row>
                   </div>
 
-                  <div class="contentContainer">
+                  <div class="contentContainer2">
                     <Grid>
                       <Grid.Row>
                         <h3 style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
@@ -705,7 +705,7 @@ class Deposit extends React.Component {
                     </Grid.Row>
                   </div>
 
-                    <div class="contentContainer" >
+                    <div class="contentContainer2" >
                       <Grid>
                         <Grid.Row>
                           <h3 style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
@@ -783,7 +783,7 @@ class Deposit extends React.Component {
                   </Grid.Row>
                 </div>
 
-                <div class="contentContainer" >
+                <div class="contentContainer2" >
                   <Grid>
                     <Grid.Row>
                       <h3 style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>

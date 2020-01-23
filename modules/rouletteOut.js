@@ -48,9 +48,9 @@ module.exports.returnData = async result => {
   // write event data to mongoDB database
   try {
     // update session DB
-    const playData = await dbMongo.findPlayInfo({ machineID:machineIDPadded, type: 'Roulette' });
+    const playData = await dbMongo.findPlayInfo({ machineID:machineIDPadded, type: 'Roulette', txid:result[0].transactionHash });
     if (!playData) {
-      console.log("can't find roulette play info : machinID = " + machineIDPadded);
+      console.log("can't find roulette play info : machinID = " + machineIDPadded, " txid = ", result[0].transactionHash);
       return;
     } else {
       playData = await dbMongo.updatePlayInfo(playData, {

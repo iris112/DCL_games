@@ -63,13 +63,13 @@ class SideMenu extends React.Component {
   render() {
     return (
       <Menu className="menuContainer" icon='labeled' vertical>
-        <a href="https://decentral.games">
-          <img class="image inline" src={logo} style={{width: '50px', paddingTop: '30px', paddingBottom: '35px'}}/>
+        <a href="/">
+          <img class="image inline" src={logo} style={{width: '42px', paddingTop: '30px', paddingBottom: '35px'}}/>
         </a>
        {this.getContent('Play Now', 0, 'play')}
        {this.getContent('NFTs', 4, 'gamepad')}
        {this.getContent('Tx History', 1, 'dollar')}
-       {this.getContent('Authorizations', 3, 'check')}
+       {this.getContent('Authorize', 3, 'check')}
       </Menu>
     )
   }

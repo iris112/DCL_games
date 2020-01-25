@@ -167,38 +167,38 @@ class WalletInfo extends React.Component {
         <div style={{padding: '20px 0'}}>
           <div style={{padding: '0 20px'}}>
             <h3>Matic Balances</h3>
-            <p>Default gameplay is free. Deposit to play with cryptocurrency. <i>Decentral Games is currently in beta, so all our crypto gameplay is with Ropsten coins on Matic Testnet.</i></p>
+            <p id="featured-casino-text2">Default games are free, deposit to play with crypto. Decentral Games is in beta, crypto gameplay is on Matic testnet using Ropsten MANA.</p>
           </div>
           <div id='balance-box' style={{ marginTop: '20px'}}>
             <Table id='header' singleLine fixed style={{marginBottom: 0}}>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell style={{paddingLeft: '20px!important'}}>BALANCE</Table.HeaderCell>
-                  <Table.HeaderCell style={{paddingRight: '20px'}}>ACTIONS</Table.HeaderCell>
+                  <Table.HeaderCell style={{paddingLeft: '20px!important'}} id="featured-casino-text">BALANCE</Table.HeaderCell>
+                  <Table.HeaderCell id="featured-casino-text">ACTIONS</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
                 {data.map((row) => {
                   return (
                     <Table.Row>
-                      <Table.Cell style={{paddingLeft: '20px'}}>
+                      <Table.Cell style={{paddingLeft: '0px'}}>
                         <img style={{verticalAlign:'middle'}} class="image inline" width="20px" height="20px" src={row.image} />
                         <span style={{textAlign: 'left', marginLeft: '10px', lineHeight: '25px', verticalAlign: 'middle'}}>
                           {row.balance} {row.coin}
                         </span>
                       </Table.Cell>
-                      <Table.Cell style={{paddingRight: '20px'}}>
+                      <Table.Cell style={{paddingRight: '0px'}}>
                         {row.enabled == 1 ?
-                          <div>
+                          <div className="wallet-deposit">
                             <ModalDeposit showSpinner={this.props.showSpinner} hideSpinner={this.props.hideSpinner} update={this.update} authvalue={4}/>
                             <ModalWithdraw isLink={0} showSpinner={this.props.showSpinner} hideSpinner={this.props.hideSpinner}/>
                           </div>
                         : <div>
-                            <Button id="depositButton" color='blue' style={{marginRight:'0'}}
+                            <Button id="depositButton" color='blue' className="wallet-deposit"
                             >
                               Deposit
                             </Button>
-                            <Button id="depositButton" color='blue' style={{marginRight:'0'}}
+                            <Button id="depositButton" color='blue'
                             >
                               Withdraw
                             </Button> 
@@ -210,7 +210,7 @@ class WalletInfo extends React.Component {
               </Table.Body>
             </Table>
           </div>
-          <p style={{textAlign: 'center'}}><a href="#" style={{color: 'rgba(1, 133, 244, 1)'}}>Exchange</a> on Kyber</p>
+          <p style={{textAlign: 'center', paddingTop: '9px'}} className="featured-casino-text3"><a href="#" style={{color: 'rgba(1, 133, 244, 1)' }} className="exchange-hover">Exchange</a> on Kyber</p>
         </div>
       </div>
     )

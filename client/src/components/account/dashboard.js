@@ -1,8 +1,8 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom';
 import '../additional.css';
-import teleport1 from '../Images/chateau.png';
-import teleport2 from '../Images/serenity.png';
+import teleport1 from '../Images/chateau_.png';
+import teleport2 from '../Images/serenity_.png';
 import { Button } from 'decentraland-ui'
 import { Image} from 'semantic-ui-react'
 import Global from '../constant';

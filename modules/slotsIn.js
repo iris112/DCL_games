@@ -5,6 +5,7 @@ const { getWeb3 } = require('./web3');
 const { getContractInstance } = require('./contractInstance');
 const ABISlotsMANA = require('../ethereum/contracts/slots/ABISlotsMANA');
 const dbMongo = require('../db/dbMongo');
+const { getHash } = require('./hashchain');
 
 dbMongo.initDb();
 
@@ -25,7 +26,6 @@ async function setProviderAndInstance() {
 }
 
 setProviderAndInstance();
-
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 module.exports.prepareTransaction = async messageJSON => {
@@ -46,7 +46,8 @@ module.exports.prepareTransaction = async messageJSON => {
   console.log('land ID: ' + landID);
   // console.log('game type: ' + gameType);
 
-  const randomNumber = Math.ceil(Math.random() * 10000);
+  // const randomNumber = Math.ceil(Math.random() * 10000);
+  const randomNumber = await getHash();
 
   console.log('random number: ' + randomNumber);
 

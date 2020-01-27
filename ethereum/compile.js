@@ -12,7 +12,6 @@ const contractPath = path.resolve(
 );
 const source = fs.readFileSync(contractPath, 'utf8');
 const output = solc.compile(source, 1).contracts;
-
 fs.ensureDirSync(buildPath);
 
 // iterate over the keys in the object

@@ -22,6 +22,9 @@ const INITIAL_STATE = {
 };
 
 class Account extends React.Component {
+  showSpinner = () => this.setState({isRunningTransaction: true})
+  hideSpinner = () => this.setState({isRunningTransaction: false})
+
   constructor(props) {
     super(props);
 
@@ -141,7 +144,7 @@ class Account extends React.Component {
 
   getContent = () => {
     if (this.state.selectedMenu == 1)
-      return (<History />);
+      return (<History showSpinner={this.showSpinner} hideSpinner={this.hideSpinner} />);
     if (this.state.selectedMenu == 2)
       return (<Deposit />);
     if (this.state.selectedMenu == 3)

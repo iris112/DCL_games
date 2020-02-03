@@ -8,6 +8,7 @@ import teleport1 from '../Images/chateau.png';
 import teleport2 from '../Images/serenity.png';
 import { Button } from 'decentraland-ui'
 import { Input, Image} from 'semantic-ui-react'
+import Fade from 'react-reveal/Fade'
 
 import Global from '../constant';
 
@@ -119,15 +120,20 @@ class Coin extends React.Component {
   render() {
     return (
       <div class="contentContainer">
-        <div style={{width: 'calc(100% - 50px)', minWidth: '860px', marginTop: '20px', marginLeft: '30px'}}>
-          <h3 style={{paddingTop: '20px'}}> NFTs </h3>
-          <div id='nft-box' style={{ height: 'calc(100vh - 200px)', marginTop: '20px', padding: '10px'}}>
-            <div style={{marginTop:'calc(50vh - 150px)', padding: '10px'}}>
-              <p style={{textAlign: 'center', marginTop: '20px', color: 'gray'}}>
-                You don't have any Decentral Games NFTs.
-              </p>
+        <div style={{width: 'calc(100% - 90px)', minWidth: '800px', marginTop: '20px', marginLeft: '45px', marginRight: '45px'}}>
+          <Fade bottom distance="20px" duration="600">
+            <h3 className="account-h3" style={{paddingTop: '20px'}}> NFTs </h3>
+            <p className="opensea-text">Own a piece of the first Decentraland Community Mega Casino! Check out the NFTs on <a className="exchange-hover2" href="https://opensea.io/assets/vegas-city-land-lease?query=flamingos">OpenSea</a> or read about the offering on our <a className="exchange-hover2" href="https://decentral.games/blog/the-flamingos-a-mega-casino-by-vegas-city-decentral-games">blog</a>.</p>
+          </Fade>
+          <Fade bottom distance="20px" duration="600" delay="200">
+            <div id='nft-box' style={{ height: 'calc(100vh - 200px)', marginTop: '20px', padding: '10px'}}>
+              <div style={{marginTop:'calc(50vh - 150px)', padding: '10px'}}>
+                <p className="playboard-p" style={{textAlign: 'center', marginTop: '20px', color: 'gray'}}>
+                  You don't have any Decentral Games NFTs.
+                </p>
+              </div>
             </div>
-          </div>
+          </Fade>
         </div>
       </div>
     )

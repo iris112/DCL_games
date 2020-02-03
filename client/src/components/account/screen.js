@@ -3,7 +3,7 @@ import { Redirect, withRouter } from 'react-router-dom';
 import { isMobile } from "react-device-detect";
 import '../additional.css';
 import { Header } from 'decentraland-ui'
-import { Container, Grid } from 'semantic-ui-react'
+import { Container, Grid, Icon } from 'semantic-ui-react'
 import Menu from './menu'
 import Dashboard from './dashboard'
 import History from './history'
@@ -175,9 +175,12 @@ class Account extends React.Component {
     if (this.state.isValid == 1) {
       return (
         <div id="account" class="ui accountContainer">
-          <Container style={{ marginTop: '25.5em', height: '35em' }}>
+          <a href="/">
+            <Icon name='arrow left' style={{ color: 'black', fontSize: '20px', marginLeft: '20px', marginTop: '20px' }}/>
+          </a>
+          <Container style={{ marginTop: '45vh'}}>
             <Grid verticalAlign='middle' textAlign='center'>
-              <Header> Please finish verification to view My Account. </Header>
+              <Header> Create an account to view dashboard. </Header>
             </Grid>
           </Container>
         </div>
@@ -189,7 +192,7 @@ class Account extends React.Component {
         <div id="account">
           <Container style={{ marginTop: '5.5em' }}>
             <Grid verticalAlign='middle' textAlign='center'>
-              <Header> This page is only available when you have installed metamask on browser. </Header>
+              <Header> This page is only available when you've installed metamask on a Chrome browser. </Header>
             </Grid>
           </Container>
         </div>

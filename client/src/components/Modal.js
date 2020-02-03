@@ -355,7 +355,7 @@ class ModalVerify extends Component {
     if (this.state.isLoaded === 0) {
       return (
         <Modal
-          trigger={<Button content='Play Now' className='hvr-pop' onClick={this.handleOpen} />}
+          trigger={<Button content='Play Now' className='home-play animate2' onClick={this.handleOpen} />}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           closeIcon
@@ -389,14 +389,14 @@ class ModalVerify extends Component {
 
     if (this.state.existAccount == 1) {
       return (
-        <Button content='Play Now' className='hvr-pop' as={NavLink} to='/account/' id='button-account' />
+        <Button content='Play Now' className="home-play animate2" as={NavLink} to='/account/' />
       )
     }
 
     if (this.state.isValidBirth == 2) {
       return (
         <Modal
-          trigger={<Button content='Play Now' className='hvr-pop' onClick={this.handleOpen} />}
+          trigger={<Button content='Play Now' className='home-play animate2' onClick={this.handleOpen} />}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           closeIcon
@@ -430,7 +430,7 @@ class ModalVerify extends Component {
                 <div class="contentContainer2">
                   <Grid>
                     <Grid.Row>
-                      <h3 style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>
+                      <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>
                     </Grid.Row>
                     <Grid.Row>
                       <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>3. Verify your location. Due to international online gaming legislation, we unfortunately do not allow accounts from US IP addresses.
@@ -462,7 +462,7 @@ class ModalVerify extends Component {
     if (this.state.isValidMetamask == 2) {
       return (
         <Modal
-          trigger={<Button content='Play Now' className='hvr-pop' onClick={this.handleOpen} />}
+          trigger={<Button content='Play Now' className='home-play animate2' onClick={this.handleOpen} />}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           closeIcon
@@ -493,7 +493,7 @@ class ModalVerify extends Component {
                   <div class="contentContainer2">
                     <Grid>
                       <Grid.Row>
-                        <h3 style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>
+                        <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>
                       </Grid.Row>
                       <Grid.Row>
                         <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>2. Enter your name, email, and verify your date of birth. You must be over 18 to play our games.
@@ -547,7 +547,7 @@ class ModalVerify extends Component {
 
     return  (
       <Modal
-        trigger={<Button content='Play Now' className='hvr-pop' onClick={this.handleOpen} />}
+        trigger={<Button content='Play Now' className='home-play animate2' onClick={this.handleOpen} />}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
@@ -577,7 +577,7 @@ class ModalVerify extends Component {
                 <div class="contentContainer2">
                   <Grid>
                     <Grid.Row>
-                      <h3 style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>
+                      <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>
                     </Grid.Row>
                     <Grid.Row>
                       <p style={{ textAlign: 'left', float: 'left', fontSize: '20px'}}>1. Connect your Metamask wallet.

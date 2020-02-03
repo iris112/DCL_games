@@ -5,6 +5,107 @@
   font-style: normal;
 }
 
+a.item.account-p:focus {
+  color: white !important;
+}
+
+.svg-eth {
+  stroke: grey;
+}
+
+.svg-eth2 {
+  stroke: white;
+  margin-right: 8px !important;
+  margin-bottom: -15px !important;
+  margin-top: -4px !important;
+}
+
+a.item.account-p:hover .svg-eth, a.item.account-p:focus .svg-eth {
+  stroke: white;
+}
+
+.main-footer-icon-row {
+  padding-left: calc(50% - 66px) !important;
+}
+
+.main-footer-icon {
+  color: white;
+  font-size: 18px;
+  margin-right: 12px;
+}
+
+.main-footer-icon:hover {
+  color: grey;
+}
+
+button.ui.button.home-play {
+  background-color: #2085F4;
+  box-shadow: 0 4px 14px 0 rgba(0,118,255,0.39);
+  color: white;
+  font-family: 'Lato', sans-serif!important;
+  width: 162px;
+  font-size: 16px !important;
+  font-weight: 600;
+  margin-top: 0px;
+  height: 45px;
+  letter-spacing: 1.25px !important;
+  border-radius: 4px !important;
+}
+
+button.ui.button.home-play.animate2:hover {
+  transform: translateY(-1px);
+}
+
+button.ui.button.home-play.animate2 {
+  animation : shimmerbuttontwo 3s infinite;
+  background: linear-gradient(to right, #2085F4 4%, #339df5 18%, #2085F4 32%);
+  background-size: 1000px 100%;
+} 
+
+@keyframes shimmerbuttontwo {
+  0% {
+    background-position: -500px 0;
+  }
+  100% {
+    background-position: 500px 0;
+  }
+}
+
+a.ui.blue.button.play-shimmer {
+  background-color: #2085F4;
+  box-shadow: 0 4px 14px 0 rgba(0,118,255,0.39);
+  color: white;
+  font-family: 'Lato', sans-serif!important;
+  width: 180px;
+  font-size: 16px !important;
+  font-weight: 600;
+  margin-top: 20px;
+  padding: 1em;
+  height: 50px;
+  letter-spacing: 1.25px !important;
+  border-radius: 4px !important;
+}
+
+a.ui.blue.button.play-shimmer.animate2:hover {
+  transform: translateY(-1px);
+}
+
+a.ui.blue.button.play-shimmer.animate2 {
+   animation : shimmerbutton 3s infinite;
+   background: linear-gradient(to right, #2085F4 4%, #339df5 18%, #2085F4 32%);
+   background-size: 1000px 100%;
+}
+
+@keyframes shimmerbutton {
+  0% {
+    background-position: -500px 0;
+  }
+  100% {
+    background-position: 500px 0;
+  }
+}
+
+
 /* ----------------------------------------- */
 /*           General Spacing, Font           */
 /* ----------------------------------------- */
@@ -46,6 +147,10 @@
   font-size: 12px !important;
   padding-left: 0!important;
   padding-right: 0!important;
+}
+
+.account-p:hover {
+  color: white !important;
 }
 
 #a-footer {
@@ -95,6 +200,10 @@ h3 {
   }
 }
 
+#disclaimer-container {
+  width: 80%;
+}
+
 @media (min-width: 768px) {
   #disclaimer-container {
     padding-left: 21px !important;
@@ -131,12 +240,14 @@ h3 {
   font-size: 16px !important;
   color: white !important;
   padding-left: 0px !important;
+  letter-spacing: 0.15px;
 }
 
 .nav-text2 {
   font-size: 16px !important;
   color: white !important;
   margin-left: 3px !important;
+  letter-spacing: 0.15px;
 }
 
 .nav-text3 {
@@ -144,6 +255,7 @@ h3 {
   font-size: 16px !important;
   color: white !important;
   padding-right: 21px !important;
+  letter-spacing: 0.15px;
 }
 
 .nav-text:hover, .nav-text2:hover, .nav-text3:hover {
@@ -204,6 +316,12 @@ h3 {
 .navbarHidden2 {
   top: -50px;
   border: none !important;
+}
+
+@media (max-width: 499px) {
+  .navbarHidden, .navbarHidden2 {
+    top: 0px;
+  }
 }
 
 .ui.menu .active.item {
@@ -323,12 +441,12 @@ a.item.nav-text:hover {
   margin-top: 60px !important;
   padding-top: 45px !important;
   padding-bottom: 60px !important;
-  background-color: rgba(6, 10, 13, 1) !important;
+  background-color: #060A0D !important;
   overflow-x: hidden !important;
 }
 
 .hero-image {
-  border-radius: 2px;
+  border-radius: 4px;
   padding-left: 3px !important;
   padding-right: 3px !important;
 }
@@ -401,47 +519,6 @@ a.item.nav-text:hover {
   letter-spacing: 0.115em !important;
 }
 
-@-webkit-keyframes hvr-pop {
-  50% {
-    -webkit-transform: scale(1.025);
-    transform: scale(1.025);
-  }
-}
-@keyframes hvr-pop {
-  50% {
-    -webkit-transform: scale(1.025);
-    transform: scale(1.025);
-  }
-}
-
-.hvr-pop {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  color: white !important;
-  background-color: rgba(1, 133, 244, 1) !important;
-  padding-left: 36px !important;
-  padding-right: 36px !important;
-  letter-spacing: 0.12em !important;
-  font-size: 14px !important; 
-  height: 39px !important;
-  padding-top: 11px !important;
-  margin-top: 3px !important;
-}
-
-.hvr-pop:hover, .hvr-pop:focus, .hvr-pop:active {
-  -webkit-animation-name: hvr-pop;
-  animation-name: hvr-pop;
-  -webkit-animation-duration: 0.3s;
-  animation-duration: 0.3s;
-  -webkit-animation-timing-function: linear;
-  animation-timing-function: linear;
-  -webkit-animation-iteration-count: 1;
-  animation-iteration-count: 1;
-}
-
 .button-nav {
 	color: white !important;
   background-color: rgba(1, 133, 244, 1) !important;
@@ -463,8 +540,33 @@ a.item.nav-text:hover {
 /*           Games/Casino Sections           */
 /* ----------------------------------------- */
 
+
+@media (max-width: 767px) {
+  #stat1 {
+    padding-bottom: 21px;
+  }
+  #stat2 {
+    margin-bottom: 0px;
+  }
+}
+
+#gold-grad {
+  background: -webkit-linear-gradient(#bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-top: 9px !important;
+  font-size: 14px !important;
+  letter-spacing: 0.15px;
+}
+
+@media (max-width: 991px) {
+  #grid-display-stat {
+    display: none;
+  }
+}
+
 .games {
-  background-color: rgba(18, 22, 25, 1) !important;
+  background-color: rgba(10, 14, 17, 1) !important;
   padding-top: 45px !important;
   padding-bottom: 45px !important;
   margin-top: 0px !important;
@@ -473,19 +575,25 @@ a.item.nav-text:hover {
 }
 
 .casino {
-  background-color: rgba(18, 22, 25, 1) !important;
+  background-color: rgba(10, 14, 17, 1) !important;
   padding-top: 30px !important;
-  padding-bottom: 45px !important;
-  margin-top: 0px !important;
+  padding-bottom: 48px !important;
+  margin-top: -1px !important;
   margin-bottom: 0px !important;
   border-bottom: 1px #1D1E24 solid !important;
 }
 
+.games-h {
+  font-size: 48px !important;
+  padding-bottom: 30px !important;
+}
+
 .games-h1, .casino-h1 {
-  font-size: 30px !important;
+  font-size: 34px !important;
   font-weight: 300 !important;
+  margin-top: 30px !important;
   padding-bottom: 6px !important;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.25px;
   display: inline-block;
   color: #2085f4 !important;  
   background: #2085f4 -webkit-gradient(linear, 100% 0, 0 0, from(#4c9df6), color-stop(0.5, #4c9df6), to(#4c9df6));  
@@ -498,7 +606,6 @@ a.item.nav-text:hover {
   -webkit-animation-iteration-count: infinite;
   -webkit-background-size: 4rem 100%;
   -webkit-animation-delay: 2s !important;
-  
 }
 
 @-webkit-keyframes shimmer {
@@ -516,11 +623,15 @@ a.ui.card:hover {
 }
 
 .ui.card>:first-child, .ui.cards>.card>:first-child, .ui.card>:last-child, .ui.cards>.card>:last-child {
-  border-radius: 0px !important;
+  border-radius: 0 !important;
 }
 
 .card-image {
-  border-bottom: 1px solid rgba(100, 100, 100, 1) !important;
+  border-bottom: 0px solid rgba(100, 100, 100, 1) !important;
+}
+
+.ui.card>.content, .ui.cards>.card>.content {
+  border-top: 0px;
 }
 
 .overlay-image {
@@ -531,7 +642,7 @@ a.ui.card:hover {
 
 .games-card, .games-card2 {
   border: rgba(18, 22, 25, 1) solid 3px !important;
-  border-radius: 2px !important;
+  border-radius: 4px !important;
 }
 
 @media (max-width: 767px) {
@@ -542,11 +653,11 @@ a.ui.card:hover {
 
 .card-header {
   color: white !important;
-  letter-spacing: 0.12em !important;
-  font-size: 18px !important; 
+  letter-spacing: 1.25px !important;
+  font-size: 20px !important; 
   text-align: center;
   margin-bottom: -6px !important;
-  margin-top: -9px !important;
+  margin-top: -6px !important;
 }
 
 @media (max-width: 499px) {
@@ -601,24 +712,15 @@ a.ui.card:hover {
   margin-left: 12px !important;
 }
 
-@media only screen and (min-width: 768px) {
-  .modallogospin {
-    margin-right: calc((100vw - 88%) / 2)
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  .modallogospin {
-    margin-right: calc((100vw - 850px) / 2)
-  }
+.modallogospin {
+  height: 60px;
+  position: absolute;
+  right: 0 !important;
 }
 
 @media only screen and (min-width: 1200px) {
   .ui.modal {
     width: 1100px;
-  }
-  .modallogospin {
-    margin-right: calc((100vw - 1100px) / 2)
   }
 }
 
@@ -634,11 +736,17 @@ a.ui.card:hover {
   #footer-display {
     display: none !important;
   }
-  #footer-mobile, #footer-mobile2 {
+  #footer-top-mobile, #footer-mobile2 {
     float: left !important;
-    padding-left: 0px !important;
+    padding-left: 20px !important;
   }
-  #footer-mobile2 {
+  #footer-mobile3 {
+    margin-left: -13px;
+  }
+  #footer-top-mobile2 {
+    padding-left: 28px !important;
+  }
+  #footer-mobile2, #footer-mobile3 {
     margin-top: -15px !important;
   }
   #footer-float2 {
@@ -710,7 +818,7 @@ a.ui.card:hover {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  fill: #172023;
+  fill: rgb(30, 34, 37);
 }
 
 .svg1:hover, .svg2:hover, .svg3:hover, .svg4:hover {
@@ -743,8 +851,12 @@ a.ui.card:hover {
   margin-right:0px;
 }
 
-.ui.withdrawContainer * {
+.ui.withdrawContainer *, #modal-font {
   font-family: 'Lato', sans-serif, Dropdown!important;
+}
+
+.ui.dropdown > .dropdown.icon {
+  color: #2085F3 !important;
 }
 
 /* ------------------------------- */
@@ -770,8 +882,12 @@ a.ui.card:hover {
   font-family: 'Lato', sans-serif, Dropdown!important;
 }
 
+.ui.modal {
+  border-radius: 4px;
+}
+
 /* ------------------------------- */
-/*         Account Page CSS         */
+/*        Account Page CSS         */
 /* ------------------------------- */
 
 .ui.accountContainer {
@@ -811,11 +927,28 @@ a.ui.card:hover {
 #playboard div.teleport p {
   color: white;
   text-shadow: 1px 1px 5px #000000;
-
 }
 
-#playboard div.description h3 {
-  font-size: 48px!important;
+.playboard-p {
+  font-size: 20px !important;
+  letter-spacing: 0.15px;
+}
+
+.account-h3 {
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  padding-bottom: 18px;
+}
+
+.account-h3-2 {
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  padding-bottom: 18px;
+}
+
+.playboard-h3 {
+  font-weight: 600 !important;
+  padding-bottom: 12px;
 }
 
 .ui.accountContainer .menuContainer {
@@ -836,7 +969,7 @@ a.ui.card:hover {
   padding: 30px;
   text-align: center;
   width: calc((100% - 40px) / 3);
-  background-color: #f9fbfd;
+  background-color: white;
   display: inline-block;
   border: 1px solid rgba(34,36,38,.15);
   border-radius: 4px;
@@ -860,17 +993,18 @@ a.ui.card:hover {
 }
 
 #nft-box {
-  background-color: #f9fbfd;
+  background-color: white;
   border: 1px solid rgba(34,36,38,.15);
   border-radius: 4px;
   margin-top: 42px !important;
 }
 
 #tx-box, #dep-box {
-  background-color: #f9fbfd;
+  background-color: white;
   border: 1px solid rgba(34,36,38,.15);
   border-radius: 4px;
   margin-top: 42px !important;
+  height: calc(100vh - 200px);
 }
 
 #balance-pad {
@@ -883,6 +1017,7 @@ a.ui.card:hover {
 
 .dataTable {
   overflow: auto;
+  height: calc(100vh - 240px);
 }
 .dataTable::-webkit-scrollbar { 
   width: 10px !important ;
@@ -903,8 +1038,9 @@ a.ui.card:hover {
   margin-left: 80px;
   display: inline-block; 
   width: calc(100% - 80px);
-  height: 550px;
-  border-radius: 5px;
+  height: 100vh;
+  border-radius: 0px;
+  background-color: #F9FBFD;
 }
 
 .bottom-connect {
@@ -919,7 +1055,7 @@ a.ui.card:hover {
   display: inline-block; 
   width: calc(100% - 350px);
   height: 550px;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 
@@ -939,12 +1075,60 @@ a.ui.card:hover {
   font-size: 0.9em;
   font-weight: bold!important;
   color: black!important;
-  padding: 5px 10px!important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
 }
 
-.contentContainer table th:last-child,
+#wallet-row {
+  padding-left: 20px;
+}
+
+#wallet-row2 {
+  margin-top: 10px !important;
+}
+
+#wallet-row3 {
+  padding-right: 27px;
+  margin-top: -3px;
+}
+
+#wallet-row4 {
+  padding-right: 27px;
+  margin-top: -2px;
+}
+
+#wallet-row4:hover {
+  cursor: default !important;
+}
+
+button#depositButton.ui.blue.button.wallet-deposit:hover,
+button#depositButton.ui.blue.button.wallet-deposit2:hover {
+  color: grey !important;
+  cursor: default !important;
+}
+
+.contentContainer table th:nth-child(1) {
+  padding-left: 10px !important;
+}
+
+.contentContainer table th:nth-child(2) {
+  padding-left: 10px !important;
+}
+
+.contentContainer table th:nth-child(3) {
+  padding-left: 6px !important;
+}
+
+.contentContainer table th:nth-child(4) {
+  padding-left: 4px !important;
+}
+
+.contentContainer table th:last-child {
+  padding-left: calc(4% - 8px);
+}
+
 .contentContainer table td:last-child {
-  text-align: center!important;
+  padding-left: 4% !important;
 }
 
 .contentContainer table td {
@@ -961,7 +1145,12 @@ a.ui.card:hover {
 .contentContainer table#header,
 .contentContainer table#header tr,
 .contentContainer table#header tr th {
-  background-color: rgba(241, 243, 245, 1) !important;
+  background-color: rgba(243, 245, 247, 1) !important;
+  border-radius: 0px;
+}
+
+.contentContainer table#header {
+  width: 100%;
 }
 
 .ui.accountContainer span.balanceAmount {
@@ -984,12 +1173,42 @@ a.ui.card:hover {
   color: white;
   letter-spacing: 0.075em !important;
   font-family: 'Lato', sans-serif!important;
+  border-radius: 4px;
+}
+
+.ui.accountContainer button,
+#depositButton2, #withdrawButton2 {
+  background-color: rgba(1, 133, 244, 1);
+  box-shadow: 0 4px 14px 0 rgba(0,118,255,0.39);
+  min-width: 114px;
+  padding: 7px 10px;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  font-size: 13px !important;
+  vertical-align: middle;
+  height: 40px; 
+  color: white;
+  letter-spacing: 1.2px !important;
+  font-family: 'Lato', sans-serif!important;
+  border-radius: 4px;
+}
+
+.ui.accountContainer button:hover,
+#depositButton:hover, #withdrawButton:hover {
+  transform: translateY(0);
+  background-color: #145DA9 !important;
+}
+
+.ui.accountContainer button:hover,
+#depositButton2:hover, #withdrawButton2:hover {
+  transform: translateY(0);
+  background-color: #145DA9 !important;
 }
 
 #dashboard-casino-img {
-  width: 323px !important;
+  width: 291px !important;
   border-radius: 4px !important;
-  height: 195px;
+  height: 176px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.75);
 }
 
@@ -1003,7 +1222,8 @@ a.ui.card:hover {
 }
 
 #featured-casino-text2 {
-  font-size: 16px !important;
+  font-size: 14px !important;
+  margin-top: -6px;
 }
 
 #playButton {
@@ -1017,7 +1237,13 @@ a.ui.card:hover {
   margin-top: 20px;
   padding: 1em;
   height: 50px;
-  letter-spacing: 0.1em !important;
+  letter-spacing: 1.2px !important;
+  border-radius: 4px !important;
+}
+
+#playButton:hover {
+  transform: translateY(0px);
+  background-color: #005daa !important;
 }
 
 #italics-p {
@@ -1033,9 +1259,26 @@ a.ui.card:hover {
   margin-right: 0px !important;
 }
 
+#wallet-top-text {
+  font-size: 14px;
+}
+
+#wallet-top-text2 {
+  font-size: 14px;
+  float: right;
+  margin-top: 2px;
+}
+
+.account {
+  padding-top: 0px;
+  padding-bottom: 3px;
+  height: 50px;
+  margin-top: -3px;
+}
+
 .ui.accountContainer div.wallet_board {
-  width: 330px;
-  height: 480px;
+  width: 327px;
+  height: 450px;
   background-color: rgba(255,255,255, 0.8);
   display: block;
   border-radius: 4px;
@@ -1056,20 +1299,26 @@ a.ui.card:hover {
 
 .ui.accountContainer div.wallet_board table#header tbody tr:nth-child(odd) {
   background-color: #00000019 !important;
+
 }
 
 .ui.accountContainer div.wallet_board table#header tr th:nth-child(odd),
 .ui.accountContainer div.wallet_board table#header tr td:nth-child(odd) {
-  padding-left: 20px !important
+  padding-left: 20px !important;
+  padding-right: 0px !important;
 }
 
 .ui.accountContainer div.wallet_board table#header tr th:nth-child(even),
 .ui.accountContainer div.wallet_board table#header tr td:nth-child(even) {
-  padding-left: 0px !important
+  padding-left: 12px !important
 }
 
 .ui.accountContainer div.wallet_board table#header tr th:nth-child(even) {
   padding-right: 12px !important;
+}
+
+table#header.ui.fixed.single.line.table.info-table {
+  line-height: 45px;
 }
 
 .ui.accountContainer div.wallet_board table#header,
@@ -1090,17 +1339,77 @@ a.ui.card:hover {
   text-transform: capitalize;
   font-size: 14px !important;
   margin-left: 0;
-  margin-right: -18px !important;
+  margin-right: -27px !important;
   letter-spacing: 0.025rem !important;
+  padding-top: 8px;
+}
+
+.info-modal {
+  height: 42%;
+}
+
+.ui.accountContainer div.wallet_board table button#depositButton2 {
+  background-color: transparent!important;
+  box-shadow: none!important;
+  color: rgba(1, 133, 244, 1);
+  text-transform: capitalize;
+  font-size: 14px !important;
+  margin-left: -9px;
+  margin-right: -36px !important;
+  letter-spacing: 0.025rem !important;
+  padding-top: 9px;
+}
+
+.ui.accountContainer div.wallet_board table button#depositButton2:hover {
+  transform: translateY(0px);
+  color: #005daa !important;
+}
+
+div#modal-balance {
+  padding-left: 0px !important;
 }
 
 .featured-casino-text3 {
+  margin-top: 6px;
   font-size: 14px !important;
+}
+
+.exchange-hover {
+  font-weight: 600;
+  color: #2085F3 !important;
+}
+
+.exchange-hover2 {
+  color: #2085F3 !important;
+}
+
+.exchange-hover2:hover {
+  color: #005daa !important;
+  cursor: pointer;
+}
+
+.opensea-text {
+  font-size: 18px !important;
+  margin-top: -6px;
+}
+
+.outter-modal {
+  border: 0px !important;
+  border-radius: 4px !important;
+  height: 660px;
+}
+
+#uniswap-modal {
+  height: 660px;
+  width: 100%;
+  border-radius: 4px;
+  border: 0px !important;
 }
 
 .ui.accountContainer div.wallet_board table button#depositButton:hover, .exchange-hover:hover {
   transform: translateY(0px);
   color: #005daa !important;
+  cursor: pointer;
 }
 
 .ui.accountContainer div.wallet_board div.account {
@@ -1262,11 +1571,7 @@ div.progressbar .row, div.progressbar2 .row {
   z-index: 1000;
   /*background-color: rgba(255,255,255,0.8);*/
 }
-.modallogospin {
-  float: right;
-  width: 100px;
-  margin-top: calc((100vh - 600px) / 2);
-}
+
 .logospin {
   display: block;
   width: 100px;

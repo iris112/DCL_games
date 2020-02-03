@@ -1,11 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import "../additional.css";
 import Screen from "./screen";
-import Navbar from "../Navbar";
 import { GlobalContext } from "../../store";
 import { butter } from "../../store/api";
 import { Segment } from "semantic-ui-react";
-import Footer2 from '../Footer2';
+
 
 const BlogDetail = ({ match }) => {
   const [state, dispatch] = useContext(GlobalContext);
@@ -31,7 +30,6 @@ const BlogDetail = ({ match }) => {
 
   return (
     <Segment vertical>
-      <Navbar />
       {currentPage && (
         <Screen
           image={currentPage.featured_image}
@@ -45,7 +43,6 @@ const BlogDetail = ({ match }) => {
           prev={prevPage}
         />
       )}
-    <Footer2 />
     </Segment>
   );
 };

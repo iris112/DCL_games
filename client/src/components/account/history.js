@@ -4,6 +4,10 @@ import { Table } from 'semantic-ui-react'
 import ModalWithdraw from '../ModalWithdraw'
 import LogoSpinner from '../../LogoSpinner'
 import Global from '../constant';
+import mana from '../Images/mana.png';
+import { Icon } from 'semantic-ui-react'
+import Fade from 'react-reveal/Fade';
+
 
 const INITIAL_STATE = {
   data: [],
@@ -244,7 +248,7 @@ class History extends React.Component {
                   </Table.Body>
                 </Table>
               </div>
-            : <p style={{lineHeight:'calc(100vh - 200px)', textAlign:'center', color: 'gray', fontStyle: 'italic'}}> There is no transaction history for this account </p> }
+            : <p className="playboard-p" style={{lineHeight:'calc(100vh - 200px)', textAlign:'center', color: 'gray', fontStyle: 'italic'}}> There is no transaction history for this account </p> }
           </div>
         </div>
       </div>

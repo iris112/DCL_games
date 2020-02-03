@@ -639,7 +639,7 @@ class Withdraw extends React.Component {
         <div id="deposit">
           <Container style={{ height: '35em' }}>
             <Grid style={{marginTop: '17em'}} verticalAlign='middle' textAlign='center'>
-              <Header> You have in-progress withdrawal now, Please finish already started withdrawal. </Header>
+              <Header> You have a withdrawal in progress. Please check back in a few days. </Header>
             </Grid>
           </Container>
         </div>
@@ -705,7 +705,7 @@ class Withdraw extends React.Component {
                     <div class="contentContainer2" >
                       <Grid>
                         <Grid.Row>
-                          <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
+                          <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                         </Grid.Row>
                         <Grid.Row>
                           <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>7. Confirm withdrawal on Ropsten.
@@ -796,7 +796,7 @@ class Withdraw extends React.Component {
                   <div class="contentContainer2" >
                     <Grid>
                       <Grid.Row>
-                        <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
+                        <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                       </Grid.Row>
                       <Grid.Row>
                         <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>4. On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
@@ -877,7 +877,7 @@ class Withdraw extends React.Component {
                   <div class="contentContainer2" >
                     <Grid>
                       <Grid.Row>
-                        <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
+                        <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                       </Grid.Row>
                       <Grid.Row>
                         <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>6. Please check back in 15 minutes to continue withdrawal process from Matic Network.
@@ -971,7 +971,7 @@ class Withdraw extends React.Component {
                     <div class="contentContainer2" >
                       <Grid>
                         <Grid.Row>
-                          <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
+                          <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                         </Grid.Row>
                         <Grid.Row>
                           <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>5. Continue withdrawal to Ropsten.
@@ -1062,7 +1062,7 @@ class Withdraw extends React.Component {
                   <div class="contentContainer2" >
                     <Grid>
                       <Grid.Row>
-                        <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
+                        <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                       </Grid.Row>
                       <Grid.Row>
                         <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>4. On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
@@ -1140,14 +1140,14 @@ class Withdraw extends React.Component {
                   <div class="contentContainer2" >
                     <Grid>
                       <Grid.Row>
-                        <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
+                        <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                       </Grid.Row>
                       <Grid.Row>
                         <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>3. Please check back in 1-2 days to continue withdrawal process from Matic Network.
                         </p>
                       </Grid.Row>
                       <Grid.Row>
-                        <Button id='button-6' color='blue' style={{marginLeft: '5px', marginBottom: '3em' }} 
+                        <Button id='depositButton2' color='blue' style={{ marginTop: '-10px', display: 'block' }}  
                           onClick={this.confirmStep1}>
                           Confirm
                         </Button>
@@ -1159,16 +1159,18 @@ class Withdraw extends React.Component {
                         Withdraw confirm failed.
                       </p> : <p/>
                     }
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', marginRight: '30px', fontStyle:'italic', marginTop: '100px' }}>
-                      **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
-                    </p>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
-                      <span style={{fontWeight: 'bold'}}>NOTE: </span>
-                      To ensure upmost security on the Matic sidechain, withdrawals currently take 1 week, and are broken down into 3 steps. You will need to sign 2 more thransactions to complete this withdrawal - one in 1-2 days, and one in 1 week.
-                    </p>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
-                      We will be offering instant mainchain liquidity services in the near future,
-                    </p>
+                    <Container style={{ paddingRight: '21px' }}>
+                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', marginRight: '30px', fontStyle:'italic', marginTop: '100px' }}>
+                        **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
+                      </p>
+                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', fontStyle:'italic', marginTop: '20px' }}>
+                        <span style={{fontWeight: 'bold'}}>NOTE: </span>
+                        To ensure upmost security on the Matic sidechain, withdrawals currently take 1 week, and are broken down into 3 steps. You will need to sign 2 more thransactions to complete this withdrawal - one in 1-2 days, and one in 1 week.
+                      </p>
+                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', fontStyle:'italic', marginTop: '20px' }}>
+                        We will be offering instant mainchain liquidity services in the near future,
+                      </p>
+                    </Container>
                   </div>
                 </Grid.Column>
               </Grid>
@@ -1230,7 +1232,7 @@ class Withdraw extends React.Component {
                   <div class="contentContainer2" >
                     <Grid>
                       <Grid.Row>
-                        <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
+                        <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                       </Grid.Row>
                       <Grid.Row>
                         <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>2. Select amount to initiate withdrawal of MANA from Matic.
@@ -1244,7 +1246,7 @@ class Withdraw extends React.Component {
                         : <Input style={{ width: '300px', marginTop: '0px'}} value={this.state.amount} onChange={this.onChangeCustomAmount} /> }
                       </Grid.Row>
                       <Grid.Row>
-                        <Button id='button-6' color='blue' style={{marginLeft: '-10px', marginBottom: '3em' }} 
+                        <Button id='depositButton2' color='blue' style={{ marginTop: '-10px', display: 'block' }} 
                           onClick={this.withdrawManaFromMatic}>
                           Withdraw
                         </Button>
@@ -1252,20 +1254,22 @@ class Withdraw extends React.Component {
                     </Grid>
 
                     { this.state.isValidStep1 == 1 ?
-                      <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
+                      <p style={{ textAlign: 'left', color: 'red', marginTop: '20px', marginLeft: '-14px' }}>
                         Withdraw failed.
                       </p> : <p/>
                     }
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', marginRight: '30px', fontStyle:'italic', marginTop: '100px' }}>
-                      **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
-                    </p>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
-                      <span style={{fontWeight: 'bold'}}>NOTE: </span>
-                      To ensure upmost security on the Matic sidechain, withdrawals currently take 1 week, and are broken down into 3 steps. You will need to sign 2 more thransactions to complete this withdrawal - one in 1-2 days, and one in 1 week.
-                    </p>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
-                      We will be offering instant mainchain liquidity services in the near future,
-                    </p>
+                    <Container style={{ paddingRight: '21px' }}>
+                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', marginRight: '30px', fontStyle:'italic', marginTop: '90px' }}>
+                        **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
+                      </p>
+                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', fontStyle:'italic', marginTop: '20px' }}>
+                        <span style={{fontWeight: 'bold'}}>NOTE: </span>
+                        To ensure upmost security on the Matic sidechain, withdrawals currently take 1 week, and are broken down into 3 steps. You will need to sign 2 more thransactions to complete this withdrawal - one in 1-2 days, and one in 1 week.
+                      </p>
+                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', fontStyle:'italic', marginTop: '20px' }}>
+                        We will be offering instant mainchain liquidity services in the near future.
+                      </p>
+                    </Container>
                   </div>
                 </Grid.Column>
               </Grid>
@@ -1325,7 +1329,7 @@ class Withdraw extends React.Component {
                 <div class="contentContainer2" >
                   <Grid>
                     <Grid.Row>
-                      <h3 style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
+                      <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                     </Grid.Row>
                     <Grid.Row>
                       <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>1. On your Metamask extension, open the Network dropdown menu and select 'Matic' Testnet.

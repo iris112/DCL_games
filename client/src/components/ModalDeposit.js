@@ -6,11 +6,13 @@ import box from './Images/box.png';
 import check from './Images/check.png';
 import verify1 from './Images/switch_ropsten.png';
 import { Header, Button } from 'decentraland-ui'
-import { Container, Grid, Dropdown, Input, Modal, Divider } from 'semantic-ui-react'
+import { Container, Grid, Dropdown, Input, Modal, Divider, Table, Icon } from 'semantic-ui-react'
 import logo from './Images/logo.png'
 import verify5_1 from './Images/switch_matic_1.png';
 import verify5_2 from './Images/switch_matic_2.png';
 import Global from './constant';
+import mana from './Images/mana.png';
+
 
 var UNIT = 1;
 // var UNIT = 1000;
@@ -24,6 +26,8 @@ const INITIAL_STATE = {
   networkID: 0,
   isValidDeposit: 0,
   isValidAuthorize: 0,
+  tokenBalance: 0,
+  tokenBalance2: 0,
 };
 
 class Deposit extends React.Component {
@@ -52,9 +56,18 @@ class Deposit extends React.Component {
       USER_ADDRESS = window.web3.currentProvider.selectedAddress;
       this.isBrowserMetamsk = 1;
     }
+
+    this.maticWeb3 = new window.Web3(new window.Web3.providers.HttpProvider("https://testnet2.matic.network"));
   }
 
   async componentDidMount() {
+
+  let object = this;
+    window.ethereum.on('accountsChanged', async function (accounts) {
+      await object.getUserData();
+    })
+
+    await this.getUserData();
       
     try {
       if (!window.web3.currentProvider.selectedAddress) {
@@ -91,6 +104,32 @@ class Deposit extends React.Component {
     this.setState({isLoaded : 0});
     this.props.hideSpinner();
   }
+
+  async getUserData() {
+    this.verifyNetwork();
+  }
+
+  update = () => {
+    this.getTokenBalance();
+  }
+
+  getTokenBalance = async (isMatic) => {
+    try {
+      var amount;
+      var amount2;
+      
+      // if (isMatic)
+      //   amount = await Global.balanceOfToken(Global.MATIC_TOKEN);
+      // else
+      //   amount = await Global.balanceOfToken(Global.ROPSTEN_TOKEN);
+      amount = await Global.balanceOfToken(Global.MATIC_TOKEN, this.maticWeb3);
+      amount2 = await Global.balanceOfToken(Global.ROPSTEN_TOKEN);
+      this.setState({tokenBalance: window.web3.fromWei(amount, 'ether').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")});
+      this.setState({tokenBalance2: window.web3.fromWei(amount2, 'ether').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")});
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   checkUserVerifyStep = async () => {
     try {
@@ -131,10 +170,19 @@ class Deposit extends React.Component {
   }
 
   verifyNetwork = () => {
-    window.web3.version.getNetwork((err, network) => {
+    window.web3.version.getNetwork(async (err, network) => {
       this.setState({networkID: parseInt(network)});
+      if (network === Global.MATIC_NETWORK_ID) {
+        this.isMatic = true;
+        await this.getTokenBalance(true);
+      }
+      else {
+        this.isMatic = false;
+        await this.getTokenBalance(false);
+      }
     });
   }
+
 
   getUserVerify = () => {
     return fetch(`${Global.BASE_URL}/order/verifyAddress`, {
@@ -318,18 +366,32 @@ class Deposit extends React.Component {
 
   getTrigger = () => {
     if (this.props.type != 1) {
-      return <Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>;
+      return <Button content='Deposit' id='depositButton2' onClick={this.handleOpen} style={{marginRight: '0px'}}/>;
     }
     else if (this.props.commingsoon == 1) {
-      return <Button content='Coming Soon' disabled id='depositButton' color='blue' style={{marginTop:'5px'}} />
+      return <Button content='Coming Soon' disabled id='depositButton2' color='blue' style={{marginTop:'5px'}} />
     } else if (this.props.authorized == 0) {
-      return <Button content='Authorize' id='depositButton' color='blue' style={{marginTop:'5px'}} onClick={this.onAuthorize}/>
+      return <Button content='Authorize' id='depositButton2' color='blue' style={{marginTop:'5px'}} onClick={this.onAuthorize}/>
     } else {
-      return <Button disabled content='Authorized' id='depositButton' style={{marginTop:'5px', color: 'white'}}/>
+      return <Button disabled content='Authorized' id='depositButton2' style={{marginTop:'5px', color: 'white'}}/>
     }
   }
 
   render() {
+    const data = [
+    {
+      coin1: 'ROPSTEN BALANCE: ',
+      image1: mana,
+      balance1: this.state.tokenBalance2,
+      enabled: 1
+    },
+    {
+      coin2: 'MATIC BALANCE: ',
+      image2: mana,
+      balance2: this.state.tokenBalance,
+      enabled: 0
+    }];
+
     const amount = [
       { key: 1, text: '1000 MANA', value: 1000 },
       { key: 2, text: '2000 MANA', value: 2000 },
@@ -361,7 +423,7 @@ class Deposit extends React.Component {
     if (this.state.isLoaded === 1) {
       return (
         <Modal
-          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
+          trigger={<Button content='Deposit' id='depositButton2' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           closeIcon
@@ -380,7 +442,7 @@ class Deposit extends React.Component {
     if (!this.isBrowserMetamsk) {
       return (
         <Modal
-          trigger={<Button content='Deposit' id='depositButton' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
+          trigger={<Button content='Deposit' id='depositButton2' onClick={this.handleOpen} style={{marginRight: '0px'}}/>}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           closeIcon
@@ -431,12 +493,41 @@ class Deposit extends React.Component {
                     <div class="contentContainer2" >
                       <Grid>
                         <Grid.Row>
-                          <h3 style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
+                          <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
                         </Grid.Row>
                         <Grid.Row>
-                          <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>2. Select amount to deposit MANA to Matic.
+                          <p className="playboard-p" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>2. Select amount to deposit MANA to Matic.
                           </p>
                         </Grid.Row>
+
+                        <div id='modal-balance'>
+                          <Table id='header' singleLine fixed style={{marginBottom: 0, border: '0px' }}>
+                            <Table.Body>
+                                <div style={{ paddingTop: '6px', paddingBottom: '17px' }}>
+                                  <Table.Row>
+                                    <span style={{textAlign: 'left', lineHeight: '25px', verticalAlign: 'middle', fontWeight: 'bold' }}>
+                                      ROPSTEN BALANCE:
+                                    </span>
+                                    <img style={{ verticalAlign:'middle', marginLeft: '40px' }} class="image inline" width="20px" height="20px" src={mana} />
+                                    <span style={{ textAlign: 'left', marginLeft: '10px', lineHeight: '25px', verticalAlign: 'middle'}}>
+                                      {this.state.tokenBalance2} MANA
+                                    </span>
+                                  </Table.Row>
+                                  <Table.Row>
+                                    <span style={{textAlign: 'left', lineHeight: '25px', verticalAlign: 'middle', fontWeight: 'bold' }}>
+                                      MATIC BALANCE:
+                                    </span>
+                                    <img style={{ verticalAlign:'middle', marginLeft: '61px' }} class="image inline" width="20px" height="20px" src={mana} />
+                                    <span style={{ textAlign: 'left', marginLeft: '10px', lineHeight: '25px', verticalAlign: 'middle'}}>
+                                      {this.state.tokenBalance} MANA
+                                    </span>
+                                  </Table.Row>
+                                </div>
+
+                            </Table.Body>
+                          </Table>
+                        </div>
+
                         <Grid.Row>
                           { this.state.isCustomAmount == 0 ?
                         <Dropdown selection options={amount} value={this.state.amount} 
@@ -445,7 +536,7 @@ class Deposit extends React.Component {
                           : <Input style={{ width: '300px', marginTop: '0px'}} value={this.state.amount} onChange={this.onChangeCustomAmount} /> }
                         </Grid.Row>
                         <Grid.Row>
-                          <Button id='button-6' color='blue' style={{ marginTop: '-10px', display: 'block' }} 
+                          <Button id='depositButton2' color='blue' style={{ marginTop: '-10px', display: 'block' }} 
                             onClick={this.depositManaToMatic}>
                             Deposit
                           </Button>
@@ -453,14 +544,14 @@ class Deposit extends React.Component {
                       </Grid>
 
                       { this.state.isValidDeposit == 1 ?
-                        <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
+                        <p className="playboard-p" style={{ textAlign: 'left', color: 'red', marginTop: '20px', marginLeft: '-14px' }}>
                           Deposit failed.
                         </p> : <p/>
                       }
-                      <p style={{ textAlign: 'left', marginLeft: '-13px', marginRight: '30px', fontSize: '1.33em', fontStyle:'italic', marginTop: '100px' }}>
+                      <p className="playboard-p" style={{ textAlign: 'left', marginLeft: '-13px', marginRight: '30px', fontSize: '1.33em', fontStyle:'italic', marginTop: '100px' }}>
                         **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
                       </p>
-                      <p style={{ textAlign: 'left', marginLeft: '-13px', fontSize: '1.33em', fontStyle:'italic', marginTop: '20px' }}>
+                      <p className="playboard-p" style={{ textAlign: 'left', marginLeft: '-13px', fontSize: '1.33em', fontStyle:'italic', marginTop: '20px' }}>
                         <span style={{fontWeight: 'bold'}}>NOTE: </span>
                         Matic deposits are instantly usable in all our games.
                       </p>
@@ -505,10 +596,10 @@ class Deposit extends React.Component {
                 <div class="contentContainer2" >
                   <Grid>
                     <Grid.Row>
-                      <h3 style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
+                      <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
                     </Grid.Row>
                     <Grid.Row>
-                      <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>1. On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
+                      <p className="playboard-p" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>1. On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
                       </p>
                     </Grid.Row>
                     <Grid.Row>
@@ -517,7 +608,7 @@ class Deposit extends React.Component {
                   </Grid>
 
                   { this.state.networkID != 3 ?
-                    <p style={{ textAlign: 'left', color: 'red', marginTop: '21px', marginLeft: '-13px'}}>
+                    <p className="playboard-p" style={{ textAlign: 'left', color: 'red', marginTop: '21px', marginLeft: '-13px'}}>
                       This is not Ropsten Network.
                     </p> : <p/>
                   }
@@ -573,10 +664,10 @@ class Deposit extends React.Component {
                     <div class="contentContainer2">
                       <Grid>
                         <Grid.Row>
-                          <h3 style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
+                          <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
                         </Grid.Row>
                         <Grid.Row>
-                          <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>
+                          <p className="playboard-p" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>
                             4. Authorize MANA transfers on Matic.
                           </p>
                         </Grid.Row>
@@ -587,7 +678,7 @@ class Deposit extends React.Component {
                           </Button>
 
                           { this.state.isValidAuthorize == 1 ?
-                            <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
+                            <p className="playboard-p" style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
                               Authorization failed.
                             </p> : <p/>
                           }
@@ -640,10 +731,10 @@ class Deposit extends React.Component {
                   <div class="contentContainer2">
                     <Grid>
                       <Grid.Row>
-                        <h3 style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
+                        <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
                       </Grid.Row>
                       <Grid.Row>
-                        <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>
+                        <p className="playboard-p" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>
                           3. On your Metamask extension, open the 'Main Ethereum Network' dropdown menu and select 'Custom RPC'. Fill in 'Matic Testnet' as Network name and <span style={{fontStyle:'italic'}}>https://testnet2.matic.network</span> as New RPC URL and select 'Save'.
                         </p>
                       </Grid.Row>
@@ -655,7 +746,7 @@ class Deposit extends React.Component {
                         <img style={{width:'210px', verticalAlign:'top'}} src={verify5_2} class="image small inline" />
 
                         { this.state.networkID != parseInt(Global.MATIC_NETWORK_ID) ?
-                          <p style={{ textAlign: 'left', color: 'red', marginTop: '30px', width: '400px'}}>
+                          <p className="playboard-p" style={{ textAlign: 'left', color: 'red', marginTop: '30px', width: '400px'}}>
                             This is not Matic Network.
                           </p> : <p/>
                         }
@@ -708,10 +799,10 @@ class Deposit extends React.Component {
                     <div class="contentContainer2" >
                       <Grid>
                         <Grid.Row>
-                          <h3 style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
+                          <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
                         </Grid.Row>
                         <Grid.Row>
-                          <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>2. Authorize MANA transfers and deposit to Matic.
+                          <p className="playboard-p" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>2. Authorize MANA transfers and deposit to Matic.
                           </p>
                         </Grid.Row>
                         <Grid.Row>
@@ -730,14 +821,14 @@ class Deposit extends React.Component {
                       </Grid>
 
                       { this.state.isValidDeposit == 1 ?
-                        <p style={{ textAlign: 'left', marginLeft: '-13px', color: 'red', marginTop: '30px'}}>
+                        <p className="playboard-p" style={{ textAlign: 'left', marginLeft: '-13px', color: 'red', marginTop: '30px'}}>
                           Deposit failed.
                         </p> : <p/>
                       }
-                      <p style={{ textAlign: 'left', marginLeft: '-13px', marginRight: '30px', fontSize: '1.33em', fontStyle:'italic', marginTop: '100px' }}>
+                      <p className="playboard-p" style={{ textAlign: 'left', marginLeft: '-13px', marginRight: '30px', fontSize: '1.33em', fontStyle:'italic', marginTop: '100px' }}>
                         **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
                       </p>
-                      <p style={{ textAlign: 'left', marginLeft: '-13px', fontSize: '1.33em', fontStyle:'italic', marginTop: '20px' }}>
+                      <p className="playboard-p" style={{ textAlign: 'left', marginLeft: '-13px', fontSize: '1.33em', fontStyle:'italic', marginTop: '20px' }}>
                         <span style={{fontWeight: 'bold'}}>NOTE: </span>
                         Matic deposits are instantly usable in all our games.
                       </p>
@@ -786,10 +877,10 @@ class Deposit extends React.Component {
                 <div class="contentContainer2" >
                   <Grid>
                     <Grid.Row>
-                      <h3 style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
+                      <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
                     </Grid.Row>
                     <Grid.Row>
-                      <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>1. On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
+                      <p className="playboard-p" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>1. On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
                       </p>
                     </Grid.Row>
                     <Grid.Row>
@@ -798,7 +889,7 @@ class Deposit extends React.Component {
                   </Grid>
 
                   { this.state.networkID != 3 ?
-                    <p style={{ textAlign: 'left', color: 'red', marginTop: '21px', marginLeft: '-13px'}}>
+                    <p className="playboard-p" style={{ textAlign: 'left', color: 'red', marginTop: '21px', marginLeft: '-13px'}}>
                       This is not Ropsten Network.
                     </p> : <p/>
                   }

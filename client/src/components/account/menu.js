@@ -1,9 +1,17 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { Menu, Icon} from 'semantic-ui-react';
+import { Menu, Icon, Divider } from 'semantic-ui-react';
 import '../additional.css';
 import logo from '../Images/authorize_title.png'
+import { MdPlayCircleOutline } from "react-icons/md";
+import { FaEthereum } from "react-icons/fa";
+import { MdHistory } from "react-icons/md";
+import { MdPlaylistAddCheck } from "react-icons/md";
+import { MdBookmarkBorder } from "react-icons/md";
+import { MdInfoOutline } from "react-icons/md";
+import Svgeth from '../Images/svg6.js'
+
 
 const INITIAL_STATE = {
   selectedMenu: 0,
@@ -30,46 +38,36 @@ class SideMenu extends React.Component {
     this.props.onMenuSelected(index);
   }
 
-  getContent = (title, index, icon) => {
-    if (this.state.selectedMenu == index) {
-      return (
-        <Menu.Item onClick={() => this.onMenuClick(index)} exact href='#' className='account-p' style={{color:'white'}}>
-          <Icon name={icon} />
-          {title}
-        </Menu.Item>
-      )
-    }
-
-    let url = '#';
-    if (index == 5)
-      url = '/blog/';
-    else if (index == 6)
-      url = 'https://decentral.games/discord/';
-    else if (index == 7)
-      url = 'mailto:hello@decentral.games';
-    else if (index == 8)
-      url = 'https://twitter.com/decentralgames';
-    else if (index == 9)
-      url = '/disclaimer/';
-
-    return (
-      <Menu.Item onClick={() => this.onMenuClick(index)} exact href='#' className='account-p' style={{color:'gray'}}>
-        <Icon name={icon} />
-        {title}
-      </Menu.Item>
-    )
-  }
-
   render() {
     return (
       <Menu className="menuContainer" icon='labeled' vertical>
         <a href="/">
           <img class="image inline" src={logo} style={{width: '42px', paddingTop: '30px', paddingBottom: '35px'}}/>
         </a>
-       {this.getContent('Play Now', 0, 'play')}
-       {this.getContent('NFTs', 4, 'gamepad')}
-       {this.getContent('Tx History', 1, 'dollar')}
-       {this.getContent('Authorize', 3, 'check')}
+        <Menu.Item onClick={() => this.onMenuClick(0)} exact href='#' className='account-p' style={{color:'grey'}}>
+          <span> <MdPlayCircleOutline style={{ fontSize: '30px', paddingBottom: '6px' }}/></span><br />
+          Play Now
+        </Menu.Item>
+        <Menu.Item onClick={() => this.onMenuClick(4)} exact href='#' className='account-p' style={{color:'grey'}}>
+          <span> <Svgeth  style={{ paddingBottom: '9px' }}/></span><br />
+          NFTs
+        </Menu.Item>
+        <Menu.Item onClick={() => this.onMenuClick(1)} exact href='#' className='account-p' style={{color:'grey'}}>
+          <span> <MdHistory style={{ fontSize: '30px', paddingBottom: '6px' }}/></span><br />
+          TX History
+        </Menu.Item>
+        <Menu.Item onClick={() => this.onMenuClick(3)} exact href='#' className='account-p' style={{color:'grey'}}>
+          <span> <MdPlaylistAddCheck style={{ fontSize: '30px', paddingBottom: '6px' }}/></span><br />
+          Authorize
+        </Menu.Item>
+        <Menu.Item className="account-p" href="/blog/" style={{ color: 'grey' }}>
+          <span> <MdBookmarkBorder style={{ fontSize: '30px', paddingBottom: '6px' }}/></span><br />
+          Blog
+        </Menu.Item>
+        <Menu.Item className="account-p" href="/disclaimer/" style={{ color: 'grey' }}>
+          <span> <MdInfoOutline style={{ fontSize: '30px', paddingBottom: '6px' }}/></span><br />
+          Disclaimer
+        </Menu.Item>
       </Menu>
     )
   }

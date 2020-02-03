@@ -1,8 +1,7 @@
 import React from 'react'
 import '../additional.css';
 import ethereum from '../Images/ethereum3.png';
-import { Header, Divider, Grid, Image, List, Segment, Container, Breadcrumb } from 'semantic-ui-react'
-import Footer2 from '../Footer2'
+import { Header, Divider, Grid, Image, List, Segment, Container, Breadcrumb, Icon } from 'semantic-ui-react'
 
 
 const Screen = () => (
@@ -11,10 +10,10 @@ const Screen = () => (
     <Container id='disclaimer-container' style={{ paddingTop: '2rem', paddingBottom: '5em' }}>
 
     <a id='a-footer' href='/'>
-      <Breadcrumb.Divider  style={{ fontSize: '18px' }} icon='left arrow' />
+      <Breadcrumb style={{ borderRadius: '4px', color: 'rgb(97, 97, 97)', paddingBottom: '30px', marginTop: '-12px' }}> <Icon style={{ fontSize: '10px', color: 'rgb(97, 97, 97)' }} name="arrow left" /> Go to Decentral Games  </Breadcrumb>
     </a>
 
-      <Header as='h3' id='disclaimer-header' style={{ textAlign: 'center', lineHeight: '1.6em', fontSize: '2.7em', color: 'black', marginBottom: '0.5em' }}>
+      <Header as='h3' id='disclaimer-header' style={{ paddingBottom: '30px' }}>
         Decentraland Games Disclaimer
       </Header>
 
@@ -212,6 +211,21 @@ const Screen = () => (
         18. The user acknowledges and accepts that Metaverse Holdings Ltd. (the “Curator”), the curator of Decentraland is not, and shall not be liable for the services provided by Decentral Games and hereby waives and releases the Curator from and against any claim in connection with its use of the services of Decentral Games.
       </p>
 
+    </Container>
+
+    <div>
+      <Divider />
+    </div>
+
+    <Container id="disclaimer-container" style={{ paddingBottom: '21px', paddingTop: '5px' }}>
+      <Grid className='grid-margin'>
+       <Grid.Column floated='left' computer={8} tablet={6} mobile={16} id="footer-top-mobile2">
+          <p className='footer-font2' id='footer-float1' style={{ marginLeft: '-27px' }}> © 2019 <a id='a-footer' href='/'> Decentral Games </a></p>
+        </Grid.Column>
+        <Grid.Column id='footer-mobile3' floated='right' computer={8} tablet={10} mobile={16} style={{ marginRight: '-12px' }}>
+          <p className='footer-font2' id='footer-float2'> Follow <a id='a-footer' href='https://twitter.com/decentralgames'> Twitter </a> & Join <a id='a-footer' href='https://decentral.games/discord/'> Discord </a> | <a id='a-footer' href='/disclaimer/'> Disclaimer </a></p>
+        </Grid.Column>
+      </Grid>
     </Container>
   </Segment>
 )

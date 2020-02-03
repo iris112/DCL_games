@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { BrowserView } from "react-device-detect"
 import { Divider, Icon, Menu, Segment, Sidebar, Image } from 'semantic-ui-react'
-import Navbar from './Navbar'
 import Global from './constant';
 import './additional.css'
 
@@ -87,10 +86,6 @@ class SidebarExampleDimmed extends React.Component {
   render() {
     return (
       <Sidebar.Pushable as={Segment}>
-        <Navbar
-          visible={this.state.visible}
-          handleClickButton={() => this.setState({ visible: !this.state.visible })}
-        />
         <Sidebar
           direction='right'
           as={Menu}

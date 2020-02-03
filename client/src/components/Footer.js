@@ -7,9 +7,15 @@ import Svg1 from './Images/svg1.js'
 import Svg2 from './Images/svg2.js'
 import Svg3 from './Images/svg3.js'
 import Svg4 from './Images/svg4.js'
+import { FaDiscord } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { FaTelegramPlane } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+
 
 const Footer = () => (
-    <Segment vertical style={{ backgroundColor: '#070a0e' }}>
+    <Segment vertical style={{ backgroundColor: '#060a0d' }}>
       <Container>
         <Grid>
           <Grid.Row className='comp-footer' style={{ paddingBottom: '30px', paddingTop: '33px' }}>
@@ -72,6 +78,23 @@ const Footer = () => (
             <Grid.Column centered computer={16}>
               <p className='footer-font'>Copyright © 2020 Decentral Games </p>
             </Grid.Column>
+          </Grid.Row>
+          <Grid.Row className="main-footer-icon-row">
+            <a href="/discord/">
+              <FaDiscord className="main-footer-icon" />
+            </a>
+            <a href="https://twitter.com/decentralgames/">
+              <FaTwitter className="main-footer-icon" />
+            </a>
+            <a href="https://github.com/decentral.games">
+              <FaGithub className="main-footer-icon"/>
+            </a>
+            <a href="https://telegram.org/decentralgames/">
+              <FaTelegramPlane className="main-footer-icon"/>
+            </a>
+            <a href="mailto:hello@decentral.games">
+              <MdEmail className="main-footer-icon"/>
+            </a>
           </Grid.Row>
         </Grid>
 

@@ -2,6 +2,14 @@
   Five-color theme from a single blue hue.
 */
 
+pre {
+  margin-top: 42px;
+}
+
+#copy-button {
+  margin-bottom: 21px;
+}
+
 code strong, kbd, samp {
   background-color: rgb(244, 246, 250) !important;
   font-size: 18px;

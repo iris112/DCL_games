@@ -1,6 +1,6 @@
 import React from "react";
 import PostPreview from "./PostPreview";
-import { Segment, Container, Menu } from "decentraland-ui";
+import { Segment, Container, Menu, Navbar } from "decentraland-ui";
 import logo from '../Images/authorize_title.png'
 import ethereum from "../Images/ethereum3.png";
 import { NavLink } from "react-router-dom";
@@ -23,7 +23,7 @@ const Screen = ({ pages, category }) => {
           className="blog-nav-menu"
           >
             <Menu.Item header as={NavLink} to="/" style={{ marginLeft: '-15px' }}>
-              <Image src={logo} style={{ width: '42px', marginTop: '1em' }} />
+              <Image src={logo} style={{ width: '42px', marginTop: '1.5em' }} />
             </Menu.Item>
 
             <Menu.Item position='right' header as={NavLink} to="/" style={{ marginRight: '-15px' }}>
@@ -32,6 +32,7 @@ const Screen = ({ pages, category }) => {
 
           </Menu>
         </Container>
+
         <Container style={{ marginTop: "-27px" }}>
           <Fade bottom distance="20px" duration="600">
             <h3> Decentral Games</h3>
@@ -44,7 +45,7 @@ const Screen = ({ pages, category }) => {
             <p style={{ color: 'rgb(97, 97, 97)' }}> Featured Post</p>
             <Divider style={{ opacity: '0.5', paddingBottom: '15px' }} />
 
-            <Grid href="/blog/the-flamingos-a-mega-casino-by-vegas-city-decentral-games/" style={{ paddingBottom: '120px' }}>
+            <Grid href="/blog/the-flamingos-a-mega-casino-by-vegas-city-decentral-games/" style={{ paddingBottom: '120px' }} className="featured-post-padding">
               <Grid.Row>
                 <Grid.Column computer={11} tablet={16} mobile={16}>
                   <Image src={flamingos} className="featured-image"/>
@@ -70,41 +71,48 @@ const Screen = ({ pages, category }) => {
           </Fade>
         </Container>
 
-        <Fade bottom distance="20px" duration="600" delay="400">
-          <Container>
-            <Menu.Item as={NavLink} exact to="/blog/" className="category-link">
-              ALL ARTICLES
-            </Menu.Item>
-            <Menu.Item as={NavLink} to="/blog/announcements/" className="category-link">
-              ANNOUNCEMENTS
-            </Menu.Item>
-            <Menu.Item as={NavLink} to="/blog/tutorials/" className="category-link">
-              TUTORIALS
-            </Menu.Item>
-            <Menu.Item as={NavLink} to="/blog/technology/" className="category-link">
-              TECHNOLOGY
-            </Menu.Item>
-            <Menu.Item style={{ float: 'right', marginRight: '-3px' }} as={NavLink} to="/blog/technology/" className="category-link2">
-              <Icon name='mail' />
-            </Menu.Item>
-            <Menu.Item style={{ float: 'right' }} as={NavLink} to="/blog/technology/" className="category-link2">
-              <Icon name='twitter' />
-            </Menu.Item>
-            <Menu.Item style={{ float: 'right' }} as={NavLink} to="/blog/technology/" className="category-link2">
-              <Icon name='discord' />
-            </Menu.Item>
-            <Menu.Item style={{ float: 'right' }} as={NavLink} to="/blog/technology/" className="category-link2">
-              <Icon name='search' />
-            </Menu.Item>
-          </Container>
-        </Fade>
+
+        <div>
+          <Navbar
+            leftMenu={
+              <>
+                <Menu.Item as={NavLink} exact to="/blog/">
+                  All Articles
+                </Menu.Item>
+                <Menu.Item as={NavLink} to="/blog/announcements/">
+                  Announcements
+                </Menu.Item>
+                <Menu.Item as={NavLink} to="/blog/tutorials/">
+                  Tutorials
+                </Menu.Item>
+                <Menu.Item as={NavLink} to="/blog/technology/">
+                  Technology
+                </Menu.Item>
+              </>
+            }
+            rightMenu={
+              <div>
+                <Menu.Item style={{ float: 'right', marginRight: '-3px' }} as={NavLink} to="/blog/technology/" className="category-link2">
+                  <Icon name='mail' />
+                </Menu.Item>
+                <Menu.Item style={{ float: 'right' }} as={NavLink} to="/blog/technology/" className="category-link2">
+                  <Icon name='twitter' />
+                </Menu.Item>
+                <Menu.Item style={{ float: 'right' }} as={NavLink} to="/blog/technology/" className="category-link2">
+                  <Icon name='discord' />
+                </Menu.Item>
+                <Menu.Item style={{ float: 'right' }} as={NavLink} to="/blog/technology/" className="category-link2">
+                  <Icon name='search' />
+                </Menu.Item>
+              </div>
+            }
+          />
+        </div>
       </Container>
 
       <div style={{ marginBottom: '30px' }}>
         <Divider />
       </div>
-
-      <Fade bottom distance="20px" duration="600" delay="200">
         <Container className="outter-blog-container" style={{ paddingBottom: '60px' }}>
           <div className="posts">
             {filteredPages.map(page => (
@@ -122,7 +130,6 @@ const Screen = ({ pages, category }) => {
             ))}
           </div>
         </Container>
-      </Fade>
 
       <Divider />
 

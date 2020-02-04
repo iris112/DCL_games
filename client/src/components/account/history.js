@@ -138,8 +138,8 @@ class History extends React.Component {
     return (
       <div class="contentContainer">
       <LogoSpinner show={this.state.isRunningTransaction}/>
-        <div style={{width: 'calc(100% - 50px)', minWidth: '860px', marginTop: '20px', marginLeft: '30px'}}>
-          <h3 style={{paddingTop: '20px'}}> Transaction History </h3>
+        <div style={{width: 'calc(100% - 90px)', minWidth: '800px', marginTop: '20px', marginLeft: '45px', marginRight: '45px'}}>
+          <h3 className="account-h3" style={{paddingTop: '20px'}}> Transaction History </h3>
           <div id='tx-box' style={{ marginTop: '20px'}}>
             <Table id='header' singleLine fixed style={{marginBottom: 0}}>
               <Table.Header>
@@ -153,7 +153,7 @@ class History extends React.Component {
               </Table.Header>
              </Table>
              { data.length != 0 ?
-               <div class='dataTable' style={{height: 'calc(100vh - 200px)'}}>
+               <div class='dataTable' style={{height: 'calc(100vh - 240px)'}}>
                 <Table singleLine fixed>
                   <Table.Header></Table.Header>
                   <Table.Body>
@@ -173,12 +173,12 @@ class History extends React.Component {
 
                         return (
                           <Table.Row>
-                            <Table.Cell style={{paddingLeft: '20px'}}>{action}</Table.Cell>
+                            <Table.Cell style={{paddingLeft:'20px'}}><img src={mana} style={{ width: '18px', paddingRight: '3px', verticalAlign: 'middle', marginTop: '-3px' }}/>{action}</Table.Cell>
                             <Table.Cell>-{amount} MANA</Table.Cell>
                             <Table.Cell>+{result} MANA</Table.Cell>
                             <Table.Cell>{timestamp}</Table.Cell>
                             <Table.Cell>
-                              <a style={{color: 'gray', 
+                              <a style={{color: '#2085F4', 
                                         maxWidth: '120px', 
                                         display: 'inline-block',
                                         textOverflow: 'ellipsis',
@@ -187,7 +187,7 @@ class History extends React.Component {
                                  target="_blank" href={`https://explorer.testnet2.matic.network/tx/${row.txid}`}>
                                 {row.txid}
                               </a>
-                              <i style={{marginLeft:'5px'}}>&#x25B8;</i>
+                              <Icon name="caret right" style={{ color: '#2085F4' }}/>
                             </Table.Cell>
                           </Table.Row>
                         );
@@ -200,7 +200,7 @@ class History extends React.Component {
                         if (row.status === 'Failed')
                           return (
                             <Table.Row style={{background: '#fb9ca7'}}>
-                              <Table.Cell style={{color:'white', paddingLeft:'20px'}}>{row.type}</Table.Cell>
+                              <Table.Cell style={{paddingLeft:'20px'}}><img src={mana} style={{ width: '18px', paddingRight: '3px', verticalAlign: 'middle', marginTop: '-3px' }}/>{row.type}</Table.Cell>
                               <Table.Cell style={{color:'white'}}>{amount} MANA</Table.Cell>
                               <Table.Cell style={{color:'white'}}>{row.status}</Table.Cell>
                               <Table.Cell style={{color:'white'}}>{timestamp}</Table.Cell>
@@ -213,7 +213,7 @@ class History extends React.Component {
                         if (row.status === 'Ready')
                           return (
                             <Table.Row style={{background: '#8fe08f'}}>
-                              <Table.Cell style={{color:'white', paddingLeft:'20px'}}>{row.type}</Table.Cell>
+                              <Table.Cell style={{paddingLeft:'20px'}}><img src={mana} style={{ width: '18px', paddingRight: '3px', verticalAlign: 'middle', marginTop: '-3px' }}/>{row.type}</Table.Cell>
                               <Table.Cell style={{color:'white'}}>{amount} MANA</Table.Cell>
                               <Table.Cell style={{color:'white'}}>{row.status}</Table.Cell>
                               <Table.Cell style={{color:'white'}}>{timestamp}</Table.Cell>
@@ -225,12 +225,12 @@ class History extends React.Component {
 
                         return (
                           <Table.Row>
-                            <Table.Cell style={{paddingLeft:'20px'}}>{row.type}</Table.Cell>
+                            <Table.Cell style={{paddingLeft:'20px'}}><img src={mana} style={{ width: '18px', paddingRight: '3px', verticalAlign: 'middle', marginTop: '-3px' }}/>{row.type}</Table.Cell>
                             <Table.Cell>{amount} MANA</Table.Cell>
                             <Table.Cell>{row.status}</Table.Cell>
                             <Table.Cell>{timestamp}</Table.Cell>
                             <Table.Cell>
-                              <a style={{color: 'gray', 
+                              <a style={{color: '#2085F4', 
                                         maxWidth: '120px', 
                                         display: 'inline-block',
                                         textOverflow: 'ellipsis',
@@ -239,7 +239,7 @@ class History extends React.Component {
                                  target="_blank" href={`https://explorer.testnet2.matic.network/tx/${row.txid}`}>
                                 {row.txid}
                               </a>
-                              <i style={{marginLeft:'5px'}}>&#x25B8;</i>
+                              <Icon name="caret right" style={{ color: '#2085F4' }}/>
                             </Table.Cell>
                           </Table.Row>
                         );

@@ -669,36 +669,36 @@ class Withdraw extends React.Component {
                         <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
                         <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                         <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                        <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
+                        <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
                       </Grid.Row>  
                       <Grid.Row style={{marginTop: '15px'}}>
                         <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                         <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                        <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Initiate Withdrawal </p>
+                        <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Initiate Withdrawal </p>
                       </Grid.Row>
                       <Grid.Row style={{marginTop: '15px'}}>
                         <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                         <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                        <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Waiting Period </p>
+                        <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Waiting Period </p>
                       </Grid.Row>
                       <Grid.Row style={{marginTop: '15px'}}>
                         <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                         <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                        <p style={{opacity: '0.5', marginLeft: '2px'}} style={{opacity: '0.5'}} class="progressbar"> Switch to Ropsten RPC </p>
+                        <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} style={{opacity: '0.5'}} class="progressbar"> Switch to Ropsten RPC </p>
                       </Grid.Row>
                       <Grid.Row style={{marginTop: '15px'}}>
                         <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                         <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                        <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Continue Withdrawal </p>
+                        <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Continue Withdrawal </p>
                       </Grid.Row>
                       <Grid.Row style={{marginTop: '15px'}}>
                         <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                         <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                        <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Waiting Period </p>
+                        <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Waiting Period </p>
                       </Grid.Row>
                       <Grid.Row style={{marginTop: '15px'}}>
                         <img class="progressbar image inline" src={box} />
-                        <p class="progressbar"> Confirm Withdrawal </p>
+                        <p className="playboard-p2" class="progressbar"> Confirm Withdrawal </p>
                       </Grid.Row>
                     </div>
 
@@ -708,11 +708,11 @@ class Withdraw extends React.Component {
                           <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                         </Grid.Row>
                         <Grid.Row>
-                          <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>7. Confirm withdrawal on Ropsten.
+                          <p className="playboard-p2" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>7. Confirm withdrawal on Ropsten.
                           </p>
                         </Grid.Row>
                         <Grid.Row>
-                          <Button id='button-6' color='blue' style={{marginLeft: '5px', marginBottom: '3em' }} 
+                          <Button id='depositButton2' color='blue' style={{marginLeft: '5px', marginBottom: '3em' }} 
                             onClick={this.confirmStep3}>
                             Confirm
                           </Button>
@@ -720,18 +720,18 @@ class Withdraw extends React.Component {
                       </Grid>
 
                       { this.state.isConfirmStep3 == 1 ?
-                        <p style={{ textAlign: 'left', color: 'red', marginTop: '10px'}}>
+                        <p className="playboard-p2" style={{ textAlign: 'left', color: 'red', marginTop: '10px'}}>
                           Withdraw confirm failed.
                         </p> : <p/>
                       }
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', marginRight: '30px', fontStyle:'italic', marginTop: '100px' }}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', marginRight: '30px', fontStyle:'italic', marginTop: '100px' }}>
                         **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
                       </p>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
                         <span style={{fontWeight: 'bold'}}>NOTE: </span>
                         To ensure upmost security on the Matic sidechain, withdrawals currently take 1 week, and are broken down into 3 steps. You will need to sign 2 more thransactions to complete this withdrawal - one in 1-2 days, and one in 1 week.
                       </p>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
                         We will be offering instant mainchain liquidity services in the near future,
                       </p>
                     </div>
@@ -763,33 +763,33 @@ class Withdraw extends React.Component {
                       <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
+                      <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
                     </Grid.Row>  
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Initiate Withdrawal </p>
+                      <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Initiate Withdrawal </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Waiting Period </p>
+                      <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Waiting Period </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img class="progressbar image inline" src={box} />
-                      <p class="progressbar"> Switch to Ropsten RPC </p>
+                      <p className="playboard-p2" class="progressbar"> Switch to Ropsten RPC </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Continue Withdrawal </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Continue Withdrawal </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Confirm Withdrawal </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Confirm Withdrawal </p>
                     </Grid.Row>
                   </div>
 
@@ -799,7 +799,7 @@ class Withdraw extends React.Component {
                         <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                       </Grid.Row>
                       <Grid.Row>
-                        <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>4. On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
+                        <p className="playboard-p2" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>4. On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
                         </p>
                       </Grid.Row>
                       <Grid.Row>
@@ -808,7 +808,7 @@ class Withdraw extends React.Component {
                     </Grid>
 
                     { this.state.networkID != 3 ?
-                      <p style={{ textAlign: 'left', color: 'red', marginTop: '10px'}}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', color: 'red', marginTop: '10px'}}>
                         This is not Ropsten Network.
                       </p> : <p/>
                     }
@@ -842,35 +842,35 @@ class Withdraw extends React.Component {
                       <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
+                      <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
                     </Grid.Row>  
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Initiate Withdrawal </p>
+                      <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Initiate Withdrawal </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Waiting Period </p>
+                      <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Waiting Period </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} style={{opacity: '0.5'}} class="progressbar"> Switch to Ropsten RPC </p>
+                      <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} style={{opacity: '0.5'}} class="progressbar"> Switch to Ropsten RPC </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Continue Withdrawal </p>
+                      <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Continue Withdrawal </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img class="progressbar image inline" src={box} />
-                      <p class="progressbar"> Waiting Period </p>
+                      <p className="playboard-p2" class="progressbar"> Waiting Period </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Confirm Withdrawal </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Confirm Withdrawal </p>
                     </Grid.Row>
                   </div>
 
@@ -880,11 +880,11 @@ class Withdraw extends React.Component {
                         <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                       </Grid.Row>
                       <Grid.Row>
-                        <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>6. Please check back in 15 minutes to continue withdrawal process from Matic Network.
+                        <p className="playboard-p2" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>6. Please check back in 15 minutes to continue withdrawal process from Matic Network.
                         </p>
                       </Grid.Row>
                       <Grid.Row>
-                        <Button id='button-6' color='blue' style={{marginLeft: '5px', marginBottom: '3em' }} 
+                        <Button id='depositButton2' color='blue' style={{marginLeft: '5px', marginBottom: '3em' }} 
                           onClick={this.confirmStep2}>
                           Confirm
                         </Button>
@@ -892,18 +892,18 @@ class Withdraw extends React.Component {
                     </Grid>
 
                     { this.state.isConfirmStep2 == 1 ?
-                      <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
+                      <p className="playboard-p2" style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
                         Withdraw confirm failed.
                       </p> : <p/>
                     }
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', marginRight: '30px', fontStyle:'italic', marginTop: '100px' }}>
+                    <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', marginRight: '30px', fontStyle:'italic', marginTop: '100px' }}>
                       **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
                     </p>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
+                    <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
                       <span style={{fontWeight: 'bold'}}>NOTE: </span>
                       To ensure upmost security on the Matic sidechain, withdrawals currently take 1 week, and are broken down into 3 steps. You will need to sign 2 more thransactions to complete this withdrawal - one in 1-2 days, and one in 1 week.
                     </p>
-                    <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
+                    <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
                       We will be offering instant mainchain liquidity services in the near future,
                     </p>
                   </div>
@@ -937,34 +937,34 @@ class Withdraw extends React.Component {
                         <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
                         <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                         <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                        <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
+                        <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
                       </Grid.Row>  
                       <Grid.Row style={{marginTop: '15px'}}>
                         <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                         <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                        <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Initiate Withdrawal </p>
+                        <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Initiate Withdrawal </p>
                       </Grid.Row>
                       <Grid.Row style={{marginTop: '15px'}}>
                         <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                         <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                        <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Waiting Period </p>
+                        <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Waiting Period </p>
                       </Grid.Row>
                       <Grid.Row style={{marginTop: '15px'}}>
                         <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                         <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                        <p style={{opacity: '0.5', marginLeft: '2px'}} style={{opacity: '0.5'}} class="progressbar"> Switch to Ropsten RPC </p>
+                        <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} style={{opacity: '0.5'}} class="progressbar"> Switch to Ropsten RPC </p>
                       </Grid.Row>
                       <Grid.Row style={{marginTop: '15px'}}>
                         <img class="progressbar image inline" src={box} />
-                        <p class="progressbar"> Continue Withdrawal </p>
+                        <p className="playboard-p2" class="progressbar"> Continue Withdrawal </p>
                       </Grid.Row>
                       <Grid.Row style={{marginTop: '15px'}}>
                         <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                        <p style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
+                        <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
                       </Grid.Row>
                       <Grid.Row style={{marginTop: '15px'}}>
                         <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                        <p style={{opacity: '0.5'}} class="progressbar"> Confirm Withdrawal </p>
+                        <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Confirm Withdrawal </p>
                       </Grid.Row>
                     </div>
 
@@ -974,11 +974,11 @@ class Withdraw extends React.Component {
                           <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                         </Grid.Row>
                         <Grid.Row>
-                          <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>5. Continue withdrawal to Ropsten.
+                          <p className="playboard-p2" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>5. Continue withdrawal to Ropsten.
                           </p>
                         </Grid.Row>
                         <Grid.Row>
-                          <Button id='button-6' color='blue' style={{marginLeft: '5px', marginBottom: '3em' }} 
+                          <Button id='depositButton2' color='blue' style={{marginLeft: '5px', marginBottom: '3em' }} 
                             onClick={this.continueStep2}>
                             Continue
                           </Button>
@@ -986,18 +986,18 @@ class Withdraw extends React.Component {
                       </Grid>
 
                       { this.state.isValidStep2 == 1 ?
-                        <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
+                        <p className="playboard-p2" style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
                           Withdraw continue failed.
                         </p> : <p/>
                       }
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', marginRight: '30px', fontStyle:'italic', marginTop: '100px' }}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', marginRight: '30px', fontStyle:'italic', marginTop: '100px' }}>
                         **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
                       </p>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
                         <span style={{fontWeight: 'bold'}}>NOTE: </span>
                         To ensure upmost security on the Matic sidechain, withdrawals currently take 1 week, and are broken down into 3 steps. You will need to sign 2 more thransactions to complete this withdrawal - one in 1-2 days, and one in 1 week.
                       </p>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-13px', fontStyle:'italic', marginTop: '20px' }}>
                         We will be offering instant mainchain liquidity services in the near future,
                       </p>
                     </div>
@@ -1029,33 +1029,33 @@ class Withdraw extends React.Component {
                       <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
+                      <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
                     </Grid.Row>  
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Initiate Withdrawal </p>
+                      <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Initiate Withdrawal </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Waiting Period </p>
+                      <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Waiting Period </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img class="progressbar image inline" src={box} />
-                      <p class="progressbar"> Switch to Ropsten RPC </p>
+                      <p className="playboard-p2" class="progressbar"> Switch to Ropsten RPC </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Continue Withdrawal </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Continue Withdrawal </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Confirm Withdrawal </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Confirm Withdrawal </p>
                     </Grid.Row>
                   </div>
 
@@ -1065,7 +1065,7 @@ class Withdraw extends React.Component {
                         <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                       </Grid.Row>
                       <Grid.Row>
-                        <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>4. On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
+                        <p className="playboard-p2" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>4. On your Metamask extension, open the Network dropdown menu and select 'Ropsten'.
                         </p>
                       </Grid.Row>
                       <Grid.Row>
@@ -1074,7 +1074,7 @@ class Withdraw extends React.Component {
                     </Grid>
 
                     { this.state.networkID != 3 ?
-                      <p style={{ textAlign: 'left', color: 'red', marginTop: '10px'}}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', color: 'red', marginTop: '10px'}}>
                         This is not Ropsten Network.
                       </p> : <p/>
                     }
@@ -1108,32 +1108,32 @@ class Withdraw extends React.Component {
                       <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
+                      <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
                     </Grid.Row>  
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Initiate Withdrawal </p>
+                      <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Initiate Withdrawal </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img class="progressbar image inline" src={box} />
-                      <p class="progressbar"> Waiting Period </p>
+                      <p className="playboard-p2" class="progressbar"> Waiting Period </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Switch to Ropsten RPC </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Switch to Ropsten RPC </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Continue Withdrawal </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Continue Withdrawal </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Confirm Withdrawal </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Confirm Withdrawal </p>
                     </Grid.Row>
                   </div>
 
@@ -1143,7 +1143,7 @@ class Withdraw extends React.Component {
                         <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                       </Grid.Row>
                       <Grid.Row>
-                        <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>3. Please check back in 1-2 days to continue withdrawal process from Matic Network.
+                        <p className="playboard-p2" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>3. Please check back in 1-2 days to continue withdrawal process from Matic Network.
                         </p>
                       </Grid.Row>
                       <Grid.Row>
@@ -1155,19 +1155,19 @@ class Withdraw extends React.Component {
                     </Grid>
 
                     { this.state.isConfirmStep1 == 1 ?
-                      <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
+                      <p className="playboard-p2" style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
                         Withdraw confirm failed.
                       </p> : <p/>
                     }
                     <Container style={{ paddingRight: '21px' }}>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', marginRight: '30px', fontStyle:'italic', marginTop: '100px' }}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', marginRight: '30px', fontStyle:'italic', marginTop: '100px' }}>
                         **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
                       </p>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', fontStyle:'italic', marginTop: '20px' }}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', fontStyle:'italic', marginTop: '20px' }}>
                         <span style={{fontWeight: 'bold'}}>NOTE: </span>
                         To ensure upmost security on the Matic sidechain, withdrawals currently take 1 week, and are broken down into 3 steps. You will need to sign 2 more thransactions to complete this withdrawal - one in 1-2 days, and one in 1 week.
                       </p>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', fontStyle:'italic', marginTop: '20px' }}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', fontStyle:'italic', marginTop: '20px' }}>
                         We will be offering instant mainchain liquidity services in the near future,
                       </p>
                     </Container>
@@ -1201,31 +1201,31 @@ class Withdraw extends React.Component {
                       <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
                       <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
+                      <p className="playboard-p2" style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Matic RPC </p>
                     </Grid.Row>  
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img class="progressbar image inline" src={box} />
-                      <p class="progressbar"> Initiate Withdrawal </p>
+                      <p className="playboard-p2" class="progressbar"> Initiate Withdrawal </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Switch to Ropsten RPC </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Switch to Ropsten RPC </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Continue Withdrawal </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Continue Withdrawal </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
                       <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Confirm Withdrawal </p>
+                      <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Confirm Withdrawal </p>
                     </Grid.Row>
                   </div>
 
@@ -1235,7 +1235,7 @@ class Withdraw extends React.Component {
                         <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                       </Grid.Row>
                       <Grid.Row>
-                        <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>2. Select amount to initiate withdrawal of MANA from Matic.
+                        <p className="playboard-p2" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>2. Select amount to initiate withdrawal of MANA from Matic.
                         </p>
                       </Grid.Row>
                       <Grid.Row>
@@ -1254,19 +1254,19 @@ class Withdraw extends React.Component {
                     </Grid>
 
                     { this.state.isValidStep1 == 1 ?
-                      <p style={{ textAlign: 'left', color: 'red', marginTop: '20px', marginLeft: '-14px' }}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', color: 'red', marginTop: '20px', marginLeft: '-14px' }}>
                         Withdraw failed.
                       </p> : <p/>
                     }
                     <Container style={{ paddingRight: '21px' }}>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', marginRight: '30px', fontStyle:'italic', marginTop: '90px' }}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', marginRight: '30px', fontStyle:'italic', marginTop: '90px' }}>
                         **Matic Network is a second layer sidechain that allows our games to have much faster in-game transactions.**
                       </p>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', fontStyle:'italic', marginTop: '20px' }}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', fontStyle:'italic', marginTop: '20px' }}>
                         <span style={{fontWeight: 'bold'}}>NOTE: </span>
                         To ensure upmost security on the Matic sidechain, withdrawals currently take 1 week, and are broken down into 3 steps. You will need to sign 2 more thransactions to complete this withdrawal - one in 1-2 days, and one in 1 week.
                       </p>
-                      <p style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', fontStyle:'italic', marginTop: '20px' }}>
+                      <p className="playboard-p2" style={{ textAlign: 'left', fontSize: '1.33em', marginLeft: '-33px', fontStyle:'italic', marginTop: '20px' }}>
                         We will be offering instant mainchain liquidity services in the near future.
                       </p>
                     </Container>
@@ -1298,31 +1298,31 @@ class Withdraw extends React.Component {
                   <Grid.Row >
                     <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
                     <img class="progressbar image inline" src={box} />
-                    <p class="progressbar"> Switch to Matic RPC </p>
+                    <p className="playboard-p2" class="progressbar"> Switch to Matic RPC </p>
                   </Grid.Row>  
                   <Grid.Row style={{marginTop: '15px'}}>
                     <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> Initiate Withdrawal </p>
+                    <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Initiate Withdrawal </p>
                   </Grid.Row>
                   <Grid.Row style={{marginTop: '15px'}}>
                     <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
+                    <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
                   </Grid.Row>
                   <Grid.Row style={{marginTop: '15px'}}>
                     <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> Switch to Ropsten RPC </p>
+                    <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Switch to Ropsten RPC </p>
                   </Grid.Row>
                   <Grid.Row style={{marginTop: '15px'}}>
                     <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> Continue Withdrawal </p>
+                    <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Continue Withdrawal </p>
                   </Grid.Row>
                   <Grid.Row style={{marginTop: '15px'}}>
                     <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
+                    <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Waiting Period </p>
                   </Grid.Row>
                   <Grid.Row style={{marginTop: '15px'}}>
                     <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> Confirm Withdrawal </p>
+                    <p className="playboard-p2" style={{opacity: '0.5'}} class="progressbar"> Confirm Withdrawal </p>
                   </Grid.Row>
                 </div>
 
@@ -1332,7 +1332,7 @@ class Withdraw extends React.Component {
                       <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Withdraw MANA </h3>
                     </Grid.Row>
                     <Grid.Row>
-                      <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>1. On your Metamask extension, open the Network dropdown menu and select 'Matic' Testnet.
+                      <p className="playboard-p2" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>1. On your Metamask extension, open the Network dropdown menu and select 'Matic' Testnet.
                       </p>
                     </Grid.Row>
                     <Grid.Row>
@@ -1341,7 +1341,7 @@ class Withdraw extends React.Component {
                   </Grid>
 
                   { this.state.isMaticNetwork != parseInt(Global.MATIC_NETWORK_ID) ?
-                    <p style={{ textAlign: 'left', color: 'red', marginTop: '10px'}}>
+                    <p className="playboard-p2" style={{ textAlign: 'left', color: 'red', marginTop: '10px'}}>
                       This is not Matic Network.
                     </p> : <p/>
                   }

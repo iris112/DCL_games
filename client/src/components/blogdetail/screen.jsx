@@ -3,11 +3,13 @@ import React from "react";
 import PostPreview from "../blog/PostPreview";
 import banner from "../assets/images/banner.png";
 import defaultProfile from "../assets/images/icon.png";
-import { Divider, Grid, List, Image, Sticky, Button, Icon } from "semantic-ui-react";
+import { Divider, Grid, List, Image, Sticky, Button, Icon, Breadcrumb } from "semantic-ui-react";
 import { Container, Segment, Menu, Navbar } from "decentraland-ui";
 import "../agate.css";
 import HtmlParser from "./HtmlParser";
 import { create } from "domain";
+import { NavLink } from "react-router-dom";
+import logo from '../Images/authorize_title.png'
 
 
 const Screen = ({ slug, featured_image, image, created, categories, title, summary, author: { first_name = "", last_name = "", profile_image = "" }, body }) => {
@@ -16,7 +18,8 @@ const Screen = ({ slug, featured_image, image, created, categories, title, summa
     <div className="blogdetail-page">
 
       <div className="coverimg">
-        <div className="image">
+
+        <div className="image" style={{ marginTop: '-140px' }}>
           <img src={image || banner} alt="" />
         </div>
       </div>
@@ -41,20 +44,20 @@ const Screen = ({ slug, featured_image, image, created, categories, title, summa
       
           <div className="post__content" style={{ marginTop: '-60px' }}>{HtmlParser(body)}</div>
 
-          <Divider style={{ opacity: '0.5', paddingBottom: '15px' }} />
-          <div className="date1" style={{ marginTop: '-15px' }}>
-            <span>
-              {new Date(created).toLocaleDateString("en-DE", {
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-              })}
-              <p className="date2"> TWEET </p>
-              <Icon className="date3" name="twitter" />
-              <p className="date2"> SHARE </p>
-              <Icon className="date3" name="facebook" />
-            </span>
-          </div>
+            <Divider style={{ opacity: '0.5', paddingBottom: '15px' }} className="date-divider" />
+            <div className="date1" style={{ marginTop: '-15px' }}>
+              <span>
+                {new Date(created).toLocaleDateString("en-DE", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric"
+                })}
+                <p className="date2"> TWEET </p>
+                <Icon className="date3" name="twitter" />
+                <p className="date2"> SHARE </p>
+                <Icon className="date3" name="facebook" />
+              </span>
+            </div>
         </Container>
 
 

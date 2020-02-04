@@ -55,7 +55,7 @@ class Dashboard extends React.Component {
                 <p id="featured-casino-text" style={{ paddingBottom: '10px' }}>ALL CASINOS</p>
               </Fade>
               <Fade bottom distance="20px" duration="600" delay="200">
-                <div>
+                <div style={{ marginLeft: '-6px' }}>
                   <a href="/chateau/">
                     <Image src={teleport1} inline id="dashboard-casino-img"/>
                   </a>

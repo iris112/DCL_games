@@ -4,6 +4,7 @@ import Screen from "./screen";
 import { GlobalContext } from "../../store";
 import { butter } from "../../store/api";
 import { Segment } from "semantic-ui-react";
+import ScrollToTop from '../scroll.js';
 
 
 const BlogDetail = ({ match }) => {
@@ -29,21 +30,23 @@ const BlogDetail = ({ match }) => {
   }, []);
 
   return (
-    <Segment vertical>
-      {currentPage && (
-        <Screen
-          image={currentPage.featured_image}
-          created={currentPage.created}
-          category={currentPage.categories[0]}
-          title={currentPage.title}
-          summary={currentPage.summary}
-          author={currentPage.author}
-          body={currentPage.body}
-          next={nextPage}
-          prev={prevPage}
-        />
-      )}
-    </Segment>
+    <ScrollToTop>
+      <Segment vertical>
+        {currentPage && (
+          <Screen
+            image={currentPage.featured_image}
+            created={currentPage.created}
+            category={currentPage.categories[0]}
+            title={currentPage.title}
+            summary={currentPage.summary}
+            author={currentPage.author}
+            body={currentPage.body}
+            next={nextPage}
+            prev={prevPage}
+          />
+        )}
+      </Segment>
+    </ScrollToTop>
   );
 };
 export default BlogDetail;

@@ -17,7 +17,7 @@ const PostPreview = ({
 }) => {
   return (
     <Link to={`/blog/${slug}`} className="post">
-      <Container>
+      <Container className="post-container" >
         <div className="post-image">
           <img src={featured_image || banner} alt="" />
         </div>

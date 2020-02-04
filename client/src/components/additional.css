@@ -15,9 +15,13 @@ a.item.account-p:focus {
 
 .svg-eth2 {
   stroke: white;
-  margin-right: 8px !important;
+  margin-right: 14px !important;
   margin-bottom: -15px !important;
   margin-top: -4px !important;
+}
+
+.stats-container {
+
 }
 
 a.item.account-p:hover .svg-eth, a.item.account-p:focus .svg-eth {
@@ -456,7 +460,7 @@ a.item.nav-text:hover {
   background-position: center center, center center;
   background-repeat: no-repeat, no-repeat;
   background-color: transparent;
-  background-size: 100px, 99%;
+  background-size: 60px, 99%;
   max-height: 430px;
   width: 100%;
 }
@@ -540,13 +544,25 @@ a.item.nav-text:hover {
 /*           Games/Casino Sections           */
 /* ----------------------------------------- */
 
-
 @media (max-width: 767px) {
+  .stats-container {
+    padding-top: 90px !important;
+    padding-bottom: 00px !important;
+  }
+  .stat-size {
+    font-size: 42px !important;
+  }
+}
+
+@media (max-width: 991px) {
   #stat1 {
-    padding-bottom: 21px;
+    padding-bottom: 30px;
   }
   #stat2 {
-    margin-bottom: 0px;
+    margin-bottom: 30px;
+  }
+  #stat3 {
+    margin-bottom: 6px;
   }
 }
 
@@ -576,16 +592,27 @@ a.item.nav-text:hover {
 
 .casino {
   background-color: rgba(10, 14, 17, 1) !important;
-  padding-top: 30px !important;
+  padding-top: 0px !important;
   padding-bottom: 48px !important;
   margin-top: -1px !important;
   margin-bottom: 0px !important;
   border-bottom: 1px #1D1E24 solid !important;
 }
 
+@media (max-width: 767px) {
+  .casino {
+    padding-bottom: 75px !important;
+    padding-top: 30px !important;
+  }
+  .games {
+    padding-bottom: 24px !important;
+  }
+}
+
 .games-h {
   font-size: 48px !important;
   padding-bottom: 30px !important;
+  color: white;
 }
 
 .games-h1, .casino-h1 {
@@ -713,9 +740,10 @@ a.ui.card:hover {
 }
 
 .modallogospin {
-  height: 60px;
+  height: 36px;
   position: absolute;
-  right: 0 !important;
+  right: 10px !important;
+  top: 10px !important;
 }
 
 @media only screen and (min-width: 1200px) {
@@ -908,7 +936,7 @@ a.ui.card:hover {
 }
 
 .ui.accountContainer #playboard {
-  background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2),rgba(0,0,0,0.9)), url(./Images/background.jpeg);
+  background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2),rgba(0,0,0,0.9)), url(./Images/serenity-home.jpeg);
   background-position: center center;
   background-repeat: no-repeat;
   background-color: transparent;
@@ -934,10 +962,16 @@ a.ui.card:hover {
   letter-spacing: 0.15px;
 }
 
+.playboard-p2 {
+  font-size: 20px !important;
+  letter-spacing: 0.15px;
+  margin-right: 20px;
+  margin-top: 0px !important;
+}
+
 .account-h3 {
   font-size: 28px !important;
   font-weight: 600 !important;
-  padding-bottom: 18px;
 }
 
 .account-h3-2 {
@@ -1203,13 +1237,6 @@ button#depositButton.ui.blue.button.wallet-deposit2:hover {
 #depositButton2:hover, #withdrawButton2:hover {
   transform: translateY(0);
   background-color: #145DA9 !important;
-}
-
-#dashboard-casino-img {
-  width: 291px !important;
-  border-radius: 4px !important;
-  height: 176px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.75);
 }
 
 .description #featured-casino-text {
@@ -1574,7 +1601,7 @@ div.progressbar .row, div.progressbar2 .row {
 
 .logospin {
   display: block;
-  width: 100px;
+  width: 60px;
   margin-left: calc((100vw - 100px) / 2);
   margin-top: calc((100vh - 100px) / 2);
 }

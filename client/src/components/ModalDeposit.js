@@ -672,7 +672,7 @@ class Deposit extends React.Component {
                           </p>
                         </Grid.Row>
                         <Grid.Row>
-                          <Button id='button-6' color='blue' style={{marginLeft: '5px', marginBottom: '3em' }} 
+                          <Button id='depositButton2' color='blue' style={{marginLeft: '5px', marginBottom: '3em' }} 
                             onClick={this.authorizeMana}>
                             Authorize
                           </Button>
@@ -813,7 +813,7 @@ class Deposit extends React.Component {
                           : <Input style={{ width: '300px', marginTop: '0px'}} value={this.state.amount} onChange={this.onChangeCustomAmount} /> }
                         </Grid.Row>
                         <Grid.Row>
-                          <Button id='button-6' color='blue' style={{ marginTop: '-10px', display: 'block' }} 
+                          <Button id='depositButton2' color='blue' style={{ marginTop: '-10px', display: 'block' }} 
                             onClick={this.depositManaToMatic}>
                             Deposit
                           </Button>

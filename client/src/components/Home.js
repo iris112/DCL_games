@@ -127,78 +127,92 @@ class Home extends Component {
             
 
 					</Container>
-						<Container style={{paddingTop: '90px', paddingBottom: '60px' }}>
-        	  <Header className='games-h' style={{ color: 'white', textAlign: 'center', fontWeight: '300' }}>
-              Decentral Games by the Numbers
+            <Container className="stats-container" style={{paddingTop: '60px', paddingBottom: '60px' }}>
+            <Header className='games-h' style={{ color: 'white', textAlign: 'center', fontWeight: '300', lineHeight: '54px' }}>
+              By the Numbers
             </Header>
 
-	            <Grid>
-	            	<Grid.Row>
+              <Grid>
+                <Grid.Row>
+                  
+                  <Grid.Column computer={4} tablet={8} mobile={16}>
+                    <Statistic style={{ paddingLeft: 'calc(50% - 97px)'}} id="stat1">
+                      <Statistic.Value style={{ color: 'white' }}>
+                        <Grid>
+                          <Grid.Row>
+                            <Grid.Column computer={8} style={{ marginRight: '-45px' }}>
+                              <Image src={dcl} style= {{ marginTop: '7px' }}/>
+                            </Grid.Column>
+                            <Grid.Column computer={8}>
+                              <CountUp
+                                end={250}
+                                duration={3}
+                              />K
+                            </Grid.Column>
+                          </Grid.Row>
+                        </Grid>
+                      </Statistic.Value>
+                      <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px', paddingLeft: '17px' }}>Mana Slots Jackpot </Statistic.Label>
+                    </Statistic>
+                  </Grid.Column>
 
-	            		<Grid.Column computer={2} tablet={0} mobile={0} id="grid-display-stat"/>
-	            		
-	            		<Grid.Column computer={3} tablet={4} mobile={16}>
-							      <Statistic style={{ paddingLeft: 'calc(50% - 79px)'}} id="stat1">
-							        <Statistic.Value style={{ color: 'white' }}>$
-							      		<CountUp
-							      			end={7500}
-							      			duration={3}
-							      		/>
-							      	</Statistic.Value>
-							      	<Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px' }}>Slots Jackpot</Statistic.Label>
-						      	</Statistic>
-						      </Grid.Column>
+                  <Grid.Column computer={4} tablet={8} mobile={16}>
+                    <Statistic style={{ paddingLeft: 'calc(50% - 97px)'}} id="stat1">
+                      <Statistic.Value style={{ color: 'white' }}>
+                        <Grid>
+                          <Grid.Row>
+                            <Grid.Column computer={8} style={{ marginRight: '-51px' }}>
+                              <Image src={dcl} style= {{ marginTop: '7px' }}/>
+                            </Grid.Column>
+                            <Grid.Column computer={8}>
+                              <CountUp
+                                end={360}
+                                duration={3}
+                              />K
+                            </Grid.Column>
+                          </Grid.Row>
+                        </Grid>
+                      </Statistic.Value>
+                      <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px', paddingLeft: '4px' }}>Mana Roulette Jackpot </Statistic.Label>
+                    </Statistic>
+                  </Grid.Column>
+                    
+                  <Grid.Column computer={4} tablet={8} mobile={16}>
+                    <Statistic style={{ paddingLeft: 'calc(50% - 56px)'}} id="stat2">
+                      <Statistic.Value style={{ color: 'white' }}>
+                        <Svgeth className='svg-eth2' />
+                        <CountUp
+                          end={4}
+                          duration={6}
+                        />
+                      </Statistic.Value>
+                      <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px' }}>Coins Offered</Statistic.Label>
+                    </Statistic>
+                  </Grid.Column>
 
-						     	<Grid.Column computer={3} tablet={4} mobile={16}>
-							      <Statistic style={{ paddingLeft: 'calc(50% - 97px)'}} id="stat1">
-							        <Statistic.Value style={{ color: 'white' }} id="gold-grad2">$
-							      		<CountUp
-							      			end={12500}
-							      			duration={3}
-							      		/>
-							      	</Statistic.Value>
-							        <Statistic.Label id="gold-grad" style={{ paddingTop: '6px' }}>Roulette Jackpot</Statistic.Label>
-							      </Statistic>
-							    </Grid.Column>
-							      
-	            		<Grid.Column computer={3} tablet={4} mobile={16}>
-							      <Statistic style={{ paddingLeft: 'calc(50% - 56px)'}} id="stat1">
-							        <Statistic.Value style={{ color: 'white' }}>
-							        	<Svgeth className='svg-eth2' />
-							      		<CountUp
-							      			end={4}
-							      			duration={9}
-							      		/>
-							      	</Statistic.Value>
-							        <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px' }}>Coins Offered</Statistic.Label>
-							      </Statistic>
-							    </Grid.Column>
+                  <Grid.Column computer={4} tablet={8} mobile={16}>
+                    <Statistic style={{ paddingLeft: 'calc(50% - 73px)'}} id="stat3">
+                      <Statistic.Value style={{ color: 'white' }}>
+                        <Grid>
+                          <Grid.Row>
+                            <Grid.Column computer={8} style={{ marginRight: '-31px' }}>
+                              <Image src={dcl} style= {{ marginTop: '7px' }}/>
+                            </Grid.Column>
+                            <Grid.Column computer={8}>
+                              <CountUp
+                                end={199}
+                                duration={3}
+                              />
+                            </Grid.Column>
+                          </Grid.Row>
+                        </Grid>
+                      </Statistic.Value>
+                      <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px', paddingLeft: '10px' }}>DCL Parcels</Statistic.Label>
+                    </Statistic>
+                  </Grid.Column>
 
-							   	<Grid.Column computer={3} tablet={4} mobile={16}>
-							      <Statistic style={{ paddingLeft: 'calc(50% - 77px)'}} id="stat2">
-							        <Statistic.Value style={{ color: 'white' }}>
-							        	<Grid>
-								        	<Grid.Row>
-									        	<Grid.Column computer={8} style={{ marginRight: '-33px' }}>
-									        		<Image src={dcl} style= {{ marginTop: '7px' }}/>
-									        	</Grid.Column>
-									        	<Grid.Column computer={8}>
-										      		<CountUp
-										      			end={199}
-										      			duration={3}
-										      		/>
-										      	</Grid.Column>
-										      </Grid.Row>
-									     	</Grid>
-							      	</Statistic.Value>
-							        <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px' }}>DCL Parcels</Statistic.Label>
-							      </Statistic>
-							  	</Grid.Column>
-
-							  	<Grid.Column computer={2} tablet={0} mobile={0} id="grid-display-stat"/>
-
-								</Grid.Row>
-							</Grid>
+                </Grid.Row>
+              </Grid>
           </Container>
         </Segment>
 
@@ -362,7 +376,7 @@ class Home extends Component {
         { /*                       HERO SECTION                          */ }
         { /* ----------------------------------------------------------- */ }
 
-        <Segment className='hero'>
+        <Segment className='hero' style={{ backgroundColor: 'rgb(6, 10, 13)' }}>
           <Container className='hero-container'>
   
           {isMobile ? <video className="hero-image" ref={ref => this.refVideo(ref)} preload="auto" playsInline autoPlay muted loop/>
@@ -371,59 +385,75 @@ class Home extends Component {
               </a> }
 
           </Container>
-						<Container style={{paddingTop: '90px', paddingBottom: '60px' }}>
-        	  <Header className='games-h' style={{ color: 'white', textAlign: 'center', fontWeight: '300' }}>
-              Decentral Games by the Numbers
+						<Container className="stats-container" style={{paddingTop: '60px', paddingBottom: '60px' }}>
+        	  <Header className='games-h' style={{ color: 'white', textAlign: 'center', fontWeight: '300', lineHeight: '54px' }}>
+             	By the Numbers
             </Header>
 
 	            <Grid>
 	            	<Grid.Row>
-
-	            		<Grid.Column computer={2} tablet={0} mobile={0} id="grid-display-stat"/>
 	            		
-	            		<Grid.Column computer={3} tablet={4} mobile={16}>
-							      <Statistic style={{ paddingLeft: 'calc(50% - 79px)'}} id="stat1">
-							        <Statistic.Value style={{ color: 'white' }}>$
-							      		<CountUp
-							      			end={7500}
-							      			duration={3}
-							      		/>
-							      	</Statistic.Value>
-							      	<Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px' }}>Slots Jackpot</Statistic.Label>
-						      	</Statistic>
-						      </Grid.Column>
-
-						     	<Grid.Column computer={3} tablet={4} mobile={16}>
+							   	<Grid.Column computer={4} tablet={8} mobile={16}>
 							      <Statistic style={{ paddingLeft: 'calc(50% - 97px)'}} id="stat1">
-							        <Statistic.Value style={{ color: 'white' }} id="gold-grad2">$
-							      		<CountUp
-							      			end={12500}
-							      			duration={3}
-							      		/>
+							        <Statistic.Value style={{ color: 'white' }}>
+							        	<Grid>
+								        	<Grid.Row>
+									        	<Grid.Column computer={8} style={{ marginRight: '-45px' }}>
+									        		<Image src={dcl} style= {{ marginTop: '7px' }}/>
+									        	</Grid.Column>
+									        	<Grid.Column computer={8}>
+										      		<CountUp
+										      			end={250}
+										      			duration={3}
+										      		/>K
+										      	</Grid.Column>
+										      </Grid.Row>
+									     	</Grid>
 							      	</Statistic.Value>
-							        <Statistic.Label id="gold-grad" style={{ paddingTop: '6px' }}>Roulette Jackpot</Statistic.Label>
+							        <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px', paddingLeft: '17px' }}>Mana Slots Jackpot </Statistic.Label>
 							      </Statistic>
-							    </Grid.Column>
+							  	</Grid.Column>
+
+							   	<Grid.Column computer={4} tablet={8} mobile={16}>
+							      <Statistic style={{ paddingLeft: 'calc(50% - 97px)'}} id="stat1">
+							        <Statistic.Value style={{ color: 'white' }}>
+							        	<Grid>
+								        	<Grid.Row>
+									        	<Grid.Column computer={8} style={{ marginRight: '-51px' }}>
+									        		<Image src={dcl} style= {{ marginTop: '7px' }}/>
+									        	</Grid.Column>
+									        	<Grid.Column computer={8}>
+										      		<CountUp
+										      			end={360}
+										      			duration={3}
+										      		/>K
+										      	</Grid.Column>
+										      </Grid.Row>
+									     	</Grid>
+							      	</Statistic.Value>
+							        <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px', paddingLeft: '4px' }}>Mana Roulette Jackpot </Statistic.Label>
+							      </Statistic>
+							  	</Grid.Column>
 							      
-	            		<Grid.Column computer={3} tablet={4} mobile={16}>
-							      <Statistic style={{ paddingLeft: 'calc(50% - 56px)'}} id="stat1">
+	            		<Grid.Column computer={4} tablet={8} mobile={16}>
+							      <Statistic style={{ paddingLeft: 'calc(50% - 56px)'}} id="stat2">
 							        <Statistic.Value style={{ color: 'white' }}>
 							        	<Svgeth className='svg-eth2' />
 							      		<CountUp
 							      			end={4}
-							      			duration={9}
+							      			duration={6}
 							      		/>
 							      	</Statistic.Value>
 							        <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px' }}>Coins Offered</Statistic.Label>
 							      </Statistic>
 							    </Grid.Column>
 
-							   	<Grid.Column computer={3} tablet={4} mobile={16}>
-							      <Statistic style={{ paddingLeft: 'calc(50% - 77px)'}} id="stat2">
+							   	<Grid.Column computer={4} tablet={8} mobile={16}>
+							      <Statistic style={{ paddingLeft: 'calc(50% - 73px)'}} id="stat3">
 							        <Statistic.Value style={{ color: 'white' }}>
 							        	<Grid>
 								        	<Grid.Row>
-									        	<Grid.Column computer={8} style={{ marginRight: '-33px' }}>
+									        	<Grid.Column computer={8} style={{ marginRight: '-31px' }}>
 									        		<Image src={dcl} style= {{ marginTop: '7px' }}/>
 									        	</Grid.Column>
 									        	<Grid.Column computer={8}>
@@ -435,11 +465,9 @@ class Home extends Component {
 										      </Grid.Row>
 									     	</Grid>
 							      	</Statistic.Value>
-							        <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px' }}>DCL Parcels</Statistic.Label>
+							        <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px', paddingLeft: '10px' }}>DCL Parcels</Statistic.Label>
 							      </Statistic>
 							  	</Grid.Column>
-
-							  	<Grid.Column computer={2} tablet={0} mobile={0} id="grid-display-stat"/>
 
 								</Grid.Row>
 							</Grid>

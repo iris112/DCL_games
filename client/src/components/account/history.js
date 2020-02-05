@@ -1,12 +1,13 @@
-import React from 'react'
+import React from 'react';
 import '../additional.css';
-import { Table } from 'semantic-ui-react'
-import ModalWithdraw from '../ModalWithdraw'
-import LogoSpinner from '../../LogoSpinner'
+import { Table } from 'semantic-ui-react';
+import ModalWithdraw from '../ModalWithdraw';
+import LogoSpinner from '../../LogoSpinner';
 import Global from '../constant';
 import mana from '../Images/mana.png';
-import { Icon } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react';
 import Fade from 'react-reveal/Fade';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 
 const INITIAL_STATE = {
@@ -153,100 +154,107 @@ class History extends React.Component {
               </Table.Header>
              </Table>
              { data.length != 0 ?
-               <div class='dataTable' style={{height: 'calc(100vh - 240px)'}}>
-                <Table singleLine fixed>
-                  <Table.Header></Table.Header>
-                  <Table.Body>
-                    {data.map((row) => {
-                      var action, amount, result;
-                      var date = new Date(row.createdAt);
-                      var timestamp = date.toLocaleString();
-                      
-                      timestamp = timestamp.replace(timestamp.substr(-2), '').trim();
-                      if (row.betAmount) {
-                        amount = Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
-                        result = Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
-                        if (row.type === 'Roulette')
-                          action = "MANA Roulette";
-                        else
-                          action = "MANA Slots";
+              <div>
+                <div class='dataTable' style={{height: 'calc(100vh - 280px)'}}>
+                  <Table singleLine fixed>
+                    <Table.Header></Table.Header>
+                    <Table.Body>
+                      {data.map((row) => {
+                        var action, amount, result;
+                        var date = new Date(row.createdAt);
+                        var timestamp = date.toLocaleString();
+                        
+                        timestamp = timestamp.replace(timestamp.substr(-2), '').trim();
+                        if (row.betAmount) {
+                          amount = Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
+                          result = Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
+                          if (row.type === 'Roulette')
+                            action = "MANA Roulette";
+                          else
+                            action = "MANA Slots";
 
-                        return (
-                          <Table.Row>
-                            <Table.Cell style={{paddingLeft:'20px'}}><img src={mana} style={{ width: '18px', paddingRight: '3px', verticalAlign: 'middle', marginTop: '-3px' }}/>{action}</Table.Cell>
-                            <Table.Cell>-{amount} MANA</Table.Cell>
-                            <Table.Cell>+{result} MANA</Table.Cell>
-                            <Table.Cell>{timestamp}</Table.Cell>
-                            <Table.Cell>
-                              <a style={{color: '#2085F4', 
-                                        maxWidth: '120px', 
-                                        display: 'inline-block',
-                                        textOverflow: 'ellipsis',
-                                        overflow: 'hidden',
-                                        verticalAlign: 'middle'}} 
-                                 target="_blank" href={`https://explorer.testnet2.matic.network/tx/${row.txid}`}>
-                                {row.txid}
-                              </a>
-                              <Icon name="caret right" style={{ color: '#2085F4' }}/>
-                            </Table.Cell>
-                          </Table.Row>
-                        );
-                      } else {
-                        if (row.type === 'Deposit')
-                          amount = `+${row.amount}`;
-                        else
-                          amount = `-${row.amount}`;
-
-                        if (row.status === 'Failed')
                           return (
-                            <Table.Row style={{background: '#fb9ca7'}}>
-                              <Table.Cell style={{paddingLeft:'20px'}}><img src={mana} style={{ width: '18px', paddingRight: '3px', verticalAlign: 'middle', marginTop: '-3px' }}/>{row.type}</Table.Cell>
-                              <Table.Cell style={{color:'white'}}>{amount} MANA</Table.Cell>
-                              <Table.Cell style={{color:'white'}}>{row.status}</Table.Cell>
-                              <Table.Cell style={{color:'white'}}>{timestamp}</Table.Cell>
+                            <Table.Row>
+                              <Table.Cell style={{paddingLeft:'20px'}}><img src={mana} style={{ width: '18px', paddingRight: '3px', verticalAlign: 'middle', marginTop: '-3px' }}/>{action}</Table.Cell>
+                              <Table.Cell>-{amount} MANA</Table.Cell>
+                              <Table.Cell>+{result} MANA</Table.Cell>
+                              <Table.Cell>{timestamp}</Table.Cell>
                               <Table.Cell>
-                                <ModalWithdraw isLink={1} tx={row.txid} showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
+                                <a style={{color: '#2085F4', 
+                                          maxWidth: '120px', 
+                                          display: 'inline-block',
+                                          textOverflow: 'ellipsis',
+                                          overflow: 'hidden',
+                                          verticalAlign: 'middle'}} 
+                                  target="_blank" href={`https://explorer.testnet2.matic.network/tx/${row.txid}`}>
+                                  {row.txid}
+                                </a>
+                                <Icon name="caret right" style={{ color: '#2085F4' }}/>
                               </Table.Cell>
                             </Table.Row>
                           );
+                        } else {
+                          if (row.type === 'Deposit')
+                            amount = `+${row.amount}`;
+                          else
+                            amount = `-${row.amount}`;
 
-                        if (row.status === 'Ready')
+                          if (row.status === 'Failed')
+                            return (
+                              <Table.Row style={{background: '#fb9ca7'}}>
+                                <Table.Cell style={{paddingLeft:'20px'}}><img src={mana} style={{ width: '18px', paddingRight: '3px', verticalAlign: 'middle', marginTop: '-3px' }}/>{row.type}</Table.Cell>
+                                <Table.Cell style={{color:'white'}}>{amount} MANA</Table.Cell>
+                                <Table.Cell style={{color:'white'}}>{row.status}</Table.Cell>
+                                <Table.Cell style={{color:'white'}}>{timestamp}</Table.Cell>
+                                <Table.Cell>
+                                  <ModalWithdraw isLink={1} tx={row.txid} showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
+                                </Table.Cell>
+                              </Table.Row>
+                            );
+
+                          if (row.status === 'Ready')
+                            return (
+                              <Table.Row style={{background: '#8fe08f'}}>
+                                <Table.Cell style={{paddingLeft:'20px'}}><img src={mana} style={{ width: '18px', paddingRight: '3px', verticalAlign: 'middle', marginTop: '-3px' }}/>{row.type}</Table.Cell>
+                                <Table.Cell style={{color:'white'}}>{amount} MANA</Table.Cell>
+                                <Table.Cell style={{color:'white'}}>{row.status}</Table.Cell>
+                                <Table.Cell style={{color:'white'}}>{timestamp}</Table.Cell>
+                                <Table.Cell>
+                                  <ModalWithdraw isLink={1} tx={row.txid} showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
+                                </Table.Cell>
+                              </Table.Row>
+                            );
+
                           return (
-                            <Table.Row style={{background: '#8fe08f'}}>
+                            <Table.Row>
                               <Table.Cell style={{paddingLeft:'20px'}}><img src={mana} style={{ width: '18px', paddingRight: '3px', verticalAlign: 'middle', marginTop: '-3px' }}/>{row.type}</Table.Cell>
-                              <Table.Cell style={{color:'white'}}>{amount} MANA</Table.Cell>
-                              <Table.Cell style={{color:'white'}}>{row.status}</Table.Cell>
-                              <Table.Cell style={{color:'white'}}>{timestamp}</Table.Cell>
+                              <Table.Cell>{amount} MANA</Table.Cell>
+                              <Table.Cell>{row.status}</Table.Cell>
+                              <Table.Cell>{timestamp}</Table.Cell>
                               <Table.Cell>
-                                <ModalWithdraw isLink={1} tx={row.txid} showSpinner={this.showSpinner} hideSpinner={this.hideSpinner}/>
+                                <a style={{color: '#2085F4', 
+                                          maxWidth: '120px', 
+                                          display: 'inline-block',
+                                          textOverflow: 'ellipsis',
+                                          overflow: 'hidden',
+                                          verticalAlign: 'middle'}} 
+                                  target="_blank" href={`https://explorer.testnet2.matic.network/tx/${row.txid}`}>
+                                  {row.txid}
+                                </a>
+                                <Icon name="caret right" style={{ color: '#2085F4' }}/>
                               </Table.Cell>
                             </Table.Row>
                           );
-
-                        return (
-                          <Table.Row>
-                            <Table.Cell style={{paddingLeft:'20px'}}><img src={mana} style={{ width: '18px', paddingRight: '3px', verticalAlign: 'middle', marginTop: '-3px' }}/>{row.type}</Table.Cell>
-                            <Table.Cell>{amount} MANA</Table.Cell>
-                            <Table.Cell>{row.status}</Table.Cell>
-                            <Table.Cell>{timestamp}</Table.Cell>
-                            <Table.Cell>
-                              <a style={{color: '#2085F4', 
-                                        maxWidth: '120px', 
-                                        display: 'inline-block',
-                                        textOverflow: 'ellipsis',
-                                        overflow: 'hidden',
-                                        verticalAlign: 'middle'}} 
-                                 target="_blank" href={`https://explorer.testnet2.matic.network/tx/${row.txid}`}>
-                                {row.txid}
-                              </a>
-                              <Icon name="caret right" style={{ color: '#2085F4' }}/>
-                            </Table.Cell>
-                          </Table.Row>
-                        );
-                      }
-                    })}
-                  </Table.Body>
-                </Table>
+                        }
+                      })}
+                    </Table.Body>
+                  </Table>
+                </div>
+                <div class="pagination">
+                  <MdKeyboardArrowLeft size='2.2em' className='spanbox' />
+                  <span class="spanbox" style={{padding: '10px 15px'}}>Page 1</span>
+                  <MdKeyboardArrowRight size='2.2em' className='spanbox' />
+                </div>
               </div>
             : <p className="playboard-p" style={{lineHeight:'calc(100vh - 200px)', textAlign:'center', color: 'gray', fontStyle: 'italic'}}> There is no transaction history for this account </p> }
           </div>

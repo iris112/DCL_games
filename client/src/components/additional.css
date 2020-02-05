@@ -1016,6 +1016,20 @@ a.ui.card:hover {
   text-align: right;
 }
 
+.ui.accountContainer .spanbox {
+  background-color: rgba(240, 240, 240);
+  vertical-align: middle;
+  text-align: center;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.ui.accountContainer div.pagination {
+  text-align: center;
+  margin: auto;
+  width: 300px;
+}
+
 #teleport-box {
   background-color: #f9fbfd;
   border: 1px solid rgba(34,36,38,.15);

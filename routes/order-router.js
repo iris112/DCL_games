@@ -278,6 +278,7 @@ router.post('/getHistory', preAction, function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         var address = req.body.address;
         var limit = req.body.limit;
+        var page = req.body.page;
         var json_data = {
             "status": 'ok',
             "result": '',
@@ -287,7 +288,7 @@ router.post('/getHistory', preAction, function (req, res) {
         else {
             try {
                 let currentDate = new Date();
-                var txdatas = yield dbMongo.findAllTransaction({ address }, limit);
+                var txdatas = yield dbMongo.findAllTransaction({ address }, { limit, page });
                 if (txdatas && txdatas.length) {
                     for (let i = 0; i < txdatas.length; i++) {
                         if (txdatas[i].type != 'Withdraw')
@@ -350,6 +351,7 @@ router.post('/getPlayInfo', preAction, function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         var address = req.body.address;
         var limit = req.body.limit;
+        var page = req.body.page;
         var json_data = {
             "status": 'ok',
             "result": '',
@@ -358,7 +360,7 @@ router.post('/getPlayInfo', preAction, function (req, res) {
             json_data['result'] = 'false';
         else {
             try {
-                var playinfodatas = yield dbMongo.findAllPlayInfos({ address }, limit);
+                var playinfodatas = yield dbMongo.findAllPlayInfos({ address }, { limit, page });
                 if (playinfodatas && playinfodatas.length)
                     json_data['result'] = playinfodatas;
                 else

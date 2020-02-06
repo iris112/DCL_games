@@ -1,10 +1,10 @@
-const keccak256 = require('js-sha3').keccak256;
 const { getContractInstance } = require('./contractInstance');
 const ABIMasterParent = require('../ethereum/contracts/MasterParent');
 const keys = require('../config/keys');
 const Tx = require('ethereumjs-tx').Transaction;
 const Common = require('ethereumjs-common').default;
 const { getWeb3 } = require('./web3');
+const crypto = require('crypto');
 
 var hashList = [];
 var hashPos = 500;
@@ -34,12 +34,13 @@ function waitConfirmedTx(txHash) {
 
 async function generateHashList() {
 	var now = new Date();
-	var tail = 'hello i am blockchain miner ' + now.toString();
-	var ret = keccak256.create();
+	var tail = crypto.randomBytes(32).toString('hex');
+	var ret;
 	for (var i = 0; i < 500; i++) {
-		ret.update(tail);
-		hashList.push(ret.hex());
-		tail = ret.digest();
+		ret = web3.utils.soliditySha3(tail);
+		hashList.push(ret);
+		console.log(ret);
+		tail = ret;
 	}
 }
 
@@ -56,7 +57,7 @@ module.exports.getHash = async () => {
 			);
 		}
 
-		const contractFunction = contractMasterParent.methods.setTail(web3.utils.hexToBytes(hashList[hashPos - 1]));
+		const contractFunction = contractMasterParent.methods.setTail('0x' + hashList[hashPos - 1]);
 		const functionABI = contractFunction.encodeABI();
 		const _nonce = await web3.eth.getTransactionCount(keys.WALLET_ADDRESS, "pending");
         const gasMultiple = parseInt(await contractFunction.estimateGas({from: keys.WALLET_ADDRESS}) * 1.5);
@@ -94,7 +95,7 @@ module.exports.getHash = async () => {
 		if (result.transactionHash)
 			result = result.transactionHash;
 
-		await waitConfirmedTx(ret.transactionHash);
+		await waitConfirmedTx(result);
 		hashPos--;
 	}
 

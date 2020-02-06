@@ -9,17 +9,17 @@ import { Icon } from 'semantic-ui-react';
 import Fade from 'react-reveal/Fade';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
-
+const PAGE_COUNT = 20
 const INITIAL_STATE = {
   data: [],
   currentPage: 1,
+  dataType: 'History',
   isRunningTransaction: false,
+  nextAvail: true,
+  prevAvail: false
 };
 
 class History extends React.Component {
-  data_json_result = [];
-  rawCount = 14;
-  all_json_result = [];
   showSpinner = () => this.setState({isRunningTransaction: true})
   hideSpinner = () => this.setState({isRunningTransaction: false})
 
@@ -27,8 +27,6 @@ class History extends React.Component {
     super(props);
 
     this.state = { ...INITIAL_STATE };
-    
-    
   }
 
   async componentDidMount() {
@@ -37,18 +35,24 @@ class History extends React.Component {
       await object.getUserData();
     })
     
-    await this.getUserData();
+    await this.getUserData(this.state.dataType, this.state.currentPage);
   }
 
-  async getUserData() {
+  async getUserData(type, page) {
     this.props.showSpinner();
-    var response = await this.getPlayData();
+    var response
+    if (type == 'History')
+      response = await this.getPlayData(page);
+    else
+      response = await this.getHistoryData(page);
+
     var json = await response.json();
     var allData = [];
-    var isScroll = false;
+    var nextAvail = this.state.nextAvail;
+    var prevAvail = this.state.prevAvail;
+
     if (json.result !== 'false') {
-      this.data_json_result = json.result;
-      allData = allData.concat(json.result);
+      allData = json.result;
 
       for (var i = 0; i < 3; i++) {
         if (json.result.length > 0) {
@@ -57,7 +61,6 @@ class History extends React.Component {
             await Global.delay(1000);
             continue;
           }
-          isScroll = true;
           
           el.addEventListener('scroll', function(e) {
           (function(el){
@@ -71,117 +74,38 @@ class History extends React.Component {
       }
     }
 
-    response = await this.getHistoryData();
-    json = await response.json();
-    if (json.result !== 'false') {
-      this.data_json_result = this.data_json_result.concat(json.result);  
-      this.all_json_result = this.data_json_result;
-      if (!isScroll) {
-        for (var i = 0; i < 3; i++) {
-          if (json.result.length > 0) {
-            var el = document.querySelector('.dataTable');
-            if (!el) {
-              await Global.delay(1000);
-              continue;
-            }
-            
-            el.addEventListener('scroll', function(e) {
-            (function(el){
-              el.classList.add('scrollTable');
-              setTimeout(function() {
-                el.classList.remove('scrollTable');
-              }, 1000);    
-            })(el);
-            })
-          }
-        }
-      }
-    }
-    var displayData = [];
-    displayData = this.setInitPage(this.data_json_result);
-    allData = allData.concat(displayData);
+    if ((json.result === 'false') || (!json.result.length)) {
+      if (this.state.currentPage > 1)
+        nextAvail = false;
+    } else
+      nextAvail = true;
 
-    allData.sort(function(a, b){
-      var dateA = new Date(a.createdAt);
-      var dateB = new Date(b.createdAt);
-      var diff = dateB.getTime() - dateA.getTime();
-      return diff;
-    });
-
-    this.props.hideSpinner();
-    this.setState({data: allData});
-  }
-
-  setInitPage(json_result) {
-    var displayData = [];
-    for(var i = 0 ; i < this.rawCount ; i ++) {
-      var index = this.rawCount * (this.state.currentPage - 1) + i;
-      if(index >= json_result) break;
-      displayData[i] = json_result[index];
-    }
-    return displayData
-  }
-
-  handleHistory = (param1, param2) => {
-    var historyData = [];
-    if(param2 == null)
-      this.all_json_result.map(function(history) {
-        if(history.type == param1) {
-          historyData = historyData.concat(history);
-        }
-      });
+    if (this.state.currentPage == 1)
+      prevAvail = false;
     else
-      this.all_json_result.map(function(history) {
-        if(history.type == param1 || history.type == param2) {
-          historyData = historyData.concat(history);
-        }
-      });
-    console.log(historyData);
-    var displayData = [];
-    this.data_json_result = historyData;
-    this.setState({currentPage: 1});
-    displayData = this.setInitPage(this.data_json_result);
-  
+      prevAvail = true;
+
     this.props.hideSpinner();
-    this.setState({data: displayData});
+    this.setState({data: allData, dataType: type, currentPage: page, nextAvail: nextAvail, prevAvail: prevAvail});
+  }
+
+  handleHistory = () => {
+    this.getUserData('History', this.state.currentPage);
+  }
+
+  handlePlay = () => {
+    this.getUserData('Play', this.state.currentPage);
   }
 
   nextPage = () => {
-    if(this.data_json_result.length > (this.state.currentPage * this.rawCount)) {
-      var displayData = [];
-      for(var i = 0 ; i < this.rawCount ; i ++) {
-        var index = this.rawCount * (this.state.currentPage) + i;
-        if(index >= this.data_json_result.length) break;
-        displayData[i] = this.data_json_result[index];
-      }
-      this.setState({data: ""});
-      var nextData = [];
-      nextData = nextData.concat(displayData);
-      this.setState({data: nextData});
-      this.setState((state) => ({currentPage: state.currentPage + 1}));
-    }
+    this.getUserData(this.state.dataType, this.state.currentPage + 1);
   }
 
   previewPage = () => {
-    console.log(this.data_json_result.length);
-    console.log(this.state.currentPage);
-    console.log(this.rawCount);
-    if(this.state.currentPage != 1 ) {
-      var displayData = [];
-      for(var i = 0 ; i < this.rawCount ; i ++) {
-        var index = this.rawCount * (this.state.currentPage - 2) + i;
-        if(index >= this.data_json_result.length) break;
-        displayData[i] = this.data_json_result[index];
-        console.log(index);
-      }
-      var previewData = [];
-      previewData = previewData.concat(displayData);
-      this.setState({data: previewData});
-      this.setState((state) => ({currentPage: state.currentPage - 1}));
-    }
+    this.getUserData(this.state.dataType, this.state.currentPage - 1);
   }
 
-  getPlayData = () => {
+  getPlayData = (page) => {
     return fetch(`${Global.BASE_URL}/order/getPlayInfo`, {
       method: 'POST',
       headers: {
@@ -191,12 +115,13 @@ class History extends React.Component {
       body: JSON.stringify({
         // address: '0x0fe1829403d422470cd4cf0abad4bcec9aa2ebf6',
         address: window.web3.currentProvider.selectedAddress,
-        limit: 100000,
+        limit: PAGE_COUNT,
+        page: page
       })
     })
   }
 
-  getHistoryData = () => {
+  getHistoryData = (page) => {
     return fetch(`${Global.BASE_URL}/order/getHistory`, {
       method: 'POST',
       headers: {
@@ -206,7 +131,8 @@ class History extends React.Component {
       body: JSON.stringify({
         // address: '0x0fe1829403d422470cd4cf0abad4bcec9aa2ebf6',
         address: window.web3.currentProvider.selectedAddress,
-        limit: 100000,
+        limit: PAGE_COUNT,
+        page: page
       })
     })
   }
@@ -219,7 +145,11 @@ class History extends React.Component {
       <LogoSpinner show={this.state.isRunningTransaction}/>
         <div style={{width: 'calc(100% - 90px)', minWidth: '800px', marginTop: '20px', marginLeft: '45px', marginRight: '45px'}}>
           <h3 className="account-h3" style={{paddingTop: '20px'}}> Transaction History </h3>
-          <div style={{marginLeft:'3px', paddingTop:'10px'}}><span class="mouseCursor" onClick= {() => this.handleHistory("Withdraw","Deposit")}>Deposits/Withdrawals</span><span> | </span><span class="mouseCursor" onClick={() => this.handleHistory("MANA")}>GamePlay</span></div>
+          <div style={{marginLeft:'3px', paddingTop:'10px'}}>
+            <span class="mouseCursor" onClick= {() => this.handleHistory("Withdraw","Deposit")}>Deposits/Withdrawals</span>
+            <span> | </span>
+            <span class="mouseCursor" onClick={() => this.handleHistory("MANA")}>GamePlay</span>
+          </div>
           <div id='tx-box-history'>
             <Table id='header' singleLine fixed style={{marginBottom: 0}}>
               <Table.Header>
@@ -330,9 +260,9 @@ class History extends React.Component {
                   </Table>
                 </div>
                 <div class="pagination">
-                  <MdKeyboardArrowLeft size='2.2em' className='spanbox' onClick={this.previewPage}/>
+                  <MdKeyboardArrowLeft size='2.2em' className='spanbox' disabled={this.state.beforeAvail} onClick={this.previewPage}/>
                   <span class="spanbox" style={{padding: '10px 15px'}}>Page {this.state.currentPage}</span>
-                  <MdKeyboardArrowRight size='2.2em' className='spanbox' onClick={this.nextPage} />
+                  <MdKeyboardArrowRight size='2.2em' className='spanbox' disabled={this.state.nextAvail} onClick={this.nextPage} />
                 </div>
               </div>
             : <p className="playboard-p" style={{lineHeight:'calc(100vh - 200px)', textAlign:'center', color: 'gray', fontStyle: 'italic'}}> There is no transaction history for this account </p> }

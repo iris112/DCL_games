@@ -283,13 +283,12 @@ async function findTransaction(txid) {
   return tx
 }
 
-async function findAllTransaction(data, limit) {
-  var opts = {};
-  opts['limit'] = limit || 20;
-  opts['page'] = 1;
-  const offset = (opts['page'] - 1) * opts['limit'];
+async function findAllTransaction(data, opts = {}) {
+  var limit = opts['limit'] || 20;
+  var page = opts['page'] || 1;
+  const offset = (page - 1) * limit;
 
-  let ret = await userTransactionsModel.find(data, null, {skip: offset, limit: opts['limit']}).sort({createdAt: -1}).exec();
+  let ret = await userTransactionsModel.find(data, null, {skip: offset, limit: limit}).sort({createdAt: -1}).exec();
   if (ret && ret.length) {
     let arr = [];
     for (const item of ret) {
@@ -395,13 +394,13 @@ async function findPlayInfo(data) {
   return tx
 }
 
-async function findAllPlayInfos(data, limit, page = 1) {
+async function findAllPlayInfos(data, opts = {}) {
   var opts = {};
-  opts['limit'] = limit || 20;
-  opts['page'] = page;
-  const offset = (opts['page'] - 1) * opts['limit'];
+  var limit = opts['limit'] || 20;
+  var page = opts['page'] || 1;
+  const offset = (page - 1) * limit;
 
-  let ret = await userPlayInfosModel.find(data, null, {skip: offset, limit: opts['limit']}).sort({createdAt: -1}).exec();
+  let ret = await userPlayInfosModel.find(data, null, {skip: offset, limit: limit}).sort({createdAt: -1}).exec();
   if (ret && ret.length) {
     let arr = [];
     for (const item of ret) {

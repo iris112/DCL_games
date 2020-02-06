@@ -1054,6 +1054,14 @@ a.ui.card:hover {
   margin-top: 42px !important;
   height: calc(100vh - 200px);
 }
+#tx-box-history {
+  background-color: white;
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: 4px;
+  margin-top: 23px !important;
+  height: calc(100vh - 200px);
+}
+
 
 #balance-pad {
   margin-top: 22px !important;
@@ -1075,6 +1083,10 @@ a.ui.card:hover {
 }
 .dataTable::-webkit-scrollbar-track {
   background: transparent
+}
+
+.mouseCursor:hover {
+  cursor: pointer;
 }
 
 .scrollTable::-webkit-scrollbar-thumb {

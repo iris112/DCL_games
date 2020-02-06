@@ -1,6 +1,6 @@
 import React from 'react';
 import '../additional.css';
-import { Table } from 'semantic-ui-react';
+import { Table, Pagination, Menu} from 'semantic-ui-react';
 import ModalWithdraw from '../ModalWithdraw';
 import LogoSpinner from '../../LogoSpinner';
 import Global from '../constant';
@@ -12,10 +12,14 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 const INITIAL_STATE = {
   data: [],
+  currentPage: 1,
   isRunningTransaction: false,
 };
 
 class History extends React.Component {
+  data_json_result = [];
+  rawCount = 14;
+  all_json_result = [];
   showSpinner = () => this.setState({isRunningTransaction: true})
   hideSpinner = () => this.setState({isRunningTransaction: false})
 
@@ -43,6 +47,7 @@ class History extends React.Component {
     var allData = [];
     var isScroll = false;
     if (json.result !== 'false') {
+      this.data_json_result = json.result;
       allData = allData.concat(json.result);
 
       for (var i = 0; i < 3; i++) {
@@ -69,8 +74,8 @@ class History extends React.Component {
     response = await this.getHistoryData();
     json = await response.json();
     if (json.result !== 'false') {
-      allData = allData.concat(json.result);
-
+      this.data_json_result = this.data_json_result.concat(json.result);  
+      this.all_json_result = this.data_json_result;
       if (!isScroll) {
         for (var i = 0; i < 3; i++) {
           if (json.result.length > 0) {
@@ -92,6 +97,10 @@ class History extends React.Component {
         }
       }
     }
+    var displayData = [];
+    displayData = this.setInitPage(this.data_json_result);
+    allData = allData.concat(displayData);
+
     allData.sort(function(a, b){
       var dateA = new Date(a.createdAt);
       var dateB = new Date(b.createdAt);
@@ -103,6 +112,75 @@ class History extends React.Component {
     this.setState({data: allData});
   }
 
+  setInitPage(json_result) {
+    var displayData = [];
+    for(var i = 0 ; i < this.rawCount ; i ++) {
+      var index = this.rawCount * (this.state.currentPage - 1) + i;
+      if(index >= json_result) break;
+      displayData[i] = json_result[index];
+    }
+    return displayData
+  }
+
+  handleHistory = (param1, param2) => {
+    var historyData = [];
+    if(param2 == null)
+      this.all_json_result.map(function(history) {
+        if(history.type == param1) {
+          historyData = historyData.concat(history);
+        }
+      });
+    else
+      this.all_json_result.map(function(history) {
+        if(history.type == param1 || history.type == param2) {
+          historyData = historyData.concat(history);
+        }
+      });
+    console.log(historyData);
+    var displayData = [];
+    this.data_json_result = historyData;
+    this.setState({currentPage: 1});
+    displayData = this.setInitPage(this.data_json_result);
+  
+    this.props.hideSpinner();
+    this.setState({data: displayData});
+  }
+
+  nextPage = () => {
+    if(this.data_json_result.length > (this.state.currentPage * this.rawCount)) {
+      var displayData = [];
+      for(var i = 0 ; i < this.rawCount ; i ++) {
+        var index = this.rawCount * (this.state.currentPage) + i;
+        if(index >= this.data_json_result.length) break;
+        displayData[i] = this.data_json_result[index];
+      }
+      this.setState({data: ""});
+      var nextData = [];
+      nextData = nextData.concat(displayData);
+      this.setState({data: nextData});
+      this.setState((state) => ({currentPage: state.currentPage + 1}));
+    }
+  }
+
+  previewPage = () => {
+    console.log(this.data_json_result.length);
+    console.log(this.state.currentPage);
+    console.log(this.rawCount);
+    if(this.state.currentPage != 1 ) {
+      var displayData = [];
+      for(var i = 0 ; i < this.rawCount ; i ++) {
+        var index = this.rawCount * (this.state.currentPage - 2) + i;
+        if(index >= this.data_json_result.length) break;
+        displayData[i] = this.data_json_result[index];
+        console.log(index);
+      }
+      var previewData = [];
+      previewData = previewData.concat(displayData);
+      this.setState({data: previewData});
+      this.setState((state) => ({currentPage: state.currentPage - 1}));
+    }
+  }
+
   getPlayData = () => {
     return fetch(`${Global.BASE_URL}/order/getPlayInfo`, {
       method: 'POST',
@@ -111,7 +189,7 @@ class History extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        // address: '0x5aae39aed818b07235dc8bedbf5698bb4f299ef3',
+        // address: '0x0fe1829403d422470cd4cf0abad4bcec9aa2ebf6',
         address: window.web3.currentProvider.selectedAddress,
         limit: 100000,
       })
@@ -126,7 +204,7 @@ class History extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        // address: '0x5aae39aed818b07235dc8bedbf5698bb4f299ef3',
+        // address: '0x0fe1829403d422470cd4cf0abad4bcec9aa2ebf6',
         address: window.web3.currentProvider.selectedAddress,
         limit: 100000,
       })
@@ -141,7 +219,8 @@ class History extends React.Component {
       <LogoSpinner show={this.state.isRunningTransaction}/>
         <div style={{width: 'calc(100% - 90px)', minWidth: '800px', marginTop: '20px', marginLeft: '45px', marginRight: '45px'}}>
           <h3 className="account-h3" style={{paddingTop: '20px'}}> Transaction History </h3>
-          <div id='tx-box' style={{ marginTop: '20px'}}>
+          <div style={{marginLeft:'3px', paddingTop:'10px'}}><span class="mouseCursor" onClick= {() => this.handleHistory("Withdraw","Deposit")}>Deposits/Withdrawals</span><span> | </span><span class="mouseCursor" onClick={() => this.handleHistory("MANA")}>GamePlay</span></div>
+          <div id='tx-box-history'>
             <Table id='header' singleLine fixed style={{marginBottom: 0}}>
               <Table.Header>
                 <Table.Row>
@@ -159,7 +238,7 @@ class History extends React.Component {
                   <Table singleLine fixed>
                     <Table.Header></Table.Header>
                     <Table.Body>
-                      {data.map((row) => {
+                      {data.map((row) => {if(row != undefined)  {
                         var action, amount, result;
                         var date = new Date(row.createdAt);
                         var timestamp = date.toLocaleString();
@@ -246,14 +325,14 @@ class History extends React.Component {
                             </Table.Row>
                           );
                         }
-                      })}
+                      }})}
                     </Table.Body>
                   </Table>
                 </div>
                 <div class="pagination">
-                  <MdKeyboardArrowLeft size='2.2em' className='spanbox' />
-                  <span class="spanbox" style={{padding: '10px 15px'}}>Page 1</span>
-                  <MdKeyboardArrowRight size='2.2em' className='spanbox' />
+                  <MdKeyboardArrowLeft size='2.2em' className='spanbox' onClick={this.previewPage}/>
+                  <span class="spanbox" style={{padding: '10px 15px'}}>Page {this.state.currentPage}</span>
+                  <MdKeyboardArrowRight size='2.2em' className='spanbox' onClick={this.nextPage} />
                 </div>
               </div>
             : <p className="playboard-p" style={{lineHeight:'calc(100vh - 200px)', textAlign:'center', color: 'gray', fontStyle: 'italic'}}> There is no transaction history for this account </p> }

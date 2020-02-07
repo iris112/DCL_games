@@ -40,7 +40,6 @@ async function generateHashList() {
 	for (var i = 0; i < 500; i++) {
 		ret = web3.utils.soliditySha3(tail);
 		hashList.push(ret);
-		console.log(ret);
 		tail = ret;
 	}
 }
@@ -59,7 +58,7 @@ module.exports.getHash = async () => {
     }
 
     const contractFunction = contractMasterParent.methods.setTail(
-      '0x' + hashList[hashPos - 1]
+      hashList[hashPos - 1]
     );
 
     const functionABI = contractFunction.encodeABI();

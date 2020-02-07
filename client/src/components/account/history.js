@@ -41,7 +41,7 @@ class History extends React.Component {
   async getUserData(type, page) {
     this.props.showSpinner();
     var response
-    if (type == 'History')
+    if (type == 'Play')
       response = await this.getPlayData(page);
     else
       response = await this.getHistoryData(page);
@@ -75,7 +75,7 @@ class History extends React.Component {
     }
 
     if ((json.result === 'false') || (!json.result.length)) {
-      if (this.state.currentPage > 1)
+      if (page > 1)
         nextAvail = false;
     } else
       nextAvail = true;
@@ -86,23 +86,32 @@ class History extends React.Component {
       prevAvail = true;
 
     this.props.hideSpinner();
-    this.setState({data: allData, dataType: type, currentPage: page, nextAvail: nextAvail, prevAvail: prevAvail});
+    if (allData.length > 0)
+      this.setState({data: allData, dataType: type, currentPage: page, nextAvail: nextAvail, prevAvail: prevAvail});
+    else if (this.state.dataType !== type)
+      this.setState({data: allData, dataType: type, currentPage: page, nextAvail: nextAvail, prevAvail: prevAvail});
+    else
+      this.setState({nextAvail: nextAvail, prevAvail: prevAvail});
   }
 
   handleHistory = () => {
-    this.getUserData('History', this.state.currentPage);
+    if (this.state.dataType !== 'History')
+      this.getUserData('History', 1);
   }
 
   handlePlay = () => {
-    this.getUserData('Play', this.state.currentPage);
+    if (this.state.dataType !== 'Play')
+      this.getUserData('Play', 1);
   }
 
   nextPage = () => {
-    this.getUserData(this.state.dataType, this.state.currentPage + 1);
+    if (this.state.nextAvail)
+      this.getUserData(this.state.dataType, this.state.currentPage + 1);
   }
 
   previewPage = () => {
-    this.getUserData(this.state.dataType, this.state.currentPage - 1);
+    if (this.state.beforeAvail)
+      this.getUserData(this.state.dataType, this.state.currentPage - 1);
   }
 
   getPlayData = (page) => {
@@ -146,9 +155,9 @@ class History extends React.Component {
         <div style={{width: 'calc(100% - 90px)', minWidth: '800px', marginTop: '20px', marginLeft: '45px', marginRight: '45px'}}>
           <h3 className="account-h3" style={{paddingTop: '20px'}}> Transaction History </h3>
           <div style={{marginLeft:'3px', paddingTop:'10px'}}>
-            <span class="mouseCursor" onClick= {() => this.handleHistory("Withdraw","Deposit")}>Deposits/Withdrawals</span>
+            <span class="mouseCursor" onClick= {() => this.handleHistory()}>Deposits/Withdrawals</span>
             <span> | </span>
-            <span class="mouseCursor" onClick={() => this.handleHistory("MANA")}>GamePlay</span>
+            <span class="mouseCursor" onClick={() => this.handlePlay()}>GamePlay</span>
           </div>
           <div id='tx-box-history'>
             <Table id='header' singleLine fixed style={{marginBottom: 0}}>
@@ -164,8 +173,8 @@ class History extends React.Component {
              </Table>
              { data.length != 0 ?
               <div>
-                <div class='dataTable' style={{height: 'calc(100vh - 280px)'}}>
-                  <Table singleLine fixed>
+                <div class='dataTable' style={{height: 'calc(100vh - 280px)', padding: 0}}>
+                  <Table singleLine fixed style={{margin: 0, padding: 0}}>
                     <Table.Header></Table.Header>
                     <Table.Body>
                       {data.map((row) => {if(row != undefined)  {
@@ -259,13 +268,13 @@ class History extends React.Component {
                     </Table.Body>
                   </Table>
                 </div>
-                <div class="pagination">
-                  <MdKeyboardArrowLeft size='2.2em' className='spanbox' disabled={this.state.beforeAvail} onClick={this.previewPage}/>
-                  <span class="spanbox" style={{padding: '10px 15px'}}>Page {this.state.currentPage}</span>
-                  <MdKeyboardArrowRight size='2.2em' className='spanbox' disabled={this.state.nextAvail} onClick={this.nextPage} />
-                </div>
               </div>
-            : <p className="playboard-p" style={{lineHeight:'calc(100vh - 200px)', textAlign:'center', color: 'gray', fontStyle: 'italic'}}> There is no transaction history for this account </p> }
+            : <p className="playboard-p" style={{lineHeight:'calc(100vh - 280px)', margin: 0, textAlign:'center', color: 'gray', fontStyle: 'italic'}}> There is no transaction history for this account </p> }
+            <div class="pagination">
+              <MdKeyboardArrowLeft size='2.2em' className={`spanbox ${this.state.beforeAvail ? 'mouseCursor' : 'disable'}`} onClick={this.previewPage}/>
+              <span class="spanbox" style={{padding: '6px 15px', display: 'inline-block'}}>Page {this.state.currentPage}</span>
+              <MdKeyboardArrowRight size='2.2em' className={`spanbox ${this.state.nextAvail ? 'mouseCursor' : 'disable'}`} onClick={this.nextPage} />
+            </div>
           </div>
         </div>
       </div>

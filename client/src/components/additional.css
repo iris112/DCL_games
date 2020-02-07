@@ -1024,6 +1024,11 @@ a.ui.card:hover {
   border-radius: 5px;
 }
 
+.ui.accountContainer svg.disable {
+  background-color: gray;
+  color: lightgray;
+}
+
 .ui.accountContainer div.pagination {
   text-align: center;
   margin: auto;

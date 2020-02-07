@@ -132,6 +132,7 @@ router.get('/getHistory', preAction, async function (req, res) {
 router.post('/getTotal', preAction, async function (req, res) {
     var page = req.body.page;
     var period = req.body.period;
+    var limit = req.body.limit || 100;
     var json_data = {
         "status": 'ok',
         "result": null,
@@ -139,7 +140,7 @@ router.post('/getTotal', preAction, async function (req, res) {
 
     try {
         var curTime = new Date();
-        var playinfos = await dbMongo.findAllPlayInfos({"createdAt" : {"$gte" : new Date(curTime.getTime() - Number(period))}}, 100, page);
+        var playinfos = await dbMongo.findAllPlayInfos({"createdAt" : {"$gte" : new Date(curTime.getTime() - Number(period))}}, {limit, page});
         if (!playinfos || playinfos.length == 0)
             json_data['result'] = 'false';
         else

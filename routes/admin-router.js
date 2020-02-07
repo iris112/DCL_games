@@ -140,13 +140,14 @@ router.post('/getTotal', preAction, function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         var page = req.body.page;
         var period = req.body.period;
+        var limit = req.body.limit || 100;
         var json_data = {
             "status": 'ok',
             "result": null,
         };
         try {
             var curTime = new Date();
-            var playinfos = yield dbMongo.findAllPlayInfos({ "createdAt": { "$gte": new Date(curTime.getTime() - Number(period)) } }, 100, page);
+            var playinfos = yield dbMongo.findAllPlayInfos({ "createdAt": { "$gte": new Date(curTime.getTime() - Number(period)) } }, { limit, page });
             if (!playinfos || playinfos.length == 0)
                 json_data['result'] = 'false';
             else

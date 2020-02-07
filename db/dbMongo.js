@@ -276,13 +276,12 @@ function findTransaction(txid) {
     });
 }
 exports.findTransaction = findTransaction;
-function findAllTransaction(data, limit) {
+function findAllTransaction(data, opts = {}) {
     return __awaiter(this, void 0, void 0, function* () {
-        var opts = {};
-        opts['limit'] = limit || 20;
-        opts['page'] = 1;
-        const offset = (opts['page'] - 1) * opts['limit'];
-        let ret = yield userTransactionsModel.find(data, null, { skip: offset, limit: opts['limit'] }).sort({ createdAt: -1 }).exec();
+        var limit = opts['limit'] || 20;
+        var page = opts['page'] || 1;
+        const offset = (page - 1) * limit;
+        let ret = yield userTransactionsModel.find(data, null, { skip: offset, limit: limit }).sort({ createdAt: -1 }).exec();
         if (ret && ret.length) {
             let arr = [];
             for (const item of ret) {
@@ -387,13 +386,14 @@ function findPlayInfo(data) {
     });
 }
 exports.findPlayInfo = findPlayInfo;
-function findAllPlayInfos(data, limit, page = 1) {
+function findAllPlayInfos(data, opts = {}) {
+    var opts;
     return __awaiter(this, void 0, void 0, function* () {
-        var opts = {};
-        opts['limit'] = limit || 20;
-        opts['page'] = page;
-        const offset = (opts['page'] - 1) * opts['limit'];
-        let ret = yield userPlayInfosModel.find(data, null, { skip: offset, limit: opts['limit'] }).sort({ createdAt: -1 }).exec();
+        opts = {};
+        var limit = opts['limit'] || 20;
+        var page = opts['page'] || 1;
+        const offset = (page - 1) * limit;
+        let ret = yield userPlayInfosModel.find(data, null, { skip: offset, limit: limit }).sort({ createdAt: -1 }).exec();
         if (ret && ret.length) {
             let arr = [];
             for (const item of ret) {

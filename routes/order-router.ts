@@ -267,6 +267,7 @@ router.post('/confirmHistory', preAction, async function(req, res) {
 router.post('/getHistory', preAction, async function(req, res) {
     var address = req.body.address;
     var limit = req.body.limit;
+    var page = req.body.page;
     var json_data = {
         "status": 'ok',
         "result": '',
@@ -277,7 +278,7 @@ router.post('/getHistory', preAction, async function(req, res) {
     else {
         try {
             let currentDate = new Date();
-            var txdatas = await dbMongo.findAllTransaction({address}, limit);
+            var txdatas = await dbMongo.findAllTransaction({address}, {limit, page});
             if (txdatas && txdatas.length) {
                 for (let i = 0; i < txdatas.length; i++) {
                     if (txdatas[i].type != 'Withdraw')
@@ -339,6 +340,7 @@ router.post('/existWithdraw', preAction, async function(req, res) {
 router.post('/getPlayInfo', preAction, async function(req, res) {
     var address = req.body.address;
     var limit = req.body.limit;
+    var page = req.body.page;
     var json_data = {
         "status": 'ok',
         "result": '',
@@ -348,7 +350,7 @@ router.post('/getPlayInfo', preAction, async function(req, res) {
         json_data['result'] = 'false';
     else {
         try {
-            var playinfodatas = await dbMongo.findAllPlayInfos({address}, limit);
+            var playinfodatas = await dbMongo.findAllPlayInfos({address}, {limit, page});
             if (playinfodatas && playinfodatas.length)
                 json_data['result'] = playinfodatas;
             else

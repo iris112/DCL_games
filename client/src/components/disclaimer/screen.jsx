@@ -4,7 +4,12 @@ import ethereum from '../Images/ethereum3.png';
 import { Header, Divider, Grid, Image, List, Segment, Container, Breadcrumb, Icon } from 'semantic-ui-react'
 
 
-const Screen = () => (
+const Screen = () => {
+
+  window.scrollTo(0,0);
+
+  return (
+
   <Segment vertical style={{ backgroundColor: 'white', border: 'none', paddingBottom: '0px' }}>
 
     <Container id='disclaimer-container' style={{ paddingTop: '2rem', paddingBottom: '5em' }}>
@@ -228,6 +233,7 @@ const Screen = () => (
       </Grid>
     </Container>
   </Segment>
-)
+);
+};
 
 export default Screen

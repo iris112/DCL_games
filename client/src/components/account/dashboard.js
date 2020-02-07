@@ -30,11 +30,11 @@ class Dashboard extends React.Component {
   
   render() {
     return (
-      <div id="playboard" class="contentContainer">
+      <div id="playboard" class="contentContainer" style={{ minWidth: '1000px' }}>
         <LogoSpinner show={this.state.isRunningTransaction}/>
-        <div class="bottom-connect">
-          <div style={{marginLeft:'50px', marginRight:'20px'}}>
-            <div class="description">
+        <div class="bottom-connect" style={{ minWidth: '1000px' }}>
+          <div style={{marginLeft:'50px', marginRight:'20px' }}>
+            <div class="description" style={{ width: '510px' }}>
               <Fade bottom distance="20px" duration="600">
                 <p id="featured-casino-text">FEATURED CASINO</p>
                 <h3 className="playboard-h3">Serenity Island</h3>
@@ -50,7 +50,7 @@ class Dashboard extends React.Component {
                 Play Now
               </Button>
             </Fade>
-            <div class="teleport" style={{marginTop: '50px'}}>
+            <div class="teleport" style={{marginTop: '50px' }}>
               <Fade bottom distance="20px" duration="600" delay="200">
                 <p id="featured-casino-text" style={{ paddingBottom: '10px' }}>ALL CASINOS</p>
               </Fade>

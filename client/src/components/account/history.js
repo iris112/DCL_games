@@ -150,9 +150,9 @@ class History extends React.Component {
     const data = this.state.data; 
 
     return (
-      <div class="contentContainer">
-      <LogoSpinner show={this.state.isRunningTransaction}/>
-        <div style={{width: 'calc(100% - 90px)', minWidth: '800px', marginTop: '20px', marginLeft: '45px', marginRight: '45px'}}>
+      <div class="contentContainer" style={{ marginBottom: '-60px' }}>
+      <LogoSpinner show={this.state.isRunningTransaction} className="tx-history-spinner" />
+        <div style={{width: 'calc(100% - 90px)', marginTop: '20px', marginLeft: '45px', marginRight: '45px'}}>
           <h3 className="account-h3" style={{paddingTop: '20px'}}> Transaction History </h3>
           <div style={{marginLeft:'3px', paddingTop:'10px'}}>
             <span class="mouseCursor" onClick= {() => this.handleHistory()}>Deposits/Withdrawals</span>

@@ -6,7 +6,7 @@ import dai from '../Images/dai.png';
 import eth from '../Images/eth.png';
 import dg from '../Images/authorize_title.png';
 import { Button } from 'decentraland-ui'
-import { Table, Modal } from 'semantic-ui-react'
+import { Table, Modal, Icon } from 'semantic-ui-react'
 import Global from '../constant';
 import ModalDeposit from '../ModalDeposit'
 import ModalWithdraw from '../ModalWithdraw'
@@ -157,6 +157,20 @@ class WalletInfo extends React.Component {
       enabled: 0
     }];
 
+    let button;
+
+    if (this.state.tokenBalance == 0) {
+      button =  <span>
+                  <ModalDeposit 
+                    showSpinner={this.props.showSpinner} hideSpinner={this.props.hideSpinner} update={this.update} authvalue={4}
+                  />
+                  <Icon name="exclamation circle" style={{ color: 'red', marginRight: '-14px', marginLeft: '3px', verticalAlign: 'top', marginTop: '-3px', fontSize: '10px '}}/>
+                </span>;
+    }
+    else {
+      button = <ModalDeposit showSpinner={this.props.showSpinner} hideSpinner={this.props.hideSpinner} update={this.update} authvalue={4}/>;
+    }
+
     return (
       <div class="wallet_board">
         <div class="account">
@@ -188,7 +202,8 @@ class WalletInfo extends React.Component {
                     <img style={{ verticalAlign: 'middle', marginRight: '6px' }} class="image inline" width="20px" height="20px" src={mana} />
                     {this.state.tokenBalance} MANA
                     <span style={{ float: 'right' }} id="wallet-row3">
-                      <ModalDeposit showSpinner={this.props.showSpinner} hideSpinner={this.props.hideSpinner} update={this.update} authvalue={4}/>
+
+                      {button}
                       <ModalWithdraw isLink={0} showSpinner={this.props.showSpinner} hideSpinner={this.props.hideSpinner}/>
                     </span>
                   </span>

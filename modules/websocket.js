@@ -1,47 +1,63 @@
 const SocketServer = require('ws').Server;
-const slotsIn = require('./slotsIn');
-const rouletteIn = require('./rouletteIn');
+// const slotsIn = require('./slotsIn');
+// const rouletteIn = require('./rouletteIn');
+const gameIn = require('./gameIn');
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 module.exports = function WebSocket(server) {
-	wss = new SocketServer(server); // create WebSocket connection and establish handshake
+  wss = new SocketServer(server); // create WebSocket connection and establish handshake
 
-	wss.on('connection', (ws) => {
-		console.log('DCL client connected');
-		ws.send('Hello Decentraland!');
+  const messageJSON = {
+    machineID: '001001005',
+    walletAddress: '0x1fcde174c13691ef0c13fcee042e0951452c0f8a',
+    gameData: {
+      coinName: 'MANA',
+      betIDs: [1101],
+      betValues: [0],
+      betAmounts: [100]
+    }
+  };
 
-		ws.on('close', () => console.log('DCL client disconnected'));
+  gameIn.prepareTransaction(messageJSON);
 
-		/////////////////////////////////////////////////////////////////////////////////////////
-		/////////////////////////////////////////////////////////////////////////////////////////
-		// handle incoming client-side play calls and send blockchain transactions
-		ws.on('message', function incoming(message) {
-			// console.log('gameplay message: ' + message);
+  wss.on('connection', ws => {
+    console.log('DCL client connected');
+    ws.send('Hello Decentraland!');
 
-			const messageJSON = JSON.parse(message);
+    ws.on('close', () => console.log('DCL client disconnected'));
 
-			// get the game type from the machine ID
-			const machineID = messageJSON.machineID;
-			const gameType = machineID.slice(3, 6);
-			console.log('game type: ' + gameType);
+    /////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////
+    // handle incoming client-side play calls and send blockchain transactions
+    ws.on('message', function incoming(message) {
+      // console.log('gameplay message: ' + message);
 
-			if (gameType == '001') {
-				slotsIn.prepareTransaction(messageJSON);
-			} else if (gameType == '002') {
-				rouletteIn.prepareTransaction(messageJSON);
-			} else if (gameType == '003') {
-				// backgammonIn.prepareTransaction(messageJSON);
-			}
-		});
-	});
+      const messageJSON = JSON.parse(message);
 
-	/////////////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////////////
-	// send pings once every 10 seconds to keep connection open on Heroku
-	setInterval(() => {
-		wss.clients.forEach((client) => {
-			client.send(new Date().toTimeString());
-		});
-	}, 10000);
+      // get the game type from the machine ID
+      // const machineID = messageJSON.machineID;
+      // const gameType = machineID.slice(3, 6);
+      // console.log('game type: ' + gameType);
+
+      // if (gameType == '001') {
+      // 	slotsIn.prepareTransaction(messageJSON);
+      // } else if (gameType == '002') {
+      // 	rouletteIn.prepareTransaction(messageJSON);
+      // } else if (gameType == '003') {
+      // backgammonIn.prepareTransaction(messageJSON);
+      // }
+
+      gameIn.prepareTransaction(messageJSON);
+    });
+  });
+
+  /////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////
+  // send pings once every 10 seconds to keep connection open on Heroku
+  setInterval(() => {
+    wss.clients.forEach(client => {
+      client.send(new Date().toTimeString());
+    });
+  }, 10000);
 };

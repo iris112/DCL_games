@@ -37,11 +37,13 @@ const INITIAL_STATE = {
   isRunningTransaction: false,
   isFistLoading: false,
   existAccount: 0,
+  visible: true,
 };
 
 class Navbar2 extends Component {
 
   state = { modalOpen: false}
+  handleDismiss = () => this.setState({ visible: false })
   handleOpen = () => this.setState({ modalOpen: true })
   handleClose = () => this.setState({ modalOpen: false })
   showSpinner = () => this.setState({isRunningTransaction: true})
@@ -68,23 +70,25 @@ class Navbar2 extends Component {
     { /*                         NOT METAMASK                        */ }
     { /* ----------------------------------------------------------- */ }
 
-    if (!this.isBrowserMetamsk) {
+    if (!this.isBrowserMetamsk && this.state.visible) {
       return (
         <Segment className='nav-desktop' style={{ marginTop: '0em', paddingTop: '0em', marginBottom: '0em', paddingBottom: '0em' }}>
 
           <div className='navbar2'>
+
             <Menu
               className='black-menu'
               borderless
-              style={{ boxShadow: 'none', marginBottom: '-1px' }}
+              style={{ boxShadow: 'none', marginBottom: '-1px', marginTop: '0px', borderWidth: '0px' }}
             >
               <Container>
-                <Menu.Item header id='nav2-logo' as={NavLink} to="/" style={{ marginTop: '6px' }}>
+                <Menu.Item header id='nav2-logo' as={NavLink} to="/" style={{ marginTop: '9px', marginBottom: '0px' }} >
                   <Image src={logo} id='nav2-logo' style={{ width: '36px' }} />
-                  <Menu.Item className='nav-text2' as={NavLink} to='/blog/'>BLOG</Menu.Item>
+                </Menu.Item>
+                  <Menu.Item className='nav-text2' href="/blog/">BLOG</Menu.Item>
                   <Menu.Item className='nav-text' as={NavLink} to='/disclaimer/'>DISCLAIMER</Menu.Item>
                   <Popup
-                    trigger={<Menu.Item className='nav-text'>DOCUMENTATION</Menu.Item>}
+                    trigger={<Menu.Item className='nav-text'>DOCS</Menu.Item>}
                     className='modal-pop'
                     content='Coming Soon'
                     position='bottom center'
@@ -95,7 +99,6 @@ class Navbar2 extends Component {
                     content='Coming Soon'
                     position='bottom center'
                   />
-                </Menu.Item>
 
                   { /* ----------------------------------------------------------- */ }
                   { /*                     MODAL NOT METAMASK                      */ }
@@ -104,17 +107,17 @@ class Navbar2 extends Component {
                 <Menu.Menu className='nav-buttons' position='right' style={{ paddingRight: '6px', paddingTop: '6px' }}>
                   <Menu.Item className='nav-text3' as={NavLink} to='/discord'>JOIN OUR DISCORD</Menu.Item> 
                   <Modal
-                    trigger={<Button content='Play Now' className='hvr-pop' onClick={this.handleOpen} />}
+                    trigger={<Button content='Play Now' className='home-play animate2' onClick={this.handleOpen} />}
                     open={this.state.modalOpen}
                     onClose={this.handleClose}
                     closeIcon
                   >
-                  <h3 style={{textAlign: 'left', marginTop: '25px', marginLeft: '32px' }}> Create Account </h3>
+                  <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px', paddingLeft: '30px' }}> Create Account </h3>
                     <Modal.Content>
-                      <Header>Please use a desktop Chrome browser to play our free games. To play games with cryptocurrency, you must enable Metamask. You can download Chrome <a className='blue-link' href="https://www.google.com/chrome/">here</a> and Metamask <a className='blue-link' href="https://metamask.io/">here</a>.</Header>
+                      <Header>Please use a desktop Chrome browser to play our free games. To play games with cryptocurrency, you must enable Metamask. You can download Chrome <a className='blue-link2' href="https://www.google.com/chrome/">here</a> and Metamask <a className='blue-link2' href="https://metamask.io/">here</a>.</Header>
                     </Modal.Content>
                     <Modal.Actions style={{ marginTop: '30px' }}>
-                      <Button id='button-6' onClick={this.handleClose}>
+                      <Button id='depositButton' onClick={this.handleClose}>
                         OK
                       </Button>
                     </Modal.Actions>
@@ -130,7 +133,7 @@ class Navbar2 extends Component {
     }
 
     return (
-      <Segment className='nav-desktop' style={{ marginTop: '0em', paddingTop: '0em', marginBottom: '0em', paddingBottom: '0em' }}>
+      <Segment className='nav-desktop' style={{ marginTop: '0em', paddingTop: '0em', marginBottom: '0em', paddingBottom: '0px' }}>
 
         <div className='navbar2'>
           <Spinner show={this.state.isFistLoading}/>
@@ -138,12 +141,13 @@ class Navbar2 extends Component {
           <Menu
             className='black-menu'
             borderless
-            style={{ boxShadow: 'none', marginBottom: '-1px' }}
+            style={{ boxShadow: 'none', marginBottom: '-1px', paddingBottom: '6px' }}
           >
             <Container>
-              <Menu.Item header id='nav2-logo' as={NavLink} to="/" style={{ marginTop: '6px' }}>
+              <Menu.Item header id='nav2-logo' as={NavLink} to="/" style={{ marginTop: '9px', marginBottom: '0px' }} >
                 <Image src={logo} id='nav2-logo' style={{ width: '36px' }} />
-                <Menu.Item className='nav-text2' as={NavLink} to='/blog/'>BLOG</Menu.Item>
+              </Menu.Item>
+                <Menu.Item className='nav-text2' href="/blog/">BLOG</Menu.Item>
                 <Menu.Item className='nav-text' as={NavLink} to='/disclaimer/'>DISCLAIMER</Menu.Item>
                 <Popup
                   trigger={<Menu.Item className='nav-text'>DOCS</Menu.Item>}
@@ -157,7 +161,6 @@ class Navbar2 extends Component {
                   content='Coming Soon'
                   position='bottom center'
                 />
-              </Menu.Item>
 
               <Menu.Menu className='nav-buttons' position='right' style={{ paddingRight: '6px', paddingTop: '6px' }}>
                 <Menu.Item className='nav-text3' as={NavLink} to='/discord'>JOIN OUR DISCORD</Menu.Item> 

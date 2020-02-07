@@ -14,12 +14,20 @@ import logo from '../Images/authorize_title.png'
 
 const Screen = ({ slug, featured_image, image, created, categories, title, summary, author: { first_name = "", last_name = "", profile_image = "" }, body }) => {
 
+  window.scrollTo(0, 0);
+
   return (
     <div className="blogdetail-page">
 
       <div className="coverimg">
 
-        <div className="image" style={{ marginTop: '-140px' }}>
+        <Container>
+          <a href="/blog/">
+            <Icon name="arrow left" style={{ color: 'white', paddingTop: '30px', fontSize: '18px' }} />
+          </a>
+        </Container>
+
+        <div className="image" style={{ marginTop: '-60px' }}>
           <img src={image || banner} alt="" />
         </div>
       </div>

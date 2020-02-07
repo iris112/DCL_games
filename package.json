@@ -38,6 +38,7 @@
     "gulp": "^3.9.1",
     "gulp-typescript": "^5.0.0",
     "heroku-ssl-redirect": "0.0.4",
+    "js-sha3": "0.6.1",
     "keccak256": "^1.0.0",
     "mongoose": "^5.4.20",
     "mongoose-int32": "^0.3.1",

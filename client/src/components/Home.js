@@ -9,10 +9,10 @@ import { isMobile } from "react-device-detect";
 import Footer from "./Footer";
 import ReactGA from "react-ga";
 import slots from './Images/slots-1.png'
-import slots2 from './Images/slots.gif'
+import slots2 from './Images/slots-2.png'
 import overlaySlots from './Images/slots_overlay.png'
 import roulette from './Images/roulette-1.png'
-import roulette2 from './Images/roulette.gif'
+import roulette2 from './Images/roulette-2.png'
 import overlayRoulette from './Images/roulette_overlay.png'
 import blackjack from './Images/blackjack.png'
 import dice from './Images/dice.png'
@@ -26,6 +26,7 @@ import preview from './Images/preview.png'
 import Hls from "hls.js";
 import CountUp from 'react-countup';
 import Svgeth from './Images/svg7.js'
+import Svgdcl from './Images/svg8.js'
 import dcl from './Images/dcl.png'
 
 
@@ -109,16 +110,22 @@ class Home extends Component {
         <Navbar2 />
         <Navbar3 />
 
+          <div style={{ backgroundColor: 'rgba(1, 133, 244, 1)', paddingTop: '60px', marginBottom: '-60px' }}>
+            <Container>
+              <Message className='modal-msg' onDismiss={this.handleDismiss}>
+                <Header className='msg-text'>Please use a desktop Chrome browser to play our free games. To play games with cryptocurrency, you must enable Metamask. You can download Chrome <a className='blue-link' href="https://www.google.com/chrome/">here</a> and Metamask <a className='blue-link' href="https://metamask.io/">here</a>.</Header>
+              </Message>
+            </Container>
+          </div>
+
         { /* ----------------------------------------------------------- */ }
         { /*                       HERO SECTION                          */ }
         { /* ----------------------------------------------------------- */ }
 
         <Segment className='hero'>
-          <Container className='hero-container'>
 
-            <Message className='modal-msg' onDismiss={this.handleDismiss}>
-              <Header className='msg-text'>Please use a desktop Chrome browser to play our free games. To play games with cryptocurrency, you must enable Metamask. You can download Chrome <a className='blue-link' href="https://www.google.com/chrome/">here</a> and Metamask <a className='blue-link' href="https://metamask.io/">here</a>.</Header>
-            </Message>
+
+          <Container className='hero-container'>
             
             {isMobile ? <video className="hero-image" ref={ref => this.refVideo(ref)} preload="auto" playsInline autoPlay muted loop/>
             : <a href='/account'>
@@ -127,92 +134,115 @@ class Home extends Component {
             
 
 					</Container>
-            <Container className="stats-container" style={{paddingTop: '60px', paddingBottom: '60px' }}>
+
+          <Container className="stats-container" style={{paddingTop: '60px', paddingBottom: '60px' }}>
             <Header className='games-h' style={{ color: 'white', textAlign: 'center', fontWeight: '300', lineHeight: '54px' }}>
-              By the Numbers
+              BY THE NUMBERS
             </Header>
 
-              <Grid>
-                <Grid.Row>
-                  
-                  <Grid.Column computer={4} tablet={8} mobile={16}>
-                    <Statistic style={{ paddingLeft: 'calc(50% - 97px)'}} id="stat1">
-                      <Statistic.Value style={{ color: 'white' }}>
-                        <Grid>
-                          <Grid.Row>
-                            <Grid.Column computer={8} style={{ marginRight: '-45px' }}>
-                              <Image src={dcl} style= {{ marginTop: '7px' }}/>
-                            </Grid.Column>
-                            <Grid.Column computer={8}>
-                              <CountUp
-                                end={250}
-                                duration={3}
-                              />K
-                            </Grid.Column>
-                          </Grid.Row>
-                        </Grid>
-                      </Statistic.Value>
-                      <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px', paddingLeft: '17px' }}>Mana Slots Jackpot </Statistic.Label>
-                    </Statistic>
-                  </Grid.Column>
+            <Statistic.Group widths='four'>
+              <Statistic>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgdcl className="svg-dcl"/>
+                  <CountUp
+                    end={250}
+                    duration={3}
+                  />K
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad1">Mana Slots Jackpot</Statistic.Label>
+              </Statistic>
 
-                  <Grid.Column computer={4} tablet={8} mobile={16}>
-                    <Statistic style={{ paddingLeft: 'calc(50% - 97px)'}} id="stat1">
-                      <Statistic.Value style={{ color: 'white' }}>
-                        <Grid>
-                          <Grid.Row>
-                            <Grid.Column computer={8} style={{ marginRight: '-51px' }}>
-                              <Image src={dcl} style= {{ marginTop: '7px' }}/>
-                            </Grid.Column>
-                            <Grid.Column computer={8}>
-                              <CountUp
-                                end={360}
-                                duration={3}
-                              />K
-                            </Grid.Column>
-                          </Grid.Row>
-                        </Grid>
-                      </Statistic.Value>
-                      <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px', paddingLeft: '4px' }}>Mana Roulette Jackpot </Statistic.Label>
-                    </Statistic>
-                  </Grid.Column>
-                    
-                  <Grid.Column computer={4} tablet={8} mobile={16}>
-                    <Statistic style={{ paddingLeft: 'calc(50% - 56px)'}} id="stat2">
-                      <Statistic.Value style={{ color: 'white' }}>
-                        <Svgeth className='svg-eth2' />
-                        <CountUp
-                          end={4}
-                          duration={6}
-                        />
-                      </Statistic.Value>
-                      <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px' }}>Coins Offered</Statistic.Label>
-                    </Statistic>
-                  </Grid.Column>
+              <Statistic>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgdcl className="svg-dcl"/>
+                  <CountUp
+                    end={360}
+                    duration={3}
+                  />K
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad2">Mana Roulette Jackpot</Statistic.Label>
+              </Statistic>
 
-                  <Grid.Column computer={4} tablet={8} mobile={16}>
-                    <Statistic style={{ paddingLeft: 'calc(50% - 73px)'}} id="stat3">
-                      <Statistic.Value style={{ color: 'white' }}>
-                        <Grid>
-                          <Grid.Row>
-                            <Grid.Column computer={8} style={{ marginRight: '-31px' }}>
-                              <Image src={dcl} style= {{ marginTop: '7px' }}/>
-                            </Grid.Column>
-                            <Grid.Column computer={8}>
-                              <CountUp
-                                end={199}
-                                duration={3}
-                              />
-                            </Grid.Column>
-                          </Grid.Row>
-                        </Grid>
-                      </Statistic.Value>
-                      <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px', paddingLeft: '10px' }}>DCL Parcels</Statistic.Label>
-                    </Statistic>
-                  </Grid.Column>
+              <Statistic>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgeth className="svg-eth2" />
+                  <CountUp
+                    end={4}
+                    duration={3}
+                  />
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad3">Coins Offered</Statistic.Label>
+              </Statistic>
 
-                </Grid.Row>
-              </Grid>
+              <Statistic>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgdcl className="svg-dcl"/>
+                  <CountUp
+                    end={199}
+                    duration={3}
+                  />
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad4">dcl parcels</Statistic.Label>
+              </Statistic>
+            </Statistic.Group>
+
+          </Container>
+
+          <Container className="stats-container2" style={{paddingTop: '60px', paddingBottom: '60px' }}>
+            <Header className='games-h' style={{ color: 'white', textAlign: 'center', fontWeight: '300', lineHeight: '54px' }}>
+              BY THE NUMBERS
+            </Header>
+
+            <Statistic.Group widths='two'>
+              <Statistic style={{ paddingBottom: '30px' }}>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgdcl className="svg-dcl"/>
+                  <CountUp
+                    className="statistic-value"
+                    end={250}
+                    duration={3}
+                  /><span className="statistic-value">K</span>
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad1">Mana Slots <br /> Jackpot</Statistic.Label>
+              </Statistic>
+
+              <Statistic>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgdcl className="svg-dcl"/>
+                  <CountUp
+                    className="statistic-value"
+                    end={360}
+                    duration={3}
+                  /><span className="statistic-value">K</span>
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad2">Mana Roulette  <br /> Jackpot</Statistic.Label>
+              </Statistic>
+
+              <Statistic>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgeth className="svg-eth2" />
+                  <CountUp
+                    className="statistic-value"
+                    end={4}
+                    duration={3}
+                  />
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad3">Coins Offered</Statistic.Label>
+              </Statistic>
+
+              <Statistic>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgdcl className="svg-dcl"/>
+                  <CountUp
+                    className="statistic-value"
+                    end={199}
+                    duration={3}
+                  />
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad4">dcl parcels</Statistic.Label>
+              </Statistic>
+            </Statistic.Group>
+
           </Container>
         </Segment>
 
@@ -228,20 +258,19 @@ class Home extends Component {
             <Header className='games-h1'>
               GAMES
             </Header>
-            <p className="playboard-p" style={{ color: 'white', paddingBottom: '9px', marginTop: '-6px' }}> Playable with MANA. ETH, DAI and DG coming soon </p>
+            <p className="playboard-p" style={{ color: 'white', paddingBottom: '9px', marginTop: '-6px' }}> Playable for free and with MANA. ETH, DAI and DG coming soon </p>
 
             <Grid>
 
               <Grid.Row>
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/account' className='games-card'>
+                  <Card fluid className='games-card'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={slots} />
                       </Reveal.Content>
                       <Reveal.Content hidden>
                         <Image className='card-image' src={slots2} />
-                        <Image className='card-image overlay-image' src={overlaySlots} />
                       </Reveal.Content>
                     </Reveal>
                     <Card.Content>
@@ -251,14 +280,13 @@ class Home extends Component {
                 </Grid.Column>
 
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/account' className='games-card'>
+                  <Card fluid className='games-card'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={roulette} />
                       </Reveal.Content>
                       <Reveal.Content hidden>
                         <Image className='card-image' src={roulette2} />
-                        <Image className='card-image overlay-image' src={overlayRoulette} />
                       </Reveal.Content>
                     </Reveal>
                     <Card.Content className='card-border'>
@@ -268,7 +296,7 @@ class Home extends Component {
                 </Grid.Column>
 
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/account' className='games-card2'>
+                  <Card fluid className='games-card2'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={blackjack} />
@@ -284,7 +312,7 @@ class Home extends Component {
                 </Grid.Column>
 
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/account' className='games-card2'>
+                  <Card fluid className='games-card2'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={dice} />
@@ -294,7 +322,7 @@ class Home extends Component {
                       </Reveal.Content>
                     </Reveal>
                     <Card.Content className='card-border'>
-                      <Card.Header className='card-header'>DICE</Card.Header>
+                      <Card.Header className='card-header'>BACKGAMMON</Card.Header>
                     </Card.Content>
                   </Card>
                 </Grid.Column>
@@ -313,9 +341,9 @@ class Home extends Component {
           <Container>
 
             <Header className='casino-h1'>
-              VIRTUAL CASINOS
+              CASINOS
             </Header>
-            <p className="playboard-p" style={{ color: 'white', paddingBottom: '9px', marginTop: '-6px' }}> Now Playable in the Decentraland metaverse </p>
+            <p className="playboard-p" style={{ color: 'white', paddingBottom: '9px', marginTop: '-6px' }}> Playable in Decentraland </p>
 
             <Grid>
 
@@ -368,7 +396,7 @@ class Home extends Component {
   { /* ----------------------------------------------------------- */ }
 
     return (
-      <Segment className='main-segment'>
+      <Segment className='main-segment' style={{ marginTop: '6px' }}>
         <Navbar2 />
         <Navbar3 />
 
@@ -385,92 +413,115 @@ class Home extends Component {
               </a> }
 
           </Container>
-						<Container className="stats-container" style={{paddingTop: '60px', paddingBottom: '60px' }}>
-        	  <Header className='games-h' style={{ color: 'white', textAlign: 'center', fontWeight: '300', lineHeight: '54px' }}>
-             	By the Numbers
+
+          <Container className="stats-container" style={{paddingTop: '60px', paddingBottom: '60px' }}>
+            <Header className='games-h' style={{ color: 'white', textAlign: 'center', fontWeight: '300', lineHeight: '54px' }}>
+              BY THE NUMBERS
             </Header>
 
-	            <Grid>
-	            	<Grid.Row>
-	            		
-							   	<Grid.Column computer={4} tablet={8} mobile={16}>
-							      <Statistic style={{ paddingLeft: 'calc(50% - 97px)'}} id="stat1">
-							        <Statistic.Value style={{ color: 'white' }}>
-							        	<Grid>
-								        	<Grid.Row>
-									        	<Grid.Column computer={8} style={{ marginRight: '-45px' }}>
-									        		<Image src={dcl} style= {{ marginTop: '7px' }}/>
-									        	</Grid.Column>
-									        	<Grid.Column computer={8}>
-										      		<CountUp
-										      			end={250}
-										      			duration={3}
-										      		/>K
-										      	</Grid.Column>
-										      </Grid.Row>
-									     	</Grid>
-							      	</Statistic.Value>
-							        <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px', paddingLeft: '17px' }}>Mana Slots Jackpot </Statistic.Label>
-							      </Statistic>
-							  	</Grid.Column>
+            <Statistic.Group widths='four'>
+              <Statistic>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgdcl className="svg-dcl"/>
+                  <CountUp
+                    end={250}
+                    duration={3}
+                  />K
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad1">Mana Slots Jackpot</Statistic.Label>
+              </Statistic>
 
-							   	<Grid.Column computer={4} tablet={8} mobile={16}>
-							      <Statistic style={{ paddingLeft: 'calc(50% - 97px)'}} id="stat1">
-							        <Statistic.Value style={{ color: 'white' }}>
-							        	<Grid>
-								        	<Grid.Row>
-									        	<Grid.Column computer={8} style={{ marginRight: '-51px' }}>
-									        		<Image src={dcl} style= {{ marginTop: '7px' }}/>
-									        	</Grid.Column>
-									        	<Grid.Column computer={8}>
-										      		<CountUp
-										      			end={360}
-										      			duration={3}
-										      		/>K
-										      	</Grid.Column>
-										      </Grid.Row>
-									     	</Grid>
-							      	</Statistic.Value>
-							        <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px', paddingLeft: '4px' }}>Mana Roulette Jackpot </Statistic.Label>
-							      </Statistic>
-							  	</Grid.Column>
-							      
-	            		<Grid.Column computer={4} tablet={8} mobile={16}>
-							      <Statistic style={{ paddingLeft: 'calc(50% - 56px)'}} id="stat2">
-							        <Statistic.Value style={{ color: 'white' }}>
-							        	<Svgeth className='svg-eth2' />
-							      		<CountUp
-							      			end={4}
-							      			duration={6}
-							      		/>
-							      	</Statistic.Value>
-							        <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px' }}>Coins Offered</Statistic.Label>
-							      </Statistic>
-							    </Grid.Column>
+              <Statistic>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgdcl className="svg-dcl"/>
+                  <CountUp
+                    end={360}
+                    duration={3}
+                  />K
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad2">Mana Roulette Jackpot</Statistic.Label>
+              </Statistic>
 
-							   	<Grid.Column computer={4} tablet={8} mobile={16}>
-							      <Statistic style={{ paddingLeft: 'calc(50% - 73px)'}} id="stat3">
-							        <Statistic.Value style={{ color: 'white' }}>
-							        	<Grid>
-								        	<Grid.Row>
-									        	<Grid.Column computer={8} style={{ marginRight: '-31px' }}>
-									        		<Image src={dcl} style= {{ marginTop: '7px' }}/>
-									        	</Grid.Column>
-									        	<Grid.Column computer={8}>
-										      		<CountUp
-										      			end={199}
-										      			duration={3}
-										      		/>
-										      	</Grid.Column>
-										      </Grid.Row>
-									     	</Grid>
-							      	</Statistic.Value>
-							        <Statistic.Label id="gold-grad" style={{ color: 'white', paddingTop: '6px', paddingLeft: '10px' }}>DCL Parcels</Statistic.Label>
-							      </Statistic>
-							  	</Grid.Column>
+              <Statistic>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgeth className="svg-eth2" />
+                  <CountUp
+                    end={4}
+                    duration={3}
+                  />
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad3">Coins Offered</Statistic.Label>
+              </Statistic>
 
-								</Grid.Row>
-							</Grid>
+              <Statistic>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgdcl className="svg-dcl"/>
+                  <CountUp
+                    end={199}
+                    duration={3}
+                  />
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad4">dcl parcels</Statistic.Label>
+              </Statistic>
+            </Statistic.Group>
+
+          </Container>
+
+          <Container className="stats-container2" style={{paddingTop: '60px', paddingBottom: '60px' }}>
+            <Header className='games-h' style={{ color: 'white', textAlign: 'center', fontWeight: '300', lineHeight: '54px' }}>
+              BY THE NUMBERS
+            </Header>
+
+            <Statistic.Group widths='two'>
+              <Statistic style={{ paddingBottom: '30px' }}>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgdcl className="svg-dcl"/>
+                  <CountUp
+                    className="statistic-value"
+                    end={250}
+                    duration={3}
+                  /><span className="statistic-value">K</span>
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad1">Mana Slots <br /> Jackpot</Statistic.Label>
+              </Statistic>
+
+              <Statistic>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgdcl className="svg-dcl"/>
+                  <CountUp
+                    className="statistic-value"
+                    end={360}
+                    duration={3}
+                  /><span className="statistic-value">K</span>
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad2">Mana Roulette  <br /> Jackpot</Statistic.Label>
+              </Statistic>
+
+              <Statistic>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgeth className="svg-eth2" />
+                  <CountUp
+                    className="statistic-value"
+                    end={4}
+                    duration={3}
+                  />
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad3">Coins Offered</Statistic.Label>
+              </Statistic>
+
+              <Statistic>
+                <Statistic.Value style={{ color: 'white' }}>
+                  <Svgdcl className="svg-dcl"/>
+                  <CountUp
+                    className="statistic-value"
+                    end={199}
+                    duration={3}
+                  />
+                </Statistic.Value>
+                <Statistic.Label className="gold-grad4">dcl parcels</Statistic.Label>
+              </Statistic>
+            </Statistic.Group>
+
           </Container>
         </Segment>
 
@@ -485,20 +536,19 @@ class Home extends Component {
             <Header className='games-h1'>
               GAMES
             </Header>
-            <p className="playboard-p" style={{ color: 'white', paddingBottom: '9px', marginTop: '-6px' }}> Playable with MANA. ETH, DAI and DG coming soon  </p>
+            <p className="playboard-p" style={{ color: 'white', paddingBottom: '9px', marginTop: '-6px' }}> Playable for free and with MANA. ETH, DAI and DG coming soon </p>
 
             <Grid>
 
               <Grid.Row>
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/account' className='games-card'>
+                  <Card fluid href='/account/' className='games-card'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={slots} />
                       </Reveal.Content>
                       <Reveal.Content hidden>
                         <Image className='card-image' src={slots2} />
-                        <Image className='card-image overlay-image' src={overlaySlots} />
                       </Reveal.Content>
                     </Reveal>
                     <Card.Content>
@@ -508,14 +558,13 @@ class Home extends Component {
                 </Grid.Column>
 
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/account' className='games-card'>
+                  <Card fluid href='/account/' className='games-card'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={roulette} />
                       </Reveal.Content>
                       <Reveal.Content hidden>
                         <Image className='card-image' src={roulette2} />
-                        <Image className='card-image overlay-image' src={overlayRoulette} />
                       </Reveal.Content>
                     </Reveal>
                     <Card.Content className='card-border'>
@@ -525,7 +574,7 @@ class Home extends Component {
                 </Grid.Column>
 
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/account' className='games-card2'>
+                  <Card fluid href='/account/' className='games-card2'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={blackjack} />
@@ -541,7 +590,7 @@ class Home extends Component {
                 </Grid.Column>
 
                 <Grid.Column computer={4} tablet={4} mobile={8}>
-                  <Card fluid href='/account' className='games-card2'>
+                  <Card fluid href='/account/' className='games-card2'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={dice} />
@@ -551,7 +600,7 @@ class Home extends Component {
                       </Reveal.Content>
                     </Reveal>
                     <Card.Content className='card-border'>
-                      <Card.Header className='card-header'>DICE</Card.Header>
+                      <Card.Header className='card-header'>BACKGAMMON</Card.Header>
                     </Card.Content>
                   </Card>
                 </Grid.Column>
@@ -570,9 +619,9 @@ class Home extends Component {
           <Container>
 
             <Header className='casino-h1'>
-              VIRTUAL CASINOS
+              CASINOS
             </Header>
-            <p className="playboard-p" style={{ color: 'white', paddingBottom: '9px', marginTop: '-6px' }}> Now Playable in the Decentraland metaverse</p>
+            <p className="playboard-p" style={{ color: 'white', paddingBottom: '9px', marginTop: '-6px' }}> Playable in Decentraland</p>
 
             <Grid>
 

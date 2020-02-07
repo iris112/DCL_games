@@ -4,7 +4,6 @@ import { GlobalContext } from "../store";
 import { butter } from "../store/api";
 import Aux from './_Aux';
 import Footer from '../components/Footer.js';
-import ScrollToTop from '../components/scroll.js';
 import Home from "../components/Home";
 import Decentralotto from "../containers/Decentralotto";
 import BannerLotto from "../containers/BannerLotto";
@@ -43,7 +42,6 @@ class Layout extends Component {
     const blogDetailPaths = state.pages.data.map(page => `/blog/${page.slug}`);
 
     return (
-      <ScrollToTop>
         <Aux>
           <Switch>
             <Route path="/" exact component={Home} />
@@ -58,7 +56,6 @@ class Layout extends Component {
             <Route path={blogDetailPaths} exact component={BlogDetail} />
           </Switch>
         </Aux>
-      </ScrollToTop>
     );
   }
 }

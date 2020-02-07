@@ -1,30 +1,20 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
-Ropsten Network addresses
-
-MANA contract: 0x2a8Fd99c19271F4F04B1B7b9c4f7cF264b626eDB
-SlotMachineLogic: 0x4cde4d1cef4ac925eea54b5e50673455f6aef9c1
-
-SlotMachineETH:
-SlotMachineMANA: 0xf4286ce6950ca64050e48b5698239492d3ad6891
-Server wallet address: 0x0C279F0f2090f8177c8C6F395BdAf52F77a3D910
+CEO/Worker public key:
+0x1FcdE174C13691ef0C13fcEE042e0951452C0f8A
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
-Matic Network addresses
+// contracts on Matic Network
+
 MANA contract: 0xDd1B834a483fD754c8021FF0938f69C1d10dA81F
 
-SlotMachineLogic 0x85697947b9bac8926bfa1e265a220436e8d0ee84
-RouletteLogicInternal: 0xC78fFe7079eD4a5C7D520794Fb9e8f982a656fA3
+MasterParent.sol:
+0xd5d543db6aaf6442d9dd14b9539285fc4470c773
 
-SlotMachineETH:
+Slots.sol:
+// 0x7742c83b2e82e3234f9cf4376f6222e954a6e3b7
+0xbd52781980079FCD3C07a7C273CE1bf70F2838fA
 
-SlotMachineMANA: 0x11f6757ab51a01686b1c54fa0f0c45960b1bd3bc
-RouletteParent: 0x04056a039a10854447c298311abf1fd21cc90e3e
-
-Server wallet address: 0x1FcdE174C13691ef0C13fcEE042e0951452C0f8A
-
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-User accmount: 0xDf4eC4dAdCCAbBE4bC44C5D3597abBA54B18Df45
-Approve amount: 5000000000000000000000
+Roulette.sol:
+0xc21cc78ae7ae82801a0d106c1c4d0d11a716780e

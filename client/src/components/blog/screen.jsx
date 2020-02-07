@@ -1,17 +1,54 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import PostPreview from "./PostPreview";
 import { Segment, Container, Menu, Navbar } from "decentraland-ui";
 import logo from '../Images/authorize_title.png'
 import ethereum from "../Images/ethereum3.png";
 import { NavLink } from "react-router-dom";
-import { Image, Divider, Grid, Icon, Breadcrumb } from 'semantic-ui-react';
+import { Image, Divider, Grid, Icon, Breadcrumb, Search } from 'semantic-ui-react';
 import '../blog.css'
+import _ from "lodash";
 import flamingos from '../Images/flamingos.png';
 import Fade from 'react-reveal/Fade';
+import { GlobalContext } from "../../store";
 
 
-const Screen = ({ pages, category }) => {
+const Screen = ({ pages, category, handleClickButton, match, history }) => {
+
   const filteredPages = category === "All" ? pages : pages.filter(page => (page.categories.length > 0 ? page.categories[0].name === category : false));
+  const [loading, setLoading] = useState(false);
+  const [results, setResults] = useState([]);
+  const [value, setValue] = useState("");
+  const [state, dispatch] = useContext(GlobalContext);
+  const blogs = state.pages.data.map(blog => {
+    return {
+      title: blog.title,
+      image: blog.featured_image,
+      slug: blog.slug
+    };
+  });
+  const handleResultSelect = (e, { result }) => {
+    setValue("");
+    history.push(`/blog/${result.slug}`);
+  };
+
+  const handleSearchChange = (e, { value }) => {
+    setLoading(true);
+    setValue(value);
+
+    setTimeout(() => {
+      if (value.length < 1) {
+        setLoading(false);
+        setResults([]);
+        setValue("");
+      }
+
+      const re = new RegExp(_.escapeRegExp(value), "i");
+      const isMatch = result => re.test(result.title);
+
+      setLoading(false);
+      setResults(_.filter(blogs, isMatch));
+    }, 300);
+  };
 
   return (
     <div className="blog-page">
@@ -27,7 +64,7 @@ const Screen = ({ pages, category }) => {
             </Menu.Item>
 
             <Menu.Item position='right' header as={NavLink} to="/" style={{ marginRight: '-15px' }}>
-              <Breadcrumb style={{ borderRadius: '4px', color: 'rgb(97, 97, 97)' }}> Go to Decentral Games <Icon style={{ fontSize: '10px', color: 'rgb(97, 97, 97)' }} name="arrow right" /> </Breadcrumb>
+              <Breadcrumb style={{ borderRadius: '4px', color: 'rgb(97, 97, 97)', paddingTop: '20px' }}> Go to Decentral Games <Icon style={{ fontSize: '10px', color: 'rgb(97, 97, 97)' }} name="arrow right" /> </Breadcrumb>
             </Menu.Item>
 
           </Menu>
@@ -91,7 +128,7 @@ const Screen = ({ pages, category }) => {
               </>
             }
             rightMenu={
-              <div>
+              <div style={{ marginTop: '15px' }}>
                 <Menu.Item style={{ float: 'right', marginRight: '-3px' }} as={NavLink} to="/blog/technology/" className="category-link2">
                   <Icon name='mail' />
                 </Menu.Item>
@@ -100,9 +137,6 @@ const Screen = ({ pages, category }) => {
                 </Menu.Item>
                 <Menu.Item style={{ float: 'right' }} as={NavLink} to="/blog/technology/" className="category-link2">
                   <Icon name='discord' />
-                </Menu.Item>
-                <Menu.Item style={{ float: 'right' }} as={NavLink} to="/blog/technology/" className="category-link2">
-                  <Icon name='search' />
                 </Menu.Item>
               </div>
             }

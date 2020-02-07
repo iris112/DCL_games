@@ -9,19 +9,12 @@ a.item.account-p:focus {
   color: white !important;
 }
 
+div.ui.segment.main-segment {
+  margin-top: -7px !important;
+}
+
 .svg-eth {
   stroke: grey;
-}
-
-.svg-eth2 {
-  stroke: white;
-  margin-right: 14px !important;
-  margin-bottom: -15px !important;
-  margin-top: -4px !important;
-}
-
-.stats-container {
-
 }
 
 a.item.account-p:hover .svg-eth, a.item.account-p:focus .svg-eth {
@@ -240,11 +233,17 @@ h3 {
   color: white;
 }
 
+@media (max-width: 991px) {
+  .nav-text, .nav-text2 {
+     margin-top: -6px !important;
+  }
+}
 .nav-text {
   font-size: 16px !important;
   color: white !important;
   padding-left: 0px !important;
   letter-spacing: 0.15px;
+  padding-top: 22px !important;
 }
 
 .nav-text2 {
@@ -252,10 +251,11 @@ h3 {
   color: white !important;
   margin-left: 3px !important;
   letter-spacing: 0.15px;
+  padding-top: 22px !important;
 }
 
 .nav-text3 {
-  padding-top: 11px !important;
+  padding-top: 16px !important;
   font-size: 16px !important;
   color: white !important;
   padding-right: 21px !important;
@@ -271,6 +271,7 @@ h3 {
   padding-left: 0px !important;
   padding-top: 0px !important;
   padding-bottom: 3px !important;
+  padding-right: 0px;
 }
 
 #nav3-logo {
@@ -399,12 +400,18 @@ a.item.nav-text:hover {
 }
 
 .modal-msg {
-  margin-left: 2px !important;
-  margin-right: 2px !important;
-  border-radius: 4px;
-  border: 1px solid white;
-  background-color: rgba(6, 10, 13, 1) !important;
-  margin-top: -30px !important;
+  background-color: rgba(1, 133, 244, 1) !important;
+  border-radius: 0px !important;
+  padding-top: 18px !important;
+  padding-bottom: 18px !important;
+}
+
+.msg-text {
+  margin-left: -18px !important;
+}
+
+.ui.message {
+  box-shadow: none !important;
 }
 
 .ui.message .header, .ui.message>.close.icon {
@@ -413,13 +420,18 @@ a.item.nav-text:hover {
 }
 
 .ui.message>.close.icon {
-  margin-top: -4px !important;
+  margin-top: -6px !important;
+  margin-right: -9px !important;
 }
 
 @media (max-width: 499px) {
   .ui.message>.close.icon {
-    margin-top: -8px !important;
+    margin-top: 3px !important;
     margin-right: -3px !important;
+  }
+  .modal-msg {
+    padding-top: 27px !important;
+    padding-bottom: 18px !important;
   }
 }
 
@@ -494,12 +506,15 @@ a.item.nav-text:hover {
     padding-bottom: 75px !important;
   }
   .modal-msg {
-    margin-top: -45px !important;
-    margin-bottom: 45px !important;
+    margin-bottom: -15px !important;
   }
 }
 
 .blue-link {
+  color: rgba(6, 10, 13, 1) !important;
+}
+
+.blue-link2 {
   color: rgba(1, 133, 244, 1) !important;
 }
 
@@ -544,29 +559,8 @@ a.item.nav-text:hover {
 /*           Games/Casino Sections           */
 /* ----------------------------------------- */
 
-@media (max-width: 767px) {
-  .stats-container {
-    padding-top: 90px !important;
-    padding-bottom: 00px !important;
-  }
-  .stat-size {
-    font-size: 42px !important;
-  }
-}
 
-@media (max-width: 991px) {
-  #stat1 {
-    padding-bottom: 30px;
-  }
-  #stat2 {
-    margin-bottom: 30px;
-  }
-  #stat3 {
-    margin-bottom: 6px;
-  }
-}
-
-#gold-grad {
+.gold-grad1, .gold-grad2, .gold-grad3, .gold-grad4 {
   background: -webkit-linear-gradient(#bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -575,10 +569,56 @@ a.item.nav-text:hover {
   letter-spacing: 0.15px;
 }
 
-@media (max-width: 991px) {
-  #grid-display-stat {
-    display: none;
+.svg-eth2 {
+  stroke: white;
+  margin-right: 12px !important;
+  margin-bottom: -15px !important;
+  margin-top: -4px !important;
+}
+
+@media (max-width: 767px) {
+  .stats-container2 {
+    padding-top: 90px !important;
+    padding-bottom: 15px !important;
   }
+}
+
+@media (min-width: 991px) {
+  .stats-container2 {
+    display: none !important;
+  }
+}
+
+@media (max-width: 990px) {
+  .stats-container {
+    display: none !important;
+  }
+}
+
+@media (max-width: 499px) {
+  .statistic-value {
+    font-size: 42px !important;
+  }
+  .svg-dcl {
+    width: 0.6em;
+    height: 0.6em;
+  }
+  .svg-eth2 {
+    width: 0.5em;
+    height: 1em;
+  }
+  div.ui.two.statistics {
+    margin-left: -9 px !important;
+  }
+}
+
+.svg-dcl {
+  margin-right: 12px !important;
+}
+
+.stat-image {
+  margin-left: 36px !important;
+  margin-bottom: -48px !important;
 }
 
 .games {
@@ -610,7 +650,7 @@ a.item.nav-text:hover {
 }
 
 .games-h {
-  font-size: 48px !important;
+  font-size: 34px !important;
   padding-bottom: 30px !important;
   color: white;
 }
@@ -622,17 +662,9 @@ a.item.nav-text:hover {
   padding-bottom: 6px !important;
   letter-spacing: 0.25px;
   display: inline-block;
-  color: #2085f4 !important;  
-  background: #2085f4 -webkit-gradient(linear, 100% 0, 0 0, from(#4c9df6), color-stop(0.5, #4c9df6), to(#4c9df6));  
-  background-position: -4rem top;
-  background-repeat: no-repeat;
+  background: -webkit-linear-gradient(#bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-animation-name: shimmer;
-  -webkit-animation-duration: 2.2s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-background-size: 4rem 100%;
-  -webkit-animation-delay: 2s !important;
 }
 
 @-webkit-keyframes shimmer {
@@ -640,7 +672,7 @@ a.item.nav-text:hover {
     100% { background-position: 24rem top; }
 }
 
-a.ui.card:hover {
+a.ui.card:hover, a.ui.card:active {
   transform: translateY(0px) !important;
   border: white solid 3px !important;
 }
@@ -682,7 +714,7 @@ a.ui.card:hover {
   color: white !important;
   letter-spacing: 1.25px !important;
   font-size: 20px !important; 
-  text-align: center;
+  text-align: center !important;
   margin-bottom: -6px !important;
   margin-top: -6px !important;
 }
@@ -690,6 +722,9 @@ a.ui.card:hover {
 @media (max-width: 499px) {
   .games-card {
     width: 100% !important;
+  }
+  .card-header {
+    font-size: 16px !important;
   }
 }
 
@@ -742,7 +777,7 @@ a.ui.card:hover {
 .modallogospin {
   height: 36px;
   position: absolute;
-  right: 10px !important;
+  right: calc(50% - 70px) !important;
   top: 10px !important;
 }
 
@@ -936,7 +971,7 @@ a.ui.card:hover {
 }
 
 .ui.accountContainer #playboard {
-  background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2),rgba(0,0,0,0.9)), url(./Images/serenity-home.jpeg);
+  background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2),rgba(0,0,0,0.9)), url(./Images/serenity-home2.jpeg);
   background-position: center center;
   background-repeat: no-repeat;
   background-color: transparent;
@@ -1000,9 +1035,10 @@ a.ui.card:hover {
 }
 
 .ui.accountContainer .balanceBox {
-  padding: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   text-align: center;
-  width: calc((100% - 40px) / 3);
+  width: 100%;
   background-color: white;
   display: inline-block;
   border: 1px solid rgba(34,36,38,.15);
@@ -1340,9 +1376,9 @@ button#depositButton.ui.blue.button.wallet-deposit2:hover {
   background-color: rgba(255,255,255, 0.8);
   display: block;
   border-radius: 4px;
-  position: absolute;
-  top: 30px;
-  right: 30px;
+  margin-top: 30px;
+  margin-right: 30px;
+  float: right;
   font-size: 18px;
 }
 
@@ -1633,9 +1669,10 @@ div.progressbar .row, div.progressbar2 .row {
 .logospin {
   display: block;
   width: 60px;
-  margin-left: calc((100vw - 100px) / 2);
-  margin-top: calc((100vh - 100px) / 2);
+  margin-left: calc((100vw - 60px) / 2);
+  margin-top: calc((100vh - 60px) / 2);
 }
+
 .sk-fading-circle {
   margin: calc(50vh - 120px) 50%;
   width: 40px;

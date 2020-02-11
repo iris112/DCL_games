@@ -395,7 +395,6 @@ async function findPlayInfo(data) {
 }
 
 async function findAllPlayInfos(data, opts = {}) {
-  var opts = {};
   var limit = opts['limit'] || 20;
   var page = opts['page'] || 1;
   const offset = (page - 1) * limit;

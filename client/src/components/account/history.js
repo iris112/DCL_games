@@ -122,7 +122,7 @@ class History extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        // address: '0x0fe1829403d422470cd4cf0abad4bcec9aa2ebf6',
+        // address: '0x9eEb6d6b11146B1c089C2702B4A0061c06E2B10B'.toLowerCase(),
         address: window.web3.currentProvider.selectedAddress,
         limit: PAGE_COUNT,
         page: page
@@ -138,7 +138,7 @@ class History extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        // address: '0x0fe1829403d422470cd4cf0abad4bcec9aa2ebf6',
+        // address: '0x9eEb6d6b11146B1c089C2702B4A0061c06E2B10B'.toLowerCase(),
         address: window.web3.currentProvider.selectedAddress,
         limit: PAGE_COUNT,
         page: page

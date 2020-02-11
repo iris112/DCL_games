@@ -24,7 +24,7 @@ const PostPreview = ({
         <div className="post-info">
           <div className="top">
             <div className="date">
-              <span>{new Date(created).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</span>
+              <span>{new Date(created).toLocaleDateString("en-DE", { day: "numeric", month: "short", year: "numeric" })}</span>
             </div>
             <div className="category" style={{ color: 'rgb(97, 97, 97)' }}>
               <span>{categories && categories[0] && categories[0].name}</span>

@@ -51,7 +51,7 @@ module.exports.prepareTransaction = async messageJSON => {
   // get the hash value from our hash generator script
   const hash = await getHash();
 
-  const hashString = '0x' + hash;
+  const hashString = hash;
   console.log('hashString: ' + hashString);
 
   // const hashBytes = web3.utils.asciiToHex(hash);

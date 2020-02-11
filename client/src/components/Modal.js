@@ -433,12 +433,12 @@ class ModalVerify extends Component {
                       <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>
                     </Grid.Row>
                     <Grid.Row>
-                      <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>3. Verify your location. Due to international online gaming legislation, we unfortunately do not allow accounts from US IP addresses.
+                      <p className="playboard-p" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>3. Verify your location. Due to international online gaming legislation, we unfortunately do not allow accounts from US IP addresses.
                       </p>
                     </Grid.Row>
 
                     <Grid.Row>
-                      <Button id='button-6' color='blue' style={{marginTop: '20px'}} 
+                      <Button id='depositButton2' color='blue' style={{marginTop: '20px'}} 
                         onClick={this.verifyLocation} >
                         Verify
                       </Button>
@@ -446,7 +446,7 @@ class ModalVerify extends Component {
                   </Grid>
 
                   { this.state.isValidLocation == 1 ?
-                  <p style={{ textAlign: 'left', color: 'red', marginTop: '21px', marginLeft: '-13px'}}>
+                  <p className="playboard-p" style={{ textAlign: 'left', color: 'red', marginTop: '21px', marginLeft: '-13px'}}>
                     You are within the United States.
                   </p> : <p/> }
 
@@ -496,7 +496,7 @@ class ModalVerify extends Component {
                         <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>
                       </Grid.Row>
                       <Grid.Row>
-                        <p style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>2. Enter your name, email, and verify your date of birth. You must be over 18 to play our games.
+                        <p className="playboard-p" style={{ textAlign: 'left', float: 'left', fontSize: '20px', marginRight: '30px' }}>2. Enter your name, email, and verify your date of birth. You must be over 18 to play our games.
                         </p>
                       </Grid.Row>
                       <Grid.Row style={{paddingTop: '5px', paddingBottom: '5px', marginTop: '20px'}}>
@@ -519,7 +519,7 @@ class ModalVerify extends Component {
                         </div>
                       </Grid.Row>
                       <Grid.Row>
-                        <Button color='blue' id="button-6" style={{marginRight: 'auto' }}
+                        <Button color='blue' id="depositButton2" style={{marginRight: 'auto' }}
                           onClick={this.verifyBirth} >
                           Verify
                         </Button>
@@ -527,11 +527,11 @@ class ModalVerify extends Component {
                     </Grid>
                     
                     { this.state.isValidBirth == 1 ?
-                      <p style={{ textAlign: 'left', color: 'red', marginTop: '21px', marginLeft: '-13px'}}>
+                      <p className="playboard-p" style={{ textAlign: 'left', color: 'red', marginTop: '21px', marginLeft: '-13px'}}>
                         You must be over 18 to play
                       </p> 
                     : this.state.isEmailNameDone == 1 ?
-                      <p style={{ textAlign: 'left', color: 'red', marginTop: '21px', marginLeft: '-13px'}}>
+                      <p className="playboard-p" style={{ textAlign: 'left', color: 'red', marginTop: '21px', marginLeft: '-13px'}}>
                         You must enter an email and name.
                       </p> 
                     : <p/>
@@ -580,7 +580,7 @@ class ModalVerify extends Component {
                       <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>
                     </Grid.Row>
                     <Grid.Row>
-                      <p style={{ textAlign: 'left', float: 'left', fontSize: '20px'}}>1. Connect your Metamask wallet.
+                      <p className="playboard-p" style={{ textAlign: 'left', float: 'left', fontSize: '20px'}}>1. Connect your Metamask wallet.
                       </p>
                     </Grid.Row>
                     <Grid.Row>
@@ -590,7 +590,7 @@ class ModalVerify extends Component {
                         </Link>
 
                         { this.state.isValidMetamask == 1 ?
-                          <p style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
+                          <p className="playboard-p" style={{ textAlign: 'center', color: 'red', marginTop: '10px'}}>
                             Add address failed.
                           </p> : <p/>
                         }

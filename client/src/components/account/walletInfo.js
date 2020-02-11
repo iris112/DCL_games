@@ -92,7 +92,10 @@ class WalletInfo extends React.Component {
       // else
       //   amount = await Global.balanceOfToken(Global.ROPSTEN_TOKEN);
       amount = await Global.balanceOfToken(Global.MATIC_TOKEN, this.maticWeb3);
-      this.setState({tokenBalance: window.web3.fromWei(amount, 'ether').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")});
+      // stepan if you're reading this: I'm sorry.
+      // it works though lol (adds commas every three numbers, removes decimals.)
+      // I'm sure there's a better way - feel free to update
+      this.setState({tokenBalance: window.web3.fromWei(amount, 'ether').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",").replace(/\.[^.]*?$/, "")});
     } catch (err) {
       console.log(err);
     }

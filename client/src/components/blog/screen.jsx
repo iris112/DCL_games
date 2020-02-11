@@ -91,7 +91,7 @@ const Screen = ({ pages, category, handleClickButton, match, history }) => {
                   <div className="post-info">
                     <div className="top">
                       <div>
-                        <span className="preview-date">OCT 18, 2019</span>
+                        <span className="preview-date">18 OCT 2019</span>
                         <span className="preview-category">Announcements</span>
                       </div>
                     </div>
@@ -170,7 +170,7 @@ const Screen = ({ pages, category, handleClickButton, match, history }) => {
       <Container className="outter-blog-container" style={{ marginBottom: '-18px', paddingTop: '5px' }}>
         <Grid className='grid-margin'>
          <Grid.Column floated='left' computer={8} tablet={8} mobile={16} style={{ paddingLeft: '6px' }} id="footer-top-mobile">
-            <p className='footer-font2' id='footer-float1'> © 2019 <a id='a-footer' href='/'> Decentral Games </a></p>
+            <p className='footer-font2' id='footer-float1'> © 2020 <a id='a-footer' href='/'> Decentral Games </a></p>
           </Grid.Column>
           <Grid.Column id='footer-mobile2' floated='right' computer={8} tablet={8} mobile={16} style={{ paddingRight: '20px' }}>
             <p className='footer-font2' id='footer-float2'> Follow <a id='a-footer' href='https://twitter.com/decentralgames'> Twitter </a> & Join <a id='a-footer' href='https://decentral.games/discord/'> Discord </a> | <a id='a-footer' href='/disclaimer/'> Disclaimer </a></p>

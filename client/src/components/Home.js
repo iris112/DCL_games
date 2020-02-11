@@ -322,7 +322,7 @@ class Home extends Component {
                       </Reveal.Content>
                     </Reveal>
                     <Card.Content className='card-border'>
-                      <Card.Header className='card-header'>BACKGAMMON</Card.Header>
+                      <Card.Header className='card-header' id="backgammon-header">BACKGAMMON</Card.Header>
                     </Card.Content>
                   </Card>
                 </Grid.Column>
@@ -472,7 +472,7 @@ class Home extends Component {
               BY THE NUMBERS
             </Header>
 
-            <Statistic.Group widths='two'>
+            <Statistic.Group widths='two' className="stats-group">
               <Statistic style={{ paddingBottom: '30px' }}>
                 <Statistic.Value style={{ color: 'white' }}>
                   <Svgdcl className="svg-dcl"/>
@@ -600,7 +600,7 @@ class Home extends Component {
                       </Reveal.Content>
                     </Reveal>
                     <Card.Content className='card-border'>
-                      <Card.Header className='card-header'>BACKGAMMON</Card.Header>
+                      <Card.Header className='card-header' id="backgammon-header">BACKGAMMON</Card.Header>
                     </Card.Content>
                   </Card>
                 </Grid.Column>

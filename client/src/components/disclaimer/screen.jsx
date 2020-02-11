@@ -225,7 +225,7 @@ const Screen = () => {
     <Container id="disclaimer-container" style={{ paddingBottom: '21px', paddingTop: '5px' }}>
       <Grid className='grid-margin'>
        <Grid.Column floated='left' computer={8} tablet={6} mobile={16} id="footer-top-mobile2">
-          <p className='footer-font2' id='footer-float1' style={{ marginLeft: '-27px' }}> © 2019 <a id='a-footer' href='/'> Decentral Games </a></p>
+          <p className='footer-font2' id='footer-float1' style={{ marginLeft: '-27px' }}> © 2020 <a id='a-footer' href='/'> Decentral Games </a></p>
         </Grid.Column>
         <Grid.Column id='footer-mobile3' floated='right' computer={8} tablet={10} mobile={16} style={{ marginRight: '-12px' }}>
           <p className='footer-font2' id='footer-float2'> Follow <a id='a-footer' href='https://twitter.com/decentralgames'> Twitter </a> & Join <a id='a-footer' href='https://decentral.games/discord/'> Discord </a> | <a id='a-footer' href='/disclaimer/'> Disclaimer </a></p>

@@ -153,12 +153,15 @@ class History extends React.Component {
       <div class="contentContainer" style={{ marginBottom: '-60px' }}>
       <LogoSpinner show={this.state.isRunningTransaction} className="tx-history-spinner" />
         <div style={{width: 'calc(100% - 90px)', marginTop: '20px', marginLeft: '45px', marginRight: '45px'}}>
-          <h3 className="account-h3" style={{paddingTop: '20px'}}> Transaction History </h3>
-          <div style={{marginLeft:'3px', paddingTop:'10px'}}>
-            <span class="mouseCursor" onClick= {() => this.handleHistory()}>Deposits/Withdrawals</span>
-            <span> | </span>
-            <span class="mouseCursor" onClick={() => this.handlePlay()}>GamePlay</span>
-          </div>
+          <Fade bottom distance="20px" duration="600">
+            <h3 className="account-h3" style={{paddingTop: '20px', paddingBottom: '18px' }}> Transaction History </h3>
+            <div style={{marginLeft:'3px' }}>
+              <span class="mouseCursor" onClick= {() => this.handleHistory()}>Deposits/Withdrawals</span>
+              <span> | </span>
+              <span class="mouseCursor" onClick={() => this.handlePlay()}>GamePlay</span>
+            </div>
+          </Fade>
+          <Fade bottom distance="20px" duration="600" delay="200">
           <div id='tx-box-history'>
             <Table id='header' singleLine fixed style={{marginBottom: 0}}>
               <Table.Header>
@@ -173,7 +176,7 @@ class History extends React.Component {
              </Table>
              { data.length != 0 ?
               <div>
-                <div class='dataTable' style={{height: 'calc(100vh - 280px)', padding: 0}}>
+                <div class='dataTable' style={{height: 'calc(100vh - 310px)', padding: 0}}>
                   <Table singleLine fixed style={{margin: 0, padding: 0}}>
                     <Table.Header></Table.Header>
                     <Table.Body>
@@ -271,11 +274,14 @@ class History extends React.Component {
               </div>
             : <p className="playboard-p" style={{lineHeight:'calc(100vh - 280px)', margin: 0, textAlign:'center', color: 'gray', fontStyle: 'italic'}}> There is no transaction history for this account </p> }
             <div class="pagination">
-              <MdKeyboardArrowLeft size='2.2em' className={`spanbox ${this.state.beforeAvail ? 'mouseCursor' : 'disable'}`} onClick={this.previewPage}/>
-              <span class="spanbox" style={{padding: '6px 15px', display: 'inline-block'}}>Page {this.state.currentPage}</span>
-              <MdKeyboardArrowRight size='2.2em' className={`spanbox ${this.state.nextAvail ? 'mouseCursor' : 'disable'}`} onClick={this.nextPage} />
+              <MdKeyboardArrowLeft size='2em' className={`spanarrow ${this.state.beforeAvail ? 'mouseCursor' : 'disable'}`} onClick={this.previewPage}/>
+              <span class="spanbox" style={{paddingLeft: '6px', paddingRight: '6px', display: 'inline-block'}}>
+                <p className="page-p"> Page {this.state.currentPage} </p>
+              </span>
+              <MdKeyboardArrowRight className="page-arrow" size='1.5em' className={`spanarrow ${this.state.nextAvail ? 'mouseCursor' : 'disable'}`} onClick={this.nextPage} />
             </div>
           </div>
+          </Fade>
         </div>
       </div>
     )

@@ -719,6 +719,12 @@ a.ui.card:hover, a.ui.card:active {
   margin-top: -6px !important;
 }
 
+@media (max-width: 399px) {
+  #backgammon-header {
+    margin-left: -6px !important;
+  }
+}
+
 @media (max-width: 499px) {
   .games-card {
     width: 100% !important;
@@ -726,8 +732,16 @@ a.ui.card:hover, a.ui.card:active {
   .card-header {
     font-size: 16px !important;
   }
+  .stats-group {
+    margin-left: -3px !important;
+  }
 }
 
+@media (max-width: 767px) {
+  .blogpost-arrow {
+    margin-left: -20px !important;
+  }
+}
 
 /* ----------------------------------------- */
 /*              Footer Section               */
@@ -778,7 +792,7 @@ a.ui.card:hover, a.ui.card:active {
   height: 36px;
   position: absolute;
   right: calc(50% - 70px) !important;
-  top: 10px !important;
+  top: 36px !important;
 }
 
 @media only screen and (min-width: 1200px) {
@@ -971,7 +985,7 @@ a.ui.card:hover, a.ui.card:active {
 }
 
 .ui.accountContainer #playboard {
-  background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2),rgba(0,0,0,0.9)), url(./Images/serenity-home2.jpeg);
+  background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2),rgba(0,0,0,0.9)), url(./Images/account-background.png);
   background-position: center center;
   background-repeat: no-repeat;
   background-color: transparent;
@@ -1052,25 +1066,6 @@ a.ui.card:hover, a.ui.card:active {
   text-align: right;
 }
 
-.ui.accountContainer .spanbox {
-  background-color: rgba(240, 240, 240);
-  vertical-align: middle;
-  text-align: center;
-  margin: 5px;
-  border-radius: 5px;
-}
-
-.ui.accountContainer svg.disable {
-  background-color: gray;
-  color: lightgray;
-}
-
-.ui.accountContainer div.pagination {
-  text-align: center;
-  margin: auto;
-  width: 300px;
-}
-
 #teleport-box {
   background-color: #f9fbfd;
   border: 1px solid rgba(34,36,38,.15);
@@ -1088,21 +1083,37 @@ a.ui.card:hover, a.ui.card:active {
   margin-top: 42px !important;
 }
 
-#tx-box, #dep-box {
+.mouseCursor {
+  font-size: 18px;
+}
+
+.mouseCursor:hover, .page-arrow:hover {
+  cursor: pointer;
+}
+
+.page-arrow {
+  width: 18px !important;
+}
+
+.spanbox {
+  margin-top: 30px;
+}
+
+.spanarrow {
+  padding-top: 15px;
+}
+
+#tx-box-history, #dep-box {
   background-color: white;
-  border: 1px solid rgba(34,36,38,.15);
+  border: 1px solid rgba(34,36,38,.15) !important;
   border-radius: 4px;
   margin-top: 42px !important;
   height: calc(100vh - 200px);
 }
-#tx-box-history {
-  background-color: white;
-  border: 1px solid rgba(34,36,38,.15);
-  border-radius: 4px;
-  margin-top: 23px !important;
-  height: calc(100vh - 200px);
-}
 
+#tx-box-history {
+  height: calc(100vh - 270px);
+}
 
 #balance-pad {
   margin-top: 22px !important;
@@ -1124,10 +1135,6 @@ a.ui.card:hover, a.ui.card:active {
 }
 .dataTable::-webkit-scrollbar-track {
   background: transparent
-}
-
-.mouseCursor:hover {
-  cursor: pointer;
 }
 
 .scrollTable::-webkit-scrollbar-thumb {

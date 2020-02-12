@@ -1083,7 +1083,7 @@ a.ui.card:hover, a.ui.card:active {
   margin-top: 42px !important;
 }
 
-.mouseCursor {
+.mouseCursor, .mouseCursor2 {
   font-size: 18px;
 }
 

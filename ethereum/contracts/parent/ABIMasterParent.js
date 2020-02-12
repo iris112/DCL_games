@@ -70,6 +70,36 @@ module.exports = [
 		type: 'function'
 	},
 	{
+		inputs: [
+			{
+				internalType: 'address',
+				name: 'defaultToken',
+				type: 'address'
+			},
+			{
+				internalType: 'string',
+				name: 'tokenName',
+				type: 'string'
+			}
+		],
+		payable: false,
+		stateMutability: 'nonpayable',
+		type: 'constructor'
+	},
+	{
+		anonymous: false,
+		inputs: [
+			{
+				indexed: false,
+				internalType: 'address',
+				name: 'newCEO',
+				type: 'address'
+			}
+		],
+		name: 'CEOSet',
+		type: 'event'
+	},
+	{
 		constant: false,
 		inputs: [
 			{
@@ -88,11 +118,55 @@ module.exports = [
 				type: 'string'
 			}
 		],
-		name: 'manaulAllocation',
+		name: 'manualAdjustment',
 		outputs: [],
 		payable: false,
 		stateMutability: 'nonpayable',
 		type: 'function'
+	},
+	{
+		constant: false,
+		inputs: [
+			{
+				internalType: 'uint256',
+				name: '_gameID',
+				type: 'uint256'
+			},
+			{
+				internalType: 'uint256',
+				name: '_tokenAmount',
+				type: 'uint256'
+			},
+			{
+				internalType: 'string',
+				name: '_tokenName',
+				type: 'string'
+			}
+		],
+		name: 'manualAllocation',
+		outputs: [],
+		payable: false,
+		stateMutability: 'nonpayable',
+		type: 'function'
+	},
+	{
+		anonymous: false,
+		inputs: [
+			{
+				indexed: false,
+				internalType: 'uint256',
+				name: '_gameID',
+				type: 'uint256'
+			},
+			{
+				indexed: false,
+				internalType: 'uint256',
+				name: '_balance',
+				type: 'uint256'
+			}
+		],
+		name: 'NewBalance',
+		type: 'event'
 	},
 	{
 		constant: false,
@@ -102,6 +176,12 @@ module.exports = [
 		payable: false,
 		stateMutability: 'nonpayable',
 		type: 'function'
+	},
+	{
+		anonymous: false,
+		inputs: [],
+		name: 'Paused',
+		type: 'event'
 	},
 	{
 		constant: false,
@@ -157,61 +237,6 @@ module.exports = [
 		payable: false,
 		stateMutability: 'nonpayable',
 		type: 'function'
-	},
-	{
-		inputs: [
-			{
-				internalType: 'address',
-				name: 'defaultToken',
-				type: 'address'
-			},
-			{
-				internalType: 'string',
-				name: 'tokenName',
-				type: 'string'
-			}
-		],
-		payable: false,
-		stateMutability: 'nonpayable',
-		type: 'constructor'
-	},
-	{
-		anonymous: false,
-		inputs: [
-			{
-				indexed: false,
-				internalType: 'address',
-				name: 'newCEO',
-				type: 'address'
-			}
-		],
-		name: 'CEOSet',
-		type: 'event'
-	},
-	{
-		anonymous: false,
-		inputs: [
-			{
-				indexed: false,
-				internalType: 'uint256',
-				name: '_gameID',
-				type: 'uint256'
-			},
-			{
-				indexed: false,
-				internalType: 'uint256',
-				name: '_balance',
-				type: 'uint256'
-			}
-		],
-		name: 'NewBalance',
-		type: 'event'
-	},
-	{
-		anonymous: false,
-		inputs: [],
-		name: 'Paused',
-		type: 'event'
 	},
 	{
 		constant: false,
@@ -310,24 +335,6 @@ module.exports = [
 		type: 'event'
 	},
 	{
-		anonymous: false,
-		inputs: [
-			{
-				indexed: false,
-				internalType: 'address',
-				name: 'newWorker',
-				type: 'address'
-			}
-		],
-		name: 'WorkerSet',
-		type: 'event'
-	},
-	{
-		payable: true,
-		stateMutability: 'payable',
-		type: 'fallback'
-	},
-	{
 		constant: false,
 		inputs: [
 			{
@@ -412,6 +419,39 @@ module.exports = [
 			}
 		],
 		name: 'withdrawCollateral',
+		outputs: [],
+		payable: false,
+		stateMutability: 'nonpayable',
+		type: 'function'
+	},
+	{
+		anonymous: false,
+		inputs: [
+			{
+				indexed: false,
+				internalType: 'address',
+				name: 'newWorker',
+				type: 'address'
+			}
+		],
+		name: 'WorkerSet',
+		type: 'event'
+	},
+	{
+		payable: true,
+		stateMutability: 'payable',
+		type: 'fallback'
+	},
+	{
+		constant: false,
+		inputs: [
+			{
+				internalType: 'string',
+				name: '_tokenName',
+				type: 'string'
+			}
+		],
+		name: 'withdrawMaxTokenBalance',
 		outputs: [],
 		payable: false,
 		stateMutability: 'nonpayable',
@@ -532,8 +572,50 @@ module.exports = [
 	},
 	{
 		constant: true,
+		inputs: [
+			{
+				internalType: 'address',
+				name: '_tokenAddress',
+				type: 'address'
+			}
+		],
+		name: 'getBalanceByTokenAddress',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: '',
+				type: 'uint256'
+			}
+		],
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
+		constant: true,
+		inputs: [
+			{
+				internalType: 'string',
+				name: '_tokenName',
+				type: 'string'
+			}
+		],
+		name: 'getBalanceByTokenName',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: '',
+				type: 'uint256'
+			}
+		],
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
+		constant: true,
 		inputs: [],
-		name: 'maximumBetsAmount',
+		name: 'maximumNumberBets',
 		outputs: [
 			{
 				internalType: 'uint256',

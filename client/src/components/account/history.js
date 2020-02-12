@@ -16,7 +16,8 @@ const INITIAL_STATE = {
   dataType: 'History',
   isRunningTransaction: false,
   nextAvail: true,
-  prevAvail: false
+  beforeAvail: false,
+  isLoadingData: false
 };
 
 class History extends React.Component {
@@ -39,6 +40,7 @@ class History extends React.Component {
   }
 
   async getUserData(type, page) {
+    this.setState({isLoadingData: true});
     this.props.showSpinner();
     var response
     if (type == 'Play')
@@ -49,7 +51,6 @@ class History extends React.Component {
     var json = await response.json();
     var allData = [];
     var nextAvail = this.state.nextAvail;
-    var prevAvail = this.state.prevAvail;
 
     if (json.result !== 'false') {
       allData = json.result;
@@ -80,18 +81,13 @@ class History extends React.Component {
     } else
       nextAvail = true;
 
-    if (this.state.currentPage == 1)
-      prevAvail = false;
-    else
-      prevAvail = true;
-
     this.props.hideSpinner();
     if (allData.length > 0)
-      this.setState({data: allData, dataType: type, currentPage: page, nextAvail: nextAvail, prevAvail: prevAvail});
+      this.setState({data: allData, isLoadingData: false, dataType: type, currentPage: page, nextAvail: nextAvail, beforeAvail: page == 1 ? false : true});
     else if (this.state.dataType !== type)
-      this.setState({data: allData, dataType: type, currentPage: page, nextAvail: nextAvail, prevAvail: prevAvail});
+      this.setState({data: allData, isLoadingData: false, dataType: type, currentPage: page, nextAvail: nextAvail, beforeAvail: page == 1 ? false : true});
     else
-      this.setState({nextAvail: nextAvail, prevAvail: prevAvail});
+      this.setState({isLoadingData: false, nextAvail: nextAvail, beforeAvail: this.state.currentPage == 1 ? false : true});
   }
 
   handleHistory = () => {
@@ -122,7 +118,7 @@ class History extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        // address: '0x9eEb6d6b11146B1c089C2702B4A0061c06E2B10B'.toLowerCase(),
+        // address: '0x5aae39aed818b07235dc8bedbf5698bb4f299ef3'.toLowerCase(),
         address: window.web3.currentProvider.selectedAddress,
         limit: PAGE_COUNT,
         page: page
@@ -138,7 +134,7 @@ class History extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        // address: '0x9eEb6d6b11146B1c089C2702B4A0061c06E2B10B'.toLowerCase(),
+        // address: '0x5aae39aed818b07235dc8bedbf5698bb4f299ef3'.toLowerCase(),
         address: window.web3.currentProvider.selectedAddress,
         limit: PAGE_COUNT,
         page: page
@@ -174,7 +170,7 @@ class History extends React.Component {
                 </Table.Row>
               </Table.Header>
              </Table>
-             { data.length != 0 ?
+             { data.length != 0 && this.state.isLoadingData == false ?
               <div>
                 <div class='dataTable' style={{height: 'calc(100vh - 310px)', padding: 0}}>
                   <Table singleLine fixed style={{margin: 0, padding: 0}}>
@@ -272,9 +268,10 @@ class History extends React.Component {
                   </Table>
                 </div>
               </div>
-            : <p className="playboard-p" style={{lineHeight:'calc(100vh - 280px)', margin: 0, textAlign:'center', color: 'gray', fontStyle: 'italic'}}> There is no transaction history for this account </p> }
+            : this.state.isLoadingData == false ? <p className="playboard-p" style={{lineHeight:'calc(100vh - 310px)', margin: 0, textAlign:'center', color: 'gray', fontStyle: 'italic'}}> There is no transaction history for this account </p> 
+            : <p style={{height:'calc(100vh - 310px)', margin: 0}}></p> }
             <div class="pagination">
-              <MdKeyboardArrowLeft size='2em' className={`spanarrow ${this.state.beforeAvail ? 'mouseCursor' : 'disable'}`} onClick={this.previewPage}/>
+              <MdKeyboardArrowLeft className="page-arrow" size='1.5em' className={`spanarrow ${this.state.beforeAvail ? 'mouseCursor' : 'disable'}`} onClick={this.previewPage}/>
               <span class="spanbox" style={{paddingLeft: '6px', paddingRight: '6px', display: 'inline-block'}}>
                 <p className="page-p"> Page {this.state.currentPage} </p>
               </span>

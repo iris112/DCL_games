@@ -55,6 +55,20 @@ userAddresses.set('toJSON', {
   },
 });
 
+const userIndexings = new Schema({
+  address: {type: String, default: '', index: true},
+  page: {type: Int32, default: 0, index: true},
+  historyID: {type: Schema.Types.ObjectId, default: null},
+  playID: {type: Schema.Types.ObjectId, default: null},
+},
+{
+  timestamps: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  },
+  collection: 'userIndexings'
+});
+
 const userTransactions = new Schema({
   address: {type: String, default: ''},
   txid: {type: String, default: '', unique: true, index: true},
@@ -216,6 +230,7 @@ const userPlayInfosModel = connection.model('userPlayInfos', userPlayInfos);
 const userPlayerInfosModel = connection.model('userPlayerInfos', userPlayerInfos);
 const machineInfosModel = connection.model('machineInfos', machineInfos);
 const machineTotalInfosModel = connection.model('machineTotalInfos', machineTotalInfos);
+const userIndexingsModel = connection.model('userIndexings', userIndexings);
 
 async function initDb() {
   // This produce empty db item. so disable temporarily.
@@ -223,6 +238,34 @@ async function initDb() {
   // await new userTransactionsModel().save()
   // await new userTradingsModel().save()
   // await new userEmailsModel().save()
+}
+// ------------- userIndexings -------------------
+async function insertUserIndexing(data) {
+  let UserIndexingsModel = new userIndexingsModel();
+
+  UserIndexingsModel.address = data.address || '';
+  UserIndexingsModel.page = data.page || 0;
+  UserIndexingsModel.historyID = data.historyID || null;
+  UserIndexingsModel.playID = data.playID || null;
+
+  UserIndexingsModel = await UserIndexingsModel.save();
+  return UserIndexingsModel;
+}
+
+async function findUserIndexing(address, page) {
+  var ret = await userIndexingsModel.findOne({address, page}).exec();
+  if (ret)
+    return ret.toJSON();
+
+  return ret
+}
+
+async function updateUserIndexing(address, page, data) {
+  let ret = await userIndexingsModel.findOneAndUpdate({address, page}, data, {new: true}).exec();
+  if (ret)
+    return ret.toJSON();
+
+  return ret;
 }
 
 // ------------- userAddresses -------------------
@@ -285,10 +328,8 @@ async function findTransaction(txid) {
 
 async function findAllTransaction(data, opts = {}) {
   var limit = opts['limit'] || 20;
-  var page = opts['page'] || 1;
-  const offset = (page - 1) * limit;
 
-  let ret = await userTransactionsModel.find(data, null, {skip: offset, limit: limit}).sort({createdAt: -1}).exec();
+  let ret = await userTransactionsModel.find(data, null, {limit: limit}).sort({createdAt: -1}).exec();
   if (ret && ret.length) {
     let arr = [];
     for (const item of ret) {
@@ -396,10 +437,8 @@ async function findPlayInfo(data) {
 
 async function findAllPlayInfos(data, opts = {}) {
   var limit = opts['limit'] || 20;
-  var page = opts['page'] || 1;
-  const offset = (page - 1) * limit;
 
-  let ret = await userPlayInfosModel.find(data, null, {skip: offset, limit: limit}).sort({createdAt: -1}).exec();
+  let ret = await userPlayInfosModel.find(data, null, {limit: limit}).sort({createdAt: -1}).exec();
   if (ret && ret.length) {
     let arr = [];
     for (const item of ret) {
@@ -560,6 +599,9 @@ async function findAllMachineTotalInfo(data) {
 
 export {
   initDb,
+  insertUserIndexing,
+  findUserIndexing,
+  updateUserIndexing,
   insertUser,
   findUser,
   updateUser,

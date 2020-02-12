@@ -288,8 +288,22 @@ router.post('/getHistory', preAction, function (req, res) {
         else {
             try {
                 let currentDate = new Date();
-                var txdatas = yield dbMongo.findAllTransaction({ address }, { limit, page });
+                let indexData;
+                let txdatas;
+                if (!page || page == 1) {
+                    txdatas = yield dbMongo.findAllTransaction({ address }, { limit });
+                }
+                else {
+                    indexData = yield dbMongo.findUserIndexing(address, page - 1);
+                    if (indexData)
+                        txdatas = yield dbMongo.findAllTransaction({ address, _id: { $lt: indexData.historyID } }, { limit });
+                }
                 if (txdatas && txdatas.length) {
+                    indexData = yield dbMongo.findUserIndexing(address, page);
+                    if (!indexData)
+                        yield dbMongo.insertUserIndexing({ address, page, historyID: txdatas[txdatas.length - 1]._id });
+                    else
+                        yield dbMongo.updateUserIndexing(address, page, { historyID: txdatas[txdatas.length - 1]._id });
                     for (let i = 0; i < txdatas.length; i++) {
                         if (txdatas[i].type != 'Withdraw')
                             continue;
@@ -360,9 +374,24 @@ router.post('/getPlayInfo', preAction, function (req, res) {
             json_data['result'] = 'false';
         else {
             try {
-                var playinfodatas = yield dbMongo.findAllPlayInfos({ address }, { limit, page });
-                if (playinfodatas && playinfodatas.length)
+                let indexData;
+                let playinfodatas;
+                if (!page || page == 1) {
+                    playinfodatas = yield dbMongo.findAllPlayInfos({ address }, { limit });
+                }
+                else {
+                    indexData = yield dbMongo.findUserIndexing(address, page - 1);
+                    if (indexData)
+                        playinfodatas = yield dbMongo.findAllPlayInfos({ address, _id: { $lt: indexData.playID } }, { limit });
+                }
+                if (playinfodatas && playinfodatas.length) {
+                    indexData = yield dbMongo.findUserIndexing(address, page);
+                    if (!indexData)
+                        yield dbMongo.insertUserIndexing({ address, page, playID: playinfodatas[playinfodatas.length - 1]._id });
+                    else
+                        yield dbMongo.updateUserIndexing(address, page, { playID: playinfodatas[playinfodatas.length - 1]._id });
                     json_data['result'] = playinfodatas;
+                }
                 else
                     json_data['result'] = 'false';
             }

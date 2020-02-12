@@ -63,6 +63,18 @@ userAddresses.set('toJSON', {
         return ret;
     },
 });
+const userIndexings = new Schema({
+    address: { type: String, default: '', index: true },
+    page: { type: Int32, default: 0, index: true },
+    historyID: { type: Schema.Types.ObjectId, default: null },
+    playID: { type: Schema.Types.ObjectId, default: null },
+}, {
+    timestamps: {
+        createdAt: 'createdAt',
+        updatedAt: 'updatedAt'
+    },
+    collection: 'userIndexings'
+});
 const userTransactions = new Schema({
     address: { type: String, default: '' },
     txid: { type: String, default: '', unique: true, index: true },
@@ -207,6 +219,7 @@ const userPlayInfosModel = connection.model('userPlayInfos', userPlayInfos);
 const userPlayerInfosModel = connection.model('userPlayerInfos', userPlayerInfos);
 const machineInfosModel = connection.model('machineInfos', machineInfos);
 const machineTotalInfosModel = connection.model('machineTotalInfos', machineTotalInfos);
+const userIndexingsModel = connection.model('userIndexings', userIndexings);
 function initDb() {
     return __awaiter(this, void 0, void 0, function* () {
         // This produce empty db item. so disable temporarily.
@@ -217,6 +230,37 @@ function initDb() {
     });
 }
 exports.initDb = initDb;
+// ------------- userIndexings -------------------
+function insertUserIndexing(data) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let UserIndexingsModel = new userIndexingsModel();
+        UserIndexingsModel.address = data.address || '';
+        UserIndexingsModel.page = data.page || 0;
+        UserIndexingsModel.historyID = data.historyID || null;
+        UserIndexingsModel.playID = data.playID || null;
+        UserIndexingsModel = yield UserIndexingsModel.save();
+        return UserIndexingsModel;
+    });
+}
+exports.insertUserIndexing = insertUserIndexing;
+function findUserIndexing(address, page) {
+    return __awaiter(this, void 0, void 0, function* () {
+        var ret = yield userIndexingsModel.findOne({ address, page }).exec();
+        if (ret)
+            return ret.toJSON();
+        return ret;
+    });
+}
+exports.findUserIndexing = findUserIndexing;
+function updateUserIndexing(address, page, data) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let ret = yield userIndexingsModel.findOneAndUpdate({ address, page }, data, { new: true }).exec();
+        if (ret)
+            return ret.toJSON();
+        return ret;
+    });
+}
+exports.updateUserIndexing = updateUserIndexing;
 // ------------- userAddresses -------------------
 function insertUser(data) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -279,9 +323,7 @@ exports.findTransaction = findTransaction;
 function findAllTransaction(data, opts = {}) {
     return __awaiter(this, void 0, void 0, function* () {
         var limit = opts['limit'] || 20;
-        var page = opts['page'] || 1;
-        const offset = (page - 1) * limit;
-        let ret = yield userTransactionsModel.find(data, null, { skip: offset, limit: limit }).sort({ createdAt: -1 }).exec();
+        let ret = yield userTransactionsModel.find(data, null, { limit: limit }).sort({ createdAt: -1 }).exec();
         if (ret && ret.length) {
             let arr = [];
             for (const item of ret) {
@@ -389,9 +431,7 @@ exports.findPlayInfo = findPlayInfo;
 function findAllPlayInfos(data, opts = {}) {
     return __awaiter(this, void 0, void 0, function* () {
         var limit = opts['limit'] || 20;
-        var page = opts['page'] || 1;
-        const offset = (page - 1) * limit;
-        let ret = yield userPlayInfosModel.find(data, null, { skip: offset, limit: limit }).sort({ createdAt: -1 }).exec();
+        let ret = yield userPlayInfosModel.find(data, null, { limit: limit }).sort({ createdAt: -1 }).exec();
         if (ret && ret.length) {
             let arr = [];
             for (const item of ret) {

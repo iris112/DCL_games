@@ -153,8 +153,8 @@ class History extends React.Component {
             <h3 className="account-h3" style={{paddingTop: '20px', paddingBottom: '18px' }}> Transaction History </h3>
             <div style={{marginLeft:'3px' }}>
               <span class="mouseCursor" onClick= {() => this.handleHistory()}>Deposits/Withdrawals</span>
-              <span> | </span>
-              <span class="mouseCursor" onClick={() => this.handlePlay()}>GamePlay</span>
+              <span style={{ fontSize: '18px', paddingLeft: '3px', paddingRight: '3px' }}> | </span>
+              <span class="mouseCursor" onClick={() => this.handlePlay()}>Gameplay</span>
             </div>
           </Fade>
           <Fade bottom distance="20px" duration="600" delay="200">

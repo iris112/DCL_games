@@ -36,6 +36,7 @@ module.exports.prepareTransaction = async (messageJSON) => {
 	// parse the land ID and game type from the machine ID
 	const landID = machineID.slice(0, 3);
 	const gameType = machineID.slice(3, 6);
+	const gameTypeStr = gameType == 1 ? 'Slots' : 'Roulette';
 
 	console.log('game type: ' + gameType);
 	console.log('wallet address: ' + walletAddress);
@@ -112,94 +113,94 @@ module.exports.prepareTransaction = async (messageJSON) => {
 						/////////////////////////////////////////////////////////////////////////////////////////
 						/////////////////////////////////////////////////////////////////////////////////////////
 						// write transaction data to mongoDB database
-						// var allAmount = 0;
-						// for (var i = 0; i < betAmounts.length; i++) allAmount += Number(betAmounts[i]);
-						// try {
-						// 	//store session DB
-						// 	var playData = await dbMongo.insertPlayInfo({
-						// 		address: walletAddress,
-						// 		coinName: coinName,
-						// 		machineID: machineID,
-						// 		landID: landID,
-						// 		betAmount: allAmount,
-						// 		txid: txHash,
-						// 		type: gameType
-						// 	});
-						// 	if (playData) console.log('game play info storing success');
-						// 	else console.log('game play info storing failed');
-						// 	// store player DB
-						// 	var playerData = await dbMongo.findPlayerInfo({
-						// 		address: walletAddress,
-						// 		type: gameType
-						// 	});
-						// 	var incFreePlay = allAmount > 0 ? 0 : 1;
-						// 	var incPayoutPlay = allAmount > 0 ? 1 : 0;
-						// 	if (playerData) {
-						// 		playerData = await dbMongo.updatePlayerInfo(
-						// 			{ address: playerData.address, type: gameType },
-						// 			{
-						// 				totalBetAmount: Number(playerData.totalBetAmount) + Number(allAmount),
-						// 				latestSessionDate: playData.createdAt,
-						// 				numberOfFreePlays: Number(playerData.numberOfFreePlays) + incFreePlay,
-						// 				numberOfPayoutPlays: Number(playerData.numberOfPayoutPlays) + incPayoutPlay
-						// 			}
-						// 		);
-						// 	} else {
-						// 		playerData = await dbMongo.insertPlayerInfo({
-						// 			address: walletAddress,
-						// 			totalBetAmount: allAmount,
-						// 			latestSessionDate: playData.createdAt,
-						// 			numberOfFreePlays: incFreePlay,
-						// 			numberOfPayoutPlays: incPayoutPlay,
-						// 			type: gameType
-						// 		});
-						// 	}
-						// 	if (playerData) console.log('game player info storing success');
-						// 	else console.log('game player info storing failed');
-						// 	// store machineDB
-						// 	var machineData = await dbMongo.findMachineInfo({
-						// 		machineID: machineID,
-						// 		landID: landID,
-						// 		playerAddresse: walletAddress,
-						// 		type: gameType
-						// 	});
-						// 	if (!machineData) {
-						// 		machineData = await dbMongo.insertMachineInfo({
-						// 			machineID: machineID,
-						// 			landID: landID,
-						// 			playerAddresse: walletAddress,
-						// 			type: gameType
-						// 		});
-						// 	}
-						// 	if (machineData) console.log('game machine info storing success');
-						// 	else console.log('game machine info storing failed');
-						// 	// store machineTotalDB
-						// 	var machineTotalData = await dbMongo.findMachineTotalInfo({
-						// 		machineID: machineID,
-						// 		type: gameType
-						// 	});
-						// 	if (!machineTotalData) {
-						// 		machineTotalData = await dbMongo.insertMachineTotalInfo({
-						// 			machineID: machineID,
-						// 			landID: landID,
-						// 			totalBetAmount: allAmount,
-						// 			latestSessionDate: playData.createdAt,
-						// 			type: gameType
-						// 		});
-						// 	} else {
-						// 		machineTotalData = await dbMongo.updateMachineTotalInfo(
-						// 			{ machineID: machineID, type: gameType },
-						// 			{
-						// 				totalBetAmount: Number(machineTotalData.totalBetAmount) + Number(allAmount),
-						// 				latestSessionDate: playData.createdAt
-						// 			}
-						// 		);
-						// 		if (machineTotalData) console.log('game machine total info storing success');
-						// 		else console.log('game machine total info storing failed');
-						// 	}
-						// } catch (e) {
-						// 	console.log(e);
-						// }
+						var allAmount = 0;
+						for (var i = 0; i < betAmounts.length; i++) allAmount += Number(betAmounts[i]);
+						try {
+							//store session DB
+							var playData = await dbMongo.insertPlayInfo({
+								address: walletAddress,
+								coinName: coinName,
+								machineID: machineID,
+								landID: landID,
+								betAmount: allAmount,
+								txid: txHash,
+								type: gameTypeStr
+							});
+							if (playData) console.log('game play info storing success');
+							else console.log('game play info storing failed');
+							// store player DB
+							var playerData = await dbMongo.findPlayerInfo({
+								address: walletAddress,
+								type: gameTypeStr
+							});
+							var incFreePlay = allAmount > 0 ? 0 : 1;
+							var incPayoutPlay = allAmount > 0 ? 1 : 0;
+							if (playerData) {
+								playerData = await dbMongo.updatePlayerInfo(
+									{ address: playerData.address, type: gameTypeStr },
+									{
+										totalBetAmount: Number(playerData.totalBetAmount) + Number(allAmount),
+										latestSessionDate: playData.createdAt,
+										numberOfFreePlays: Number(playerData.numberOfFreePlays) + incFreePlay,
+										numberOfPayoutPlays: Number(playerData.numberOfPayoutPlays) + incPayoutPlay
+									}
+								);
+							} else {
+								playerData = await dbMongo.insertPlayerInfo({
+									address: walletAddress,
+									totalBetAmount: allAmount,
+									latestSessionDate: playData.createdAt,
+									numberOfFreePlays: incFreePlay,
+									numberOfPayoutPlays: incPayoutPlay,
+									type: gameTypeStr
+								});
+							}
+							if (playerData) console.log('game player info storing success');
+							else console.log('game player info storing failed');
+							// store machineDB
+							var machineData = await dbMongo.findMachineInfo({
+								machineID: machineID,
+								landID: landID,
+								playerAddresse: walletAddress,
+								type: gameTypeStr
+							});
+							if (!machineData) {
+								machineData = await dbMongo.insertMachineInfo({
+									machineID: machineID,
+									landID: landID,
+									playerAddresse: walletAddress,
+									type: gameTypeStr
+								});
+							}
+							if (machineData) console.log('game machine info storing success');
+							else console.log('game machine info storing failed');
+							// store machineTotalDB
+							var machineTotalData = await dbMongo.findMachineTotalInfo({
+								machineID: machineID,
+								type: gameTypeStr
+							});
+							if (!machineTotalData) {
+								machineTotalData = await dbMongo.insertMachineTotalInfo({
+									machineID: machineID,
+									landID: landID,
+									totalBetAmount: allAmount,
+									latestSessionDate: playData.createdAt,
+									type: gameTypeStr
+								});
+							} else {
+								machineTotalData = await dbMongo.updateMachineTotalInfo(
+									{ machineID: machineID, type: gameTypeStr },
+									{
+										totalBetAmount: Number(machineTotalData.totalBetAmount) + Number(allAmount),
+										latestSessionDate: playData.createdAt
+									}
+								);
+								if (machineTotalData) console.log('game machine total info storing success');
+								else console.log('game machine total info storing failed');
+							}
+						} catch (e) {
+							console.log(e);
+						}
 					}
 				});
 			};

@@ -24,6 +24,8 @@ module.exports.returnData = async (result) => {
 	const gameType = machineIDPadded.slice(3, 6);
 	const amount = parseInt(result[0].topics[3], 16);
 
+	const gameTypeStr = gameType == 1 ? 'Slots' : 'Roulette';
+
 	console.log('wheel numbers: ' + numbers + ', machine id: ' + machineIDPadded + ', win amount: ' + amount);
 
 	const spinObj = {
@@ -47,7 +49,7 @@ module.exports.returnData = async (result) => {
 		// update session DB
 		const playData = await dbMongo.findPlayInfo({
 			machineID: machineIDPadded,
-			type: gameType,
+			type: gameTypeStr,
 			txid: result[0].transactionHash
 		});
 		if (!playData) {
@@ -69,12 +71,12 @@ module.exports.returnData = async (result) => {
 		// update player DB
 		const playerData = await dbMongo.findPlayerInfo({
 			address: playData.address,
-			type: gameType
+			type: gameTypeStr
 		});
 
 		if (playerData) {
 			playerData = await dbMongo.updatePlayerInfo(
-				{ address: playerData.address, type: gameType },
+				{ address: playerData.address, type: gameTypeStr },
 				{
 					totalAmountWin: Number(playerData.totalAmountWin) + amount
 				}
@@ -88,12 +90,12 @@ module.exports.returnData = async (result) => {
 		// update machine Total DB
 		const machineTotalData = await dbMongo.findMachineTotalInfo({
 			machineID: machineIDPadded,
-			type: gameType
+			type: gameTypeStr
 		});
 
 		if (machineTotalData) {
 			machineTotalData = await dbMongo.updateMachineTotalInfo(
-				{ machineID: machineIDPadded, type: gameType },
+				{ machineID: machineIDPadded, type: gameTypeStr },
 				{
 					totalAmountWin: Number(machineTotalData.totalAmountWin) + amount
 				}

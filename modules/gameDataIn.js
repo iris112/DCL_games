@@ -36,6 +36,7 @@ module.exports.prepareTransaction = async (messageJSON) => {
 	// parse the land ID and game type from the machine ID
 	const landID = machineID.slice(0, 3);
 	const gameType = machineID.slice(3, 6);
+	const gameTypeStr = gameType == 1 ? 'Slots' : 'Roulette';
 
 	console.log('game type: ' + gameType);
 	console.log('wallet address: ' + walletAddress);
@@ -123,20 +124,20 @@ module.exports.prepareTransaction = async (messageJSON) => {
 								landID: landID,
 								betAmount: allAmount,
 								txid: txHash,
-								type: gameType
+								type: gameTypeStr
 							});
 							if (playData) console.log('game play info storing success');
 							else console.log('game play info storing failed');
 							// store player DB
 							var playerData = await dbMongo.findPlayerInfo({
 								address: walletAddress,
-								type: gameType
+								type: gameTypeStr
 							});
 							var incFreePlay = allAmount > 0 ? 0 : 1;
 							var incPayoutPlay = allAmount > 0 ? 1 : 0;
 							if (playerData) {
 								playerData = await dbMongo.updatePlayerInfo(
-									{ address: playerData.address, type: gameType },
+									{ address: playerData.address, type: gameTypeStr },
 									{
 										totalBetAmount: Number(playerData.totalBetAmount) + Number(allAmount),
 										latestSessionDate: playData.createdAt,
@@ -151,7 +152,7 @@ module.exports.prepareTransaction = async (messageJSON) => {
 									latestSessionDate: playData.createdAt,
 									numberOfFreePlays: incFreePlay,
 									numberOfPayoutPlays: incPayoutPlay,
-									type: gameType
+									type: gameTypeStr
 								});
 							}
 							if (playerData) console.log('game player info storing success');
@@ -161,14 +162,14 @@ module.exports.prepareTransaction = async (messageJSON) => {
 								machineID: machineID,
 								landID: landID,
 								playerAddresse: walletAddress,
-								type: gameType
+								type: gameTypeStr
 							});
 							if (!machineData) {
 								machineData = await dbMongo.insertMachineInfo({
 									machineID: machineID,
 									landID: landID,
 									playerAddresse: walletAddress,
-									type: gameType
+									type: gameTypeStr
 								});
 							}
 							if (machineData) console.log('game machine info storing success');
@@ -176,7 +177,7 @@ module.exports.prepareTransaction = async (messageJSON) => {
 							// store machineTotalDB
 							var machineTotalData = await dbMongo.findMachineTotalInfo({
 								machineID: machineID,
-								type: gameType
+								type: gameTypeStr
 							});
 							if (!machineTotalData) {
 								machineTotalData = await dbMongo.insertMachineTotalInfo({
@@ -184,11 +185,11 @@ module.exports.prepareTransaction = async (messageJSON) => {
 									landID: landID,
 									totalBetAmount: allAmount,
 									latestSessionDate: playData.createdAt,
-									type: gameType
+									type: gameTypeStr
 								});
 							} else {
 								machineTotalData = await dbMongo.updateMachineTotalInfo(
-									{ machineID: machineID, type: gameType },
+									{ machineID: machineID, type: gameTypeStr },
 									{
 										totalBetAmount: Number(machineTotalData.totalBetAmount) + Number(allAmount),
 										latestSessionDate: playData.createdAt

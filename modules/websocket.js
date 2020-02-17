@@ -1,5 +1,5 @@
 const SocketServer = require('ws').Server;
-const gameIn = require('./gameIn');
+const gameDataIn = require('./gameDataIn');
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -14,11 +14,11 @@ module.exports = function WebSocket(server) {
 	// 		coinName: 'MANA',
 	// 		betIDs: [ 1101 ],
 	// 		betValues: [ 0 ],
-	// 		betAmounts: [ 100 ]
+	// 		betAmounts: [ 10000000000000000000 ]
 	// 	}
 	// };
 
-	// gameIn.prepareTransaction(messageJSON);
+	// gameDataIn.prepareTransaction(messageJSON);
 
 	wss.on('connection', (ws) => {
 		console.log('DCL client connected');
@@ -32,7 +32,7 @@ module.exports = function WebSocket(server) {
 		ws.on('message', function incoming(message) {
 			const messageJSON = JSON.parse(message);
 
-			gameIn.prepareTransaction(messageJSON);
+			gameDataIn.prepareTransaction(messageJSON);
 		});
 	});
 

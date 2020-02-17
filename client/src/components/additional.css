@@ -22,13 +22,13 @@ a.item.account-p:hover .svg-eth, a.item.account-p:focus .svg-eth {
 }
 
 .main-footer-icon-row {
-  padding-left: calc(50% - 66px) !important;
+  padding-left: calc(50% - 72px) !important;
 }
 
 .main-footer-icon {
   color: white;
   font-size: 18px;
-  margin-right: 12px;
+  margin-right: 14px;
 }
 
 .main-footer-icon:hover {
@@ -871,13 +871,13 @@ a.ui.card:hover, a.ui.card:active {
 }
 
 .svg1 {
-  width: 11em;
-  height: 11em;
+  width: 9em;
+  height: 9em;
 }
 
 .svg3 {
-  width: 13em;
-  height: 13em;
+  width: 11em;
+  height: 11em;
 }
 
 @media (min-width: 768px) {
@@ -887,8 +887,8 @@ a.ui.card:hover, a.ui.card:active {
 }
 
 .svg2, .svg4 {
-  width: 12em;
-  height: 12em;
+  width: 10em;
+  height: 10em;
 }
 
 .svg1, .svg2, .svg3, .svg4 {

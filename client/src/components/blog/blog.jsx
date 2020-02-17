@@ -14,7 +14,7 @@ const Blog = ({ match }) => {
   
   useEffect(() => {
     const getPages = async () => {
-      const { data } = await butter.post.list();
+      const { data } = await butter.post.list({ page_size: 25 });
 
       dispatch({
         type: "update_pages",

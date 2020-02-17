@@ -1,5 +1,127 @@
 module.exports = [
 	{
+		inputs: [
+			{
+				internalType: 'address',
+				name: 'defaultToken',
+				type: 'address'
+			},
+			{
+				internalType: 'string',
+				name: 'tokenName',
+				type: 'string'
+			}
+		],
+		payable: false,
+		stateMutability: 'nonpayable',
+		type: 'constructor'
+	},
+	{
+		anonymous: false,
+		inputs: [
+			{
+				indexed: false,
+				internalType: 'address',
+				name: 'newCEO',
+				type: 'address'
+			}
+		],
+		name: 'CEOSet',
+		type: 'event'
+	},
+	{
+		anonymous: false,
+		inputs: [
+			{
+				indexed: false,
+				internalType: 'address',
+				name: '_walletAddress',
+				type: 'address'
+			},
+			{
+				indexed: false,
+				internalType: 'string',
+				name: '_tokenName',
+				type: 'string'
+			},
+			{
+				indexed: false,
+				internalType: 'uint256',
+				name: '_landID',
+				type: 'uint256'
+			},
+			{
+				indexed: true,
+				internalType: 'uint256',
+				name: '_number',
+				type: 'uint256'
+			},
+			{
+				indexed: true,
+				internalType: 'uint256',
+				name: '_machineID',
+				type: 'uint256'
+			},
+			{
+				indexed: true,
+				internalType: 'uint256',
+				name: '_amountWin',
+				type: 'uint256'
+			}
+		],
+		name: 'GameResult',
+		type: 'event'
+	},
+	{
+		anonymous: false,
+		inputs: [
+			{
+				indexed: false,
+				internalType: 'uint256',
+				name: '_gameID',
+				type: 'uint256'
+			},
+			{
+				indexed: false,
+				internalType: 'uint256',
+				name: '_balance',
+				type: 'uint256'
+			}
+		],
+		name: 'NewBalance',
+		type: 'event'
+	},
+	{
+		anonymous: false,
+		inputs: [],
+		name: 'Paused',
+		type: 'event'
+	},
+	{
+		anonymous: false,
+		inputs: [],
+		name: 'Unpaused',
+		type: 'event'
+	},
+	{
+		anonymous: false,
+		inputs: [
+			{
+				indexed: false,
+				internalType: 'address',
+				name: 'newWorker',
+				type: 'address'
+			}
+		],
+		name: 'WorkerSet',
+		type: 'event'
+	},
+	{
+		payable: true,
+		stateMutability: 'payable',
+		type: 'fallback'
+	},
+	{
 		constant: false,
 		inputs: [
 			{
@@ -70,34 +192,180 @@ module.exports = [
 		type: 'function'
 	},
 	{
+		constant: true,
+		inputs: [],
+		name: 'ceoAddress',
+		outputs: [
+			{
+				internalType: 'address',
+				name: '',
+				type: 'address'
+			}
+		],
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
+		constant: true,
+		inputs: [
+			{
+				internalType: 'uint256',
+				name: '_gameID',
+				type: 'uint256'
+			},
+			{
+				internalType: 'string',
+				name: '_tokenName',
+				type: 'string'
+			}
+		],
+		name: 'checkAllocatedTokensPerGame',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: 'tokensInGame',
+				type: 'uint256'
+			}
+		],
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
+		constant: true,
 		inputs: [
 			{
 				internalType: 'address',
-				name: 'defaultToken',
+				name: '_userAddress',
 				type: 'address'
 			},
 			{
 				internalType: 'string',
-				name: 'tokenName',
+				name: '_tokenName',
+				type: 'string'
+			}
+		],
+		name: 'checkApproval',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: 'approved',
+				type: 'uint256'
+			}
+		],
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
+		constant: true,
+		inputs: [],
+		name: 'defaultTokenName',
+		outputs: [
+			{
+				internalType: 'string',
+				name: '',
 				type: 'string'
 			}
 		],
 		payable: false,
-		stateMutability: 'nonpayable',
-		type: 'constructor'
+		stateMutability: 'view',
+		type: 'function'
 	},
 	{
-		anonymous: false,
+		constant: true,
 		inputs: [
 			{
-				indexed: false,
+				internalType: 'uint256',
+				name: '',
+				type: 'uint256'
+			}
+		],
+		name: 'games',
+		outputs: [
+			{
 				internalType: 'address',
-				name: 'newCEO',
+				name: 'gameAddress',
+				type: 'address'
+			},
+			{
+				internalType: 'string',
+				name: 'gameName',
+				type: 'string'
+			}
+		],
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
+		constant: true,
+		inputs: [
+			{
+				internalType: 'address',
+				name: '_tokenAddress',
 				type: 'address'
 			}
 		],
-		name: 'CEOSet',
-		type: 'event'
+		name: 'getBalanceByTokenAddress',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: '',
+				type: 'uint256'
+			}
+		],
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
+		constant: true,
+		inputs: [
+			{
+				internalType: 'string',
+				name: '_tokenName',
+				type: 'string'
+			}
+		],
+		name: 'getBalanceByTokenName',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: '',
+				type: 'uint256'
+			}
+		],
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
+		constant: true,
+		inputs: [
+			{
+				internalType: 'uint256',
+				name: '_gameID',
+				type: 'uint256'
+			},
+			{
+				internalType: 'string',
+				name: '_tokenName',
+				type: 'string'
+			}
+		],
+		name: 'getMaximumBet',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: '',
+				type: 'uint256'
+			}
+		],
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
 	},
 	{
 		constant: false,
@@ -150,23 +418,34 @@ module.exports = [
 		type: 'function'
 	},
 	{
-		anonymous: false,
-		inputs: [
+		constant: true,
+		inputs: [],
+		name: 'maximumNumberBets',
+		outputs: [
 			{
-				indexed: false,
 				internalType: 'uint256',
-				name: '_gameID',
-				type: 'uint256'
-			},
-			{
-				indexed: false,
-				internalType: 'uint256',
-				name: '_balance',
+				name: '',
 				type: 'uint256'
 			}
 		],
-		name: 'NewBalance',
-		type: 'event'
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
+		constant: true,
+		inputs: [],
+		name: 'number',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: '',
+				type: 'uint256'
+			}
+		],
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
 	},
 	{
 		constant: false,
@@ -178,10 +457,19 @@ module.exports = [
 		type: 'function'
 	},
 	{
-		anonymous: false,
+		constant: true,
 		inputs: [],
-		name: 'Paused',
-		type: 'event'
+		name: 'paused',
+		outputs: [
+			{
+				internalType: 'bool',
+				name: '',
+				type: 'bool'
+			}
+		],
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
 	},
 	{
 		constant: false,
@@ -299,6 +587,21 @@ module.exports = [
 		type: 'function'
 	},
 	{
+		constant: true,
+		inputs: [],
+		name: 'tail',
+		outputs: [
+			{
+				internalType: 'bytes32',
+				name: '',
+				type: 'bytes32'
+			}
+		],
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
 		constant: false,
 		inputs: [
 			{
@@ -320,6 +623,27 @@ module.exports = [
 		type: 'function'
 	},
 	{
+		constant: true,
+		inputs: [
+			{
+				internalType: 'string',
+				name: '',
+				type: 'string'
+			}
+		],
+		name: 'tokens',
+		outputs: [
+			{
+				internalType: 'address',
+				name: '',
+				type: 'address'
+			}
+		],
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
 		constant: false,
 		inputs: [],
 		name: 'unpause',
@@ -327,12 +651,6 @@ module.exports = [
 		payable: false,
 		stateMutability: 'nonpayable',
 		type: 'function'
-	},
-	{
-		anonymous: false,
-		inputs: [],
-		name: 'Unpaused',
-		type: 'event'
 	},
 	{
 		constant: false,
@@ -371,6 +689,11 @@ module.exports = [
 				internalType: 'uint256',
 				name: '_maximumBet',
 				type: 'uint256'
+			},
+			{
+				internalType: 'string',
+				name: '_tokenName',
+				type: 'string'
 			}
 		],
 		name: 'updateMaximumBet',
@@ -400,6 +723,21 @@ module.exports = [
 		type: 'function'
 	},
 	{
+		constant: true,
+		inputs: [],
+		name: 'winAmount',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: '',
+				type: 'uint256'
+			}
+		],
+		payable: false,
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
 		constant: false,
 		inputs: [
 			{
@@ -425,24 +763,6 @@ module.exports = [
 		type: 'function'
 	},
 	{
-		anonymous: false,
-		inputs: [
-			{
-				indexed: false,
-				internalType: 'address',
-				name: 'newWorker',
-				type: 'address'
-			}
-		],
-		name: 'WorkerSet',
-		type: 'event'
-	},
-	{
-		payable: true,
-		stateMutability: 'payable',
-		type: 'fallback'
-	},
-	{
 		constant: false,
 		inputs: [
 			{
@@ -455,257 +775,6 @@ module.exports = [
 		outputs: [],
 		payable: false,
 		stateMutability: 'nonpayable',
-		type: 'function'
-	},
-	{
-		constant: true,
-		inputs: [],
-		name: 'ceoAddress',
-		outputs: [
-			{
-				internalType: 'address',
-				name: '',
-				type: 'address'
-			}
-		],
-		payable: false,
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		constant: true,
-		inputs: [
-			{
-				internalType: 'uint256',
-				name: '_gameID',
-				type: 'uint256'
-			},
-			{
-				internalType: 'string',
-				name: '_tokenName',
-				type: 'string'
-			}
-		],
-		name: 'checkAllocatedTokensPerGame',
-		outputs: [
-			{
-				internalType: 'uint256',
-				name: 'tokensInGame',
-				type: 'uint256'
-			}
-		],
-		payable: false,
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		constant: true,
-		inputs: [
-			{
-				internalType: 'address',
-				name: '_userAddress',
-				type: 'address'
-			},
-			{
-				internalType: 'string',
-				name: '_tokenName',
-				type: 'string'
-			}
-		],
-		name: 'checkApproval',
-		outputs: [
-			{
-				internalType: 'uint256',
-				name: 'approved',
-				type: 'uint256'
-			}
-		],
-		payable: false,
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		constant: true,
-		inputs: [],
-		name: 'defaultTokenName',
-		outputs: [
-			{
-				internalType: 'string',
-				name: '',
-				type: 'string'
-			}
-		],
-		payable: false,
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		constant: true,
-		inputs: [
-			{
-				internalType: 'uint256',
-				name: '',
-				type: 'uint256'
-			}
-		],
-		name: 'games',
-		outputs: [
-			{
-				internalType: 'address',
-				name: 'gameAddress',
-				type: 'address'
-			},
-			{
-				internalType: 'string',
-				name: 'gameName',
-				type: 'string'
-			},
-			{
-				internalType: 'uint256',
-				name: 'maximumBet',
-				type: 'uint256'
-			}
-		],
-		payable: false,
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		constant: true,
-		inputs: [
-			{
-				internalType: 'address',
-				name: '_tokenAddress',
-				type: 'address'
-			}
-		],
-		name: 'getBalanceByTokenAddress',
-		outputs: [
-			{
-				internalType: 'uint256',
-				name: '',
-				type: 'uint256'
-			}
-		],
-		payable: false,
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		constant: true,
-		inputs: [
-			{
-				internalType: 'string',
-				name: '_tokenName',
-				type: 'string'
-			}
-		],
-		name: 'getBalanceByTokenName',
-		outputs: [
-			{
-				internalType: 'uint256',
-				name: '',
-				type: 'uint256'
-			}
-		],
-		payable: false,
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		constant: true,
-		inputs: [],
-		name: 'maximumNumberBets',
-		outputs: [
-			{
-				internalType: 'uint256',
-				name: '',
-				type: 'uint256'
-			}
-		],
-		payable: false,
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		constant: true,
-		inputs: [],
-		name: 'number',
-		outputs: [
-			{
-				internalType: 'uint256',
-				name: '',
-				type: 'uint256'
-			}
-		],
-		payable: false,
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		constant: true,
-		inputs: [],
-		name: 'paused',
-		outputs: [
-			{
-				internalType: 'bool',
-				name: '',
-				type: 'bool'
-			}
-		],
-		payable: false,
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		constant: true,
-		inputs: [],
-		name: 'tail',
-		outputs: [
-			{
-				internalType: 'bytes32',
-				name: '',
-				type: 'bytes32'
-			}
-		],
-		payable: false,
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		constant: true,
-		inputs: [
-			{
-				internalType: 'string',
-				name: '',
-				type: 'string'
-			}
-		],
-		name: 'tokens',
-		outputs: [
-			{
-				internalType: 'address',
-				name: '',
-				type: 'address'
-			}
-		],
-		payable: false,
-		stateMutability: 'view',
-		type: 'function'
-	},
-	{
-		constant: true,
-		inputs: [],
-		name: 'winAmount',
-		outputs: [
-			{
-				internalType: 'uint256',
-				name: '',
-				type: 'uint256'
-			}
-		],
-		payable: false,
-		stateMutability: 'view',
 		type: 'function'
 	},
 	{

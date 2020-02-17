@@ -15,8 +15,12 @@ code strong, kbd, samp {
   font-size: 18px;
   padding: 1px 5px 2px 5px;
   border: 1px solid #e8e8e8;
-  border-radius: 3px;
+  border-radius: 2px;
   font-weight: 500;
+}
+
+b, strong {
+  font-weight: 800 !important;
 }
 
 .hljs {
@@ -24,7 +28,7 @@ code strong, kbd, samp {
   overflow-x: auto;
   padding: 15px;
   background: rgb(244, 246, 250);
-  border-radius: 3px;
+  border-radius: 2px;
   border-left: 5px solid rgb(234, 236, 240) !important;
 }
 

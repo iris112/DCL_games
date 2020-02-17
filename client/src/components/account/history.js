@@ -150,10 +150,10 @@ class History extends React.Component {
       <LogoSpinner show={this.state.isRunningTransaction} className="tx-history-spinner" />
         <div style={{width: 'calc(100% - 90px)', marginTop: '20px', marginLeft: '45px', marginRight: '45px'}}>
           <Fade bottom distance="20px" duration="600">
-            <h3 className="account-h3" style={{paddingTop: '20px', paddingBottom: '18px' }}> Transaction History </h3>
+            <h3 className="account-h3" style={{paddingTop: '20px', paddingBottom: '16px' }}> Transaction History </h3>
             <div style={{marginLeft:'3px' }}>
               <span class="mouseCursor" onClick= {() => this.handleHistory()}>Deposits/Withdrawals</span>
-              <span style={{ fontSize: '18px', paddingLeft: '3px', paddingRight: '3px' }}> | </span>
+              <span style={{ fontSize: '18px', paddingLeft: '2px', paddingRight: '2px' }}> | </span>
               <span class="mouseCursor" onClick={() => this.handlePlay()}>Gameplay</span>
             </div>
           </Fade>
@@ -270,12 +270,10 @@ class History extends React.Component {
               </div>
             : this.state.isLoadingData == false ? <p className="playboard-p" style={{lineHeight:'calc(100vh - 310px)', margin: 0, textAlign:'center', color: 'gray', fontStyle: 'italic'}}> There is no transaction history for this account </p> 
             : <p style={{height:'calc(100vh - 310px)', margin: 0}}></p> }
-            <div class="pagination">
-              <MdKeyboardArrowLeft className="page-arrow" size='1.5em' className={`spanarrow ${this.state.beforeAvail ? 'mouseCursor' : 'disable'}`} onClick={this.previewPage}/>
-              <span class="spanbox" style={{paddingLeft: '6px', paddingRight: '6px', display: 'inline-block'}}>
-                <p className="page-p"> Page {this.state.currentPage} </p>
-              </span>
-              <MdKeyboardArrowRight className="page-arrow" size='1.5em' className={`spanarrow ${this.state.nextAvail ? 'mouseCursor' : 'disable'}`} onClick={this.nextPage} />
+            <div class="pagination" style={{ paddingTop: '12px', marginLeft: '-18px' }}>
+              <MdKeyboardArrowLeft size='2.825em' style={{ paddingTop: '24px' }} className={`spanbox ${this.state.beforeAvail ? 'mouseCursor' : 'disable'}`} onClick={this.previewPage}/>
+              <span class="spanbox" style={{padding: '6px 15px', display: 'inline-block'}}>Page {this.state.currentPage}</span>
+              <MdKeyboardArrowRight style={{ paddingTop: '21px' }} size='2em' className={`spanbox ${this.state.nextAvail ? 'mouseCursor' : 'disable'}`} onClick={this.nextPage} />
             </div>
           </div>
           </Fade>

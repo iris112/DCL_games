@@ -33,7 +33,7 @@ const PostPreview = ({
           <div className="bottom">
             <div className="blog-title">
               <h4 style={{ paddingBottom: '9px' }}>{title}</h4>
-              <p style={{ color: 'rgb(97, 97, 97)' }}>{summary.split('.', 1)[0]}.</p>
+              <p style={{ color: 'rgb(97, 97, 97)' }}>{summary.split('.', 1)[0]}</p>
             </div>
           </div>
         </div>

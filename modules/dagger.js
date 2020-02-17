@@ -1,30 +1,17 @@
 const Dagger = require('eth-dagger');
 const keys = require('../config/keys');
-
-// const slotsOut = require('./slotsOut');
-// const rouletteOut = require('./rouletteOut');
-const gameOut = require('./gameOut');
+const gameDataOut = require('./gameDataOut');
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 // we use Dagger to listen to events on Matic Network
 module.exports.setDagger = () => {
-  const dagger = new Dagger('wss://matic.dagger2.matic.network');
+	const dagger = new Dagger('wss://matic.dagger2.matic.network');
 
-  // // new log generated for slots contract address
-  // dagger.on('latest:log/' + keys.SLOTS_MANA_ADDRESS, async function(result) {
-  // 	slotsOut.returnData(result);
-  // });
+	// new log generated for parent contract address
+	dagger.on('latest:log/' + keys.MASTER_PARENT_ADDRESS, async function(result) {
+		console.log('event data received');
 
-  // // new log generated for roulette contract address
-  // dagger.on('latest:log/' + keys.ROULETTE_MANA_ADDRESS, async function(result) {
-  // 	rouletteOut.returnData(result);
-  // });
-
-  // new log generated for slots contract address
-  dagger.on('latest:log/' + keys.PARENT_CONTRACT_ADDRESS, async function(
-    result
-  ) {
-    gameOut.returnData(result);
-  });
+		gameDataOut.returnData(result);
+	});
 };

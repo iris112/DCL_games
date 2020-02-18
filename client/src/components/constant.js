@@ -5,8 +5,8 @@ import DepositManager from './ABI/DepositManager';
 import WithdrawManager from './ABI/WithdrawManager';
 import ChildERC20Token from './ABI/ChildERC20Token';
 
-// const BASE_URL = "https://decentral.games";
-const BASE_URL = "https://testdecentralgames.herokuapp.com";
+const BASE_URL = "https://decentral.games";
+// const BASE_URL = "https://testdecentralgames.herokuapp.com";
 // const BASE_URL = "http://localhost:5000";
 const Buffer = window.ethereumjs.Buffer.Buffer;
 const Util = window.ethereumjs.Util;

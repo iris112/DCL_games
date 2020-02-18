@@ -272,9 +272,7 @@ class Deposit extends React.Component {
     try {
       this.props.showSpinner();
       var amount_wei = (this.state.amount / UNIT * 10 ** Global.TOKEN_DECIMALS).toString();
-      var contract_address = Global.SLOTS_CONTRACT_ADDRESS;
-      if (this.props.authvalue === 2)
-        contract_address = Global.ROULETTE_CONTRACT_ADDRESS;
+      var contract_address = Global.MASTER_PARENT_ADDRESS;
 
       var allowed_amount = await Global.getAllowedToken(Global.MATIC_TOKEN, contract_address, USER_ADDRESS);
       allowed_amount = allowed_amount / (10 ** Global.TOKEN_DECIMALS);

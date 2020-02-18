@@ -27,9 +27,10 @@ const ROPSTEN_TOKEN = '0x2a8fd99c19271f4f04b1b7b9c4f7cf264b626edb';    //Ropsten
 const MATIC_TOKEN = '0xdd1b834a483fd754c8021ff0938f69c1d10da81f';    // Matic mapped MANA Token
 
 // const SLOTS_CONTRACT_ADDRESS = '0x0F8Dc2c169c52835A87Cfe61B62C1A05193EFB19'.toLowerCase();    // Ropsten address
-const SLOTS_CONTRACT_ADDRESS = '0x11f6757ab51a01686b1c54fa0f0c45960b1bd3bc'.toLowerCase();    // Matic address
+const SLOTS_CONTRACT_ADDRESS = '0x2Ec2ef21a0968C054490CF0cfBaadBD892d1c094'.toLowerCase();    // Matic address
 const ROULETTE_CONTRACT_ADDRESS = '0x04056a039a10854447c298311abf1fd21cc90e3e'.toLowerCase();    // Matic address
-const PARENT_CONTRACT_ADDRESS = '0xd5d543db6aaf6442d9dd14b9539285fc4470c773'.toLowerCase();   // Parent contract address
+const PARENT_CONTRACT_ADDRESS = '0xd5d543db6aaf6442d9dd14b9539285fc4470c773'.toLowerCase();
+const MASTER_CONTRACT_ADDRESS = '0x2Ec2ef21a0968C054490CF0cfBaadBD892d1c094'.toLowerCase(); // Parent contract address
 const TOKEN_DECIMALS = 18;
 
 const ROOTCHAIN_ADDRESS = '0x60e2b19b9a87a3f37827f2c8c8306be718a5f9b4';    //test

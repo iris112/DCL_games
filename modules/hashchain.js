@@ -156,7 +156,7 @@ async function initHash() {
 
 module.exports.getHash = async () => {
   if (!hashList.length)
-    initHash();
+    await initHash();
 
   if (hashPos == 0) {
     hashPos = hashSize;

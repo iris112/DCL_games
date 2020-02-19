@@ -33,7 +33,7 @@ module.exports = [
 		anonymous: false,
 		inputs: [
 			{
-				indexed: false,
+				indexed: true,
 				internalType: 'address',
 				name: '_walletAddress',
 				type: 'address'
@@ -57,7 +57,7 @@ module.exports = [
 				type: 'uint256'
 			},
 			{
-				indexed: true,
+				indexed: false,
 				internalType: 'uint256',
 				name: '_machineID',
 				type: 'uint256'

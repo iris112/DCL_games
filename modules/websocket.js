@@ -17,8 +17,10 @@ module.exports = function WebSocket(server) {
 	// 		betAmounts: [ 10000000000000000000 ]
 	// 	}
 	// };
-
-	// gameDataIn.prepareTransaction(messageJSON);
+	// const sleep = (waitTimeInMs) => new Promise((resolve) => setTimeout(resolve, waitTimeInMs));
+	// sleep(3000).then(() => {
+	// 	gameDataIn.prepareTransaction(messageJSON);
+	// });
 
 	wss.on('connection', (ws) => {
 		console.log('DCL client connected');

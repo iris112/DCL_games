@@ -185,10 +185,17 @@ class History extends React.Component {
                         if (row.betAmount) {
                           amount = Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
                           result = Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
-                          if (row.type === 'Roulette')
-                            action = "MANA Roulette";
-                          else
-                            action = "MANA Slots";
+                          if (row.gameType) {
+                            if (row.gameType == 1)
+                              action = "MANA Slots";
+                            else
+                              action = "MANA Roulette";
+                          } else {
+                            if (row.type === 'Roulette')
+                              action = "MANA Roulette";
+                            else
+                              action = "MANA Slots";
+                          }
 
                           return (
                             <Table.Row>

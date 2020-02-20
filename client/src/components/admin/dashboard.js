@@ -64,12 +64,24 @@ class Dashboard extends React.Component {
     let json = await response.json();
     while (json.result !== 'false') {
       json.result.map((row) => {
-        if (row.type !== 'Roulette') {
-          slotVolume = slotVolume + Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
-          slotPayout = slotPayout + Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
+        if (row.gameType) {
+          if (row.gameType == 1) {
+            slotVolume = slotVolume + Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
+            slotPayout = slotPayout + Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
+          }
+          else {
+            rouletteVolume = rouletteVolume + Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
+            roulettePayout = roulettePayout + Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
+          }
         } else {
-          rouletteVolume = rouletteVolume + Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
-          roulettePayout = roulettePayout + Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
+          if (row.type === 'Roulette') {
+            rouletteVolume = rouletteVolume + Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
+            roulettePayout = roulettePayout + Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
+          }
+          else {
+            slotVolume = slotVolume + Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
+            slotPayout = slotPayout + Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
+          }
         }
       });
 

@@ -136,7 +136,8 @@ const userPlayInfos = new Schema(
     number: { type: Int32, default: 0 },
     amountWin: { type: Schema.Types.Decimal128, default: 0 },
     txid: { type: String, default: '' },
-    type: { type: String, default: '' }
+    type: { type: String, default: '' },
+    gameType: { type: Int32, default: 0 }
   },
   {
     timestamps: {
@@ -167,6 +168,7 @@ const userPlayerInfos = new Schema(
   {
     address: { type: String, default: '', unique: true, index: true },
     type: { type: String, default: '' },
+    gameType: { type: Int32, default: 0 },
     totalBetAmount: { type: Schema.Types.Decimal128, default: 0 },
     totalAmountWin: { type: Schema.Types.Decimal128, default: 0 },
     latestSessionDate: { type: Date, default: null },
@@ -197,7 +199,8 @@ const machineInfos = new Schema(
     playerAddresse: { type: String, default: '' },
     machineID: { type: String, default: '' },
     landID: { type: String, default: '' },
-    type: { type: String, default: '' }
+    type: { type: String, default: '' },
+    gameType: { type: Int32, default: 0 }
   },
   {
     timestamps: {
@@ -453,6 +456,7 @@ async function insertPlayInfo(data) {
   PlayInfoModel.amountWin = data.amountWin || 0;
   PlayInfoModel.txid = data.txid || '';
   PlayInfoModel.type = data.type || '';
+  PlayInfoModel.gameType = data.gameType || 0;
 
   PlayInfoModel = await PlayInfoModel.save();
   return PlayInfoModel.toJSON();
@@ -503,6 +507,7 @@ async function insertPlayerInfo(data) {
 
   PlayerInfoModel.address = data.address || '';
   PlayerInfoModel.type = data.type || '';
+  PlayerInfoModel.gameType = data.gameType || 0;
   PlayerInfoModel.totalBetAmount = data.totalBetAmount || 0;
   PlayerInfoModel.totalAmountWin = data.totalAmountWin || 0;
   PlayerInfoModel.latestSessionDate = data.latestSessionDate || null;
@@ -536,6 +541,7 @@ async function insertMachineInfo(data) {
 
   MachineInfoModel.playerAddresse = data.playerAddresse || '';
   MachineInfoModel.type = data.type || '';
+  MachineInfoModel.gameType = data.gameType || 0;
   MachineInfoModel.machineID = data.machineID || '';
   MachineInfoModel.landID = data.landID || '';
 

@@ -144,10 +144,17 @@ class Deposit extends React.Component {
                       timestamp = timestamp.replace(timestamp.substr(-2), '').trim();
                       var game;
 
-                      if (row.type === 'Roulette')
-                        game = "MANA Roulette";
-                      else
-                        game = "MANA Slots";
+                      if (row.gameType) {
+                        if (row.gameType == 1)
+                          action = "MANA Slots";
+                        else
+                          action = "MANA Roulette";
+                      } else {
+                        if (row.type === 'Roulette')
+                          action = "MANA Roulette";
+                        else
+                          action = "MANA Slots";
+                      }
 
                       return (
                         <Table.Row>

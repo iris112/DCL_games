@@ -85,6 +85,30 @@ div.outter-blog-container.ui.segment {
   }
 }
 
+@media (min-width: 1100px) {
+  #mobile-outter-container {
+    width: calc(80% + 6px) !important;
+  }
+}
+
+@media (min-width: 1130px) {
+  #mobile-outter-container {
+    width: calc(80% + 9px) !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  #mobile-outter-container {
+    width: calc(80% + 12px) !important;
+  }
+}
+
+@media (min-width: 1260px) {
+  #mobile-outter-container {
+    width: calc(80% + 18px) !important;
+  }
+}
+
 @media (max-width: 767px) {
   #mobile-outter-container {
     margin-left: 21px !important;
@@ -393,6 +417,14 @@ div.ui.container.test-container {
   width: calc(33.33% + 0px);
   margin-top: 20px;
   transition: all 0.5s ease;
+}
+
+@media (min-width: 767px) {
+  div.ui.container.post-container {
+    margin-left: 0px !important;
+    margin-right: -20px !important;
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 980px) {

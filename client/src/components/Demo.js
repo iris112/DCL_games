@@ -6,7 +6,7 @@ const Demo = () => {
       <div className="demoStrip">
         <iframe
           title="Decentral Games"
-          src={'https://export.decentralgames.now.sh/?ENABLE_WEB3&SCENE_DEBUG_PANEL&position=-1%2C3'}
+          src={'https://play.decentraland.org/?position=-75%2C77&realm=fenrir-gold'}
           style={{
             margin: 'auto',
             padding: '0px',

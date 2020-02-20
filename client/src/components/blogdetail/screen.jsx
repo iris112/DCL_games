@@ -32,7 +32,8 @@ const Screen = ({ slug, featured_image, image, created, categories, title, summa
         array[randomIndex] = temporaryValue;
         count += 1;
         if (count >= 3) {
-          array.splice(0,2);
+          count = filteredPages.length - 3;
+          array.splice(0,count);
           console.log(array);
           return array;
         }
@@ -147,7 +148,6 @@ const Screen = ({ slug, featured_image, image, created, categories, title, summa
                         featured_image={page.featured_image}
                         url={page.url}
                         slug={page.slug}
-                        page_size={5}
                       />
                   ))}
                 </div>

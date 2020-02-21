@@ -146,14 +146,14 @@ class Deposit extends React.Component {
 
                       if (row.gameType) {
                         if (row.gameType == 1)
-                          action = "MANA Slots";
+                          game = "MANA Slots";
                         else
-                          action = "MANA Roulette";
+                          game = "MANA Roulette";
                       } else {
                         if (row.type === 'Roulette')
-                          action = "MANA Roulette";
+                          game = "MANA Roulette";
                         else
-                          action = "MANA Slots";
+                          game = "MANA Slots";
                       }
 
                       return (

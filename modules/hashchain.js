@@ -145,7 +145,7 @@ async function initHash() {
 
   const currentTail = await contractMasterParent.methods.tail().call();
   hashPos = hashList.indexOf(currentTail) + 1;
-  if (hashPos < 0) {
+  if (hashPos < 1) {
     hashPos = hashSize;
     await setTailHash();
   }

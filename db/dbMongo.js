@@ -155,7 +155,7 @@ userPlayInfos.set('toJSON', {
     }
 });
 const userPlayerInfos = new Schema({
-    address: { type: String, default: '', unique: true, index: true },
+    address: { type: String, default: '', index: true },
     type: { type: String, default: '' },
     gameType: { type: Int32, default: 0 },
     totalBetAmount: { type: Schema.Types.Decimal128, default: 0 },

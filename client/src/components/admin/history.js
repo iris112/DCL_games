@@ -154,15 +154,15 @@ class History extends React.Component {
                       var game;
 
                       if (row.gameType) {
-                        if (row.gameType == 1)
-                          action = "MANA Slots";
-                        else
-                          action = "MANA Roulette";
+                      if (row.gameType == 1)
+                         game = "MANA Slots";
+                       else
+                         game = "MANA Roulette";
                       } else {
-                        if (row.type === 'Roulette')
-                          action = "MANA Roulette";
-                        else
-                          action = "MANA Slots";
+                       if (row.type === 'Roulette')
+                         game = "MANA Roulette";
+                       else
+                         game = "MANA Slots";
                       }
 
                       return (

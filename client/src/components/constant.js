@@ -5,8 +5,8 @@ import DepositManager from './ABI/DepositManager';
 import WithdrawManager from './ABI/WithdrawManager';
 import ChildERC20Token from './ABI/ChildERC20Token';
 
-const BASE_URL = "https://decentral.games";
-// const BASE_URL = "https://testdecentralgames.herokuapp.com";
+// const BASE_URL = "https://decentral.games";
+const BASE_URL = "https://testdecentralgames.herokuapp.com";
 // const BASE_URL = "http://localhost:5000";
 const Buffer = window.ethereumjs.Buffer.Buffer;
 const Util = window.ethereumjs.Util;
@@ -21,8 +21,8 @@ const RELAY_ADDR = '0x1FcdE174C13691ef0C13fcEE042e0951452C0f8A'.toLowerCase();
 const ROPSTEN_TOKEN = '0x2a8fd99c19271f4f04b1b7b9c4f7cf264b626edb';    //Ropsten MANA Token
 const MATIC_TOKEN = '0xdd1b834a483fd754c8021ff0938f69c1d10da81f';    // Matic mapped MANA Token
 
-const MASTER_CONTRACT_ADDRESS = '0x2Ec2ef21a0968C054490CF0cfBaadBD892d1c094'.toLowerCase(); // Matic address
-// const MASTER_CONTRACT_ADDRESS = '0x4c401d4CA7589ebd06119392B894DD8232311C84'.toLowerCase(); // Matic address
+// const MASTER_CONTRACT_ADDRESS = '0x2Ec2ef21a0968C054490CF0cfBaadBD892d1c094'.toLowerCase(); // Matic address
+const MASTER_CONTRACT_ADDRESS = '0x4c401d4CA7589ebd06119392B894DD8232311C84'.toLowerCase(); // Matic address
 const SLOTS_CONTRACT_ADDRESS = MASTER_CONTRACT_ADDRESS;                           // Matic address
 const ROULETTE_CONTRACT_ADDRESS = MASTER_CONTRACT_ADDRESS                         // Matic address
 

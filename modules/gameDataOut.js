@@ -7,7 +7,7 @@ dbMongo.initDb();
 module.exports.returnData = async (result) => {
 	// console.log(result);
 
-	const address = result[0].topics[1].slice(0, 25);
+	const address = '0x' + result[0].topics[1].slice(26);
 	const numbers = parseInt(result[0].topics[2], 16);
 	const amount = parseInt(result[0].topics[3], 16);
 

@@ -55,48 +55,30 @@ class Dashboard extends React.Component {
     this.getEthBalance();   
 
     // Get Mana Slot Contract Data
-    let page = 1;
     let slotVolume = 0;
     let slotPayout = 0;
     let rouletteVolume = 0;
     let roulettePayout = 0;
-    let response = await this.getData(page, period);
+    let response = await this.getData(period);
     let json = await response.json();
-    while (json.result !== 'false') {
-      json.result.map((row) => {
-        if (row.gameType) {
-          if (row.gameType == 1) {
-            slotVolume = slotVolume + Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
-            slotPayout = slotPayout + Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
-          }
-          else {
-            rouletteVolume = rouletteVolume + Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
-            roulettePayout = roulettePayout + Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
-          }
-        } else {
-          if (row.type === 'Roulette') {
-            rouletteVolume = rouletteVolume + Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
-            roulettePayout = roulettePayout + Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
-          }
-          else {
-            slotVolume = slotVolume + Number(row.betAmount) / (10 ** Global.TOKEN_DECIMALS);
-            slotPayout = slotPayout + Number(row.amountWin) / (10 ** Global.TOKEN_DECIMALS);
-          }
-        }
-      });
-
-      page = page + 1;
-      response = await this.getData(page, period);
-      json = await response.json();
+    if (json.result !== 'false') {
+      if (json.result[0]) {
+        slotVolume = Number(json.result[0].totalBetAmount) / (10 ** Global.TOKEN_DECIMALS)
+        slotPayout = Number(json.result[0].totalAmountWin) / (10 ** Global.TOKEN_DECIMALS)
+      }
+      if (json.result[1]) {
+        rouletteVolume = Number(json.result[1].totalBetAmount) / (10 ** Global.TOKEN_DECIMALS)
+        roulettePayout = Number(json.result[1].totalAmountWin) / (10 ** Global.TOKEN_DECIMALS)
+      }
     }
-
+    
     this.setState({
       manaSlotVolume: slotVolume, manaSlotPayout: slotPayout, 
       manaRouletteVolume: rouletteVolume, manaRoulettePayout: roulettePayout, 
       isRunningTransaction: false});
   }
 
-  getData = (page, period) => {
+  getData = (period) => {
     return fetch(`${Global.BASE_URL}/admin/getTotal`, {
       method: 'POST',
       headers: {
@@ -104,7 +86,6 @@ class Dashboard extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        page: page,
         period: period * 24 * 60 * 60 * 1000
       })
     })

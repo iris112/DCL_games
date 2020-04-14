@@ -1,10 +1,9 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -67,6 +66,7 @@ const userIndexings = new Schema({
     address: { type: String, default: '', index: true },
     page: { type: Int32, default: 0, index: true },
     historyID: { type: Schema.Types.ObjectId, default: null },
+    machineID: { type: Schema.Types.ObjectId, default: null },
     playID: { type: Schema.Types.ObjectId, default: null }
 }, {
     timestamps: {
@@ -184,13 +184,25 @@ const machineInfos = new Schema({
     machineID: { type: String, default: '' },
     landID: { type: String, default: '' },
     type: { type: String, default: '' },
-    gameType: { type: Int32, default: 0 }
+    gameType: { type: Int32, default: 0 },
+    totalBetAmount: { type: Schema.Types.Decimal128, default: 0 },
+    totalAmountWin: { type: Schema.Types.Decimal128, default: 0 },
+    latestSessionDate: { type: Date, default: null }
 }, {
     timestamps: {
         createdAt: 'createdAt',
         updatedAt: 'updatedAt'
     },
     collection: 'machineInfos'
+});
+machineInfos.set('toJSON', {
+    transform: (doc, ret) => {
+        if (ret.totalBetAmount)
+            ret.totalBetAmount = Number(ret.totalBetAmount.toString());
+        if (ret.totalAmountWin)
+            ret.totalAmountWin = Number(ret.totalAmountWin.toString());
+        return ret;
+    }
 });
 const machineTotalInfos = new Schema({
     machineID: { type: String, default: '' },
@@ -240,6 +252,7 @@ function insertUserIndexing(data) {
         UserIndexingsModel.address = data.address || '';
         UserIndexingsModel.page = data.page || 0;
         UserIndexingsModel.historyID = data.historyID || null;
+        UserIndexingsModel.machineID = data.machineID || null;
         UserIndexingsModel.playID = data.playID || null;
         UserIndexingsModel = yield UserIndexingsModel.save();
         return UserIndexingsModel;
@@ -470,6 +483,22 @@ function findAllPlayInfos(data, opts = {}) {
     });
 }
 exports.findAllPlayInfos = findAllPlayInfos;
+function getTotalPlayInfos(filter) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let ret = yield userPlayInfosModel
+            .aggregate([
+            { $match: filter },
+            { $group: { _id: null, totalBetAmount: { $sum: "$betAmount" }, totalAmountWin: { $sum: "$amountWin" } } }
+        ])
+            .exec();
+        if (ret && ret.length) {
+            ret[0].totalBetAmount = ret[0].totalBetAmount.toString();
+            ret[0].totalAmountWin = ret[0].totalAmountWin.toString();
+        }
+        return ret[0];
+    });
+}
+exports.getTotalPlayInfos = getTotalPlayInfos;
 function updatePlayInfo(filter, data) {
     return __awaiter(this, void 0, void 0, function* () {
         let ret = yield userPlayInfosModel
@@ -527,6 +556,9 @@ function insertMachineInfo(data) {
         MachineInfoModel.gameType = data.gameType || 0;
         MachineInfoModel.machineID = data.machineID || '';
         MachineInfoModel.landID = data.landID || '';
+        MachineInfoModel.totalBetAmount = data.totalBetAmount || 0;
+        MachineInfoModel.totalAmountWin = data.totalAmountWin || 0;
+        MachineInfoModel.latestSessionDate = data.latestSessionDate || null;
         MachineInfoModel = yield MachineInfoModel.save();
         return MachineInfoModel.toJSON();
     });
@@ -541,11 +573,11 @@ function findMachineInfo(data) {
     });
 }
 exports.findMachineInfo = findMachineInfo;
-function findAllMachineInfo(data) {
+function findAllMachineInfo(data, opts = {}) {
     return __awaiter(this, void 0, void 0, function* () {
-        var opts = {};
+        var limit = opts['limit'] || 20;
         let ret = yield machineInfosModel
-            .find(data, null, { skip: 0 })
+            .find(data, null, { limit: limit })
             .sort({ createdAt: -1 })
             .exec();
         if (ret && ret.length) {
@@ -559,17 +591,17 @@ function findAllMachineInfo(data) {
     });
 }
 exports.findAllMachineInfo = findAllMachineInfo;
-function findAllMachines() {
+function updateMachineInfo(filter, data) {
     return __awaiter(this, void 0, void 0, function* () {
-        var opts = {};
         let ret = yield machineInfosModel
-            .find({}, null, { skip: 0 })
-            .distinct('machineID')
+            .findOneAndUpdate(filter, data, { new: true })
             .exec();
+        if (ret)
+            return ret.toJSON();
         return ret;
     });
 }
-exports.findAllMachines = findAllMachines;
+exports.updateMachineInfo = updateMachineInfo;
 // ------- machineTotalInfos --------
 function insertMachineTotalInfo(data) {
     return __awaiter(this, void 0, void 0, function* () {

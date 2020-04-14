@@ -168,7 +168,6 @@ module.exports.prepareTransaction = async (messageJSON) => {
 								// store machineDB
 								var machineData = await dbMongo.findMachineInfo({
 									machineID: machineID,
-									landID: landID,
 									playerAddresse: _walletAddress[k],
 									gameType: gameType
 								});
@@ -177,8 +176,18 @@ module.exports.prepareTransaction = async (messageJSON) => {
 										machineID: machineID,
 										landID: landID,
 										playerAddresse: _walletAddress[k],
+										totalBetAmount: allAmount,
+										latestSessionDate: playData.createdAt,
 										gameType: gameType
 									});
+								} else {
+									machineData = await dbMongo.updateMachineInfo(
+										{ machineID: machineID, playerAddresse: _walletAddress[k], gameType: gameType },
+										{
+											totalBetAmount: Number(machineData.totalBetAmount) + Number(allAmount),
+											latestSessionDate: playData.createdAt
+										}
+									);
 								}
 								if (machineData) console.log('game machine info storing success');
 								else console.log('game machine info storing failed');

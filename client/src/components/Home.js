@@ -349,7 +349,7 @@ class Home extends Component {
 
               <Grid.Row>
                 <Grid.Column computer={8} tablet={8} mobile={16}>
-                  <Card fluid href='/chateau/' className='games-card'>
+                  <Card fluid href='https://play.decentraland.org/?position=-75%2C77&realm=fenrir-gold' className='games-card'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={chateau3} />
@@ -365,7 +365,7 @@ class Home extends Component {
                 </Grid.Column>
 
                 <Grid.Column computer={8} tablet={8} mobile={16}>
-                  <Card fluid href='/serenity/' className='games-card2'>
+                  <Card fluid href='https://play.decentraland.org/?position=-55%2C143&realm=fenrir-gold' className='games-card2'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image fluid className='card-image' src={serenity} />
@@ -627,7 +627,7 @@ class Home extends Component {
 
               <Grid.Row>
                 <Grid.Column computer={8} tablet={8} mobile={16}>
-                  <Card fluid href='/chateau/' className='games-card'>
+                  <Card fluid href='https://play.decentraland.org/?position=-75%2C77&realm=fenrir-gold' className='games-card'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image className='card-image' src={chateau3} />
@@ -643,7 +643,7 @@ class Home extends Component {
                 </Grid.Column>
 
                 <Grid.Column computer={8} tablet={8} mobile={16}>
-                  <Card fluid href='/serenity/' className='games-card2'>
+                  <Card fluid href='https://play.decentraland.org/?position=-55%2C143&realm=fenrir-gold' className='games-card2'>
                     <Reveal animated='fade'>
                       <Reveal.Content visible>
                         <Image fluid className='card-image' src={serenity} />

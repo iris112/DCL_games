@@ -404,30 +404,30 @@ class ModalVerify extends Component {
          <div id="verify">
           {this.ifMobileRedirect()}
           
-          <div class="ui verifyContainer">
+          <div className="ui verifyContainer">
             <Grid verticalAlign='middle' textAlign='center'>
               <Grid.Column>
 
-                <div class="progressbar">
-                  <img class="image inline" src={logo2} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
+                <div className="progressbar">
+                  <img className="image inline" src={logo2} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
                     <Grid.Row >
                       <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
-                    <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                    <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Connect Wallet </p>
+                    <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                    <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} className="progressbar image inline" src={check} />
+                    <p style={{opacity: '0.5', marginLeft: '2px'}} className="progressbar"> Connect Wallet </p>
                   </Grid.Row>  
                   <Grid.Row style={{marginTop: '15px'}}>
-                    <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                    <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> User Info, Verify Age </p>
+                    <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                    <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} className="progressbar image inline" src={check} />
+                    <p style={{opacity: '0.5', marginLeft: '2px'}} className="progressbar"> User Info, Verify Age </p>
                   </Grid.Row>
                   <Grid.Row style={{marginTop: '15px'}}>
-                    <img class="progressbar image inline" src={box} />
-                    <p class="progressbar"> Verify Location </p>
+                    <img className="progressbar image inline" src={box} />
+                    <p className="progressbar"> Verify Location </p>
                   </Grid.Row>
                 </div>
 
-                <div class="contentContainer2">
+                <div className="contentContainer2" style={{ backgroundColor: 'white' }}>
                   <Grid>
                     <Grid.Row>
                       <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>
@@ -470,27 +470,27 @@ class ModalVerify extends Component {
           <div id="verify">
             {this.ifMobileRedirect()}
 
-            <div class="ui verifyContainer">
+            <div className="ui verifyContainer">
               <Grid verticalAlign='middle' textAlign='center'>
                 <Grid.Column>
-                  <div class="progressbar">
-                    <img class="image inline" src={logo2} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
+                  <div className="progressbar">
+                    <img className="image inline" src={logo2} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
                     <Grid.Row >
                       <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
-                      <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Connect Wallet </p>
+                      <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                      <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} className="progressbar image inline" src={check} />
+                      <p style={{opacity: '0.5', marginLeft: '2px'}} className="progressbar"> Connect Wallet </p>
                     </Grid.Row>  
                     <Grid.Row style={{marginTop: '15px'}}>
-                      <img class="progressbar image inline" src={box} />
-                      <p class="progressbar"> User Info, Verify Age </p>
+                      <img className="progressbar image inline" src={box} />
+                      <p className="progressbar"> User Info, Verify Age </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
-                      <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Verify Location </p>
+                      <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                      <p style={{opacity: '0.5'}} className="progressbar"> Verify Location </p>
                     </Grid.Row>
                   </div>
-                  <div class="contentContainer2">
+                  <div className="contentContainer2">
                     <Grid>
                       <Grid.Row>
                         <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>
@@ -555,26 +555,26 @@ class ModalVerify extends Component {
         <div id="verify">
           {this.ifMobileRedirect()}
           
-          <div class="ui verifyContainer">
+          <div className="ui verifyContainer">
             <Grid verticalAlign='middle' textAlign='center'>
               <Grid.Column>
-                <div class="progressbar">
-                  <img class="image inline" src={logo2} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
+                <div className="progressbar">
+                  <img className="image inline" src={logo2} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
                   <Grid.Row >
                     <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
-                    <img class="progressbar image inline" src={box} />
-                    <p class="progressbar"> Connect Wallet </p>
+                    <img className="progressbar image inline" src={box} />
+                    <p className="progressbar"> Connect Wallet </p>
                   </Grid.Row>  
                   <Grid.Row style={{marginTop: '15px'}}>
-                    <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> User Info, Verify Age </p>
+                    <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                    <p style={{opacity: '0.5'}} className="progressbar"> User Info, Verify Age </p>
                   </Grid.Row>
                   <Grid.Row style={{marginTop: '15px'}}>
-                    <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> Verify Location </p>
+                    <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                    <p style={{opacity: '0.5'}} className="progressbar"> Verify Location </p>
                   </Grid.Row>
                 </div>
-                <div class="contentContainer2">
+                <div className="contentContainer2">
                   <Grid>
                     <Grid.Row>
                       <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Create Account </h3>

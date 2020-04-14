@@ -7,6 +7,30 @@ h1, h2, h3, h4, h5, p, button, a {
   -webkit-font-smoothing: antialiased !important;
 }
 
+.blogdetail-page h1, h2, h3 {
+  color: black;
+}
+
+.footer-font2 {
+  color: black;
+}
+
+a#blog-item.item.active,
+a#blog-item:hover,
+a#blog-item {
+  color: black;
+  background-color: white;
+}
+
+div.ui.small.header.dcl.active-page.caret-down .active {
+  color: black !important;
+}
+
+.dcl.navbar.open .ui.container {
+  background-color: white !important;
+  color: white !important;
+}
+
 h3 {
   font-size: 48px !important;
   font-weight: 500 !important;
@@ -238,10 +262,6 @@ div.outter-blog-container.ui.segment {
   }
 }
 
-.dcl.navbar .mobile-menu {
-  display: none !important;
-}
-
 @media (max-width: 990px) {
   .left-menu1 {
     display: none !important;
@@ -249,7 +269,7 @@ div.outter-blog-container.ui.segment {
 }
 
 .dcl.navbar .mobile-menu {
-  display: inherit !important;
+  display: flex !important;
 }
 
 @media (max-width: 768px) {

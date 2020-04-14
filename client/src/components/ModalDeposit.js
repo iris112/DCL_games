@@ -473,24 +473,24 @@ class Deposit extends React.Component {
           >
             <div id="deposit">
               {this.ifMobileRedirect()}
-              <div class="ui depositContainer">
+              <div className="ui depositContainer">
             <Grid verticalAlign='middle' textAlign='center'>
               <Grid.Column>
-                <div class="progressbar2">
-                  <img class="image inline" src={logo} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
+                <div className="progressbar2">
+                  <img className="image inline" src={logo} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
                     <Grid.Row >
                       <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
-                        <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                        <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                        <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Ropsten RPC </p>
+                        <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                        <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} className="progressbar image inline" src={check} />
+                        <p style={{opacity: '0.5', marginLeft: '2px'}} className="progressbar"> Switch to Ropsten RPC </p>
                       </Grid.Row>  
                       <Grid.Row style={{marginTop: '15px'}}>
-                        <img class="progressbar image inline" src={box} />
-                        <p class="progressbar"> Deposit to Matic </p>
+                        <img className="progressbar image inline" src={box} />
+                        <p className="progressbar"> Deposit to Matic </p>
                       </Grid.Row>
                     </div>
 
-                    <div class="contentContainer2" >
+                    <div className="contentContainer2" >
                       <Grid>
                         <Grid.Row>
                           <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
@@ -508,7 +508,7 @@ class Deposit extends React.Component {
                                     <span style={{textAlign: 'left', lineHeight: '25px', verticalAlign: 'middle', fontWeight: 'bold' }}>
                                       ROPSTEN BALANCE:
                                     </span>
-                                    <img style={{ verticalAlign:'middle', marginLeft: '40px' }} class="image inline" width="20px" height="20px" src={mana} />
+                                    <img style={{ verticalAlign:'middle', marginLeft: '40px' }} className="image inline" width="20px" height="20px" src={mana} />
                                     <span style={{ textAlign: 'left', marginLeft: '10px', lineHeight: '25px', verticalAlign: 'middle'}}>
                                       {this.state.tokenBalance2} MANA
                                     </span>
@@ -517,7 +517,7 @@ class Deposit extends React.Component {
                                     <span style={{textAlign: 'left', lineHeight: '25px', verticalAlign: 'middle', fontWeight: 'bold' }}>
                                       MATIC BALANCE:
                                     </span>
-                                    <img style={{ verticalAlign:'middle', marginLeft: '61px' }} class="image inline" width="20px" height="20px" src={mana} />
+                                    <img style={{ verticalAlign:'middle', marginLeft: '61px' }} className="image inline" width="20px" height="20px" src={mana} />
                                     <span style={{ textAlign: 'left', marginLeft: '10px', lineHeight: '25px', verticalAlign: 'middle'}}>
                                       {this.state.tokenBalance} MANA
                                     </span>
@@ -577,23 +577,23 @@ class Deposit extends React.Component {
         >
         <div id="deposit">
           {this.ifMobileRedirect()}
-          <div class="ui depositContainer">
+          <div className="ui depositContainer">
             <Grid verticalAlign='middle' textAlign='center'>
               <Grid.Column>
-                <div class="progressbar2">
-                  <img class="image inline" src={logo} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
+                <div className="progressbar2">
+                  <img className="image inline" src={logo} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
                     <Grid.Row >
                       <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
-                    <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> Switch to Ropsten RPC </p>
+                    <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                    <p style={{opacity: '0.5'}} className="progressbar"> Switch to Ropsten RPC </p>
                   </Grid.Row>   
                   <Grid.Row style={{marginTop: '15px'}}>
-                    <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> Deposit to Matic </p>
+                    <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                    <p style={{opacity: '0.5'}} className="progressbar"> Deposit to Matic </p>
                   </Grid.Row>
                 </div>
 
-                <div class="contentContainer2" >
+                <div className="contentContainer2" >
                   <Grid>
                     <Grid.Row>
                       <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
@@ -603,7 +603,7 @@ class Deposit extends React.Component {
                       </p>
                     </Grid.Row>
                     <Grid.Row>
-                      <img style={{width:'240px' }} src={verify1} class="image small inline" />
+                      <img style={{width:'240px' }} src={verify1} className="image small inline" />
                     </Grid.Row>
                   </Grid>
 
@@ -634,34 +634,34 @@ class Deposit extends React.Component {
           >
           <div id="deposit">
             {this.ifMobileRedirect()}
-            <div class="ui depositContainer">
+            <div className="ui depositContainer">
               <Grid verticalAlign='middle' textAlign='center'>
                 <Grid.Column>
-                  <div class="progressbar2">
-                    <img class="image inline" src={logo} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
+                  <div className="progressbar2">
+                    <img className="image inline" src={logo} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
                     <Grid.Row >
                       <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
-                        <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                        <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                        <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Ropsten RPC </p>
+                        <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                        <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} className="progressbar image inline" src={check} />
+                        <p style={{opacity: '0.5', marginLeft: '2px'}} className="progressbar"> Switch to Ropsten RPC </p>
                       </Grid.Row>  
                       <Grid.Row style={{marginTop: '15px'}}>
-                        <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                        <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                        <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Deposit to Matic </p>
+                        <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                        <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} className="progressbar image inline" src={check} />
+                        <p style={{opacity: '0.5', marginLeft: '2px'}} className="progressbar"> Deposit to Matic </p>
                       </Grid.Row>
                       <Grid.Row style={{marginTop: '15px'}}>
-                        <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                        <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                        <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Configure Matic RPC </p>
+                        <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                        <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} className="progressbar image inline" src={check} />
+                        <p style={{opacity: '0.5', marginLeft: '2px'}} className="progressbar"> Configure Matic RPC </p>
                       </Grid.Row>
                       <Grid.Row style={{marginTop: '15px'}}>
-                        <img class="progressbar image inline" src={box} />
-                        <p class="progressbar"> MANA Authorization </p>
+                        <img className="progressbar image inline" src={box} />
+                        <p className="progressbar"> MANA Authorization </p>
                       </Grid.Row>
                     </div>
 
-                    <div class="contentContainer2">
+                    <div className="contentContainer2">
                       <Grid>
                         <Grid.Row>
                           <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
@@ -702,33 +702,33 @@ class Deposit extends React.Component {
           >
           <div id="deposit">
           {this.ifMobileRedirect()}
-          <div class="ui depositContainer">
+          <div className="ui depositContainer">
             <Grid verticalAlign='middle' textAlign='center'>
               <Grid.Column>
-                <div class="progressbar2">
-                  <img class="image inline" src={logo} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
+                <div className="progressbar2">
+                  <img className="image inline" src={logo} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
                     <Grid.Row >
                       <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
-                    <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                    <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Ropsten RPC </p>
+                    <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                    <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} className="progressbar image inline" src={check} />
+                    <p style={{opacity: '0.5', marginLeft: '2px'}} className="progressbar"> Switch to Ropsten RPC </p>
                   </Grid.Row>   
                   <Grid.Row style={{marginTop: '15px'}}>
-                    <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                    <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Deposit to Matic </p>
+                    <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                    <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} className="progressbar image inline" src={check} />
+                    <p style={{opacity: '0.5', marginLeft: '2px'}} className="progressbar"> Deposit to Matic </p>
                   </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
-                      <img class="progressbar image inline" src={box} />
-                      <p class="progressbar"> Configure Matic RPC </p>
+                      <img className="progressbar image inline" src={box} />
+                      <p className="progressbar"> Configure Matic RPC </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
-                      <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> MANA Authorization </p>
+                      <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                      <p style={{opacity: '0.5'}} className="progressbar"> MANA Authorization </p>
                     </Grid.Row>
                   </div>
 
-                  <div class="contentContainer2">
+                  <div className="contentContainer2">
                     <Grid>
                       <Grid.Row>
                         <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
@@ -741,9 +741,9 @@ class Deposit extends React.Component {
 
                       <Grid.Row>
                         <p style={{ verticalAlign: 'top', textAlign: 'left', fontSize: '20px'}}>1.</p>
-                        <img style={{width:'210px'}} src={verify5_1} class="image small inline" />
+                        <img style={{width:'210px'}} src={verify5_1} className="image small inline" />
                         <p style={{ verticalAlign: 'top', textAlign: 'left', fontSize: '20px', marginLeft: '20px'}}>2.</p>
-                        <img style={{width:'210px', verticalAlign:'top'}} src={verify5_2} class="image small inline" />
+                        <img style={{width:'210px', verticalAlign:'top'}} src={verify5_2} className="image small inline" />
 
                         { this.state.networkID != parseInt(Global.MATIC_NETWORK_ID) ?
                           <p className="playboard-p" style={{ textAlign: 'left', color: 'red', marginTop: '30px', width: '400px'}}>
@@ -771,32 +771,32 @@ class Deposit extends React.Component {
           >
           <div id="deposit">
             {this.ifMobileRedirect()}
-            <div class="ui depositContainer">
+            <div className="ui depositContainer">
               <Grid verticalAlign='middle' textAlign='center'>
                 <Grid.Column>
-                  <div class="progressbar2">
-                    <img class="image inline" src={logo} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
+                  <div className="progressbar2">
+                    <img className="image inline" src={logo} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
                     <Grid.Row >
                       <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
-                      <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} class="progressbar image inline" src={check} />
-                      <p style={{opacity: '0.5', marginLeft: '2px'}} class="progressbar"> Switch to Ropsten RPC </p>
+                      <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                      <img style={{opacity: '0.5'}} style={{marginLeft:'-15px', opacity: '0.5', marginBottom:'3px'}} className="progressbar image inline" src={check} />
+                      <p style={{opacity: '0.5', marginLeft: '2px'}} className="progressbar"> Switch to Ropsten RPC </p>
                     </Grid.Row>  
                     <Grid.Row style={{marginTop: '15px'}}>
-                      <img class="progressbar image inline" src={box} />
-                      <p class="progressbar"> Deposit to Matic </p>
+                      <img className="progressbar image inline" src={box} />
+                      <p className="progressbar"> Deposit to Matic </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
-                      <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> Configure Matic RPC </p>
+                      <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                      <p style={{opacity: '0.5'}} className="progressbar"> Configure Matic RPC </p>
                     </Grid.Row>
                     <Grid.Row style={{marginTop: '15px'}}>
-                      <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                      <p style={{opacity: '0.5'}} class="progressbar"> MANA Authorization </p>
+                      <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                      <p style={{opacity: '0.5'}} className="progressbar"> MANA Authorization </p>
                     </Grid.Row>
                   </div>
 
-                    <div class="contentContainer2" >
+                    <div className="contentContainer2" >
                       <Grid>
                         <Grid.Row>
                           <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
@@ -850,31 +850,31 @@ class Deposit extends React.Component {
           >
         <div id="deposit">
           {this.ifMobileRedirect()}
-          <div class="ui depositContainer">
+          <div className="ui depositContainer">
             <Grid verticalAlign='middle' textAlign='center'>
               <Grid.Column>
-                <div class="progressbar2">
-                  <img class="image inline" src={logo} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
+                <div className="progressbar2">
+                  <img className="image inline" src={logo} style={{width: '230px', marginLeft: '-38px', paddingTop: '25px', paddingBottom: '9px' }}/>
                   <Grid.Row >
                     <Divider style={{ marginRight: '38px', paddingTop: '9px' }}/>
-                    <img class="progressbar image inline" src={box} />
-                    <p class="progressbar"> Switch to Ropsten RPC </p>
+                    <img className="progressbar image inline" src={box} />
+                    <p className="progressbar"> Switch to Ropsten RPC </p>
                   </Grid.Row>  
                   <Grid.Row style={{marginTop: '15px'}}>
-                    <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> Deposit to Matic </p>
+                    <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                    <p style={{opacity: '0.5'}} className="progressbar"> Deposit to Matic </p>
                   </Grid.Row>
                   <Grid.Row style={{marginTop: '15px'}}>
-                    <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> Configure Matic RPC </p>
+                    <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                    <p style={{opacity: '0.5'}} className="progressbar"> Configure Matic RPC </p>
                   </Grid.Row>
                   <Grid.Row style={{marginTop: '15px'}}>
-                    <img style={{opacity: '0.5'}} class="progressbar image inline" src={box} />
-                    <p style={{opacity: '0.5'}} class="progressbar"> MANA Authorization </p>
+                    <img style={{opacity: '0.5'}} className="progressbar image inline" src={box} />
+                    <p style={{opacity: '0.5'}} className="progressbar"> MANA Authorization </p>
                   </Grid.Row>
                 </div>
 
-                <div class="contentContainer2" >
+                <div className="contentContainer2" >
                   <Grid>
                     <Grid.Row>
                       <h3 className="account-h3" style={{textAlign: 'left', marginTop: '25px' }}> Deposit MANA </h3>
@@ -884,7 +884,7 @@ class Deposit extends React.Component {
                       </p>
                     </Grid.Row>
                     <Grid.Row>
-                      <img style={{width:'240px' }} src={verify1} class="image small inline" />
+                      <img style={{width:'240px' }} src={verify1} className="image small inline" />
                     </Grid.Row>
                   </Grid>
 

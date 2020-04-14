@@ -37,15 +37,15 @@ class Dashboard extends React.Component {
             <div class="description" style={{ width: '510px' }}>
               <Fade bottom distance="20px" duration="600">
                 <p id="featured-casino-text">FEATURED CASINO</p>
-                <h3 className="playboard-h3">Serenity Island</h3>
-                <p className="playboard-p">Serenity Island is Decentral Games' first casino, located at (-55, 143) in the Decentraland Metaverse. The structure sports a Monty Carlo vibe, situated on a tropical island surrounded by water.</p>
+                <h3 className="playboard-h3">Chateau Satoshi</h3>
+                <p className="playboard-p">Chateau Satoshi is Decentral Games' first casino, located at (-75, 77) in the Decentraland Metaverse. The structure sports an elegant Art Deco vibe, situated in an ideal location in Vegas City.</p>
                 <p className="playboard-p">Games: MANA Slots, MANA Roulette</p>
               </Fade>
             </div>
             <Fade bottom distance="20px" duration="600">
               <Button color='blue' className="play-shimmer animate2"
               onClick={this.onPlay}
-              href="http://explorer.decentraland.org/?ENABLE_WEB3&position=-55%2C143"
+              href="https://play.decentraland.org/?position=-75%2C77&realm=fenrir-gold"
               >
                 Play Now
               </Button>
@@ -56,10 +56,10 @@ class Dashboard extends React.Component {
               </Fade>
               <Fade bottom distance="20px" duration="600" delay="200">
                 <div style={{ marginLeft: '-6px' }}>
-                  <a href="/chateau/">
+                  <a href="https://play.decentraland.org/?position=-75%2C77&realm=fenrir-gold">
                     <Image src={teleport1} inline id="dashboard-casino-img"/>
                   </a>
-                  <a href="/serenity/">
+                  <a href="https://play.decentraland.org/?position=-55%2C143&realm=fenrir-gold">
                     <Image src={teleport2} inline style={{marginLeft: '20px' }} id="dashboard-casino-img"/>
                   </a>
                 </div>

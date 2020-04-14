@@ -1,6 +1,6 @@
 const Dagger = require('eth-dagger');
 const keys = require('../config/keys');
-const gameDataOut = require('./gameDataOut');
+const resultsHandler = require('./resultsHandler');
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -12,6 +12,6 @@ module.exports.setDagger = () => {
 	dagger.on('latest:log/' + keys.MASTER_PARENT_ADDRESS, async function(result) {
 		console.log('event data received');
 
-		gameDataOut.returnData(result);
+		resultsHandler.returnData(result);
 	});
 };

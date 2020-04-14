@@ -157,6 +157,10 @@ async function initHash() {
 module.exports.getHash = async () => {
   if (!hashList.length)
     await initHash();
+  else {
+    const currentTail = await contractMasterParent.methods.tail().call();
+    hashPos = hashList.indexOf(currentTail);
+  }
 
   if (hashPos == 0) {
     hashPos = hashSize;

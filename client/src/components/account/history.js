@@ -65,9 +65,9 @@ class History extends React.Component {
           
           el.addEventListener('scroll', function(e) {
           (function(el){
-            el.classList.add('scrollTable');
+            el.classNameList.add('scrollTable');
             setTimeout(function() {
-              el.classList.remove('scrollTable');
+              el.classNameList.remove('scrollTable');
             }, 1000);    
           })(el);
           })
@@ -146,15 +146,15 @@ class History extends React.Component {
     const data = this.state.data; 
 
     return (
-      <div class="contentContainer" style={{ marginBottom: '-60px' }}>
+      <div className="contentContainer" style={{ marginBottom: '-60px' }}>
       <LogoSpinner show={this.state.isRunningTransaction} className="tx-history-spinner" />
         <div style={{width: 'calc(100% - 90px)', marginTop: '20px', marginLeft: '45px', marginRight: '45px'}}>
           <Fade bottom distance="20px" duration="600">
             <h3 className="account-h3" style={{paddingTop: '20px', paddingBottom: '16px' }}> Transaction History </h3>
             <div style={{marginLeft:'3px' }}>
-              <span class="mouseCursor" onClick= {() => this.handleHistory()}>Deposits/Withdrawals</span>
-              <span style={{ fontSize: '18px', paddingLeft: '2px', paddingRight: '2px' }}> | </span>
-              <span class="mouseCursor" onClick={() => this.handlePlay()}>Gameplay</span>
+              <span className="mouseCursor" onClick= {() => this.handleHistory()}>Deposits/Withdrawals</span>
+              <span style={{ fontSize: '18px', paddingLeft: '2px', paddingRight: '2px', color: 'black' }}> | </span>
+              <span className="mouseCursor" onClick={() => this.handlePlay()}>Gameplay</span>
             </div>
           </Fade>
           <Fade bottom distance="20px" duration="600" delay="200">
@@ -172,7 +172,7 @@ class History extends React.Component {
              </Table>
              { data.length != 0 && this.state.isLoadingData == false ?
               <div>
-                <div class='dataTable' style={{height: 'calc(100vh - 310px)', padding: 0}}>
+                <div className='dataTable' style={{height: 'calc(100vh - 310px)', padding: 0}}>
                   <Table singleLine fixed style={{margin: 0, padding: 0}}>
                     <Table.Header></Table.Header>
                     <Table.Body>
@@ -277,9 +277,9 @@ class History extends React.Component {
               </div>
             : this.state.isLoadingData == false ? <p className="playboard-p" style={{lineHeight:'calc(100vh - 310px)', margin: 0, textAlign:'center', color: 'gray', fontStyle: 'italic'}}> There is no transaction history for this account </p> 
             : <p style={{height:'calc(100vh - 310px)', margin: 0}}></p> }
-            <div class="pagination" style={{ paddingTop: '12px', marginLeft: '-18px' }}>
+            <div className="pagination" style={{ paddingTop: '12px', marginLeft: '-18px' }}>
               <MdKeyboardArrowLeft size='2.825em' style={{ paddingTop: '24px' }} className={`spanbox ${this.state.beforeAvail ? 'mouseCursor' : 'disable'}`} onClick={this.previewPage}/>
-              <span class="spanbox" style={{padding: '6px 15px', display: 'inline-block'}}>Page {this.state.currentPage}</span>
+              <span className="spanbox" style={{padding: '6px 15px', display: 'inline-block'}}>Page {this.state.currentPage}</span>
               <MdKeyboardArrowRight style={{ paddingTop: '21px' }} size='2em' className={`spanbox ${this.state.nextAvail ? 'mouseCursor' : 'disable'}`} onClick={this.nextPage} />
             </div>
           </div>

@@ -10,6 +10,13 @@ const adminRouter = require('./routes/admin-router');
 const dagger = require('./modules/dagger.js');
 const hls = require('./hls.js');
 
+global.clients = {};
+global.addresses = {};
+global.seconds = {};
+global.mode = {};
+global.chips = {};
+global.bets = {};
+
 const PORT = process.env.PORT || 5000;
 let server = express();
 

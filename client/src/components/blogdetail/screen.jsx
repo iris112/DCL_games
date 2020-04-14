@@ -133,7 +133,7 @@ const Screen = ({ slug, featured_image, image, created, categories, title, summa
               </div>
           </Container>
 
-            <div className="blog-page" style={{ paddingTop: '90px', paddingBottom: '60px', marginBottom: '-60px', backgroundColor: '#F6F8F9' }}>
+            <div className="blog-page" style={{ paddingTop: '90px', paddingBottom: '60px', marginBottom: '-60px', backgroundColor: '#F6F8F9', width: 'calc(100vw + 2px)', marginLeft: '-1px' }}>
               <Container className="test-container">
                 <h2 className="read-next-text"> Read Next </h2>
                 <div className="posts-2">

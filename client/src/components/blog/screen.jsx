@@ -113,16 +113,16 @@ const Screen = ({ pages, category, handleClickButton, match, history }) => {
           <Navbar
             leftMenu={
               <>
-                <Menu.Item as={NavLink} exact to="/blog/">
+                <Menu.Item id="blog-item" as={NavLink} exact to="/blog/">
                   All Articles
                 </Menu.Item>
-                <Menu.Item as={NavLink} to="/blog/announcements/">
+                <Menu.Item id="blog-item" as={NavLink} to="/blog/announcements/">
                   Announcements
                 </Menu.Item>
-                <Menu.Item as={NavLink} to="/blog/tutorials/">
+                <Menu.Item id="blog-item" as={NavLink} to="/blog/tutorials/">
                   Tutorials
                 </Menu.Item>
-                <Menu.Item as={NavLink} to="/blog/technology/">
+                <Menu.Item id="blog-item" as={NavLink} to="/blog/technology/">
                   Technology
                 </Menu.Item>
               </>

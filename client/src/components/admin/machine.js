@@ -6,6 +6,7 @@ import mana from '../Images/mana.png';
 
 import Global from '../constant';
 
+const PAGE_COUNT = 20
 const INITIAL_STATE = {
   data: [],
   isRunningTransaction: false,
@@ -28,7 +29,7 @@ class Deposit extends React.Component {
   }
 
   async getUserData() {
-    const response = await this.getData();
+    const response = await this.getData(1);
     const json = await response.json();
     if (json.result !== 'false') {
       this.setState({data: json.result});
@@ -56,13 +57,17 @@ class Deposit extends React.Component {
     }
   }
 
-  getData = () => {
+  getData = (page) => {
     return fetch(`${Global.BASE_URL}/admin/getMachine`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-      }
+      },
+      body: JSON.stringify({
+        page: page,
+        limit: PAGE_COUNT
+      })
     })
   }
 

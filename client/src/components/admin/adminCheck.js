@@ -19,7 +19,7 @@ const withAdmin = Component => {
     }
 
     componentDidMount() {
-	 //  	this.setState({isAdmin : 2});
+	  	// this.setState({isAdmin : 2});
 		// return;
 
 		try {

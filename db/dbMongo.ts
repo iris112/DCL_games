@@ -64,6 +64,7 @@ const userIndexings = new Schema(
     address: { type: String, default: '', index: true },
     page: { type: Int32, default: 0, index: true },
     historyID: { type: Schema.Types.ObjectId, default: null },
+    machineID: { type: Schema.Types.ObjectId, default: null },
     playID: { type: Schema.Types.ObjectId, default: null }
   },
   {
@@ -200,7 +201,10 @@ const machineInfos = new Schema(
     machineID: { type: String, default: '' },
     landID: { type: String, default: '' },
     type: { type: String, default: '' },
-    gameType: { type: Int32, default: 0 }
+    gameType: { type: Int32, default: 0 },
+    totalBetAmount: { type: Schema.Types.Decimal128, default: 0 },
+    totalAmountWin: { type: Schema.Types.Decimal128, default: 0 },
+    latestSessionDate: { type: Date, default: null }
   },
   {
     timestamps: {
@@ -210,6 +214,15 @@ const machineInfos = new Schema(
     collection: 'machineInfos'
   }
 );
+machineInfos.set('toJSON', {
+  transform: (doc, ret) => {
+    if (ret.totalBetAmount)
+      ret.totalBetAmount = Number(ret.totalBetAmount.toString());
+    if (ret.totalAmountWin)
+      ret.totalAmountWin = Number(ret.totalAmountWin.toString());
+    return ret;
+  }
+});
 
 const machineTotalInfos = new Schema(
   {
@@ -271,6 +284,7 @@ async function insertUserIndexing(data) {
   UserIndexingsModel.address = data.address || '';
   UserIndexingsModel.page = data.page || 0;
   UserIndexingsModel.historyID = data.historyID || null;
+  UserIndexingsModel.machineID = data.machineID || null;
   UserIndexingsModel.playID = data.playID || null;
 
   UserIndexingsModel = await UserIndexingsModel.save();
@@ -492,6 +506,21 @@ async function findAllPlayInfos(data, opts = {}) {
   return ret;
 }
 
+async function getTotalPlayInfos(filter) {
+
+  let ret = await userPlayInfosModel
+    .aggregate([
+      { $match: filter},
+      { $group: {_id: null, totalBetAmount: { $sum : "$betAmount" }, totalAmountWin: { $sum: "$amountWin"} } }
+    ])
+    .exec()
+  if (ret && ret.length) {
+    ret[0].totalBetAmount = ret[0].totalBetAmount.toString()
+    ret[0].totalAmountWin = ret[0].totalAmountWin.toString()
+  }
+  return ret[0];
+}
+
 async function updatePlayInfo(filter, data) {
   let ret = await userPlayInfosModel
     .findOneAndUpdate(filter, data, { new: true })
@@ -544,6 +573,9 @@ async function insertMachineInfo(data) {
   MachineInfoModel.gameType = data.gameType || 0;
   MachineInfoModel.machineID = data.machineID || '';
   MachineInfoModel.landID = data.landID || '';
+  MachineInfoModel.totalBetAmount = data.totalBetAmount || 0;
+  MachineInfoModel.totalAmountWin = data.totalAmountWin || 0;
+  MachineInfoModel.latestSessionDate = data.latestSessionDate || null;
 
   MachineInfoModel = await MachineInfoModel.save();
   return MachineInfoModel.toJSON();
@@ -557,11 +589,11 @@ async function findMachineInfo(data) {
   return tx;
 }
 
-async function findAllMachineInfo(data) {
-  var opts = {};
+async function findAllMachineInfo(data, opts = {}) {
+  var limit = opts['limit'] || 20;
 
   let ret = await machineInfosModel
-    .find(data, null, { skip: 0 })
+    .find(data, null, { limit: limit })
     .sort({ createdAt: -1 })
     .exec();
   if (ret && ret.length) {
@@ -576,13 +608,11 @@ async function findAllMachineInfo(data) {
   return ret;
 }
 
-async function findAllMachines() {
-  var opts = {};
-
+async function updateMachineInfo(filter, data) {
   let ret = await machineInfosModel
-    .find({}, null, { skip: 0 })
-    .distinct('machineID')
+    .findOneAndUpdate(filter, data, { new: true })
     .exec();
+  if (ret) return ret.toJSON();
 
   return ret;
 }
@@ -664,6 +694,7 @@ export {
   insertPlayInfo,
   findPlayInfo,
   findAllPlayInfos,
+  getTotalPlayInfos,
   updatePlayInfo,
   insertPlayerInfo,
   findPlayerInfo,
@@ -671,7 +702,7 @@ export {
   insertMachineInfo,
   findMachineInfo,
   findAllMachineInfo,
-  findAllMachines,
+  updateMachineInfo,
   insertMachineTotalInfo,
   updateMachineTotalInfo,
   findMachineTotalInfo,

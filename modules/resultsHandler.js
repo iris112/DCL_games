@@ -86,16 +86,35 @@ module.exports.returnData = async (result) => {
 				console.log("can't find game player info : address = " + playData.address);
 			}
 
+			// update machine DB
+			var machineData = await dbMongo.findMachineInfo({
+				machineID: playData.machineID,
+				playerAddresse: playData.address,
+				gameType: gameType
+			});
+
+			if (machineData) {
+				machineData = await dbMongo.updateMachineInfo(
+					{ machineID: playData.machineID, playerAddresse: playData.address, gameType: playData.gameType },
+					{
+						totalAmountWin: Number(machineData.totalAmountWin) + amount[i]
+					}
+				);
+				if (machineData) console.log('game machine info updating success');
+				else console.log('game machine info updating failed');
+			} else {
+				console.log("can't find game machine info : machineID = " + playData.machineID + ", address = " + playData.address);
+			}
+
 			// update machine Total DB
 			const machineTotalData = await dbMongo.findMachineTotalInfo({
 				machineID: playData.machineID,
-				address: playData.address,
 				gameType: playData.gameType
 			});
 
 			if (machineTotalData) {
 				machineTotalData = await dbMongo.updateMachineTotalInfo(
-					{ machineID: playData.machineID, address: playData.address, gameType: playData.gameType },
+					{ machineID: playData.machineID, gameType: playData.gameType },
 					{
 						totalAmountWin: Number(machineTotalData.totalAmountWin) + amount[i]
 					}
